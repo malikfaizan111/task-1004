@@ -1,0 +1,120 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+				<button mat-icon-button (click)="onLocationBack()" color="accent">
+					<img src="assets/images/actions/back.png" alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'CREATE'}} CATEGORY </span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form" (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="100">
+			<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+
+				<div fxFlex.xl="48" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="name" type="text" required placeholder="Name">
+							<mat-error
+								*ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('Name')?.touched)">
+								name
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<!-- <div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="description"
+								   type="text"
+								   placeholder="Description">
+						</mat-form-field>
+					</div>
+				</div> -->
+				<div fxFlex.xl="48" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="name_ar" type="text" required dir="rtl" lang="ar"
+								placeholder="Arabic Name">
+							<mat-error
+								*ngIf="getValue('name_ar')?.invalid && (getValue('name_ar')?.dirty || getValue('name_ar')?.touched)">
+								Arabic name
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<!-- <div class="form-group mb-0">
+						<mat-slide-toggle 
+						style="margin-left: 50px; margin-top: 8px;"
+						(change)="onChangeStatus()"
+						[(ngModel)]="status"
+						[ngModelOptions]="{standalone: true}"
+						color="accent">Status</mat-slide-toggle>
+					</div> -->
+			</div>
+		</div>
+		<div fxFlex="100">
+			<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+				<div fxFlex.xl="48" fxFlex.lg="48" fxFlex.md="48">
+					<div fxFlex="70">
+						<label style="width: 100%;">Select Image
+						</label>
+						<file-picker (onFileSelect)="onFileSelect($event)" controlName="image" [isIconHidden]="false"
+							[image]="getImage1('image')" type="Custom" [size]="{width: 172, height: 172}">
+						</file-picker>
+						<span style="float: right;font-size: 12px; color: #ff2c54"
+							*ngIf="errorMsgimage">{{errorMsgimage}}</span>
+					</div>
+				</div>
+				<div fxFlex.xl="48" fxFlex.lg="48" fxFlex.md="48" style="padding-top: 20px;">
+					<div fxLayout="row wrap" fxLayoutAlign="start start">
+						<div fxFlex="100">
+							<button class="btn btn-primary round-elem"
+								style="background: transparent;	border-color: #148F96;	height: 35px;padding: 4px 14px; width: 100%; color: #148F96; font-weight: 700;"
+								(click)="onExportCSV()">Download Outlets List CSV
+							</button>
+							<span class="text-under-csv">Download the list of outlets currently listed under this
+								popular category.</span>
+						</div>
+						<div fxFlex="100">
+							<div class="col-sm-6" style="padding: 0;text-align: left;">
+								<input type="file" accept=".csv" (change)="convertFile($event)" placeholder="Search"
+									class="form-control" style="margin: 1rem;" />
+							</div>
+							<button class="btn btn-primary round-elem"
+								style="background: #148F96;	border-color: #148F96;	height: 35px;padding: 4px 14px; width: 100%; font-weight: 700;"
+								accept=".csv" type="file" (click)="onUploadCSV()">Update Outlets
+							</button>
+							<span class="text-under-csv">Note that updating outlets will overwrite and replace the
+								current list of outlets in this
+								category.</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div style="margin-top: 20px" class="col-sm-12">
+			<button type="submit" *ngIf="!isEditing" [disabled]="Form.invalid || isLoading || isDiscountType"
+				class="btn btn-primary round-elem" style="background: red; border-color: red">
+				CREATE CATEGORY
+			</button>
+			<button type="submit" *ngIf="isEditing" [disabled]="Form.invalid || isLoading || isDiscountType"
+				class="btn btn-primary round-elem" style="background: red; border-color: red">
+				UPDATE CATEGORY
+			</button>
+			<img *ngIf="isLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+		</div>
+	</div>
+</form>

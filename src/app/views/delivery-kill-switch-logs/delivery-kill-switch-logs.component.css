@@ -1,0 +1,12 @@
+:host ::ng-deep .mat-tab-label {
+  color: black;
+  font-weight: 900;
+}
+
+:host ::ng-deep .mat-tab-body-wrapper {
+  transition: none;
+}
+
+thead tr th  {
+  text-align: center;
+}

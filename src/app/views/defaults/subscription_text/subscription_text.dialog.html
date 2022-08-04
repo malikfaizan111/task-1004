@@ -1,0 +1,47 @@
+<div style="min-width: 300px;">
+    <div class="content-head clearfix">
+        <div style="font-size: 20px;"
+             class="title">{{isEditing? 'Update' : 'Add'}} {{paraNumber == 1? 'First' : 'Second'}} Paragraph</div>
+    </div>
+
+    <div class="row">
+
+        <div style="margin-top: 10px;"
+             class="col-sm-12">
+            <mat-form-field style="width: 100%">
+                <input matInput
+                       [(ngModel)]="subData.text"
+                       type="text"
+                       required
+                       placeholder="Enter Paragraph">
+            </mat-form-field>
+        </div>
+        <div *ngIf="isLoading"
+             style="text-align: center"
+             class="col-sm-12">
+            <img *ngIf="isLoading"
+                 width="50"
+                 height="50"
+                 src="assets/images/view-loader.gif"
+                 alt="">
+        </div>
+        <div class="col-sm-12"
+             style="text-align: right;">
+            <button mat-raised-button
+                    color="primary"
+                    class="btn btn-primary round-elem"
+                    style="background: red; border-color: red; margin-right: 4px;"
+                    [disabled]="isLoading"
+                    type="button"
+                    (click)="onCancelClick()">Cancel</button>
+
+            <button mat-raised-button
+                    color="primary"
+                    class="btn btn-primary round-elem"
+                    style="background: red; border-color: red"
+                    [disabled]="isLoading"
+                    type="button"
+                    (click)="onSubmitClick()">Submit</button>
+        </div>
+    </div>
+</div>

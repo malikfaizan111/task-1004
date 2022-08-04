@@ -1,0 +1,34 @@
+<div style="min-width: 550px;" class="wrapper">
+  <div class="content-head clearfix">
+      <div style="font-size: 25px;"
+           class="title">Bee Delivery Token</div>
+  </div>
+
+  <div>
+    <div class="form-group mb-0">
+      <mat-form-field style="width: 100%;">
+        <input matInput
+             type="text"
+             [(ngModel)]="token"
+             required
+             placeholder="Token">
+        <!-- <mat-error
+               *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+          Outlet
+          Name is
+          required</mat-error> -->
+      </mat-form-field>
+    </div>
+  </div>
+  <button style="min-width: 50px;"
+          mat-raised-button
+          (click)="postToken()"
+          color="primary"
+          [disabled]="!token"
+          >  {{ isEdit ? 'UPDATE' : 'ADD' }}
+</button>
+<img *ngIf="isLoading"
+      class="loader-btn-image"
+      src="assets/images/view-loader.gif">
+</div>
+

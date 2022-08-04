@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            OUTLET DETAIL
+        </span>
+    </div>
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button (click)="onDialogClose()"
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+            <!-- <i class="glyphicon glyphicon-remove"></i> -->
+        </button>
+        <!-- <pre>{{Outlet | json}}</pre> -->
+    </div>
+</div>
+<div class="row"
+     style="margin-top: 15px;">
+    <div class="col-sm-5">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Name: </div>{{Outlet.name}} <br>
+        <div style="width: 400px; overflow-x: auto;">
+            <div style="margin-top:10px; text-transform: capitalize;font-weight: bold;">Phone: </div>{{Outlet.phone}} <br>
+        </div>
+
+        <div  *ngIf="role != '3'"  style="margin-top:10px; text-transform: capitalize;font-weight: bold">Pin: </div>{{Outlet.pin}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">neighborhood: </div>{{Outlet.address}}
+        <br>
+    </div>
+    <div class="col-sm-5">
+        <!-- <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">neighborhood: </div>{{Outlet.neighborhood}} -->
+        <!-- <br> -->
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">description: </div>{{Outlet.description}}
+        <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Search Tags: </div>{{Outlet.search_tags}}
+        <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Delivery Status: </div>{{Outlet.delivery_status == 1? 'Yes':'No'}}
+        <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Gender: </div>
+        <span *ngIf="Outlet.type == 2">All</span>
+        <span *ngIf="Outlet.type == 0">Gents</span>
+        <span *ngIf="Outlet.type == 1">Ladies</span>
+        <span *ngIf="Outlet.type != 1 && Outlet.type != 2 && Outlet.type != 0">N/A</span>
+    </div>
+    <div  *ngIf="role != '3'"  class="col-sm-2"
+         style="text-align: right">
+        <mat-slide-toggle title="Change Status"
+                          [(ngModel)]="status"
+                          (change)="onChangeStatus()"
+                          color="accent">
+
+        </mat-slide-toggle><br>
+        <button style="min-width: 50px;margin-top: 10px;"
+                mat-raised-button
+                color="accent"
+                (click)="onEditOutlet()">Edit
+        </button>
+    </div>
+</div>
+<div style="max-height: 50vh;overflow: auto;margin-top: 20px;"
+     class="data-table">
+    <table class="table table-responsive table-striped"
+           style="width:100%; margin-top: 15px">
+        <thead>
+            <tr>
+                <th>title</th>
+                <!-- <th>Time Remaining</th> -->
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th style="text-align: center" *ngIf="role != '3'">Update Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let deal of Offers">
+                <td [title]="deal.title">
+                    <span (click)="onDealNameClick(deal)"
+                          class="on-hover">{{deal.title}}</span>
+                </td>
+                <!-- <td>{{deal.remaining_days == null || deal.remaining_days == ''? 'N/A' : deal.remaining_days}}</td> -->
+                <td>{{deal.start_datetime == null ? 'N/A' : deal.start_datetime}}</td>
+                <td>{{deal.end_datetime == null ? 'N/A' : deal.end_datetime}}</td>
+                <td>
+                    <span *ngIf="deal.active == 1"
+                          style="background: green;color: white;padding: 3px 7px;width: 46px;border-radius: 3px;">Enabled</span>
+                    <span *ngIf="deal.active == 0"
+                          style="background: red;color: white;padding: 3px 7px;width: 46px;border-radius: 3px;">Disabled</span>
+                </td>
+                <td *ngIf="role != '3'" style="text-align: center; width: 100px;">
+                    <mat-slide-toggle [disabled]="!status" (change)="onChangeDealStatus(deal)"
+                                      [(ngModel)]="deal.slide"
+                                      color="accent"></mat-slide-toggle>
+                </td>
+            </tr>
+            <tr *ngIf="Offers.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No record found.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

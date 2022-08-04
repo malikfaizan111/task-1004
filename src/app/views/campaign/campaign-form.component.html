@@ -1,0 +1,280 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} PROMO IMAGE</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex="74">
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start start"
+				 fxLayoutGap="10px"
+				 >
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="campaign_name"
+								   type="text"
+								   required
+								   placeholder="Campaign Name">
+							<mat-error
+									   *ngIf="getValue('campaign_name')?.invalid && (getValue('campaign_name')?.dirty || getValue('campaign_name')?.touched)">
+								Campaign Name
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   [owlDateTime]="startDate"
+								   [owlDateTimeTrigger]="startDate"
+								   readonly
+								   [min]="currentDate"
+								   [max]="EndDate"
+								   [(ngModel)]="StartDate"
+								   [ngModelOptions]="{standalone: true}"
+								   (dateTimeChange)="onStartDate()"
+								   type="text"
+								   required
+								   placeholder="Start Date">
+
+							<i matSuffix
+							   class="glyphicon glyphicon-calendar"></i>
+
+							<owl-date-time pickerType="calendar"
+										   #startDate></owl-date-time>
+							<mat-error
+									   *ngIf="getValue('start_date')?.invalid && (getValue('start_date')?.dirty || getValue('start_date')?.touched)">
+								Start
+								Date is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%;">
+							<input matInput
+								   [owlDateTime]="endDate"
+								   [owlDateTimeTrigger]="endDate"
+								   readonly
+								   [min]="StartDate"
+								   [(ngModel)]="EndDate"
+								   [ngModelOptions]="{standalone: true}"
+								   (dateTimeChange)="onEndDate()"
+								   type="text"
+								   required
+								   placeholder="End Date">
+
+							<i matSuffix
+							   class="glyphicon glyphicon-calendar"></i>
+
+							<owl-date-time pickerType="calendar"
+										   #endDate></owl-date-time>
+							<mat-error
+									   *ngIf="getValue('end_date')?.invalid && (getValue('end_datet')?.dirty || getValue('end_date')?.touched)">
+								End
+								Date is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="hex_code"
+								   type="text"
+								   pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
+								   maxlength="7"
+								   minlength="7"
+								   required
+								   placeholder="Background Color (HEX Code (#000000) )">
+							<mat-error
+									   *ngIf="getValue('hex_code')?.invalid && (getValue('hex_code')?.dirty || getValue('hex_code')?.touched)">
+								Start with # in Hex Code
+							</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   (change)="onChangeColor()"
+								   [(ngModel)]="hex_code"
+								   [ngModelOptions]="{standalone: true}"
+								   type="color"
+								   required
+								   placeholder="Background Color">
+							<mat-error
+									   *ngIf="getValue('hex_code')?.invalid && (getValue('hex_code')?.dirty || getValue('hex_code')?.touched)">
+								Background Color
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%"
+										appearance="outline">
+							<mat-label>Select User Type </mat-label>
+							<mat-select formControlName="user_type">
+								<!-- <mat-option value="all">All</mat-option> -->
+								<mat-option value="ooredoo">Ooredoo</mat-option>
+                <mat-option value="non_ooredoo">Non-Ooredoo</mat-option>
+                <mat-option value="all">All</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div *ngIf="getValue('user_type')?.value != 'all'" fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%"
+										appearance="outline">
+							<mat-label>Select Packages</mat-label>
+							<mat-select formControlName="package_name">
+								<mat-option *ngFor="let item of arr"
+											[value]="item">{{toTitleCase(item)}}</mat-option>
+
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%"
+										appearance="outline">
+							<mat-label>Select Navigation</mat-label>
+							<mat-select (selectionChange)="modo($event)"
+										formControlName="navigation">
+								<mat-option value='new_offers'>New Offers</mat-option>
+								<mat-option value='favourites'>Favourites</mat-option>
+								<mat-option value='ooredoo_cc'>Ooredoo CC</mat-option>
+                <mat-option value='non_ooredoo_cc'>Non Ooredoo CC</mat-option>
+                <mat-option  value='unsub_premier'>Unsub Premier</mat-option>
+								<mat-option value='outlets'>Outlets</mat-option>
+                <mat-option  value='offers'>Offers</mat-option>
+								<mat-option *ngIf="Gainaccessvalue" value='gain_access'>Gain Access</mat-option>
+
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="Form.get('navigation')?.value == 'outlets' || Form.get('navigation')?.value == 'offers'"
+					 fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input type="text"
+								   placeholder="Outlet"
+								   matInput
+								   formControlName="outletObject"
+								   [matAutocomplete]="auto">
+							<mat-autocomplete #auto="matAutocomplete"
+											  [displayWith]="displayFn">
+								<mat-option *ngFor="let option of filteredOptions | async"
+											[value]="option">
+									{{option?.name}}
+								</mat-option>
+							</mat-autocomplete>
+							<mat-error
+									   *ngIf="getValue('outletObject')?.invalid && (getValue('outletObject')?.dirty || getValue('outletObject')?.touched)">
+								Outlet
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="Form.get('navigation')?.value == 'offers'"
+					 fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+
+						<mat-form-field style="width: 100%"
+										appearance="outline">
+							<mat-label>Select Offer</mat-label>
+							<mat-select formControlName="offer_id">
+								<mat-option *ngFor="let offer of Offers"
+											[value]="offer.id">{{offer.title}}</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div fxFlex="25">
+			<label style="width: 100%;">Select Image
+				<span style="font-size: 12px;"> (jpg,jpeg,JPG,png):</span>
+			</label>
+			<file-picker (onFileSelect)="onFileSelect($event)"
+						 [isIconHidden]="false"
+						 [image]="getImage('image')"
+						 controlName="image"
+						 type=""
+						 [size]="{width: 172, height: 172}">
+			</file-picker>
+			<span style="float: right;font-size: 12px; color: #ff2c54"
+				  *ngIf="errorMsg">{{errorMsg}}</span>
+		</div>
+
+		<div class="row">
+			<div style="margin-top: 20px"
+				 class="col-sm-12">
+				<button type="button"
+						(click)="doSubmit()"
+						[disabled]="Form.invalid || isLoading"
+						class="btn btn-primary round-elem"
+						style="background: red; border-color: red">
+					{{isEditing? 'UPDATE': 'ADD'}}
+				</button>
+				<img *ngIf="isLoading"
+					 class="loader-btn-image"
+					 src="assets/images/view-loader.gif">
+			</div>
+
+		</div>
+	</div>
+
+
+
+</form>

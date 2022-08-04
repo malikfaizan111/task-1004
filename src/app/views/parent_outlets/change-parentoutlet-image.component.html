@@ -1,0 +1,36 @@
+<div style="width: 550px;" class="wrapper">
+    <div class="data-table" style="max-height : 525; overflow-y: auto; min-height: 525;">
+      <span style="display: inline-block; margin-bottom: 24px;"><b>Arrange the menu Images</b></span>
+      <div class="drag-list__wrap">
+        <div cdkDropList (cdkDropListDropped)="drop($event)">
+          <div *ngFor="let outlet of Outlets; let i = index" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <div class="example-list" style="min-height: 40px; margin-bottom: 5px;" fxLayout="row"
+              fxLayoutAlign="center center" fxLayoutAlignGap="10px">
+              <div fxFlex="10">
+                <span fxFlexFill> {{i+1}}</span>
+              </div>
+              <div fxFlex="60" fxFlexAlign="start center">
+                <span fxFlexFill sty>{{outlet.file}}</span>
+              </div>
+              <div fxFlex="20" fxFlexAlign="end center">
+                <span fxFlexFill style="display: block; text-align: center;"> <img (click)="openPicture(outlet)"
+                    src="{{fileurl}}{{outlet.file}}" height="20px" width="40px"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center" style="margin-top: 15px;">
+      <button [disabled]="Outlets.length == 0" (click)="onSelectChange($event)" type="button"
+        class="btn btn-primary round-elem" style="background: red; border-color: red; width: 75px; margin-right: 4px;"
+        (click)="onSaveOrder()">
+        Save
+      </button>
+      <button (click)="closingdialog()" cdkFocusInitial type="button" class="btn btn-primary round-elem"
+        style="background: #ccc; border-color: #ccc; width: 75px;">
+        Cancel
+      </button>
+    </div>
+  </div>

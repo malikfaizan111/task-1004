@@ -1,0 +1,91 @@
+<div class="row">
+	<div style="width: fit-content;" class="col-sm-3">
+		<button mat-icon-button
+				(click)="onLocationBack()"
+				color="accent">
+			<img src="assets/images/actions/back.png"
+				 alt="">
+		</button>
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			SPEND X GET Y
+		</span>
+	</div>
+  <div class="col-sm-2">
+		<button class="btn btn-primary round-elem"
+				style="background: red; border-color: red" [routerLink]="['/main/spendXYForm/add']" routerLinkActive="router-link-active"  >ADD NEW
+		</button>
+	</div>
+	<div class="col-sm-6"
+		 style="text-align: right;float:right">
+		<div class="form-group col-sm-3"
+			 style="padding: 0 10px 0 0;">
+		</div>
+		<div class="form-group col-sm-9"
+			 style="padding: 0;text-align: left;">
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="getPromoList(1)"
+        class="input-group-addon">
+      <i class="glyphicon glyphicon-search"></i>
+    </span>
+				<input autocomplete="false"
+					   type="text"
+					   maxlength="50"
+					   class="form-control"
+					   [(ngModel)]="search"
+					   (keyup)="onSearchParentOutlet()"
+					   placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+			   style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th style="width: 70px;">ID</th>
+					<th>Name</th>
+					<th>Spend X</th>
+					<th>Get Y</th>
+					<th style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr *ngFor="let promo of promotionList">
+					<td>{{promo.id}}</td>
+					<td>{{promo.name}}</td>
+					<td>{{promo?.promotion_sxgyf[0]?.spend_x}}</td>
+					<td>{{promo?.promotion_sxgyf[0]?.get_yf}}</td>
+					<td style="width: 270px;text-align: center;">
+						<button style="min-width: 50px;"
+								mat-raised-button
+								color="accent"
+								(click)="onEditPromo(promo)">Edit
+						</button>
+						<button style="min-width: 50px;"
+								mat-raised-button
+								color="accent"
+								(click)="onAssignPromo(promo)">Assign Promotion
+						</button>
+					</td>
+				</tr>
+				<!-- <tr *ngIf="RestaurantsParentOutlets.length == 0">
+					<td colspan="100"
+						style="text-align: center">No record found.</td>
+
+				</tr> -->
+
+			</tbody>
+		</table>
+	</div>
+
+	<app-pagination *ngIf="promotionList.length > 0"
+					(setPage)="setPage($event)"
+					[perPage]="perPage"
+					[totalPages]="totalPages"
+					[currentPage]="currentPage"></app-pagination>
+</base-loader>
+

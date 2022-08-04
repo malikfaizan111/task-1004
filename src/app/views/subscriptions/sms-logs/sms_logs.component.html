@@ -1,0 +1,79 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button *ngIf="id != 'All'"
+				        mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span>SMS Log</span>
+			</div>
+		</span>
+		<strong>Total SMS: {{smsArrayCount}}</strong>
+	</div>
+	<div class="col-sm-6"
+	     style="text-align: right">
+		
+		<div class="form-group col-sm-7"
+		     style="padding: 0;text-align: left;">
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="getSMSList(1)"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       [(ngModel)]="search"
+				       (keyup)="onSearchSubscription()"
+				       class="form-control"
+				       placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+		       style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th class="weight-600">User ID</th>
+					<th class="weight-600">Name</th>
+					<th *ngIf="Roles?.role != '2'"  class="weight-600">Phone</th>
+					<th *ngIf="Roles?.role != '2'" class="weight-600">Email</th>
+					<th class="weight-600">SMS</th>
+					<th class="weight-600">Response</th>
+					<th class="weight-600">Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let sms of SMSArray">
+					<td>{{sms.user_id}}</td>
+					<td>{{sms.name}}</td>
+					<td *ngIf="Roles?.role != '2'">{{sms.phone}}</td>
+					<td *ngIf="Roles?.role != '2'">{{sms.email}}</td>
+					<td [title]="sms.sms">{{sms.sms}}</td>
+					<td>{{sms.response}}</td>
+					<td>{{sms.created_at}}</td>
+				</tr>
+				<tr *ngIf="SMSArray.length == 0">
+					<td colspan="100"
+					    style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</base-loader>
+<app-pagination *ngIf="SMSArray.length > 0"
+                (setPage)="setPage($event)"
+                [perPage]="perPage"
+                [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-pagination>

@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            PROMO DETAIL
+        </span>
+    </div>
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button (click)="onDialogClose()"
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+            <!-- <i class="glyphicon glyphicon-remove"></i> -->
+        </button>
+        <!-- <pre>{{Outlet | json}}</pre> -->
+    </div>
+</div>
+<div class="row"
+     style="margin-top: 15px;">
+    <div class="col-sm-5">
+     
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">HEX CODE: </div>{{Outlet.hex_code}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">NAVIGATION: </div>{{Outlet.navigation}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">USER TYPE: </div>{{Outlet.user_type}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">PACKAGE NAME: </div>{{Outlet.package_name}}
+        <br>
+    </div>
+    <div class="col-sm-5">
+        <!-- <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">neighborhood: </div>{{Outlet.neighborhood}} -->
+        <!-- <br> -->
+        <!-- <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">USER ID: </div>{{Outlet.user_id}}
+        <br> -->
+        <!-- <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">READ STATUS: </div>{{Outlet.read_status}}
+        <br> -->
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">CREATED AT: </div>{{Outlet.created_at}}
+        <br>
+        <!-- <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">UPDATED AT: </div>{{Outlet.updated_at}}
+        <br> -->
+       
+    </div>
+    <div class="col-sm-2"
+         style="text-align: right">
+        <!-- <mat-slide-toggle title="Change Status"
+                          [(ngModel)]="status"
+                          (change)="onChangeStatus()"
+                          color="accent">
+
+        </mat-slide-toggle><br> -->
+        <!-- <button style="min-width: 50px;margin-top: 10px;"
+                mat-raised-button
+                color="accent"
+                (click)="onEdit()">Edit
+        </button> -->
+    </div>
+</div>

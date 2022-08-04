@@ -1,0 +1,436 @@
+<!-- <style>
+  .Ansab {
+    border-radius: 20px !important;
+  }
+</style> -->
+<div class="row">
+	<div class="col-sm-6">
+		<span *ngIf="is_heading_shown"
+		      style="font-size: 25px;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span (mouseover)="check()">{{isEditing? 'EDIT': 'ADD'}} {{heading_label}}</span>
+			</div>
+		</span>
+	</div>
+	<div *ngIf="!is_child">
+		<div *ngIf="!isEditing"
+		     class="col-sm-6"
+		     style="text-align: right">
+
+			<div class="form-group col-sm-6"
+			     style="padding: 0 10px 0 0;">
+
+			</div>
+			<div class="form-group col-sm-6"
+			     style="padding: 0;text-align: left;">
+				<input type="file"
+				       accept=".csv"
+				       (change)="convertFile($event)"
+				       placeholder="Search"
+				       class="form-control" />
+			</div>
+			<br>
+
+			<button class="btn btn-primary round-elem"
+			        style="background: red; border-color: red;height: 30px;padding: 4px 14px; margin-right: 4px;"
+			        (click)="onUploadCSV()">UPLOAD CSV
+			</button>
+			<a download
+			   target="_blank"
+			   href="assets/Offers_Sample.csv"
+			   class="btn btn-primary round-elem"
+			   style="background: red; border-color: red;height: 30px;padding: 4px 14px;">SAMPLE
+			</a>
+		</div>
+	</div>
+</div>
+
+<form [formGroup]="Form"
+      (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+	     fxLayout="row wrap"
+	     fxLayoutAlign="space-between start"
+	     >
+
+		<div fxFlex="74">
+			<div fxLayout="row wrap"
+			     fxLayoutAlign="start start"
+			     fxLayoutGap="10px"
+			     >
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="title"
+							       type="text"
+							       required
+							       placeholder="Offer Name">
+							<mat-error *ngIf="getValue('title')?.invalid && (getValue('title')?.dirty || getValue('title')?.touched)">Offer Name
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="search_tags"
+							       type="text"
+							       required
+							       placeholder="Search Tags">
+							<mat-error *ngIf="getValue('search_tags')?.invalid && (getValue('search_tags')?.dirty || getValue('search_tags')?.touched)">Search
+								Tags
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="interest_tags"
+							       type="text"
+							       placeholder="Interest Tags">
+							<mat-error *ngIf="getValue('interest_tags')?.invalid && (getValue('interest_tags')?.dirty || getValue('interest_tags')?.touched)">Search
+								Tags
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="approx_saving"
+							       mask="0*.99"
+							       [dropSpecialCharacters]="false"
+							       type="text"
+							       required
+							       placeholder="Approximate Savings">
+							<mat-error *ngIf="getValue('approx_saving')?.invalid && (getValue('approx_saving')?.dirty || getValue('approx_saving')?.touched)">Approximate Savings is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       [owlDateTime]="startDate"
+							       [owlDateTimeTrigger]="startDate"
+							       readonly
+							       [min]="currentDate"
+							       [max]="EndDate"
+							       [(ngModel)]="StartDate"
+							       [ngModelOptions]="{standalone: true}"
+							       (dateTimeChange)="onStartDate()"
+							       type="text"
+							       required
+							       placeholder="Start Date">
+
+							<i matSuffix
+							   class="glyphicon glyphicon-time"></i>
+
+							<owl-date-time pickerType="both"
+							               #startDate></owl-date-time>
+
+							<mat-error *ngIf="getValue('start_datetime')?.invalid && (getValue('start_datetime')?.dirty || getValue('start_datetime')?.touched)">Start
+								Date is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%;">
+							<input matInput
+							       [owlDateTime]="endDate"
+							       [owlDateTimeTrigger]="endDate"
+							       readonly
+							       [min]="StartDate"
+							       [(ngModel)]="EndDate"
+							       [ngModelOptions]="{standalone: true}"
+							       (dateTimeChange)="onEndDate()"
+							       type="text"
+							       required
+							       placeholder="End Date">
+
+							<i matSuffix
+							   class="glyphicon glyphicon-time"></i>
+
+							<owl-date-time pickerType="both"
+							               #endDate></owl-date-time>
+							<mat-error *ngIf="getValue('end_datetime')?.invalid && (getValue('end_datetime')?.dirty || getValue('end_datetime')?.touched)">End
+								Date is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<!-- <div fxFlex.xl="32"
+				fxFlex.lg="48"
+				fxFlex.md="48">
+			   <div class="form-group mb-0">
+				   <mat-form-field style="width: 100%; margin-bottom: 10px">
+					   <mat-select placeholder="Trending Search "
+								   formControlName="trending_search">
+						   <mat-option *ngFor="let col of trendingSearch"
+									   [value]="col.id">
+							   {{col.text}}
+						   </mat-option>
+					   </mat-select>
+				   </mat-form-field>
+			   </div>
+		   </div> -->
+
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-select (change)="onSpecialChange($event)"
+							            formControlName="special"
+							            placeholder="Event Active">
+								<mat-option value="0">No</mat-option>
+								<mat-option value="1">Yes</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('special')?.invalid && (getValue('special')?.dirty || getValue('special')?.touched)">Event Active
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-select formControlName="usage_allowance"
+							            placeholder="Offer Type">
+								<mat-option value="">No Allowance</mat-option>
+								<mat-option value="single">Single</mat-option>
+								<mat-option value="couple">Couple</mat-option>
+								<mat-option value="both">Both</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('usage_allowance')?.invalid && (getValue('usage_allowance')?.dirty || getValue('usage_allowance')?.touched)">usage
+								Offer Type
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="Form.get('special')?.value == 1 && Form.get('special')?.value != ''"
+				     fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-select formControlName="special_type"
+							            placeholder="Special Type">
+								<mat-option value="other">Other</mat-option>
+								<mat-option value="ramadan">Ramadan</mat-option>
+								<mat-option value="burger">Burger</mat-option>
+								<mat-option value="biryani">Biryani</mat-option>
+								<mat-option value="food_delivery">Food Delivery</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('special_type')?.invalid && (getValue('special_type')?.dirty || getValue('special_type')?.touched)">Special
+								type
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="!is_child"
+				     fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input type="text"
+                     (click)="openOutletList()"
+							       placeholder="Outlet Name"
+							       matInput
+							       formControlName="outletName">
+
+							<!-- <mat-error *ngIf="getValue('title')?.invalid && (getValue('title')?.dirty || getValue('title')?.touched)">Title
+								is required</mat-error>
+
+							<mat-autocomplete #auto="matAutocomplete"
+							                  [displayWith]="displayFn">
+								<mat-option *ngFor="let option of filteredOptions | async"
+								            [value]="option">
+									{{option.name}}
+								</mat-option>
+							</mat-autocomplete> -->
+							<mat-error *ngIf="getValue('outletObject')?.invalid && (getValue('outletObject')?.dirty || getValue('outletObject')?.touched)">Outlet Name
+								is required</mat-error>
+						</mat-form-field>
+
+					</div>
+				</div>
+
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-select (change)="onSelectChange($event)"
+							            formControlName="renew"
+							            placeholder="Renew">
+								<mat-option value="0">No</mat-option>
+								<mat-option value="1">Yes</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('renew')?.invalid && (getValue('renew')?.dirty || getValue('renew')?.touched)">Renew
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="Form.get('renew')?.value == 0 && Form.get('renew')?.value != ''"
+				     fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="redemptions"
+							       type="text"
+							       mask="99999999999"
+							       placeholder="Redemptions">
+							<mat-error *ngIf="getValue('redemptions')?.invalid && (getValue('redemptions')?.dirty || getValue('redemptions')?.touched)">Redemptions
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="per_user"
+							       type="text"
+							       mask="9999999999"
+							       min="1"
+							       required
+							       placeholder="Per User">
+							<mat-error *ngIf="getValue('per_user')?.invalid && (getValue('per_user')?.dirty || getValue('per_user')?.touched)">Per
+								User
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="SKU"
+							       type="text"
+							       placeholder="SKU">
+							<mat-error *ngIf="getValue('SKU')?.invalid && (getValue('SKU')?.dirty || getValue('SKU')?.touched)">SKU
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="rules_of_purchase"
+							       type="text"
+							       placeholder="Outlet Details & Exclusion">
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<textarea matInput
+							          formControlName="valid_for"
+							          required
+							          placeholder="Validity"
+							          cols="30"
+							          rows="1"></textarea>
+							<mat-error *ngIf="getValue('valid_for')?.invalid && (getValue('valid_for')?.dirty || getValue('valid_for')?.touched)">Validity
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<textarea matInput
+							          formControlName="description"
+							          required
+							          placeholder="Outlet Description"
+							          cols="30"
+							          rows="1"></textarea>
+							<mat-error *ngIf="getValue('description')?.invalid && (getValue('description')?.dirty || getValue('description')?.touched)">Outlet Description
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div fxFlex="25">
+			<label style="width: 100%;">Select Image
+				<span style="font-size: 12px;"> (square image):</span>
+			</label>
+			<file-picker (onFileSelect)="onFileSelect($event)"
+			             [isIconHidden]="false"
+			             [image]="getImage('image')"
+			             controlName="image"
+			             type="Square"
+			             [size]="{width: 172, height: 172}">
+			</file-picker>
+			<span style="float: right;font-size: 12px; color: #ff2c54"
+			      *ngIf="errorMsg">{{errorMsg}}</span>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+		     class="col-sm-12">
+			<button type="submit"
+			        *ngIf="!isEditing"
+			        [disabled]="Form.invalid || isLoading"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				ADD OFFER
+			</button>
+			<button type="submit"
+			        *ngIf="isEditing"
+			        [disabled]="Form.invalid || isLoading"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				UPDATE OFFER
+			</button>
+			<img *ngIf="isLoading"
+			     class="loader-btn-image"
+			     src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

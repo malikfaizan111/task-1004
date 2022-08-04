@@ -1,0 +1,99 @@
+<div class="row">
+	<div style="width: fit-content;" class="col-sm-2">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			SMS
+			<!-- {{AccessCodeHeading}} -->
+		</span>
+	</div>
+  <div class="col-sm-4">
+    <button *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
+            style="background: red; border-color: red;margin-right: 4px;"
+            (click)="sendsmscode()">SEND SMS WITH CODE
+    </button>
+    <button *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
+        style="background: red; border-color: red"
+        (click)="addNew()">ADD NEW
+    </button>
+  </div>
+	<div class="col-sm-6"
+	     style="text-align: right;float:right">
+		<div class="form-group col-sm-3"
+		     style="padding: 0 10px 0 0;">
+			<!-- <select class="form-control"
+			        [(ngModel)]="appName"
+			        (change)="onAppChange()">
+				<option value="1">APP 1</option>
+				<option value="2">APP 2</option>
+			</select> -->
+			<!-- <user-app-selector (onAppSelect)="onAppChange($event)"></user-app-selector> -->
+		</div>
+		<div class="form-group col-sm-9"
+		     style="padding: 0;text-align: left;">
+			<!-- <input type="text"
+				  placeholder="Search"
+				  class="form-control" />
+				   -->
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="gerSmsList(1)"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       [(ngModel)]="search"
+				       (keyup)="onSearchPromoCode()"
+				       class="form-control"
+				       placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+		       style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th style="width: 170px;">NO.</th>
+					<!-- <th>Phone</th> -->
+					<th>Sent</th>
+					<th>failed</th>
+					<th>Message</th>
+					<th>Created At</th>
+					<th style="text-align: center; width: 200px;">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let sm of Sms">
+					<td>{{sm.id}}</td>
+					<!-- <td>{{sm.phone}}</td> -->
+					<td>{{sm.sendSms}}</td>
+					<td>{{sm.failedSms}}</td>
+					<td>{{sm.sms}}</td>
+					<td>{{sm.created_at}}</td>
+					<td style="text-align: center; width: 200px;">
+						<button style="min-width: 50px;"
+						        mat-raised-button
+						        (click)="onViewAllAccessSms(sm)"
+						        color="accent">View Sms
+						</button>
+					</td>
+				</tr>
+				<tr *ngIf="Sms.length == 0">
+					<td colspan="100"
+					    style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<app-pagination *ngIf="Sms.length > 0"
+	                (setPage)="setPage($event)"
+	                [perPage]="perPage"
+	                [totalPages]="totalPages"
+	                [currentPage]="currentPage"></app-pagination>
+</base-loader>

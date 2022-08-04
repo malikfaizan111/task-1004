@@ -1,0 +1,80 @@
+<div class="row">
+    <app-loader [totalRecords]="ArrayCSVCount"
+                [completedRecords]="ArrayCSV.length"
+                [loaderMessage]="loaderMessage"></app-loader>
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            ALL CODES DETAIL
+        </span>
+    </div>
+
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button mat-dialog-close
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+        </button>
+        <br>
+        <!-- <button class="btn btn-primary round-elem"
+                style="background: red; border-color: red; float: right;"
+                [disabled]="mPromoCodes.length == 0"
+                (click)="onExportCSV()">Export CSV
+        </button> -->
+    </div>
+</div>
+
+<div style="max-height: 60vh;overflow: auto;margin-top: 20px;"
+     class="data-table">
+    <!-- <base-loader> -->
+    <!-- <div class="data-table"> -->
+    <table class="table table-responsive table-striped"
+           style="width:100%; margin-top: 15px">
+        <thead>
+            <tr>
+                <th style="width: 70px;">NO.</th>
+                <th>Title</th>
+                <th>Code</th>
+                <th>Redemptions</th>
+                <th>Redeemed</th>
+                <th>Expiry date/time</th>
+                <th>Days</th>
+                <th>Multiple</th>
+                <th>Status</th>
+                <th style="text-align: center">Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let code of mPromoCodes">
+                <td>{{code.id}}</td>
+                <td>{{code.title}}</td>
+                <td>{{code.code}}</td>
+                <td>{{code.redemptions}}</td>
+                <td>{{code.redeemed}}</td>
+                <td>{{code.expiry_datetime}}</td>
+                <td>{{code.days}}</td>
+                <td>{{code.multiple == 0 ? 'No' : 'Yes'}}</td>
+                <td>{{code.status == 0 ? 'Inactive' : 'Active'}}</td>
+                <td style="text-align: center; width: 100px;">
+                    <mat-slide-toggle (change)="onChangemPromoCode(code)"
+                                      [(ngModel)]="code.slide"
+                                      color="accent"></mat-slide-toggle>
+                </td>
+            </tr>
+            <tr *ngIf="mPromoCodes.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No record found.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- </div> -->
+
+
+    <!-- </base-loader> -->
+</div>
+<app-pagination *ngIf="mPromoCodes.length > 0"
+                (setPage)="setPage($event)"
+                [perPage]="perPage"
+                [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-pagination>

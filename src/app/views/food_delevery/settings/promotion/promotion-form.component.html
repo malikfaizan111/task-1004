@@ -1,0 +1,501 @@
+<div class="row">
+	<div class="col-sm-6">
+		<button mat-icon-button
+				(click)="onLocationBack()"
+				color="accent">
+			<img src="assets/images/actions/back.png"
+				 alt="">
+		</button>
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<span>PROMOTION</span>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name"
+						   type="text"
+						   required
+						   placeholder="Promotion Name">
+					<mat-error
+							   *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+						Promotion Name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="48"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name_ar"
+						   type="text"
+						   dir="rtl"
+						   style="text-align: right"
+						   required
+						   placeholder="ARABIC NAME">
+					<mat-error
+							   *ngIf="getValue('name_ar')?.invalid && (getValue('name_ar')?.dirty || getValue('name_ar')?.touched)">
+						name_ar
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select (change)="onSelectChange($event)"
+								formControlName="renew"
+								placeholder="Renew">
+						<mat-option value="0">No</mat-option>
+						<mat-option value="1">Yes</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('renew')?.invalid && (getValue('renew')?.dirty || getValue('renew')?.touched)">
+						Renew
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div *ngIf="Form.get('renew')?.value == 0 && Form.get('renew')?.value != ''"
+			 fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="redemptions"
+						   type="text"
+						   mask="99999999999"
+						   placeholder="Redemptions">
+					<mat-error
+							   *ngIf="getValue('redemptions')?.invalid && (getValue('redemptions')?.dirty || getValue('redemptions')?.touched)">
+						Redemptions
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="per_user"
+						   type="text"
+						   mask="9999999999"
+						   min="1"
+						   required
+						   placeholder="Per User">
+					<mat-error
+							   *ngIf="getValue('per_user')?.invalid && (getValue('per_user')?.dirty || getValue('per_user')?.touched)">
+						Per
+						User
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="price"
+						   type="text"
+						   required
+						   placeholder="Promotion Price">
+					<mat-error
+							   *ngIf="getValue('price')?.invalid && (getValue('price')?.dirty || getValue('price')?.touched)">
+						Promotion Price is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<!-- <div fxFlex="25">
+			<label style="width: 100%;">Select Image
+				<span style="font-size: 12px;"> (square image):</span>
+			</label>
+			<file-picker (onFileSelect)="onFileSelect($event)"
+						 controlName="image"
+						 [isIconHidden]="false"
+						 [image]="getImage('image')"
+						 type="Square"
+						 [size]="{width: 172, height: 172}">
+			</file-picker>
+			<span style="float: right;font-size: 12px; color: #ff2c54"
+				  *ngIf="errorMsg">{{errorMsg}}</span>
+		</div> -->
+
+		<!-- <div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<input type="text"
+						   placeholder="Select Restaurant"
+						   matInput
+						   formControlName="parentObject"
+						   [matAutocomplete]="auto">
+					<mat-autocomplete #auto="matAutocomplete"
+									  [displayWith]="displayFnParent">
+						<mat-option *ngFor="let option of filteredParentOptions | async"
+									[value]="option">
+							{{option.name}}
+						</mat-option>
+					</mat-autocomplete>
+					<mat-error
+							   *ngIf="getValue('parentObject')?.invalid && (getValue('parentObject')?.dirty || getValue('parentObject')?.touched)">
+						Restaurant
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div> -->
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="type"
+								placeholder="Promotion Type">
+						<mat-option value="b1g1f">B1G1F</mat-option>
+						<!-- <mat-option value="Discount %">Discount %</mat-option>
+						<mat-option value="Discount on selected item">Discount on selected item</mat-option>
+						<mat-option value="Combo offer ">Combo offer </mat-option>
+						<mat-option value="Spend X Get Y free">Spend X Get Y free </mat-option>
+						<mat-option value="Spend X with every order">Spend X with every order</mat-option> -->
+
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('type')?.invalid && (getValue('type')?.dirty || getValue('type')?.touched)">
+						Type
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+    </div>
+    <div fxFlex.xl="32"
+    fxFlex.lg="48"
+    fxFlex.md="48">
+   <div class="form-group mb-0">
+     <mat-form-field style="width: 100%">
+       <mat-select formControlName="calculation_type"
+             placeholder="Selection Type">
+         <mat-option value="general">General</mat-option>
+         <mat-option value="basePriceZero">Base Prize Zero</mat-option>
+         <mat-option value="generalwithbasepricezero">General + Base Prize Zero</mat-option>
+       </mat-select>
+       <mat-error
+              *ngIf="getValue('calculation_type')?.invalid && (getValue('calculation_type')?.dirty || getValue('calculation_type')?.touched)">
+         Selection Type
+         is required</mat-error>
+     </mat-form-field>
+   </div>
+ </div>
+		<div fxFlex.xl="100"
+			 fxFlex.lg="100"
+			 fxFlex.md="100"
+			 style="margin-top: 20px;">
+
+			<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+				<span>MENU</span>
+			</span>
+
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="purchase_type"
+								placeholder="Item to purchase(Buy 1)"
+								(change)="onChangeType($event)">
+						<mat-option value="main_menu_item">By Category</mat-option>
+						<mat-option value="menu_item">By Items</mat-option>
+
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('purchase_type')?.invalid && (getValue('purchase_type')?.dirty || getValue('purchase_type')?.touched)">
+						purchase_type
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48"
+			 *ngIf='MultiDropDown'>
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+          <mat-select placeholder="Select Main Menu Item"
+                (change)="check()"
+								formControlName="main_menu_item_id_for_purchase"
+								multiple>
+						<mat-option *ngFor="let item of MainMenuItem"
+									[value]="item.id">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48"
+			 *ngIf="!MultiDropDown">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<mat-select placeholder="Select Menu Item"
+								formControlName="menu_item_id_for_purchase"
+								multiple>
+						<mat-option *ngFor="let item of MenuItem"
+									[value]="item.id">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="free_item_type"
+								placeholder="Item to purchase free"
+								(change)="onChangeTypeFree($event)">
+						<mat-option value="main_menu_item">By Category</mat-option>
+						<mat-option value="menu_item">By Items</mat-option>
+
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('free_item_type')?.invalid && (getValue('free_item_type')?.dirty || getValue('free_item_type')?.touched)">
+						free_item_type
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48"
+			 *ngIf='MultiDropDownFree'>
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<mat-select placeholder="Select Main Menu Item"
+								formControlName="main_menu_item_id_for_free"
+								multiple>
+						<mat-option *ngFor="let item of MainMenuItem"
+									[value]="item.id">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48"
+			 *ngIf="!MultiDropDownFree">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<mat-select placeholder="Select Menu Item"
+								formControlName="menu_item_id_for_free"
+								multiple>
+						<mat-option *ngFor="let item of MenuItem"
+									[value]="item.id">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="exclusion_status"
+								(change)="onChangeExclusions($event)"
+								placeholder="Do you have any Exclusions">
+						<mat-option value="1">YES</mat-option>
+						<mat-option value="0">NO</mat-option>
+
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('exclusion_status')?.invalid && (getValue('exclusion_status')?.dirty || getValue('exclusion_status')?.touched)">
+						Exclusion Status
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48"
+			 *ngIf='ExclusionDropDown'>
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<mat-select placeholder="Select Main Menu Item"
+								formControlName="main_menu_item_id_for_exclusions"
+								multiple>
+						<mat-option *ngFor="let item of MainMenuItem"
+									[value]="item.id">
+							{{item.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="100"
+			 fxFlex.lg="100"
+			 fxFlex.md="100"
+			 style="margin-top: 20px;">
+
+			<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+				<span>AVAILABLITY & DURATION </span>
+			</span>
+
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="availability_type"
+								placeholder="Availability Type">
+						<mat-option value="weekend">Weekend only</mat-option>
+						<mat-option value="week_days">Weekdays only</mat-option>
+						<mat-option value="everyday">Everyday</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('availability_type')?.invalid && (getValue('availability_type')?.dirty || getValue('availability_type')?.touched)">
+						Availability Type
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="availability_duration"
+								placeholder="Availability Duration">
+						<mat-option value="weekend">Weekend only</mat-option>
+						<mat-option value="week_days">Weekdays only</mat-option>
+						<mat-option value="everyday">Everyday</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('availability_duration')?.invalid && (getValue('availability_duration')?.dirty || getValue('availability_duration')?.touched)">
+						Availability Type
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   [owlDateTime]="startDate"
+						   [owlDateTimeTrigger]="startDate"
+						   readonly
+						   [(ngModel)]="StartDate"
+						   [ngModelOptions]="{standalone: true}"
+						   (dateTimeChange)="onStartDate()"
+						   type="text"
+						   required
+						   placeholder="Start Date and Time">
+
+					<i matSuffix
+					   class="glyphicon glyphicon-calendar"></i>
+
+					<owl-date-time pickerType="both"
+								   #startDate></owl-date-time>
+					<mat-error
+							   *ngIf="getValue('from_date')?.invalid && (getValue('from_date')?.dirty || getValue('from_date')?.touched)">
+						Start
+						Date is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%;">
+					<input matInput
+						   [owlDateTime]="endDate"
+						   [owlDateTimeTrigger]="endDate"
+						   readonly
+						   [min]="currentDate"
+						   [(ngModel)]="EndDate"
+						   [ngModelOptions]="{standalone: true}"
+						   (dateTimeChange)="onEndDate()"
+						   type="text"
+						   required
+						   placeholder="End Date and Time">
+
+					<i matSuffix
+					   class="glyphicon glyphicon-calendar"></i>
+
+					<owl-date-time pickerType="both"
+								   #endDate></owl-date-time>
+					<mat-error
+							   *ngIf="getValue('to_date')?.invalid && (getValue('to_date')?.dirty || getValue('to_date')?.touched)">
+						End
+						Date is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ADD
+			</button>
+			<!-- <button (click)="testcase()"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				testtt
+			</button> -->
+			<button type="submit"
+					*ngIf="isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				UPDATE
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+
+		</div>
+
+	</div>
+</form>

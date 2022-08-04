@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            NOTIFICATION DETAIL
+        </span>
+    </div>
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button mat-dialog-close
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="row"
+     style="margin-top: 15px;">
+    <div class="col-sm-12"
+         style="text-align: right">
+        <button style="min-width: 50px;margin-top: 10px;"
+                mat-raised-button
+                [disabled]="Notification.archive == 0"
+                color="primary"
+                (click)="onEditNotification()">Edit
+        </button>
+    </div>
+    <!-- <div class="col-sm-10"> -->
+    <div class="col-sm-12"
+         *ngIf="Notification.audience == 'specificusers'">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Title: </div>{{Notification.title}}
+        <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Specific Users:
+            ({{usersLength}})</div>
+        <div style="max-height: 300px; overflow: auto; width: 100%"
+             [innerHtml]="getUsers(Notification.specificUsers)"></div>
+    </div>
+    <div class="col-sm-12"
+         *ngIf="Notification.audience == 'userCreatedDate'">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Title: </div>{{Notification.title}}
+        <br>
+        <div *ngIf="Notification.dates == 'Both'">
+            <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">User Created Date: </div>
+            Greater than {{Notification.greater_than | date : 'yyyy-MM-dd'}}, <br>
+            Less than {{Notification.less_than | date : 'yyyy-MM-dd'}} <br>
+        </div>
+        <div *ngIf="Notification.dates == 'Greater'">
+            <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">User Created Date: </div>
+            Greater than {{Notification.greater_than | date : 'yyyy-MM-dd'}} <br>
+        </div>
+        <div *ngIf="Notification.dates == 'Less'">
+            <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">User Created Date: </div>
+            Greater than {{Notification.less_than | date : 'yyyy-MM-dd'}} <br>
+        </div>
+    </div>
+    <div class="col-sm-12"
+         *ngIf="Notification.audience == 'allusers'">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Title: </div>{{Notification.title}}
+        <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Users: </div> All Users
+    </div>
+    <!-- </div> -->
+
+</div>

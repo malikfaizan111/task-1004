@@ -1,0 +1,270 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} NOTIFICATION</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex="100">
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start start"
+				 fxLayoutGap="10px"
+				 >
+				<div fxFlex.xl="48"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="title"
+								   type="text"
+								   required
+								   placeholder="Title">
+							<mat-error
+									   *ngIf="getValue('title')?.invalid && (getValue('title')?.dirty || getValue('title')?.touched)">
+								title
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-slide-toggle [(ngModel)]="push"
+										  [ngModelOptions]="{standalone: true}"
+										  (change)="onChange($event)"
+										  color="accent">
+							Push
+						</mat-slide-toggle>
+					</div>
+				</div>
+
+				<fieldset class="scheduler-border"
+						  fxFlex.xl="100"
+						  fxFlex.lg="100"
+						  fxFlex.md="100">
+					<legend class="scheduler-border">Select Audience</legend>
+
+					<div style="margin-top: 20px"
+						 fxLayout="row wrap"
+						 fxLayoutAlign="start start"
+						 fxLayoutGap="10px"
+						 >
+						<div style="margin-top: 20px"
+							 fxFlex="100">
+							<mat-radio-group formControlName="audience">
+								<mat-radio-button value="userCreatedDate">User Created Date</mat-radio-button>
+								<mat-radio-button value="specificusers">Specific Users</mat-radio-button>
+								<mat-radio-button value="allusers">All Users</mat-radio-button>
+							</mat-radio-group>
+						</div>
+
+						<div style="margin-top: 20px"
+							 fxFlex="48"
+							 *ngIf="getValue('audience')?.value == 'userCreatedDate'">
+							<label style="margin-top: 20px"
+								   for="">Date Range</label>
+							<mat-radio-group style="margin-top: 20px"
+											 formControlName="dates">
+								<mat-radio-button value="Greater">Greater</mat-radio-button>
+								<mat-radio-button value="Less">Less</mat-radio-button>
+								<mat-radio-button value="Both">Both</mat-radio-button>
+							</mat-radio-group>
+
+							<ng-container
+										  *ngIf="getValue('dates')?.value == 'Greater' || getValue('dates')?.value == 'Both'">
+								<mat-form-field style="margin-top: 20px; width: 100%">
+									<input matInput
+										   [owlDateTime]="Greater"
+										   [owlDateTimeTrigger]="Greater"
+										   readonly
+										   [(ngModel)]="greaterDate"
+										   [ngModelOptions]="{standalone: true}"
+										   (dateTimeChange)="onGreaterDate()"
+										   type="text"
+										   required
+										   placeholder="Greater Than">
+									<owl-date-time pickerType="calendar"
+												   #Greater></owl-date-time>
+									<mat-error
+											   *ngIf="getValue('greater_than')?.invalid && (getValue('greater_than')?.dirty || getValue('greater_than')?.touched)">
+										greater_than
+										is required</mat-error>
+								</mat-form-field>
+							</ng-container>
+
+							<ng-container
+										  *ngIf="getValue('dates')?.value == 'Less' || getValue('dates')?.value == 'Both'">
+								<mat-form-field style="margin-top: 20px; width: 100%">
+									<input matInput
+										   [owlDateTime]="Less"
+										   [owlDateTimeTrigger]="Less"
+										   readonly
+										   [(ngModel)]="lessDate"
+										   [ngModelOptions]="{standalone: true}"
+										   (dateTimeChange)="onLessDate()"
+										   type="text"
+										   required
+										   placeholder="Less Than">
+									<owl-date-time pickerType="calendar"
+												   #Less></owl-date-time>
+									<mat-error
+											   *ngIf="getValue('less_than')?.invalid && (getValue('less_than')?.dirty || getValue('less_than')?.touched)">
+										less_than
+										is required</mat-error>
+								</mat-form-field>
+							</ng-container>
+						</div>
+
+
+						<div style="margin-top: 20px"
+							 fxFlex="48"
+							 *ngIf="getValue('audience')?.value == 'specificusers'">
+							<label style="margin-top: 20px"
+								   for="">Select Option</label>
+							<mat-radio-group style="margin-top: 20px"
+											 [(ngModel)]="select_opt"
+											 [ngModelOptions]="{standalone: true}">
+								<mat-radio-button value="1">Email</mat-radio-button>
+								<mat-radio-button value="2"> CSV</mat-radio-button>
+							</mat-radio-group>
+
+							<multi-tag-input *ngIf="select_opt == 1"
+											 (onTagAdd)="onTagAdd($event)"
+											 [emails]="Notification?.specificUsers"
+											 [required]="false"
+											 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+											 placeholder="Emails"></multi-tag-input>
+
+							<div *ngIf="select_opt == 2"
+								 style="display: flex;">
+								<input (change)="convertFile($event)"
+									   style="margin-top: 20px"
+									   accept=".csv"
+									   type="file">
+
+								<a download
+								   target="_blank"
+								   href="assets/Emails_Sample.csv"
+								   class="btn btn-primary round-elem"
+								   style="background: red; border-color: red;height: 30px;margin-top: 15px;padding: 4px 14px;">
+									Download Sample
+								</a>
+							</div>
+						</div>
+
+					</div>
+				</fieldset>
+
+				<fieldset class="scheduler-border"
+						  fxFlex.xl="100"
+						  fxFlex.lg="100"
+						  fxFlex.md="100">
+					<legend class="scheduler-border">Apply Filters</legend>
+
+					<div fxLayout="row wrap"
+						 fxLayoutAlign="start start"
+						 fxLayoutGap="10px"
+						 >
+						<div style="padding-top: 10px"
+							 fxFlex="100">
+							<mat-radio-group formControlName="platform">
+								<mat-radio-button value="android">Android</mat-radio-button>
+								<mat-radio-button value="ios">IOS</mat-radio-button>
+								<mat-radio-button value="Both">Both</mat-radio-button>
+							</mat-radio-group>
+						</div>
+						<div style="padding-top: 10px"
+							 fxFlex="100">
+							<mat-radio-group formControlName="operator">
+								<mat-radio-button value="vodafone">Vodafone</mat-radio-button>
+								<mat-radio-button value="ooredoo">Ooredoo</mat-radio-button>
+								<mat-radio-button value="both">Both</mat-radio-button>
+							</mat-radio-group>
+						</div>
+					</div>
+				</fieldset>
+				<div fxFlex.xl="52"
+					 fxFlex.lg="52"
+					 fxFlex.md="52">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<textarea matInput
+									  placeholder="Message"
+									  formControlName="message"
+									  name=""
+									  maxlength="300"
+									  id=""
+									  cols="30"
+									  rows="1"></textarea>
+							<mat-error
+									   *ngIf="getValue('message')?.invalid && (getValue('message')?.dirty || getValue('message')?.touched)">
+								Message
+								is required and max 300 characters.</mat-error>
+						</mat-form-field>
+
+
+						<i style="position: absolute;top: 15px;margin-left: 15px; font-style: normal;cursor: pointer"
+						   (click)="toggled = !toggled"
+						   [(emojiPickerIf)]="toggled"
+						   [emojiPickerDirection]="'bottom' || 'top' || 'left' || 'right'"
+						   (emojiPickerSelect)="handleSelection($event)">😄</i>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="button"
+					(click)="doSubmit(0)"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				SEND NOTIFICATION
+			</button>
+			&nbsp;&nbsp;
+			<button type="button"
+					(click)="doSubmit(1)"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				SAVE AS DRAFT
+			</button>
+			<!-- <button type="button"
+					*ngIf="isEditing"
+					(click)="doSubmit(1)"
+					[disabled]="Form.invalid || isLoading"
+					style="background: red; border-color: red"
+					class="btn btn-primary round-elem">
+				UPDATE NOTIFICATION
+			</button> -->
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

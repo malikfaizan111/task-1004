@@ -1,0 +1,87 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button *ngIf="id != 'All'"
+				        mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span>ORDER REVIEWS</span>
+			</div>
+		</span>
+	</div>
+	<div class="col-sm-6"
+	     style="text-align: right">
+		<div class="form-group col-sm-3"
+		     style="padding: 0 10px 0 0;">
+			<!-- <select class="form-control">
+				<option value="">All</option>
+
+			</select> -->
+		</div>
+		<div class="form-group col-sm-9"
+		     style="padding: 0;text-align: left;">
+			<!-- <input type="text"
+				       placeholder="Search"
+					   class="form-control" />
+					    -->
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="onSearchOrderReview()"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       [(ngModel)]="search"
+				       class="form-control"
+				       placeholder="Search">
+			</div>
+		</div>
+		<br>
+		<!-- <button class="btn btn-primary round-elem"
+		        style="background: red; breview-color: #af1f70"
+		        (click)="addNew()">ADD NEW
+		</button> -->
+	</div>
+</div>
+<base-loader>
+	<table class="table table-responsive"
+	       style="width:100%; margin-top: 15px">
+		<thead>
+			<tr>
+				<th style="width: 70px;">NO.</th>
+				<th>Review</th>
+				<th>Order Id</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr *ngFor="let review of OrderReviews">
+				<td>{{review.id}}</td>
+				<td>{{review.review}}</td>
+				<td>{{review.order_id}}</td>
+			</tr>
+			<tr *ngIf="OrderReviews.length == 0">
+				<td colspan="100"
+				    style="text-align: center">No record found.</td>
+
+			</tr>
+
+		</tbody>
+	</table>
+
+
+	<app-pagination *ngIf="OrderReviews.length > 0"
+	                (setPage)="setPage($event)"
+	                [perPage]="perPage"
+	                [totalPages]="totalPages"
+	                [currentPage]="currentPage"></app-pagination>
+</base-loader>

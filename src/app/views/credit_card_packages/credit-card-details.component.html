@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            Credit Card
+        </span>
+    </div>
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button mat-dialog-close
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="row"
+     style="margin-top: 15px;">
+    <div class="col-sm-4">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">APP ID: </div>{{CreditCard.app_id}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Created At: </div>{{CreditCard.created_at}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Creditcard Packages Id: </div>{{CreditCard.creditcard_packages_id}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Doller Value: </div>{{CreditCard.doller_value}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Duration: </div>{{CreditCard.duration===null? 'N/A':CreditCard.duration}} <br>
+    </div>
+    <div class="col-sm-4">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Id: </div>{{CreditCard.id}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Kuwait Value: </div>{{CreditCard.kuwait_value}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Name: </div>{{CreditCard.name}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Name Ar: </div>{{CreditCard.name_ar===""? 'N/A':CreditCard.duration}}<br> 
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Qatar Value: </div>{{CreditCard.qatar_value}} <br>
+    </div>
+
+
+    <div class="col-sm-4">
+         <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Savings: </div>{{CreditCard.savings===null? 'N/A':CreditCard.duration}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Scenario: </div>{{CreditCard.scenario}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Slide: </div>{{CreditCard.slide}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Status: </div>{{CreditCard.status}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">SubText: </div>{{CreditCard.sub_text}} <br>
+   
+    </div>
+
+    <div class="col-sm-4">
+        
+       
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Sub Text Ar: </div>{{CreditCard.sub_text_ar===""? 'N/A':CreditCard.duration}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Type: </div>{{CreditCard.type}} <br>
+    </div>
+</div>
+
+

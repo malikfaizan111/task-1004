@@ -1,0 +1,1 @@
+export { OrderReviewsComponent } from "./order_reviews.component";

@@ -1,0 +1,140 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} ACCOUNT</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+      (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+	     fxLayout="row wrap"
+	     fxLayoutAlign="space-between start"
+	     >
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+
+				<mat-form-field style="width: 100%">
+					<input matInput
+					       formControlName="name"
+					       type="text"
+					       required
+					       placeholder="Merchant Account Name">
+					<mat-error *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)"> Merchant Account Name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+					       formControlName="email"
+					       type="text"
+					       required
+					       placeholder="Email">
+					<mat-error *ngIf="getValue('email')?.invalid && (getValue('email')?.dirty || getValue('email')?.touched)">Email is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+
+				<mat-form-field style="width: 100%">
+					<input matInput
+					       formControlName="username"
+					       type="text"
+					       required
+					       placeholder="UserName">
+					<mat-error *ngIf="getValue('username')?.invalid && (getValue('username')?.dirty || getValue('username')?.touched)">Name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+					       formControlName="password"
+					       type="text"
+					       placeholder="Password">
+					<mat-error *ngIf="getValue('password')?.invalid && (getValue('password')?.dirty || getValue('password')?.touched)">Password is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+				<!-- <mat-form-field style="width: 100%">
+					<mat-select formControlName="merchant_id"
+					            placeholder="Merchant Id">
+						<mat-option>None</mat-option>
+
+					</mat-select>
+					<mat-error *ngIf="getValue('merchant_id')?.invalid && (getValue('merchant_id')?.dirty || getValue('merchant_id')?.touched)">Merchant Id
+						is required</mat-error>
+				</mat-form-field> -->
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<input type="text"
+						   placeholder="Parent Company Name"
+						   matInput
+						   formControlName="merchantObject"
+						   [matAutocomplete]="auto">
+					<mat-autocomplete #auto="matAutocomplete"
+									  [displayWith]="displayFn">
+						<mat-option *ngFor="let option of filteredOptions | async"
+									[value]="option">
+							{{option?.name}}
+						</mat-option>
+					</mat-autocomplete>
+					<mat-error *ngIf="getValue('merchantObject')?.invalid && (getValue('merchantObject')?.dirty || getValue('merchantObject')?.touched)">Parent Company Name
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+		     class="col-sm-12">
+			<button type="submit"
+			        *ngIf="!isEditing"
+			        [disabled]="Form.invalid || isLoading"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				ADD NEW ACCOUNT
+			</button>
+			<button type="submit"
+			        *ngIf="isEditing"
+			        [disabled]="Form.invalid || isLoading"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				UPDATE ACCOUNT
+			</button>
+			<img *ngIf="isLoading"
+			     class="loader-btn-image"
+			     src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

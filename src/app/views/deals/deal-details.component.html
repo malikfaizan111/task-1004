@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            DEAL DETAIL
+        </span>
+    </div>
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button mat-dialog-close
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+            <!-- <i class="glyphicon glyphicon-remove"></i> -->
+        </button>
+        <!-- <pre>{{Deal | json}}</pre> -->
+    </div>
+</div>
+<div class="row"
+     style="margin-top: 15px;">
+    <div class="col-sm-10">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Outlet Name: </div>{{Deal.outlet_name}} <br>
+    </div>
+    <div  *ngIf="role != '3'" class="col-sm-2"
+         style="text-align: right">
+        <mat-slide-toggle title="Change Status" [(ngModel)]="status"
+                          (change)="onChangeStatus()"
+                          color="accent">
+
+        </mat-slide-toggle><br>
+        <button style="min-width: 50px;margin-top: 10px;"
+                mat-raised-button
+                color="primary"
+                (click)="onEditDeal($event)">Edit
+        </button>
+    </div>
+</div>

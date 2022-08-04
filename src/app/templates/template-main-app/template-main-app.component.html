@@ -1,0 +1,222 @@
+<div class="dashboard-main">
+    <a class="menu-trigger">
+        <!-- <i class="glyphicon glyphicon-barcode"></i> -->
+        <img src="assets/images/actions/top_menu.png"
+             alt="">
+    </a>
+    <nav class="navbar clearfix">
+        <div class="sidebar-head">
+            <a class="cursor"
+               (click)="onHomeClick()">
+                <img src="assets/images/logo.png"
+                     alt="">
+            </a>
+        </div>
+        <div style="position: absolute;right: 205px;bottom: 10px;width: 150px;">
+            <user-app-selector></user-app-selector>
+        </div>
+        <h5 (clickOutside)="adminClick = false"
+            style="min-width: 200px;color: #148F96;
+            font-weight: 600;"
+            class="welcome">
+            <img width="22" height="22" style="position: relative;
+            right: 10px;
+            border-radius: 20px;
+            background: gray;"
+                 src="assets/images/side-menu/customers.png"> Welcome
+            <a style="cursor: pointer;color:#148F96"
+               (click)="adminClick = !adminClick">Admin</a>
+
+            <div class="dropdown"
+                 [class.open]="adminClick == true">
+                <div class="dropdown-menu">
+                    <span (click)="onLogout()"
+                          class="dropdown-item">
+                        <i style="top: 0;"
+                           class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Logout</span>
+                </div>
+            </div>
+        </h5>
+        <!-- <h3 class="welcome"
+            style="position: relative;
+            padding: 0px;
+            margin: 13px;"> -->
+        <!-- <i style="cursor: pointer;"
+               (click)="onNotificationClick()"
+               class="glyphicon glyphicon-bell"></i>
+            <div *ngIf="Notifications.ordersCount != 0"
+                 style="cursor: pointer;"
+                 (click)="onNotificationClick()"
+                 class="bell-badge">
+                {{Notifications.ordersCount}}
+            </div> -->
+        <!-- <div class="dropdown"
+                 [class.open]="notificationClick == true">
+                <div class="dropdown-menu">
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                    <span class="dropdown-item">Notification 1</span>
+                </div>
+            </div> -->
+        <!-- </h3> -->
+    </nav>
+    <div class="page-sidebar opened">
+        <div class="sidebar-head">
+            <a class="cursor"
+               (click)="onHomeClick()">
+                <img src="assets/images/logo.png"
+                     alt="">
+            </a>
+        </div>
+        <div class="sidebar-main">
+
+            <div style="height: calc(100vh - 70px);"
+                 malihu-scrollbar
+                 [scrollbarOptions]="scrollbarOptions">
+                <ul class="sidebar-nav">
+
+                    <ng-container *ngFor="let menu of menus">
+                        <ng-container *ngIf="menu.is_parent">
+                            <li *ngIf="!menu.is_hidden"
+                                class="sub-nav"
+                                [class.opened]="menu.opened"
+                                routerLinkActive="active"
+                                (click)="onMenuClick(menu, $event)">
+
+                                <a *ngIf="menu.is_parent"
+                                   class="nav-dropdown-trigger">
+                                    <div fxLayout="row"
+                                         fxLayoutGap="5px"
+                                         fxLayoutAlign="start center">
+                                        <div fxFlex="15"
+                                             class="text-center">
+                                            <img width="22"
+                                                 height="22"
+                                                 style="top: -2px;position: relative;"
+                                                 src="assets/images/side-menu/{{menu.image}}.png">
+                                        </div>
+                                        <span fxFlex>{{menu.label}}</span>
+                                    </div>
+
+                                </a>
+                                <ul class="nav-dropdown">
+                                    <li routerLinkActive="active"
+                                        (click)="onChildClick(menu, $event)"
+                                        *ngFor="let child of menu.children">
+                                        <a *ngIf="!child.is_parent"
+                                        style="padding-left: 30px;"
+                                           [routerLink]="child.routerLink">
+                                            <div fxLayout="row"
+                                                 fxLayoutGap="5px"
+                                                 fxLayoutAlign="start center">
+                                                <div fxFlex="12"
+                                                     class="text-center">
+                                                </div>
+                                                <span fxFlex>{{child.label}}</span>
+                                                <span style="background: #FF2C54;" *ngIf="child.label == 'UNATTENDED ORDERS'" class="badge badge-pill badge-danger"> {{ noOfOrders }} </span>
+                                                <!-- <span *ngIf="child.label == 'UNATTENDED ORDERS'" matBadge="1" matBadgeOverlap="false">s</span> -->
+                                            </div>
+                                        </a>
+                                        <ng-container *ngIf="child.is_parent">
+                                            <li *ngIf="!child.is_hidden"
+                                                class="sub-nav"
+                                                [class.opened2]="child.opened"
+
+                                                (click)="onChildMenuClick(child, $event)">
+
+                                                <a *ngIf="child.is_parent"
+                                                   class="nav-dropdown-trigger">
+                                                    <div fxLayout="row"
+                                                         fxLayoutGap="5px"
+                                                         fxLayoutAlign="start center">
+                                                        <div fxFlex="21"
+                                                             class="text-center">
+                                                            <!-- <img width="22"
+                                                                 height="22"
+                                                                 style="top: -2px;position: relative;"
+                                                                 src="assets/images/side-menu/{{child.image}}.png"> -->
+                                                        </div>
+                                                        <span fxFlex>{{child.label}}</span>
+                                                    </div>
+
+                                                </a>
+                                                <ul class="nav-dropdown2">
+                                                    <li routerLinkActive="active"
+                                                        (click)="onChildClick(child, $event)"
+                                                        *ngFor="let otherChild of child.children">
+                                                        <a style="padding-left: 60px;"
+                                                           [routerLink]="otherChild.routerLink">
+                                                            <div fxLayout="row"
+                                                                 fxLayoutGap="5px"
+                                                                 fxLayoutAlign="start center">
+                                                                <div fxFlex="12"
+                                                                     class="text-center">
+
+                                                                </div>
+                                                                <span fxFlex>{{otherChild.label}}</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                            </li>
+
+                                        </ng-container>
+                                    </li>
+                                </ul>
+
+                            </li>
+
+                        </ng-container>
+                        <ng-container *ngIf="!menu.is_parent">
+                            <li *ngIf="!menu.is_hidden"
+                                [class.opened]="menu.opened"
+                                routerLinkActive="active"
+                                (click)="onMenuClick(menu, $event)">
+
+                                <a [routerLink]="menu.routerLink">
+                                    <div fxLayout="row"
+                                         fxLayoutGap="5px"
+                                         fxLayoutAlign="start center">
+                                        <div fxFlex="15"
+                                             class="text-center">
+                                            <img width="22"
+                                                 height="22"
+                                                 style="top: -2px;position: relative;"
+                                                 src="assets/images/side-menu/{{menu.image}}.png">
+                                        </div>
+                                        <span fxFlex>{{menu.label}}</span>
+                                        <!--
+                                        <img style="right: 10px;position: relative;"
+                                             src="assets/images/side-menu/arrow.png"> -->
+                                    </div>
+                                </a>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="page-content">
+        <div class="content-wrapper">
+            <mat-card>
+                <router-outlet></router-outlet>
+            </mat-card>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,401 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} SPEND X GET Y</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+     >
+     <div fxFlex.xl="32"
+     fxFlex.lg="48"
+     fxFlex.md="48">
+      <div class="form-group mb-0">
+        <mat-form-field style="width: 100%">
+          <input matInput
+             formControlName="name"
+             type="text"
+             required
+             placeholder="Promotion Name">
+          <mat-error
+               *ngIf="getValue('spend_x')?.invalid && (getValue('spend_x')?.dirty || getValue('spend_x')?.touched)">
+          Spend X is required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxFlex.xl="32"
+     fxFlex.lg="48"
+     fxFlex.md="48">
+     <div class="form-group mb-0">
+      <mat-form-field style="width: 100%">
+        <mat-select (change)="onSelectChange($event)"
+              formControlName="renew"
+              placeholder="Renew">
+          <mat-option value="0">No</mat-option>
+          <mat-option value="1">Yes</mat-option>
+        </mat-select>
+        <mat-error
+               *ngIf="getValue('renew')?.invalid && (getValue('renew')?.dirty || getValue('renew')?.touched)">
+          Renew
+          is required</mat-error>
+      </mat-form-field>
+    </div>
+    </div>
+    <div fxFlex.xl="32"
+    fxFlex.lg="48"
+    fxFlex.md="48">
+   <div class="form-group mb-0">
+     <mat-form-field style="width: 100%">
+       <input matInput
+            [owlDateTime]="startDate"
+            [owlDateTimeTrigger]="startDate"
+            readonly
+            [max]="EndDate"
+            [(ngModel)]="StartDate"
+            [ngModelOptions]="{standalone: true}"
+            (dateTimeChange)="onStartDate()"
+            type="text"
+            required
+            placeholder="Start Date and Time">
+
+       <i matSuffix
+          class="glyphicon glyphicon-calendar"></i>
+
+       <owl-date-time pickerType="both"
+                #startDate></owl-date-time>
+       <mat-error
+              *ngIf="getValue('from_date')?.invalid && (getValue('from_date')?.dirty || getValue('from_date')?.touched)">
+         Start
+         Date is required</mat-error>
+     </mat-form-field>
+   </div>
+ </div>
+ <div fxFlex.xl="32"
+    fxFlex.lg="48"
+    fxFlex.md="48">
+   <div class="form-group mb-0">
+     <mat-form-field style="width: 100%;">
+       <input matInput
+            [owlDateTime]="endDate"
+            [owlDateTimeTrigger]="endDate"
+            readonly
+            [min]="currentDate"
+            [(ngModel)]="EndDate"
+            [ngModelOptions]="{standalone: true}"
+            (dateTimeChange)="onEndDate()"
+            type="text"
+            required
+            placeholder="End Date and Time">
+
+       <i matSuffix
+          class="glyphicon glyphicon-calendar"></i>
+
+       <owl-date-time pickerType="both"
+                #endDate></owl-date-time>
+       <mat-error
+              *ngIf="getValue('to_date')?.invalid && (getValue('to_date')?.dirty || getValue('to_date')?.touched)">
+         End
+         Date is required</mat-error>
+     </mat-form-field>
+   </div>
+ </div>
+ <div fxFlex.xl="32"
+ fxFlex.lg="48"
+ fxFlex.md="48">
+<div class="form-group mb-0">
+  <mat-form-field style="width: 100%">
+    <input matInput
+         formControlName="per_user"
+         type="text"
+         mask="9999999999"
+         min="1"
+         required
+         placeholder="Per User">
+    <mat-error
+           *ngIf="getValue('per_user')?.invalid && (getValue('per_user')?.dirty || getValue('per_user')?.touched)">
+      Per
+      User
+      is required</mat-error>
+  </mat-form-field>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <mat-select formControlName="exclusion_status"
+         placeholder="Do you have any Exclusions">
+     <mat-option value="1">YES</mat-option>
+     <mat-option value="0">NO</mat-option>
+
+   </mat-select>
+   <mat-error
+          *ngIf="getValue('exclusion_status')?.invalid && (getValue('exclusion_status')?.dirty || getValue('exclusion_status')?.touched)">
+     Exclusion Status
+     is required</mat-error>
+ </mat-form-field>
+</div>
+</div>
+ <div *ngIf="Form.get('renew')?.value == 0 && Form.get('renew')?.value != ''"
+ fxFlex.xl="32"
+ fxFlex.lg="48"
+ fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+      formControlName="redemptions"
+      type="text"
+      mask="99999999999"
+      placeholder="Redemptions">
+   <mat-error
+        *ngIf="getValue('redemptions')?.invalid && (getValue('redemptions')?.dirty || getValue('redemptions')?.touched)">
+   Redemptions
+   is required</mat-error>
+ </mat-form-field>
+</div>
+</div>
+  </div>
+
+  <!-- Spend X Get Y Section -->
+  <div style="margin-top: 20px"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between start"
+  >
+
+  <div fxFlex.xl="32"
+  fxFlex.lg="48"
+  fxFlex.md="48">
+ <div class="form-group mb-0">
+   <mat-form-field style="width: 100%">
+     <input matInput
+          formControlName="spend1"
+          (keyup)="checkValidity()"
+          type="number"
+          required
+          placeholder="Spend X">
+     <mat-error
+            *ngIf="getValue('spend1')?.invalid && (getValue('spend1')?.dirty || getValue('spend1')?.touched)">
+       Spend X is required</mat-error>
+   </mat-form-field>
+ </div>
+</div>
+<div fxFlex.xl="32"
+  fxFlex.lg="48"
+  fxFlex.md="48">
+ <div class="form-group mb-0">
+   <mat-form-field style="width: 100%">
+     <input matInput
+          formControlName="get1"
+          (keyup)="checkValidity()"
+          type="number"
+          required
+          placeholder=" Get Y ">
+     <mat-error
+            *ngIf="getValue('get1')?.invalid && (getValue('get1')?.dirty || getValue('get1')?.touched)">
+            Get Y is required</mat-error>
+   </mat-form-field>
+   <span style="color: red;font-size: 75%;"
+   *ngIf="validate(getValue('get1')?.value,getValue('spend1')?.value) && (getValue('get1')?.dirty || getValue('get1')?.touched)"> Get Y must be greater than Spend X</span>
+ </div>
+</div>
+
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="spend2"
+        (keyup)="checkValidity()"
+        type="number"
+        required
+        placeholder="Spend X">
+   <mat-error
+          *ngIf="getValue('spend2')?.invalid && (getValue('spend2')?.dirty || getValue('spend2')?.touched)">
+     Spend X is required</mat-error>
+ </mat-form-field>
+ <span style="color: red;font-size: 75%;"
+ *ngIf="validateSpendX(getValue('spend1')?.value,getValue('spend2')?.value) && (getValue('spend2')?.dirty || getValue('spend2')?.touched)"> Spend X2 must be greater than SpendX1</span>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="get2"
+        (keyup)="checkValidity()"
+        type="number"
+        required
+        placeholder=" Get Y ">
+   <mat-error
+          *ngIf="getValue('get2')?.invalid && (getValue('get2')?.dirty || getValue('get2')?.touched)">
+          Get Y is required</mat-error>
+ </mat-form-field>
+ <span style="color: red;font-size: 75%;"
+ *ngIf="validate(getValue('get2')?.value,getValue('spend2')?.value) && (getValue('get2')?.dirty || getValue('get2')?.touched)"> Get Y must be greater than Spend X</span>
+</div>
+</div>
+
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="spend3"
+        (keyup)="checkValidity()"
+        type="number"
+        required
+        placeholder="Spend X">
+   <mat-error
+          *ngIf="getValue('spend3')?.invalid && (getValue('spend3')?.dirty || getValue('spend3')?.touched)">
+     Spend X is required</mat-error>
+ </mat-form-field>
+ <span style="color: red;font-size: 75%;"
+ *ngIf="validateSpendX(getValue('spend2')?.value,getValue('spend3')?.value) && (getValue('spend3')?.dirty || getValue('spend3')?.touched)"> Spend X3 must be greater than Spend X2</span>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="get3"
+        (keyup)="checkValidity()"
+        type="number"
+        required
+        placeholder=" Get Y ">
+   <mat-error
+          *ngIf="getValue('get3')?.invalid && (getValue('get3')?.dirty || getValue('get3')?.touched)">
+          Get Y is required</mat-error>
+ </mat-form-field>
+ <span style="color: red;font-size: 75%;"
+ *ngIf="validate(getValue('get3')?.value,getValue('spend3')?.value) && (getValue('get3')?.dirty || getValue('get3')?.touched)"> Get Y must be greater than Spend X</span>
+</div>
+</div>
+
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="spend4"
+        (keyup)="checkValidity()"
+        type="number"
+        required
+        placeholder="Spend X">
+   <mat-error
+          *ngIf="getValue('spend4')?.invalid && (getValue('spend4')?.dirty || getValue('spend4')?.touched)">
+     Spend X is required</mat-error>
+ </mat-form-field>
+ <span style="color: red;font-size: 75%;"
+ *ngIf="validateSpendX(getValue('spend3')?.value,getValue('spend4')?.value) && (getValue('spend4')?.dirty || getValue('spend4')?.touched)"> Spend X4 must be greater than Spend X3</span>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="get4"
+        type="number"
+        (keyup)="checkValidity()"
+        required
+        placeholder=" Get Y ">
+   <mat-error
+          *ngIf="getValue('get4')?.invalid && (getValue('get4')?.dirty || getValue('get4')?.touched)">
+          Get Y is required</mat-error>
+ </mat-form-field>
+ <span style="color: red;font-size: 75%;"
+ *ngIf="validate(getValue('get4')?.value,getValue('spend4')?.value) && (getValue('get4')?.dirty || getValue('get4')?.touched)"> Get Y must be greater than Spend X</span>
+</div>
+</div>
+
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="spend5"
+        (keyup)="check()"
+        type="number"
+        placeholder="Spend X (Optional)">
+   <mat-error
+          *ngIf="getValue('spend5')?.invalid && (getValue('spend5')?.dirty || getValue('spend5')?.touched)">
+     Spend X is required</mat-error>
+ </mat-form-field>
+ <span style="color: red;font-size: 75%;"
+ *ngIf="validateSpendX(getValue('spend4')?.value,getValue('spend5')?.value) && (getValue('spend5')?.dirty || getValue('spend5')?.touched) && hasValue(getValue('spend5')?.value,getValue('get5')?.value)"> Spend X5 must be greater than Spend X4</span>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="get5"
+        (keyup)="this.check()"
+        type="number"
+        placeholder=" Get Y (Optional)">
+   <mat-error
+          *ngIf="getValue('get5')?.invalid && (getValue('get5')?.dirty || getValue('get5')?.touched)">
+          Get Y is required</mat-error>
+ </mat-form-field>
+ <span style="color: red;font-size: 75%;"
+ *ngIf="validate(getValue('get5')?.value,getValue('spend5')?.value) && (getValue('get5')?.dirty || getValue('get5')?.touched)"> Get Y must be greater than Spend X</span>
+</div>
+</div>
+
+</div>
+
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading || isInvalid || isInvalidForOptional"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ADD NEW
+			</button>
+			<button type="submit"
+					*ngIf="isEditing"
+					[disabled]="Form.invalid || isLoading || isInvalid || isInvalidForOptional"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				UPDATE
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>
+

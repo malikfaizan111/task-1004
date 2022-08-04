@@ -1,0 +1,81 @@
+<div class="login-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-logo">
+                    <img alt=""
+                         src="assets/images/logo.png">
+                </div>
+
+                <div class="wrapper-page">
+                    <div class="row">
+
+                        <form [formGroup]="theLoginForm"
+                              (ngSubmit)="doLogin()"
+                              novalidate>
+
+                            <div style="text-align: center;margin-bottom: 10px;">
+                              <img width="32" src="assets/images/lock.png" alt="">
+                            </div>
+
+                            <div style="text-align: center; margin-bottom: 20px;font-size: 23px;">
+                                Log In
+                            </div>
+
+                            <div style="text-align: center; margin-bottom: 20px;font-size: 13px;">
+                              Enter your email and password.
+                            </div>
+
+                            <div style="color: red;text-align: center;font-size: 11px;margin-bottom: 10px;width: 330px;"
+                                 *ngIf="failureAlert">
+                                {{alertMsg}}
+                                <div>Please try again.</div>
+                            </div>
+
+
+                            <div style="position: relative;">
+                                <div style="margin-top: 20px;"
+                                     class="form-group">
+                                    <mat-form-field style="width: 100%"
+                                                    floatPlaceholder="auto">
+                                        <input matInput
+                                               formControlName="email"
+                                               type="text"
+                                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                               required
+                                               placeholder="Email">
+                                        <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">Email is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-form-field style="width: 100%"
+                                                    floatPlaceholder="auto">
+                                        <input matInput
+                                               formControlName="password"
+                                               type="password"
+                                               required
+                                               placeholder="Password">
+                                        <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">Password is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="text-center">
+                                    <button class="btn btn-primary round-elem"
+                                            style="background: #757575;width: 100%; border-color: #757575"
+                                            type="submit"
+                                            [disabled]="email?.invalid || password?.invalid">
+                                        Login
+                                    </button>
+                                </div>
+                                <div class="form-group" style="font-size: 12px;text-align: center;margin-top: 10px;">
+                                   <a routerLink="/auth/forgot-password">Forgot your password?</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+parent_id,menu_category_id,menu_category_name_english,menu_category_name_arabic,menu_item_id,menu_item_name_english,menu_item_name_arabic,menu_item_description_english,menu_item_description_arabic,menu_item_price,preparation_time,allergens,kcal,size,image_name,is_base_price
+1362,64, CSV1,test,65, description1,neigh1,testttttt,teeeessss,14,80,60,0,1234,abc.png,1
+1362,65,testcase,case,66,testtt,testtt,ssssss,sssss,55,44,33,22,11,xyz.png,2

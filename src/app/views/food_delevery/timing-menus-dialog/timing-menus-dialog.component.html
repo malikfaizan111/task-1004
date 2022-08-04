@@ -1,0 +1,306 @@
+<div style="min-width: 500px;">
+  <div class="content-head clearfix">
+      <div style="font-size: 25px;"
+           class="title">Assign Timing</div>
+  </div>
+
+  <div class="row">
+      <div class="col-sm-12"
+           style="max-height: 400px;overflow: auto;">
+          <div class="col-sm-2"
+               style="margin-top: 20px;">
+              Monday
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="MondayObj.start_time"
+                             placeholder="Start Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="MondayObj.end_time"
+                             placeholder="End Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div (click)="removeTime('monday')" style="color:#af1f70; cursor: pointer; margin-top: 13px;" class="col-sm-2">
+            <strong> REMOVE </strong>
+          </div>
+      </div>
+
+  </div>
+  <div class="row">
+      <div class="col-sm-12"
+           style="max-height: 400px;overflow: auto;">
+          <div class="col-sm-2"
+               style="margin-top: 20px;">
+              Tuesday
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="TuesdayObj.start_time"
+                             placeholder="Start Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="TuesdayObj.end_time"
+                             placeholder="End Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div (click)="removeTime('tuesday')" style="color:#af1f70; cursor: pointer; margin-top: 13px;" class="col-sm-2">
+            <strong> REMOVE </strong>
+          </div>
+
+      </div>
+
+  </div>
+  <div class="row">
+      <div class="col-sm-12"
+           style="max-height: 400px;overflow: auto;">
+          <div class="col-sm-2"
+               style="margin-top: 20px;">
+              Wednesday
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="WednesdayObj.start_time"
+                             placeholder="Start Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="WednesdayObj.end_time"
+                             placeholder="End Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div (click)="removeTime('wednesday')" style="color:#af1f70; cursor: pointer; margin-top: 13px;" class="col-sm-2">
+            <strong> REMOVE </strong>
+          </div>
+      </div>
+
+  </div>
+  <div class="row">
+      <div class="col-sm-12"
+           style="max-height: 400px;overflow: auto;">
+          <div class="col-sm-2"
+               style="margin-top: 20px;">
+              Thursday
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="ThursdayObj.start_time"
+                             placeholder="Start Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="ThursdayObj.end_time"
+                             placeholder="End Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div (click)="removeTime('thursday')" style="color:#af1f70; cursor: pointer; margin-top: 13px;" class="col-sm-2">
+            <strong> REMOVE </strong>
+          </div>
+
+      </div>
+
+  </div>
+  <div class="row">
+      <div class="col-sm-12"
+           style="max-height: 400px;overflow: auto;">
+          <div class="col-sm-2"
+               style="margin-top: 20px;">
+              Friday
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="FridayObj.start_time"
+                             placeholder="Start Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="FridayObj.end_time"
+                             placeholder="End Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div (click)="removeTime('friday')" style="color:#af1f70; cursor: pointer; margin-top: 13px;" class="col-sm-2">
+            <strong> REMOVE </strong>
+          </div>
+
+      </div>
+
+  </div>
+  <div class="row">
+      <div class="col-sm-12"
+           style="max-height: 400px;overflow: auto;">
+          <div class="col-sm-2"
+               style="margin-top: 20px;">
+              Saturday
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="SaturdayObj.start_time"
+                             placeholder="Start Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="SaturdayObj.end_time"
+                             placeholder="End Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div (click)="removeTime('saturday')" style="color:#af1f70; cursor: pointer; margin-top: 13px;" class="col-sm-2">
+            <strong> REMOVE </strong>
+          </div>
+
+      </div>
+
+  </div>
+  <div class="row">
+      <div class="col-sm-12"
+           style="max-height: 400px;overflow: auto;">
+          <div class="col-sm-2"
+               style="margin-top: 20px;">
+              Sunday
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="SundayObj.start_time"
+                             placeholder="Start Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="SundayObj.end_time"
+                             placeholder="End Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div (click)="removeTime('sunday')" style="color:#af1f70; cursor: pointer; margin-top: 13px;" class="col-sm-2">
+            <strong> REMOVE </strong>
+          </div>
+
+      </div>
+
+  </div>
+  <div class="row">
+      <div class="col-sm-12"
+           style="max-height: 400px;overflow: auto;">
+          <div class="col-sm-2"
+               style="margin-top: 20px;">
+              Everyday
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="EverydayObj.start_time"
+                             placeholder="Start Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group mb-0">
+                  <mat-form-field style="width: 100%; margin-bottom: 10px">
+                      <input matInput
+                             type="text"
+                             [(ngModel)]="EverydayObj.end_time"
+                             placeholder="End Time">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div (click)="removeTime('everyday')" style="color:#af1f70; cursor: pointer; margin-top: 13px;" class="col-sm-2">
+            <strong> REMOVE </strong>
+          </div>
+
+      </div>
+
+  </div>
+  <div style="margin-top: 5px;" class="row">
+      <div *ngIf="mode == 'add'" style="text-align: center;" class="col-sm-12">
+          <button mat-raised-button
+                  color="primary"
+                  class="btn btn-clear"
+                  type="button"
+                  (click)="onAddClick()">ADD</button>
+                  <!-- [disabled]="EverydayObj.id !=null" -->
+
+      </div>
+      <div *ngIf="mode == 'edit'" style="text-align: center;" class="col-sm-12">
+          <button mat-raised-button
+                  color="primary"
+                  class="btn btn-clear"
+                  type="button"
+                  (click)="onUpdateClick()">UPDATE</button>
+                  <!-- [disabled]="EverydayObj.id ==null" -->
+
+      </div>
+      <!-- <div class="col-sm-6"
+           style="max-height: 400px;overflow: auto;text-align: right;">
+          <button mat-raised-button
+                  color="primary"
+                  class="btn btn-clear"
+                  type="button"
+                  (click)="onClose()">CLOSE</button>
+      </div> -->
+
+  </div>
+</div>

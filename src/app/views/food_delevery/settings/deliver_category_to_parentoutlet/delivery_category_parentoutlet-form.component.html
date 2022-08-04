@@ -1,0 +1,58 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<span> ASSIGN CATEGORIES TO PARENT OUTLET</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<mat-select placeholder="Delivery Category"
+								formControlName="delivery_category_id"
+								multiple>
+						<mat-option *ngFor="let col of PlaylistOnly"
+									[value]="col.id">
+							{{col.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+					Assign Category
+			</button>
+
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

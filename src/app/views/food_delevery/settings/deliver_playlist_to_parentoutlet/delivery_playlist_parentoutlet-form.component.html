@@ -1,0 +1,83 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<span> DELIVERY PLAYLIST TO PARENT OUTLET</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="ng-autocomplete">
+				<ng-autocomplete [data]="parentsList"
+								 formControlName="name"
+								 searchKeyword="name"
+								 placeHolder="Select Restaurant"
+								 (selected)='selectEvent($event)'
+								 (inputChanged)='onChangeSearch($event)'
+								 (inputCleared)='onCleared($event)'
+								 [itemTemplate]="itemTemplate1"
+								 [notFoundTemplate]="notFoundTemplate1">
+				</ng-autocomplete>
+
+				<ng-template #itemTemplate1
+							 let-item>
+					<a [innerHTML]="item.name"></a>
+				</ng-template>
+
+				<ng-template #notFoundTemplate1
+							 let-notFound>
+					<div [innerHTML]="notFound"></div>
+				</ng-template>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<mat-select placeholder="Playlist Name"
+								formControlName="playlist_id">
+						<mat-option *ngFor="let col of PlaylistOnly"
+									[value]="col.id">
+							{{col.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				Assign Delivery Playlist
+			</button>
+
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

@@ -1,0 +1,1021 @@
+<!-- PRINT -->
+<style>
+  .space:after {
+      content: '\200b';
+  }
+
+  .data-table table tbody tr td {
+    font-weight: 600;
+  }
+  </style>
+
+
+
+<div #onprint id="abc" style="display: none" >
+
+	<div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+		<div fxFlex>
+      <!-- <div style="color: red;font-weight: bold;font-size: 40;">urbanpoint</div> -->
+      <img id="logo" style="width: 150px;height: 40px;" src="assets/images/urbanPointRed.png">
+		</div>
+
+		<div fxFlex="180px">
+			<div style="font-size: 18px; border: 2px solid red; border-radius: 50%;height: 180px; position: relative;">
+				<span
+					style="text-align: center;display: block;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+					<strong style="color:red; font-size: 24px;">{{OrderDetails?.ref_id}} </strong>
+          <!-- <br />DRIVER'S<br />REFERENCE ID -->
+          <img id="driverRefImg" style="width: 120px;height: 40px;" src="assets/images/driverReferenceId.png">
+				</span>
+			</div>
+		</div>
+	</div>
+	<div style="border-bottom: 1px solid black; padding-bottom: 12px;" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="10px">
+		<div fxFlex.xl="55" fxFlex.lg="55" fxFlex.md="55">
+			<h4 style="font-weight: bolder;">
+				Ordered From:
+			</h4>
+			<span>{{OrderDetails?.outlets?.name}}</span><br>
+			<span>Order # {{OrderDetails?.id}}</span>
+
+		</div>
+
+		<div fxFlex.xl="42" fxFlex.lg="42" fxFlex.md="42">
+			<h4 style="font-weight: bolder;">
+				Customer:
+			</h4>
+			<span>{{OrderDetails?.users_delivery_addresses?.contact_name}}</span><br>
+      <span>{{OrderDetails?.users_delivery_addresses?.address}}</span><br>
+      <div *ngIf="OrderDetails?.users_delivery_addresses?.street != '0'">Street: {{ OrderDetails?.users_delivery_addresses?.street }}</div>
+      <div *ngIf="OrderDetails?.users_delivery_addresses?.building != '0'">Building: {{ OrderDetails?.users_delivery_addresses?.building }}</div>
+      <div *ngIf="OrderDetails?.users_delivery_addresses?.office_no != '0'">Office No: {{ OrderDetails?.users_delivery_addresses?.office_no }}</div>
+      <div *ngIf="OrderDetails?.users_delivery_addresses?.floor != '0'">Floor: {{ OrderDetails?.users_delivery_addresses?.floor }}</div>
+			<span>{{OrderDetails?.users_delivery_addresses?.contact_phone}}</span><br>
+		</div>
+	</div>
+	<!-- <span style="font-size: 20px; display: block;"><strong>OUTLET NAME : {{OrderDetails?.outlets?.name}}</strong></span>
+	<br />
+	<span style="font-size: 20px; display: block;"><strong>ORDER ID # {{OrderDetails?.id}}</strong></span>
+	<br />
+	<span style="font-size: 20px; display: block;"><strong>ORDER's REFERENCE ID #
+			{{OrderDetails?.ref_id}}</strong></span>
+	<br />
+
+	<span style="font-size: 14px; display: block;margin-bottom: 10px;"><b>Name:
+		</b>{{OrderDetails?.users_delivery_addresses?.contact_name}}</span>
+	<span style="font-size: 14px; display: block;margin-bottom: 10px;"><b>Address:
+		</b>{{OrderDetails?.users_delivery_addresses?.address}}</span>
+	<span style="font-size: 14px; display: block;margin-bottom: 10px;"><b>Phone Number:
+		</b>{{OrderDetails?.users_delivery_addresses?.contact_phone}}</span>
+	<br /> -->
+
+	<div style="margin-top: 20px;margin-bottom: 20px;">
+		<div class="data-table">
+			<!-- <table class="table table-responsive table-striped" style="width:100%;margin-top: 10px;">
+				<thead>
+					<tr>
+						<th style="width: 70px;">Quantity</th>
+						<th>Item</th>
+						<th>Sub Menu Item</th>
+						<th>Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let code of Promotions" style="border-bottom: 1px solid #a9a9a936">
+						<td>1 x</td>
+						<td>{{code.name== '' ? 'N/A' :code.name }}
+							<div style="display: block;">
+								<span style="font-size: 11px;"
+									*ngFor="let me of code.purchased.main_menu_items; let i = index">{{me.name}} <span
+										*ngIf="i < code.purchased.main_menu_items.length - 1">,</span><span
+										*ngIf="code.avail_free.main_menu_items.length > 0 && code.purchased.main_menu_items.length > 0">,</span>
+								</span>
+								<span style="font-size: 11px;"
+									*ngFor="let me of code.avail_free.main_menu_items; let i = index">{{me.name}} <span
+										*ngIf="i < code.avail_free.main_menu_items.length - 1">,</span> </span>
+
+							</div>
+						</td>
+						<td>
+							<div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+								style="display: grid;">
+								<strong> {{me.name}} : </strong>
+								<span style="font-size: 11px;display: inline-block;" *ngFor="let subme of me.sub_menu">
+									<span style="display: inline-block;" *ngFor="let subItem of subme.sub_menu_items">
+										{{subItem.name}}
+										<span>, </span>
+									</span>
+								</span>
+							</div>
+							<div *ngFor="let me of code.avail_free.main_menu_items; let i = index"
+								style="display: grid;">
+								<br /> <strong> {{me.name}} : </strong>
+								<span style="font-size: 11px;display: inline-block;" *ngFor="let subme of me.sub_menu">
+									<span style="display: inline-block;" *ngFor="let subItem of subme.sub_menu_items">
+										{{subItem.name}}
+										<span>, </span>
+									</span>
+								</span>
+							</div>
+						</td>
+						<td>{{code.promotion_price }}</td>
+
+					</tr>
+					<tr *ngFor="let code of ItemsFromMenu" style="border-bottom: 1px solid #a9a9a936">
+						<td>{{code.quantity}} x</td>
+						<td>{{code.purchased.main_menu_items[0].name == '' ? 'N/A' : code.purchased.main_menu_items[0].name }}
+
+						</td>
+						<td>
+							<div style="display: grid;">
+								<span style="font-size: 11px;display: inline-block;"
+									*ngFor="let subme of code.purchased.main_menu_items[0].sub_menu">
+									<span style="display: inline-block;" *ngFor="let subItem of subme.sub_menu_items">
+										{{subItem.name}}
+										<span>, </span>
+									</span>
+								</span>
+							</div>
+						</td>
+						<td>{{code.purchased.main_menu_items[0].priceTotal }}</td>
+					</tr>
+
+					<tr style="border-bottom: 1px solid #a9a9a936"
+						*ngIf="Promotions.length == 0 && ItemsFromMenu.length == 0">
+						<td colspan="4" style="text-align: center;">No record found</td>
+					</tr>
+				</tbody>
+      </table> -->
+      <table class="table table-responsive table-striped" style="width:100%;margin-top: 10px;">
+        <thead>
+          <tr>
+            <th style="width: 70px;">Quantity</th>
+            <th> Category </th>
+            <th>Product</th>
+            <th>Option/s</th>
+            <!-- <th>Description</th> -->
+            <th> Unit Price </th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let code of Promotions">
+            <td>1 x</td>
+            <td> Promotion (B1G1F) </td>
+            <td>{{code.name=== '' ? 'N/A' :code.name }}
+              <div style="display: block;">
+                <span style="font-size: 11px;"
+                  *ngFor="let me of code.purchased.main_menu_items; let i = index">{{me.name}}
+                  <span *ngIf="i < code.purchased.main_menu_items.length - 1">,</span><span
+                    *ngIf="code.avail_free.main_menu_items.length > 0 && code.purchased.main_menu_items.length > 0">,</span>
+                </span>
+                <span style="font-size: 11px;"
+                  *ngFor="let me of code.avail_free.main_menu_items; let i = index">{{me.name}}
+                  <span *ngIf="i < code.avail_free.main_menu_items.length - 1">,</span>
+                 </span>
+
+              </div>
+            </td>
+            <td>
+              <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+                >
+                <strong> {{me.name}}  </strong>
+                <div style="font-size: 11px;">
+                  <div>
+                    <span *ngFor="let nonAdd of me.nonAddOns">
+                      {{ nonAdd.name }} ,
+                    </span>
+                  </div>
+                  <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e"> <strong> Add On: </strong>
+                    <div *ngFor="let add of me.addOns">
+                      {{ add.name }}
+                    </div>
+                  </div>
+                  <!-- <span style="font-size: 11px;display: inline;"
+                  *ngFor="let subme of me.sub_menu">
+                  <span style="display: inline;"
+                    *ngFor="let subItem of subme.sub_menu_items">
+                    {{subItem.name}}
+                    <span>, </span>
+                  </span>
+                </span> -->
+                </div>
+              </div>
+              <div style="margin-top:8px" *ngFor="let me of code.avail_free.main_menu_items; let i = index"
+                >
+                <strong> {{me.name}}  </strong>
+                <div>
+                  <div style="font-size: 11px;">
+                    <div>
+                      <span *ngFor="let nonAdd of me.nonAddOns">
+                        {{ nonAdd.name }} ,
+                      </span>
+                    </div>
+                    <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e"> <strong> Add On: </strong>
+                      <div *ngFor="let add of me.addOns">
+                        {{ add.name }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <!-- <td>{{code.description== '' ? 'N/A' :code.description }}</td> -->
+            <td>
+              <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+              >
+              <strong style="color:white" class="space"> . </strong>
+              <div style="font-size: 11px;">
+                <div>
+                  <span style="color:white" class="space" *ngFor="let nonAdd of me.nonAddOns">
+                      .
+                  </span>
+                </div>
+                <div style="color:white" class="space"> . </div>
+                <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                  <div *ngFor="let add of me.addOns">
+                   {{ currency }} {{ add.price }}
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div style="margin-top:8px" *ngFor="let me of code.avail_free.main_menu_items; let i = index">
+                <strong style="color:white" class="space">.</strong>
+                <div style="font-size: 11px;">
+                  <div>
+                    <span style="color:white" class="space" *ngFor="let nonAdd of me.nonAddOns">
+                        .
+                    </span>
+                  </div>
+                  <div style="color:white" class="space">.</div>
+                  <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                    <div *ngFor="let add of me.addOns">
+                     {{ currency }} {{ add.price }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <!-- <td>{{code.promotion_price }}</td> -->
+            <td>
+              <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+              >
+              <strong>
+                <span *ngIf="code?.purchased?.main_menu_items[0]?.price != code?.avail_free?.main_menu_items[0]?.price">
+                  {{ code?.purchased?.main_menu_items[0]?.price > code?.avail_free?.main_menu_items[0]?.price  ? currency + ' ' + code?.purchased?.main_menu_items[0]?.price : 'FREE'}}
+                </span>
+                <span *ngIf="code?.purchased?.main_menu_items[0]?.price == code?.avail_free?.main_menu_items[0]?.price">
+                  {{ currency + ' ' + code?.purchased?.main_menu_items[0]?.price }}
+                </span>
+              </strong>
+              <div style="font-size: 11px;">
+                <div>
+                  <span style="color:white" class="space" *ngFor="let nonAdd of me.nonAddOns">
+                     .
+                  </span>
+                </div>
+                <div style="color:white" class="space">.</div>
+                <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                  <div *ngFor="let add of me.addOns">
+                   {{ currency }} {{ add.price }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:8px" *ngFor="let me of code.avail_free.main_menu_items; let i = index">
+              <strong>
+                <span *ngIf="code?.purchased?.main_menu_items[0]?.price != code?.avail_free?.main_menu_items[0]?.price">
+                  {{ code?.avail_free?.main_menu_items[0]?.price > code?.purchased?.main_menu_items[0]?.price ? currency + ' ' + code?.avail_free?.main_menu_items[0]?.price : 'FREE'}}
+                </span>
+                <span *ngIf="code?.purchased?.main_menu_items[0]?.price == code?.avail_free?.main_menu_items[0]?.price">
+                  FREE
+                </span>
+              </strong>
+              <div style="font-size: 11px;">
+                <div>
+                  <span style="color: white;" class="space" *ngFor="let nonAdd of me.nonAddOns">
+                     .
+                  </span>
+                </div>
+                <div style="color:white" class="space">.</div>
+                <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                  <div *ngFor="let add of me.addOns">
+                   {{ currency }} {{ add.price }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
+
+          </tr>
+          <tr *ngFor="let code of ItemsFromMenu">
+            <td>{{code.quantity}} x</td>
+            <td> {{ code?.purchased?.name }} </td>
+            <td>{{code.purchased.main_menu_items[0].name == '' ? 'N/A' : code.purchased.main_menu_items[0].name }}
+
+            </td>
+            <td>
+              <!-- <div style="display: grid;">
+                <span style="font-size: 11px;display: inline-block;"
+                  *ngFor="let subme of code.purchased.main_menu_items[0].sub_menu">
+                  <span style="display: inline-block;"
+                    *ngFor="let subItem of subme.sub_menu_items">
+                    {{subItem.name}}
+                    <span>,</span>
+                  </span>
+                </span>
+              </div> -->
+              <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+              >
+              <strong> {{me.name}}  </strong>
+              <div style="font-size: 11px;">
+                <div>
+                  <span *ngFor="let nonAdd of me.nonAddOns">
+                    {{ nonAdd.name }} ,
+                  </span>
+                </div>
+                <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e"> <strong> Add On: </strong>
+                  <div *ngFor="let add of me.addOns">
+                    {{ add.name }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
+            <!-- <td>{{code.purchased.main_menu_items[0].description == '' ? 'N/A' :code.purchased.main_menu_items[0].description }}
+            </td> -->
+            <td id="AddOn">
+              <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+              >
+              <strong> {{ currency }} {{me.price}}  </strong>
+              <div style="font-size: 11px;">
+                <div>
+                  <span style="color:white" class="space" *ngFor="let nonAdd of me.nonAddOns">
+                    .
+                  </span>
+                </div>
+                <div style="color:white" class="space">.</div>
+                <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                  <div *ngFor="let add of me.addOns">
+                   {{ currency }} {{ add.price }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
+            <!-- <td>{{code.purchased.main_menu_items[0].priceTotal }}</td> -->
+            <td>
+              <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+              >
+              <strong> {{ currency }} {{me.price * code.quantity}}  </strong>
+              <div style="font-size: 11px;">
+                <div>
+                  <span style="color:white" class="space" *ngFor="let nonAdd of me.nonAddOns">
+                     .
+                  </span>
+                </div>
+                <div style="color:white" class="space">.</div>
+                <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                  <div *ngFor="let add of me.addOns">
+                   {{ currency }} {{ add.price * code.quantity }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="Promotions.length == 0 && ItemsFromMenu.length == 0">
+            <td colspan="4" style="text-align: center;">No record found</td>
+          </tr>
+        </tbody>
+      </table>
+
+		</div>
+	</div>
+	<div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+
+		<div fxFlex.xl="100" fxFlex.lg="100" fxFlex.md="100">
+			<div fxLayout="row" fxLayoutAlign="space-between start"
+				style="margin-top: 10px;padding-bottom: 10px;border-bottom: 1px solid;border-top: 1px solid black">
+				<div fxFlex="49">
+					<p>Sub Total</p>
+					<p>Discount/Offers</p>
+					<p *ngIf="OrderDetails.order_type == 'delivery'">Delivery Fee</p>
+				</div>
+				<div fxFlex="49">
+					<p style="text-align: right;">{{ currency }} {{OrderDetails?.sub_total}}</p>
+					<p style="text-align: right;">{{ currency }} {{OrderDetails?.saving_amount}}</p>
+					<p *ngIf="OrderDetails.order_type == 'delivery'" style="text-align: right;">{{ currency }} {{OrderDetails?.outlets_parents?.delivery_charges}}</p>
+				</div>
+			</div>
+			<div fxLayout="row" fxLayoutAlign="space-between start" style="margin-top: 10px;padding-bottom: 10px;">
+				<div fxFlex="49">
+					<p style="font-size: 20px;margin: 0 0 5px;"><b>Total</b></p>
+					<p> <b>Payment</b></p>
+				</div>
+				<div fxFlex="49">
+					<p style="font-size: 20px;text-align: right;margin: 0 0 5px"><b>{{ currency }} {{OrderDetails?.amount}}</b></p>
+          <p style="text-align: right;">
+            <img id="cash" *ngIf="OrderDetails.payment_method == 'cash_on_delivery'" style="width: 30px; height: 20px;" src="assets/images/cashIcon.png">
+            <img id="card" *ngIf="OrderDetails.payment_method != 'cash_on_delivery'" style="width: 30px; height: 20px;" src="assets/images/creditCard.png">
+            <span style="margin-left: 3px; position: relative; bottom: 3px;">
+              <b>{{OrderDetails?.payment_method == 'cash_on_delivery' ? 'CASH' : 'PREPAID BY CARD'}}</b>
+            </span>
+          </p>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+
+
+		<div fxFlex.xl="48" fxFlex.lg="48" fxFlex.md="48">
+		</div>
+
+		<div fxFlex.xl="100" fxFlex.lg="100" fxFlex.md="100">
+			<div style="text-align: center;margin-bottom: 3px;">
+				Thank you for using Urban Point.
+      </div>
+      <div style="text-align: center;">Enjoy your food!</div>
+
+      <hr>
+
+      <span style="display: block;text-align: center;margin-bottom: 3px;">{{createdTime | date : 'longDate'}}</span>
+      <div style="text-align: center;">
+        Order placed at
+        <span>{{createdTime | date : 'hh:mm a'}}</span>
+			</div>
+			<!-- <span style="display: block;">{{createdTime | date : 'hh:mm a'}}</span> -->
+
+
+		</div>
+
+
+	</div>
+</div>
+
+
+
+<!-- PRINT -->
+<style>
+	.receipt .sheet {
+		width: 58mm;
+		height: 100mm
+	}
+
+	@media print {
+		.receipt {
+			width: 58mm
+		}
+	}
+
+	.rece tbody tr td {
+		vertical-align: top;
+	}
+</style>
+
+<div style="padding: 30px 40px; height: calc(100vh - 75px);overflow: auto;width: 70vw;">
+  <div>
+    <button (click)="onPrint()" style="min-width: 50px;float: right;" mat-raised-button color="accent">Preview</button>
+  </div>
+	<div fxLayout="row wrap"
+     fxLayoutAlign="space-between top">
+     <div fxFlex="95">
+			<div style="word-wrap: break-word;" fxLayout="row" fxLayoutAlign="space-between top">
+				<div fxFlex="32">
+					<mat-icon class="mat-18">person_outline</mat-icon>
+					<span style="font-size: 14px;
+          vertical-align: super;">{{OrderDetails?.users_delivery_addresses?.contact_name}}</span> <br><br>
+          <!-- <span><strong>User ID:</strong> {{ OrderDetails?.user_id }} </span><br> -->
+          <mat-icon class="mat-18">call</mat-icon>
+          <span style="font-size: 14px;
+          vertical-align: super;">{{OrderDetails?.users_delivery_addresses?.contact_phone}}</span>
+          <br><br>
+          <mat-icon class="mat-18">call</mat-icon>
+          <span style="font-size: 14px;
+        vertical-align: super;">{{OrderDetails?.alternative_user_phone}} </span>
+        <div><strong *ngIf="OrderDetails.alternative_user_phone"> ( Alternate Phone ) </strong></div>
+				</div>
+				<div fxFlex="32">
+          <div style="margin-top: 2px;">
+            <p *ngIf="OrderDetails?.users_delivery_addresses?.delivery_addresses_area?.name != '0'"> <strong> Area: </strong>
+            {{ OrderDetails?.users_delivery_addresses?.delivery_addresses_area?.name || OrderDetails?.users_delivery_addresses?.name }}</p>
+            <p *ngIf="OrderDetails?.users_delivery_addresses?.street != '0'"> <strong> Street: </strong> {{ OrderDetails?.users_delivery_addresses?.street }}</p>
+            <p *ngIf="OrderDetails?.users_delivery_addresses?.building != '0'"> <strong> Building: </strong> {{ OrderDetails?.users_delivery_addresses?.building }}</p>
+            <p *ngIf="OrderDetails?.users_delivery_addresses?.office_no != '0'"> <strong> Office No: </strong> {{ OrderDetails?.users_delivery_addresses?.office_no }}</p>
+            <p *ngIf="OrderDetails?.users_delivery_addresses?.floor != '0'"> <strong> Floor: </strong> {{ OrderDetails?.users_delivery_addresses?.floor }}</p>
+          </div>
+        </div>
+        <div fxFlex="32">
+					<p style="font-size: 14px; position: relative;
+					vertical-align: super;">
+						<mat-icon class="mat-18" style="position: absolute;left: -30px;top: -1px;">location_on
+						</mat-icon>
+						{{OrderDetails?.users_delivery_addresses?.address}}
+          </p>
+          <p> <strong> Coordinates: </strong> {{ OrderDetails?.users_delivery_addresses?.latitude }}, {{ OrderDetails?.users_delivery_addresses?.longitude }}</p>
+        </div>
+			</div>
+		</div>
+		<!-- <div fxFlex="40">
+			<div style="width: 100%;">
+				<img (click)="onPrint()"
+					 style="cursor: pointer;height: 35px; float: right ;margin: 0 10px;"
+					 src="assets/images/print_icon.png">
+			</div>
+
+			<div style="width: 100%;"
+				 (click)="onPrintRecipt()">
+				<img (click)="onPrintRecipt()"
+					 style="cursor: pointer;height: 35px;float: right; margin: 0 10px;"
+					 src="assets/images/print_icon_receipt.png">
+			</div>
+		</div> -->
+
+		<!-- <div fxFlex="100">
+			<mat-icon class="mat-18">call</mat-icon>
+			<span style="font-size: 14px;
+		vertical-align: super;">{{OrderDetails?.users_delivery_addresses?.contact_phone}}</span>
+		</div> -->
+
+  </div>
+  <div style="margin-top: 15px;">
+    <p><strong>Outlet:</strong> {{ OrderDetails?.outlets?.name }} </p>
+    <!-- <span> <strong>Latitude:</strong> {{ OrderDetails?.users_delivery_addresses?.latitude }} </span> -->
+    <!-- <span style="margin-left: 4px;"> <strong>Longitude:</strong> {{ OrderDetails?.users_delivery_addresses?.longitude }} </span> -->
+  </div>
+
+
+	<div style="margin-top: 10px;font-size: 22px;color: red;    font-weight: 600;">
+		{{OrderDetails?.status == 'outlet_rejected' ? 'Rejected' : OrderDetails?.status == 'outlet_preparing'? 'In Progress':OrderDetails?.status == 'outlet_dispatched'? 'Dispatched':OrderDetails?.status == 'outlet_delivered'? 'Completed':OrderDetails?.status == 'admin_rejected'? 'Rejected':OrderDetails?.status == 'completed'? 'Completed':OrderDetails?.status == 'created'? 'Created':OrderDetails?.status == 'outlet_own_accepted'? 'In Progress': OrderDetails?.status == 'outlet_urbanpoint_accepted' ? 'In Progress' :OrderDetails?.status == 'outlet_assigned' ? 'In Progress' :OrderDetails?.status == 'pending' ? 'Pending' : OrderDetails?.status }}
+
+	</div>
+
+
+  <div style="font-size: 14px;">
+    <div style="font-weight: 700;margin: 7px 0px 7px 0px;">
+      <span>Order ID: {{ OrderDetails.id }}</span>
+      <span style="margin-left: 12px;">Ref ID: {{ OrderDetails.ref_id }}</span>
+      <span style="margin-left: 12px;">Driver Type: {{ OrderDetails.accepted_delivery }}</span>
+      <span style="margin-left: 12px;"> Preparation Time: {{OrderDetails?.preparation_time}}</span>
+    </div>
+    <span class="order-count">
+      {{Promotions.length + ItemsFromMenu.length + ItemsAvailFree.length + ItemsPurchased.length}} items
+    </span>
+    <!-- <span>
+  Pick up {{OrderDetails.preparation_time}} min(s)
+</span> -->
+  </div>
+
+
+	<base-loader>
+		<div style="background: #a9a9a936;width: 100%; height: 2px;"></div>
+		<div style="padding: 0 40px; ">
+			<div class="data-table">
+				<!-- <table class="table table-responsive table-striped"
+					   style="width:100%;margin-top: 10px;">
+					   <thead>
+						<tr>
+							<th style="width: 70px;">Quantity</th>
+							<th>Product</th>
+							<th>Sub Menu Item</th>
+							<th>Description</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let code of Promotions">
+							<td>1 x</td>
+							<td>{{code.name== '' ? 'N/A' :code.name }}
+								<div style="display: block;">
+									<span style="font-size: 11px;" *ngFor="let me of code.purchased.main_menu_items; let i = index">{{me.name}} <span *ngIf="i < code.purchased.main_menu_items.length - 1">,</span><span *ngIf="code.avail_free.main_menu_items.length > 0 && code.purchased.main_menu_items.length > 0">,</span> </span>
+									<span style="font-size: 11px;" *ngFor="let me of code.avail_free.main_menu_items; let i = index">{{me.name}} <span *ngIf="i < code.avail_free.main_menu_items.length - 1">,</span> </span>
+
+								</div>
+							</td>
+							<td>
+								<div *ngFor="let me of code.purchased.main_menu_items; let i = index" style="display: grid;">
+									<strong> {{me.name}} : </strong>
+									<span style="font-size: 11px;display: inline-block;" *ngFor="let subme of me.sub_menu">
+										<span style="display: inline-block;" *ngFor="let subItem of subme.sub_menu_items">
+											{{subItem.name}}
+											<span>, </span>
+										</span>
+									</span>
+								</div>
+								<div *ngFor="let me of code.avail_free.main_menu_items; let i = index" style="display: grid;">
+									<br/> <strong> {{me.name}} : </strong>
+									<span style="font-size: 11px;display: inline-block;" *ngFor="let subme of me.sub_menu">
+										<span style="display: inline-block;" *ngFor="let subItem of subme.sub_menu_items">
+											{{subItem.name}}
+											<span>, </span>
+										</span>
+									</span>
+								</div>
+							</td>
+							<td>{{code.description== '' ? 'N/A' :code.description }}</td>
+							<td>{{code.promotion_price }}</td>
+
+						</tr>
+						<tr *ngFor="let code of ItemsFromMenu">
+							<td>{{code.quantity}} x</td>
+							<td>{{code.purchased.main_menu_items[0].name == '' ? 'N/A' : code.purchased.main_menu_items[0].name }}
+
+							</td>
+							<td>
+								<div style="display: grid;">
+									<span style="font-size: 11px;display: inline-block;" *ngFor="let subme of code.purchased.main_menu_items[0].sub_menu">
+										<span style="display: inline-block;" *ngFor="let subItem of subme.sub_menu_items">
+											{{subItem.name}}
+											<span>, </span>
+										</span>
+									</span>
+								</div>
+							</td>
+							<td>{{code.purchased.main_menu_items[0].description == '' ? 'N/A' :code.purchased.main_menu_items[0].description }}</td>
+							<td>{{code.purchased.main_menu_items[0].priceTotal }}</td>
+						</tr>
+
+						<tr
+							*ngIf="Promotions.length == 0 && ItemsFromMenu.length == 0">
+							<td colspan="4"
+								style="text-align: center;">No record found</td>
+						</tr>
+					</tbody>
+				</table> -->
+
+        <table class="table table-responsive table-striped" style="width:100%;margin-top: 10px;">
+          <thead>
+            <tr>
+              <th style="width: 70px;">Quantity</th>
+              <th> Category </th>
+              <th>Product</th>
+              <th>Option/s</th>
+              <!-- <th>Description</th> -->
+              <th> Unit Price </th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let code of Promotions">
+              <td>1 x</td>
+              <td> Promotion (B1G1F) </td>
+              <td>{{code.name=== '' ? 'N/A' :code.name }}
+                <div style="display: block;">
+                  <ng-container *ngIf="code.purchased">
+                    <span style="font-size: 11px;"
+                    *ngFor="let me of code.purchased.main_menu_items; let i = index">{{me.name}}
+                    <span *ngIf="i < code.purchased.main_menu_items.length - 1">,</span><span
+                      *ngIf="code.avail_free.main_menu_items.length > 0 && code.purchased.main_menu_items.length > 0">,</span>
+                  </span>
+                  </ng-container>
+                  <ng-container *ngIf="code.avail_free">
+                    <span style="font-size: 11px;"
+                    *ngFor="let me of code.avail_free.main_menu_items; let i = index">{{me.name}}
+                    <span *ngIf="i < code.avail_free.main_menu_items.length - 1">,</span>
+                   </span>
+                  </ng-container>
+
+                </div>
+              </td>
+              <td>
+                <ng-container *ngIf="code.purchased">
+                  <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+                  >
+                  <strong> {{me.name}}  </strong>
+                  <div style="font-size: 11px;">
+                    <div>
+                      <span *ngFor="let nonAdd of me.nonAddOns">
+                        {{ nonAdd.name }} ,
+                      </span>
+                    </div>
+                    <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e"> <strong> Add On: </strong>
+                      <div *ngFor="let add of me.addOns">
+                        {{ add.name }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </ng-container>
+                <ng-container *ngIf="code.avail_free">
+                  <div style="margin-top:8px" *ngFor="let me of code.avail_free.main_menu_items; let i = index"
+                  >
+                  <strong> {{me.name}}  </strong>
+                  <div>
+                    <div style="font-size: 11px;">
+                      <div>
+                        <span *ngFor="let nonAdd of me.nonAddOns">
+                          {{ nonAdd.name }} ,
+                        </span>
+                      </div>
+                      <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e"> <strong> Add On: </strong>
+                        <div *ngFor="let add of me.addOns">
+                          {{ add.name }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </ng-container>
+              </td>
+              <!-- <td>{{code.description== '' ? 'N/A' :code.description }}</td> -->
+              <td>
+                <ng-container *ngIf="code.purchased">
+                  <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+                  >
+                  <strong class="space"></strong>
+                  <div style="font-size: 11px;">
+                    <div>
+                      <span class="space" *ngFor="let nonAdd of me.nonAddOns">
+
+                      </span>
+                    </div>
+                    <div class="space"></div>
+                    <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                      <div *ngFor="let add of me.addOns">
+                       {{ currency }} {{ add.price }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </ng-container>
+                <ng-container *ngIf="code.avail_free">
+                  <div style="margin-top:8px" *ngFor="let me of code.avail_free.main_menu_items; let i = index">
+                    <strong class="space"></strong>
+                    <div style="font-size: 11px;">
+                      <div>
+                        <span class="space" *ngFor="let nonAdd of me.nonAddOns">
+
+                        </span>
+                      </div>
+                      <div *ngIf="me.addOns.length != 0" class="space"></div>
+                      <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                        <div *ngFor="let add of me.addOns">
+                         {{ currency }} {{ add.price }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </td>
+              <!-- <td>{{code.promotion_price }}</td> -->
+              <td>
+                <ng-container *ngIf="code.purchased">
+                  <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+                  >
+                  <strong>
+                    <span *ngIf="code?.purchased?.main_menu_items[0]?.price != code?.avail_free?.main_menu_items[0]?.price">
+                      {{ code?.purchased?.main_menu_items[0]?.price > code?.avail_free?.main_menu_items[0]?.price  ? currency + ' ' + code?.purchased?.main_menu_items[0]?.price : 'FREE'}}
+                    </span>
+                    <span *ngIf="code?.purchased?.main_menu_items[0]?.price == code?.avail_free?.main_menu_items[0]?.price">
+                      {{ currency + ' ' + code?.purchased?.main_menu_items[0]?.price }}
+                    </span>
+                  </strong>
+                  <div style="font-size: 11px;">
+                    <div>
+                      <span class="space" *ngFor="let nonAdd of me.nonAddOns">
+
+                      </span>
+                    </div>
+                    <div *ngIf="me.addOns.length != 0" class="space"></div>
+                    <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                      <div *ngFor="let add of me.addOns">
+                       {{ currency }} {{ add.price }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </ng-container>
+                <ng-container *ngIf="code.avail_free">
+                  <div style="margin-top:8px" *ngFor="let me of code.avail_free.main_menu_items; let i = index">
+                    <strong>
+                      <span *ngIf="code?.purchased?.main_menu_items[0]?.price != code?.avail_free?.main_menu_items[0]?.price">
+                        {{ code?.avail_free?.main_menu_items[0]?.price > code?.purchased?.main_menu_items[0]?.price ? currency + ' ' + code?.avail_free?.main_menu_items[0]?.price : 'FREE'}}
+                      </span>
+                      <span *ngIf="code?.purchased?.main_menu_items[0]?.price == code?.avail_free?.main_menu_items[0]?.price">
+                        FREE
+                      </span>
+                    </strong>
+                    <div style="font-size: 11px;">
+                      <div>
+                        <span class="space" *ngFor="let nonAdd of me.nonAddOns">
+
+                        </span>
+                      </div>
+                      <div *ngIf="me.addOns.length != 0" class="space"></div>
+                      <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                        <div *ngFor="let add of me.addOns">
+                         {{ currency }} {{ add.price }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </td>
+
+            </tr>
+            <tr *ngFor="let code of ItemsFromMenu">
+              <td>{{code.quantity}} x</td>
+              <td> {{ code?.purchased?.name }} </td>
+              <td>{{code?.purchased?.main_menu_items[0]?.name == '' ? 'N/A' : code?.purchased?.main_menu_items[0]?.name }}
+
+              </td>
+              <td>
+                <!-- <div style="display: grid;">
+                  <span style="font-size: 11px;display: inline-block;"
+                    *ngFor="let subme of code.purchased.main_menu_items[0].sub_menu">
+                    <span style="display: inline-block;"
+                      *ngFor="let subItem of subme.sub_menu_items">
+                      {{subItem.name}}
+                      <span>,</span>
+                    </span>
+                  </span>
+                </div> -->
+                <ng-container *ngIf="code.purchased">
+                  <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+                  >
+                  <strong> {{me.name}}  </strong>
+                  <div style="font-size: 11px;">
+                    <div>
+                      <span *ngFor="let nonAdd of me.nonAddOns">
+                        {{ nonAdd.name }} ,
+                      </span>
+                    </div>
+                    <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e"> <strong> Add On: </strong>
+                      <div *ngFor="let add of me.addOns">
+                        {{ add.name }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </ng-container>
+              </td>
+              <!-- <td>{{code.purchased.main_menu_items[0].description == '' ? 'N/A' :code.purchased.main_menu_items[0].description }}
+              </td> -->
+              <td id="AddOn">
+                <ng-container *ngIf="code.purchased">
+                  <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+                  >
+                  <strong> {{ currency }} {{me.price}}  </strong>
+                  <div style="font-size: 11px;">
+                    <div>
+                      <span class="space" *ngFor="let nonAdd of me.nonAddOns">
+
+                      </span>
+                    </div>
+                    <div *ngIf="me.addOns.length != 0" class="space"></div>
+                    <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                      <div *ngFor="let add of me.addOns">
+                       {{ currency }} {{ add.price }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </ng-container>
+              </td>
+              <!-- <td>{{code.purchased.main_menu_items[0].priceTotal }}</td> -->
+              <td>
+                <ng-container *ngIf="code.purchased">
+                  <div *ngFor="let me of code.purchased.main_menu_items; let i = index"
+                  >
+                  <strong> {{ currency }} {{me.price * code.quantity}}  </strong>
+                  <div style="font-size: 11px;">
+                    <div>
+                      <span class="space" *ngFor="let nonAdd of me.nonAddOns">
+
+                      </span>
+                    </div>
+                    <div *ngIf="me.addOns.length != 0" class="space"></div>
+                    <div *ngIf="me.addOns.length != 0" style="color: #8e8e8e">
+                      <div *ngFor="let add of me.addOns">
+                       {{ currency }} {{ add.price * code.quantity }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </ng-container>
+              </td>
+            </tr>
+
+            <tr *ngIf="Promotions.length == 0 && ItemsFromMenu.length == 0">
+              <td colspan="4" style="text-align: center;">No record found</td>
+            </tr>
+          </tbody>
+        </table>
+			</div>
+		</div>
+
+		<div style="background: #a9a9a936;width: 100%; height: 2px;margin-top: 28px;"></div>
+		<div style="padding:0 40px; margin-top: 25px;">
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="space-between center"
+				 fxLayoutGap="10px"
+				 >
+
+
+				<div fxFlex.xl="100"
+					 fxFlex.lg="100"
+					 fxFlex.md="100">
+					<h4 style="font-weight: bolder;">
+						Special instructions from customer
+					</h4>
+					<div style="margin-top: 20px;">
+						<textarea style="width: 30%;border: 1px solid #949494;border-radius: 4px;padding: 7px;resize: none;height: 80px;"
+								  [(ngModel)]='specialInstructions'
+								  readonly
+								  placeholder="Instruction here...">
+
+		   </textarea>
+					</div>
+
+				</div>
+
+				<div fxFlex.xl="100"
+					 fxFlex.lg="100"
+					 fxFlex.md="100">
+
+					<div fxLayout="row wrap"
+						 fxLayoutAlign="space-between center"
+						 style="margin-top: 20px;">
+						<div fxFlex>
+							<p>Sub Total</p>
+							<p *ngIf="OrderDetails.order_type == 'delivery'">Delivery Fee</p>
+							<p>Discount/Offers</p>
+							<p>Payment Method</p>
+							<p><b>Total Amount</b></p>
+
+						</div>
+						<div fxFlex="70px">
+							<p>{{ currency }} {{OrderDetails?.sub_total}}</p>
+							<p *ngIf="OrderDetails.order_type == 'delivery'">{{ currency }} {{OrderDetails?.outlets_parents?.delivery_charges}}</p>
+							<p style="width: 200%;">{{ currency }} {{OrderDetails?.saving_amount}} <span *ngIf="!hideDiscount">( {{ discountPercentage }}% )</span> </p>
+							<p>{{OrderDetails?.payment_method == 'cash_on_delivery' ? 'Cash' : 'Card'}}</p>
+							<p><b>{{OrderDetails?.amount}}</b></p>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="space-between center"
+				 fxLayoutGap="10px"
+				 
+				 style="margin-top: 20px;">
+				<!-- <div fxFlex.xl="52"
+				 fxFlex.lg="52"
+				 fxFlex.md="52">
+				<button type="button"
+						(click)="CANCELOrder()"
+						style="font-size: 16px;padding: 12px 30px 7px; border: none;border-radius: 5px;"><span style="vertical-align: super;">REJECT ORDER</span>
+				</button>
+
+			</div>
+			<div fxFlex.xl="320px"
+				 fxFlex.lg="320px"
+				 fxFlex.md="320px">
+				<button type="button"
+				(click)="dispatchOrder()"
+						style="background-color: #E62E2D;color: white;font-size: 16px;width: 100%;border: none;padding: 16px 16px;border-radius: 10px;"><span style="float: left;"></span> ACCEPT ORDER
+
+					</button>
+						<div style="background: #a9a9a936;width: 100%; height: 2px; margin-top: 20px;"></div>
+			</div> -->
+
+
+				<div fxFlex.xl="52"
+					 fxFlex.lg="52"
+					 fxFlex.md="52">
+
+				</div>
+				<div fxFlex.xl="320px"
+					 fxFlex.lg="320px"
+					 fxFlex.md="320px">
+          <!-- <div style="text-align:left; margin-top: 10px;margin-right: 10px;">
+						<p><strong>Order ID:</strong> {{OrderDetails?.id}}</p><br>
+            <p><strong>Order's Reference ID:</strong> {{OrderDetails?.ref_id}}</p><br>
+            <p><strong>Order Preparation Time:</strong> {{OrderDetails?.preparation_time}}</p><br>
+
+					</div> -->
+				</div>
+
+			</div>
+
+
+
+
+		</div>
+
+
+
+
+
+
+	</base-loader>
+
+</div>

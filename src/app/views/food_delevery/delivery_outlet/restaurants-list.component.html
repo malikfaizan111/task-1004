@@ -1,0 +1,145 @@
+<mat-spinner *ngIf="loading" style="left: 40%;top: 16%;position: absolute;"></mat-spinner>
+<div class="row">
+	<div style="width: fit-content" class="col-sm-4">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			DELIVERY BRANDS
+		</span>
+	</div>
+  <div class="col-sm-2">
+		<button class="btn btn-primary round-elem"
+				style="background: red; border-color: red"
+				(click)="addNew()">ADD NEW
+		</button>
+  </div>
+	<div class="col-sm-6"
+		 style="text-align: right;float: right;">
+		<div class="form-group col-sm-3"
+			 style="padding: 0 10px 0 0;">
+		</div>
+		<div class="form-group col-sm-9"
+			 style="padding: 0;text-align: left;">
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="gerParentOutletsList(1)"
+        class="input-group-addon">
+      <i class="glyphicon glyphicon-search"></i>
+    </span>
+				<input autocomplete="false"
+					   type="text"
+					   maxlength="50"
+					   class="form-control"
+					   [(ngModel)]="search"
+					   (keyup)="onSearchParentOutlet()"
+					   placeholder="Search">
+			</div>
+		</div>
+		<!-- <button class="btn btn-primary round-elem"
+				style="background: red; border-color: red"
+				(click)="AddCSVMenu()">UPLOAD MENU CSV
+		</button> -->
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+			   style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th style="width: 70px;">ID</th>
+					<th>OUTLET NAME</th>
+					<th>ORDER CHARGES</th>
+					<th>SERVICES CHARGES</th>
+					<th>OPENING TIME</th>
+					<th>CLOSING TIME</th>
+					<th>ICON</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr *ngFor="let parentOutlet of RestaurantsParentOutlets">
+					<td>{{parentOutlet.id}}</td>
+					<td>{{parentOutlet.name}}</td>
+					<td>{{parentOutlet.min_order_charges=== null ? 'N/A':parentOutlet.min_order_charges}}</td>
+					<td>{{parentOutlet.delivery_charges=== null ? 'N/A':parentOutlet.delivery_charges}}</td>
+					<td>{{parentOutlet.opening_time=== null ? 'N/A':parentOutlet.opening_time}}</td>
+					<td>{{parentOutlet.closing_time=== null ? 'N/A':parentOutlet.closing_time}}</td>
+					<td>{{parentOutlet.image=== null ? 'N/A':parentOutlet.image}}</td>
+
+
+					<td style="text-align: center;  max-width: 850px;">
+						<!-- <i title="EDIT"
+						   (click)="onEditAdmin(admin)"
+						   class="action-btn">
+							<img src="assets/images/actions/edit.png"
+								 alt="">
+						</i> -->
+						<button style="min-width: 30px; margin-right: 2px;"
+								mat-raised-button
+								color="accent"
+                [disabled]= "loading"
+								(click)="onEditRestaurant(parentOutlet)">Edit
+						</button>
+						<button style="min-width: 30px; margin-right: 2px;"
+								mat-raised-button
+								color="accent"
+                [disabled]= "loading"
+								(click)="onMainMenu(parentOutlet)">MAIN MENU
+						</button>
+						<button style="min-width: 30px; margin-right: 2px;"
+								mat-raised-button
+								color="accent"
+                [disabled]= "loading"
+								(click)="onPromotion(parentOutlet)">PROMOTION
+						</button>
+						<button style="min-width: 30px; margin-right: 2px;"
+								mat-raised-button
+								color="accent"
+                [disabled]= "loading"
+								(click)="onDeliveryCategory(parentOutlet)">Assign Category
+						</button>
+						<button style="min-width: 30px; margin-right: 2px;"
+								mat-raised-button
+								color="accent"
+                [disabled]= "loading"
+								(click)="onDeliveryCollection(parentOutlet)">Assign Collection
+						</button>
+            <button style="min-width: 30px;"
+                mat-raised-button
+                color="accent"
+                [disabled]= "loading"
+                (click)="downloadCredentials(parentOutlet)">Download Credentials
+            </button>
+
+
+
+						<!-- <i title="Delete"
+						   (click)="onDeleteAdmin(admin)"
+						   class="action-btn">
+							<img src="assets/images/actions/delete.png"
+								 alt="">
+						</i> -->
+					</td>
+				</tr>
+				<!-- <tr *ngIf="RestaurantsParentOutlets.length == 0">
+					<td colspan="100"
+						style="text-align: center">No record found.</td>
+
+				</tr> -->
+
+			</tbody>
+		</table>
+	</div>
+  <div id="content" style="position: absolute;left: -200%;top: -53%;visibility: hidden;">
+    <div id="contentToConvert" style="background-image: url(assets/images/outlet-credentials-template.png);height: 2339px;width: 1654px;position: relative;">
+      <span id="user" style="position: absolute;left: 504px;top: 426px;font-size: 20px;">  </span>
+      <span id="pass" style="position: absolute;left: 992px;top: 426px;font-size: 20px;">  </span>
+   </div>
+   </div>
+
+	<app-pagination *ngIf="RestaurantsParentOutlets.length > 0"
+					(setPage)="setPage($event)"
+					[perPage]="perPage"
+					[totalPages]="totalPages"
+					[currentPage]="currentPage"></app-pagination>
+</base-loader>

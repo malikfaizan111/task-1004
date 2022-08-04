@@ -1,0 +1,25 @@
+<div style="width: 550px;" class="wrapper">
+  <div class="data-table" style="max-height : 525; overflow-y: auto; min-height: 525;">
+    <span>Change Popular Category order here by draging and dropping at required place :</span>
+    <div class="drag-list__wrap">
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let outlet of Outlets" cdkDrag>
+          <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+          <span> {{outlet.position}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span></span> <span>{{outlet.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center" style="margin-top: 15px;">
+    <button [disabled]="formdataid.length == 0" (click)="onSelectChange($event)" type="button"
+      class="btn btn-primary round-elem" style="background: red; border-color: red; width: 75px; margin-right: 4px;"
+      (click)="onSaveOrder()">
+      Save
+    </button>
+    <button (click)="closingdialog()" type="button" class="btn btn-primary round-elem"
+      style="background: #ccc; border-color: #ccc; width: 75px;">
+      Cancel
+    </button>
+  </div>
+</div>

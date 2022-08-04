@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+
+            <button mat-icon-button (click)="onLocationBack()" color="accent">
+                <img src="assets/images/actions/back.png" alt="">
+            </button>
+            <span style="font-size: 20px;font-weight: 600;">Upload Menu</span>
+        </div>
+    </div>
+</div>
+<form [formGroup]="Form" (ngSubmit)="doSubmit()">
+    <div *ngIf="type == 'link'">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px"
+            style="margin-top: 30px; margin-left: 10px;">
+            <div>
+                <span style="font-weight: 600; font-size: 14px;">Direct link</span>
+            </div>
+            <div>
+                <mat-form-field style="width: 331px;margin-top: 16px;">
+                    <input matInput type="url" formControlName="menu_card"
+                        pattern="[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                        placeholder="Enter Menu URL">
+                    <mat-error
+                        *ngIf="getValue('menu_card')?.invalid && (getValue('menu_card')?.dirty || getValue('menu_card')?.touched)">
+                        Menu URL is Required</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="type == 'pdf'">
+
+        <div style="margin-top: 30px; margin-bottom: 50px; margin-left: 5px;">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button type="button" style="display:block;    border: none; background: white;color: #148F96; font-size: 15px;
+                font-weight: 700;" onclick="document.getElementById('files').click()">Upload PDF</button> <br>
+                <input id="files" style="visibility:hidden;" type="file" formControlName="pdf"
+                    (change)="onFileChange($event)" accept="application/pdf">
+            </div>
+            <span style="margin-left: 6px;" *ngIf="!checkPdf">Upload a PDF file of the menu that contains a single or
+                multiple pages</span>
+            <span style="margin-left: 6px;" *ngIf="checkPdf">{{filename}} uploaded</span>
+        </div>
+    </div>
+    <div *ngIf="type == 'image'">
+        <div style="margin-top: 30px; margin-bottom: 50px; margin-left: 5px;">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button type="button" style="display:block; border: none; background: white;color: #148F96; font-size: 15px;
+                font-weight: 700;" onclick="document.getElementById('images').click()">Upload image</button> <br>
+                <input id="images" style="visibility:hidden;" type="file" formControlName="image"
+                    (change)="onFileImageChange($event)" multiple accept="image/jpg, image/png">
+            </div>
+            <span style="margin-left: 6px;" *ngIf="imagesarray.length === 0 ">Upload one or multiple images of the menu in
+                jpg or png format.</span>
+            <span style="margin-left: 6px;" *ngIf="imagesarray.length !== 0 ">{{imagesarray.length}} images uploaded</span>
+            <span><a style=" cursor: pointer;;margin-left: 22px; font-size: 14px; font-weight: 700; color: #757575;"
+                    *ngIf="imagesarray[0]?.id" (click)="onEditArrangment()">EDIT ARRANGEMENT</a></span>
+        </div>
+    </div>
+    <div *ngIf="errorMsgImages">
+        <span style="color: red; margin-left: 15px;">
+            You can only select upto 10 images.
+        </span>
+    </div>
+    <div style="margin-top: 15px">
+        <button type="submit" [disabled]="Form.invalid || errorMsgImages" class="btn btn-primary round-elem"
+            style="background: red; border-color: red; width: 7.5em; margin-left: 10px;">
+            Upload
+        </button>
+    </div>
+</form>

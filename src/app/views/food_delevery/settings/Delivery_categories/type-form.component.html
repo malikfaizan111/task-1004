@@ -1,0 +1,162 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} Delivery Categories</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+<!-- <div style="margin-top: 20px"
+	 fxLayout="row wrap"
+	 fxLayoutAlign="space-between start"
+	 >
+
+</div> -->
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+
+		<!-- <div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<div class="input-group">
+					<input autocomplete="false"
+						   type="text"
+						   (keyup)="onSearch()"
+						   maxlength="200"
+						   [(ngModel)]="search"
+						   [formControl]="myControl"
+						   class="form-control"
+						   placeholder="Search"
+						   [matAutocomplete]="auto">
+					<mat-autocomplete #auto="matAutocomplete"
+									  [displayWith]="displayFn"
+									  (optionSelected)="onSelectionChange($event)">
+						<mat-option *ngFor="let option of filteredOptions | async"
+									[value]="option">
+							{{option.name}}
+						</mat-option>
+					</mat-autocomplete>
+
+				</div>
+			</div>
+		</div> -->
+		<!-- <div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="heading-input">
+				Administrative</div>
+			<div class="ng-autocomplete">
+				<ng-autocomplete [data]="data"
+								 formControlName="parent_outlet_id"
+								 [searchKeyword]="keyword"
+								 (selected)='selectEvent($event)'
+								 (inputChanged)='onChangeSearch($event)'
+								 (inputCleared)='onCleared($event)'
+								 [itemTemplate]="itemTemplate"
+								 [notFoundTemplate]="notFoundTemplate">
+				</ng-autocomplete>
+
+				<ng-template #itemTemplate
+							 let-item>
+					<a [innerHTML]="item.email"></a>
+				</ng-template>
+
+				<ng-template #notFoundTemplate
+							 let-notFound>
+					<div [innerHTML]="notFound"></div>
+				</ng-template>
+			</div>
+		</div> -->
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name"
+						   type="text"
+						   required
+						   placeholder="name">
+					<mat-error
+							   *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+						name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="48"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name_ar"
+						   type="text"
+						   dir="rtl"
+						   style="text-align: right"
+						   required
+						   placeholder="Name Arabic">
+					<mat-error
+							   *ngIf="getValue('name_ar')?.invalid && (getValue('name_ar')?.dirty || getValue('name')?.touched)">
+						Name Arabic
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<label style="width: 100%;">Select Image
+				<span style="font-size: 12px;"> (jpg,jpeg,JPG,png):</span>
+			</label>
+			<file-picker (onFileSelect)="onFileSelect($event)"
+						 [isIconHidden]="false"
+						 [image]="getImage('image')"
+						 controlName="image"
+						 type=""
+						 [size]="{width: 172, height: 172}">
+			</file-picker>
+			<span style="float: right;font-size: 12px; color: #ff2c54"
+				  *ngIf="errorMsg">{{errorMsg}}</span>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ADD DELIVERY CATEGORIES
+			</button>
+			<button type="submit"
+					*ngIf="isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				UPDATE DELIVERY CATEGORIES
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

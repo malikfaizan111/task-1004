@@ -1,0 +1,178 @@
+.dropdown-item {
+    display: flex;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #cacaca;
+    color: black;
+}
+
+.dropdown-menu {
+    max-height: 215px;
+    overflow: auto;
+}
+
+.menu-href {
+    position: relative;
+}
+
+.menu-href>span {
+    padding-left: 20px;
+}
+
+.side-image {
+    position: absolute;
+}
+
+$primary: #c0c0c0;
+$primaryLight: #af1f71af;
+$white: black;
+$font_family_1: 'Glyphicons Halflings';
+.sidebar-nav {
+    padding-left: 0;
+    li {
+        display: block;
+        a {
+            display: block;
+            font-size: 13px;
+            padding: 15px 10px 15px 20px;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+            &:focus {
+                outline: none;
+                text-decoration: none;
+            }
+            &:hover {
+                background: $primary;
+                text-decoration: none;
+                color: $white;
+            }
+        }
+        .nav-dropdown-trigger {
+            position: relative;
+        }
+    }
+    li.active {
+        a {
+            background: $primary;
+            text-decoration: none;
+            color: $white;
+        }
+    }
+    li.sub-nav {
+        .nav-dropdown-trigger {
+            &:after {
+                position: absolute;
+                right: 20px;
+                top: 18px;
+                font-size: 12px;
+                content: "\e080";
+                color: $white;
+                font-family: $font_family_1;
+                font-style: normal;
+                font-weight: 400;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                color: $primary;
+            }
+            &:hover {
+                &:after {
+                    color: black;
+                }
+            }
+        }
+        .nav-dropdown {
+            display: none;
+            padding-left: 0;
+        }
+        .nav-dropdown2 {
+            display: none;
+            padding-left: 0;
+        }
+    }
+    li.sub-nav.active {
+        .nav-dropdown-trigger {
+            &:after {
+                color: $white !important;
+            }
+            &:hover {
+                &:after {
+                    color: $white !important;
+                }
+            }
+        }
+        ul {
+            li {
+                a {
+                    // background: $primaryLight !important;
+                    text-decoration: none; // color: $white !important;
+                }
+            }
+        }
+        >a {
+            color: $white !important;
+            background: $primary !important;
+        }
+        >ul {
+            >li.active {
+                a {
+                    color: $white !important;
+                    background: $primary !important
+                }
+                color: $white !important;
+                background: $primary !important
+            }
+        }
+    }
+    li.sub-nav.opened {
+        .nav-dropdown-trigger {
+            &:after {
+                content: "\e114";
+                color: $white;
+            }
+            color: $white;
+            background: $primary;
+        }
+        .nav-dropdown {
+            display: block;
+            li {
+                a {
+                    color: black;
+                    background: white;
+                    &:hover {
+                        background: $primary;
+                        color: $white;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+    li.sub-nav.opened2 {
+        .nav-dropdown-trigger2 {
+            &:after {
+                content: "\e114";
+                color: $white;
+            }
+            color: $white;
+            background: $primary;
+        }
+        .nav-dropdown2 {
+            display: block;
+            li {
+                a {
+                    color: black;
+                    background: $white;
+                    &:hover {
+                        background: $primary;
+                        color: $white;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}

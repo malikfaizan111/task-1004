@@ -1,0 +1,128 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} TEAM</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+      (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+	     fxLayout="row wrap"
+	     fxLayoutAlign="space-between start"
+	     >
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+
+				<mat-form-field style="width: 100%">
+					<input matInput
+					       formControlName="name"
+					       type="text"
+					       required
+					       placeholder="Name">
+					<mat-error *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">Name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+					       formControlName="email"
+					       type="text"
+					       required
+					       placeholder="Email">
+					<mat-error *ngIf="getValue('email')?.invalid && (getValue('email')?.dirty || getValue('email')?.touched)">Email is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+
+				<mat-form-field style="width: 100%">
+					<input matInput
+					       formControlName="phone"
+					       type="text"
+						   mask="99999999999999999999"
+						   maxlength="20"
+					       required
+					       placeholder="Phone">
+					<mat-error *ngIf="getValue('phone')?.invalid && (getValue('phone')?.dirty || getValue('phone')?.touched)">Phone is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+		     fxFlex.lg="48"
+		     fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+					       formControlName="password"
+					       type="text"
+					       placeholder="Password">
+					<mat-error *ngIf="getValue('password')?.invalid && (getValue('password')?.dirty || getValue('password')?.touched)">Password is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-label>Access Level</mat-label>
+							<mat-select placeholder="Role"
+										formControlName="role">
+								<mat-option value="1">1</mat-option>
+								<mat-option value="2">2</mat-option>
+								<mat-option value="3">3</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('role')?.invalid && (getValue('role')?.dirty || getValue('role')?.touched)">role
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+		     class="col-sm-12">
+			<button type="submit"
+			        *ngIf="!isEditing"
+			        [disabled]="Form.invalid || isLoading"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				ADD NEW ADMIN
+			</button>
+			<button type="submit"
+			        *ngIf="isEditing"
+			        [disabled]="Form.invalid || isLoading"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				UPDATE ADMIN
+			</button>
+			<img *ngIf="isLoading"
+			     class="loader-btn-image"
+			     src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

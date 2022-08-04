@@ -1,0 +1,365 @@
+<div class="row">
+	<div style="width: fit-content;" class="col-sm-3">
+    <div fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="10px">
+   <button mat-icon-button
+       *ngIf="isEditStatus"
+       (click)="back()"
+       color="accent">
+     <img src="assets/images/actions/back.png"
+        alt="">
+   </button>
+   <!-- <button mat-icon-button
+      *ngIf="addNotes"
+      (click)="back('notes')"
+      color="accent">
+     <img src="assets/images/actions/back.png"
+    alt="">
+   </button> -->
+   <!-- <span>{{isEditing? 'EDIT': 'ADD'}} ACCOUNT</span> -->
+   <span *ngIf="!isEditStatus" style="font-size: 25px;">
+    {{ isUnAttended ? 'Un-attended Orders' : 'Delivery Orders' }}
+   </span>
+   <span *ngIf="updateAll" style="font-size: 25px;">
+     UPDATE ORDER
+   </span>
+ </div>
+		<!-- <span *ngIf="!isEditStatus" style="font-size: 25px;">
+		 {{ isUnAttended ? 'Un-attended Orders' : 'Delivery Orders' }}
+    </span>
+    <span *ngIf="isEditStatus" style="font-size: 25px;">
+      Update Order Status
+    </span> -->
+
+    <!-- <div style="float: right;margin-top: 4px;" >
+      <mat-slide-toggle style="cursor: pointer;" *ngIf="isUnAttended" [checked]="true">Order Alerts</mat-slide-toggle>
+    </div> -->
+  </div>
+  <div class="col-sm-4">
+    <button *ngIf="!isEditStatus" routerLink="/main/kill_switch" class="btn btn-primary round-elem" style="background: red;margin-bottom: 10px; border-color: red;margin-right: 6px;">KILLSWITCH
+    </button>
+    <button *ngIf="UpAdmin.role == 1 && !isEditStatus" (click)="exportDeliveryReport()" class="btn btn-primary round-elem" style="background: red;margin-bottom: 10px; border-color: red">EXPORT REPORT
+    </button>
+  </div>
+
+	<div class="form-group col-sm-2"
+		 style="padding: 0 10px 0 0;">
+		<select *ngIf="!isEditStatus" [(ngModel)]="orderby"
+				(change)="gerParentOutletsList(orderby)"
+				placeholder="Order By"
+				class="form-control">
+			<option disabled>Order By</option>
+			<option value="">All</option>
+			<option value="outlet_dispatched">outlet_dispatched</option>
+			<option value="completed">completed</option>
+			<option value="outlet_rejected">outlet_rejected</option>
+			<option value="pending">Pending</option>
+    </select>
+
+	</div>
+	<div class="col-sm-3"
+		 style="text-align: right">
+		<!-- <div class="form-group col-sm-3"
+			 style="padding: 0 10px 0 0;">
+		</div> -->
+		<div class="form-group"
+			 style="padding: 0;text-align: left;">
+			<div *ngIf="!isEditStatus" class="input-group">
+        <span style="cursor: pointer;"
+        (click)="gerParentOutletsList(1)"
+        class="input-group-addon">
+      <i class="glyphicon glyphicon-search"></i>
+    </span>
+        <input autocomplete="false"
+					   type="text"
+					   maxlength="50"
+					   class="form-control"
+					   [(ngModel)]="search"
+					   (keyup)="onSearchParentOutlet()"
+					   placeholder="Search by Order Id / Name / Phone-Number">
+			</div>
+    </div>
+		<!-- <button class="btn btn-primary round-elem"
+				style="background: red; border-color: red"
+				(click)="addNew()">ADD NEW
+		</button> -->
+	</div>
+
+</div>
+
+<base-loader>
+  <div style="background: #a9a9a936;width: 100%; height: 2px;"></div>
+    <div *ngIf="!isEditStatus && !addNotes">
+      <div class="data-table">
+        <table class="table table-responsive table-striped"
+             style="width:100%; margin-top: 15px">
+          <thead>
+            <tr>
+              <th style="text-align: center;">Order#</th>
+              <th style="text-align: center;">Ref ID</th>
+              <th style="text-align: center;">Parent</th>
+              <th style="text-align: center;"> Branch Name</th>
+              <th style="text-align: center;">Order Status</th>
+              <th style="text-align: center;">Order Type</th>
+              <th style="text-align: center;">Driver</th>
+              <th style="text-align: center;">Expected Duration</th>
+              <th *ngIf="!isUnAttended" style="text-align: center;">Accepted At</th>
+              <th style="text-align: center;">Created At</th>
+
+              <th style="text-align: center;"> Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let parentOutlet of RestaurantsParentOutlets"
+              style="text-align: center;">
+              <td>{{parentOutlet?.id == null ? 'N/A' :parentOutlet?.id}}</td>
+              <td>{{parentOutlet?.ref_id == null ? 'N/A' :parentOutlet?.ref_id}}</td>
+              <td>{{parentOutlet?.outlets_parents?.name == null ? 'N/A' :parentOutlet?.outlets_parents?.name }}
+              </td>
+              <td>{{parentOutlet?.outlets?.name == null ? 'N/A' :parentOutlet?.outlets?.name}}</td>
+              <td>{{parentOutlet?.status == null ? 'N/A' : getOutletStatus(parentOutlet)}}</td>
+              <td>{{parentOutlet?.order_type == 'delivery' ? 'Delivery' : 'Pick Up'}}</td>
+              <td>
+                {{parentOutlet?.accepted_delivery == null ? 'N/A' :
+                parentOutlet?.accepted_delivery + ' ' + (parentOutlet?.accepted_delivery != 'urbanpoint' ? '': getdriverType(parentOutlet))
+               }}
+              </td>
+              <td>{{parentOutlet?.estimated_time == null ? 'N/A' : parentOutlet?.estimated_time + ' Min'}}</td>
+              <td *ngIf="!isUnAttended" style="width: 20%;">{{parentOutlet?.order_logs?.outlet_own_accepted == null && parentOutlet?.order_logs?.outlet_urbanpoint_accepted == null ? 'N/A' : (parentOutlet?.order_logs?.outlet_own_accepted == null ? parentOutlet?.order_logs?.outlet_urbanpoint_accepted?.created_at : parentOutlet?.order_logs?.outlet_own_accepted?.created_at)}}</td>
+              <td style="width: 20%;">{{parentOutlet?.created_at == null ? 'N/A' : parentOutlet?.created_at }}</td>
+              <td style="text-align: center; width: 100px;">
+                <button style="min-width: 50px;"
+                    mat-raised-button
+                    color="accent"
+                    (click)="onOrderLog(parentOutlet)">Log
+                </button>
+              </td>
+              <td style="text-align: center; width: 50px;">
+                <button style="min-width: 50px;"
+                    mat-raised-button
+                    (click)="onOrderHistoryDetail(parentOutlet)"
+                    color="accent">Detail
+                </button>
+              </td>
+              <td style="text-align: center; width: 80px;">
+                <button style="min-width: 50px;"
+                    mat-raised-button
+                    (click)="openUpdateOrder(parentOutlet)"
+                    color="accent">Update Order
+                </button>
+              </td>
+              <!-- <td style="text-align: center; width: 80px;">
+                <button style="min-width: 50px;"
+                    mat-raised-button
+                    [disabled]="parentOutlet.order_type == 'pickup' && parentOutlet.status == 'cancel_by_outlet'"
+                    (click)="editStatus(parentOutlet)"
+                    color="accent">Update Status
+                </button>
+
+              </td>
+              <td style="text-align: center; width: 80px;">
+                <button style="min-width: 50px;"
+                    mat-raised-button
+                    (click)="openAssignDriver(parentOutlet)"
+                    [disabled]="(!parentOutlet.accepted_delivery && !parentOutlet.accepted_by) ||
+                    !['outlet_assigned', 'outlet_urbanpoint_accepted', 'outlet_own_accepted', 'outlet_preparing'].includes(parentOutlet.status)"
+                    color="accent"> Update Driver
+                </button>
+              </td>
+              <td style="text-align: center; width: 80px;">
+                <button style="min-width: 50px;"
+                    mat-raised-button
+                    (click)="addNote(parentOutlet)"
+                    color="accent">Add Notes
+                </button>
+              </td> -->
+            </tr>
+            <tr *ngIf="RestaurantsParentOutlets.length == 0">
+              <td colspan="4"
+                style="text-align: center;">No record found</td>
+            </tr>
+          </tbody>
+
+        </table>
+
+
+      </div>
+      <app-pagination *ngIf="RestaurantsParentOutlets.length > 0"
+        (setPage)="setPage($event)"
+        [perPage]="perPage"
+        [totalPages]="totalPages"
+        [currentPage]="currentPage"></app-pagination>
+    </div>
+
+
+
+
+
+
+
+
+ <app-loader  [totalRecords]="TotalRecords"
+            [completedRecords]="orderLength"
+            [loaderMessage]="loaderMessage"></app-loader>
+
+</base-loader>
+
+<ng-container *ngIf="updateAll">
+
+  <div id="OrderStatus" style="margin-top: 20px;margin-bottom: 75px;margin-left: 5px;">
+
+     <div style="margin-top: 38px;margin-bottom: 38px">
+       <h4 style="font-weight: 900;"> Update Status</h4>
+     </div>
+
+     <div style="margin-bottom: 20px;" fxLayout="row">
+       <div fxFlex="15">Current Status</div>
+       <div fxFlex="80">{{ statusLabel }}</div>
+     </div>
+     <div fxLayout="row">
+       <div fxFlex="15">Change Status to</div>
+       <div fxFlex="80">
+         <mat-radio-group aria-label="Select an option" [(ngModel)]="orderStatus" >
+           <mat-radio-button value="outlet_preparing">Preparing Order</mat-radio-button>
+           <mat-radio-button *ngIf="orderTypeSelected == 'delivery'" style="margin-left: 15px;" value="outlet_dispatched">Ready to Deliver</mat-radio-button>
+           <mat-radio-button *ngIf="orderTypeSelected == 'pickup'" style="margin-left: 15px;" value="ready_for_pickup">Ready For Pickup</mat-radio-button>
+           <mat-radio-button style="margin-left: 15px;" value="completed">Completed</mat-radio-button>
+           <mat-radio-button style="margin-left: 15px;" [value]="orderTypeSelected == 'delivery' ? 'outlet_rejected' : 'cancel_by_outlet'">Rejected/Cancelled</mat-radio-button>
+           </mat-radio-group>
+       </div>
+     </div>
+
+     <div style="margin-top: 15px;padding-left: 0;" class="col-sm-12">
+    <button (click)="updateOrderStatus()" [disabled]="statusLoading || (selectedOrder.order_type == 'pickup' && selectedOrder.status == 'cancel_by_outlet')" class="btn btn-primary round-elem" style="background: red; border-color: red">
+      SAVE
+    </button>
+    <img *ngIf="statusLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+  </div>
+
+     <!-- <div style="margin-top: 14px;">
+       <button type="submit" [disabled]="!orderStatus" class="btn btn-primary round-elem" style="background: red;
+         border-color: red" (click)="updateOrderStatus()"> UPDATE
+       </button>
+     </div> -->
+  </div>
+
+  <div id="UpdateDriver" style="margin-top: 20px;margin-bottom: 75px;margin-left: 5px;">
+
+   <div style="margin-top: 30px;margin-bottom: 38px">
+     <h4 style="font-weight: 900;"> Update Driver</h4>
+   </div>
+
+   <div style="margin-bottom: 20px;" fxLayout="row">
+     <div fxFlex="15">Assigned To</div>
+     <div fxFlex="80"> {{ driverLabel == 'urbanpoint' ?  getdriverType(selectedOrder) : driverLabel }} </div>
+   </div>
+   <div fxLayout="row">
+     <div fxFlex="14">Executed By</div>
+     <div fxFlex="80">
+       <mat-radio-group
+        aria-label="Select an option" [(ngModel)]="driverType" >
+         <mat-radio-button  style="margin-left: 15px;" value="urbanpoint">Urban Point {{ getdriverType(selectedOrder) }}</mat-radio-button>
+         <mat-radio-button  style="margin-left: 15px;" value="outlet">Outlet Driver</mat-radio-button>
+         <mat-radio-button  style="margin-left: 15px;" value="customer">Customer (Pick Up)</mat-radio-button>
+       </mat-radio-group>
+     </div>
+   </div>
+
+   <div style="margin-top: 15px;padding-left: 0;" class="col-sm-12">
+     <button (click)="assignDriver()" [disabled]="driverLoading || (!selectedOrder.accepted_delivery && !selectedOrder.accepted_by) ||
+     !['outlet_assigned', 'outlet_urbanpoint_accepted', 'outlet_own_accepted', 'outlet_preparing'].includes(selectedOrder.status)" class="btn btn-primary round-elem" style="background: red; border-color: red">
+       SAVE
+     </button>
+     <img *ngIf="driverLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+   </div>
+
+  </div>
+
+  <div id="AddNotes" style="margin-top: 20px;margin-left: 5px;">
+
+     <div style="margin-top: 30px;margin-bottom: 32px">
+       <h4 style="font-weight: 900;"> Add Notes</h4>
+     </div>
+
+     <!-- <h4>Select Reason: </h4> -->
+     <div style="width: fit-content;" class="btn-group">
+       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+         <strong *ngIf="selectedPrimaryReason"> {{ selectedPrimaryReason }} </strong>
+         <span *ngIf="!selectedPrimaryReason"> Primary Reason </span> <span class="caret"></span>
+       </button>
+       <ul style="cursor: pointer;" class="dropdown-menu" role="menu">
+         <li *ngFor="let res of primaryReasons">
+           <a *ngIf="res.sub_reasons.length != 0">{{ res.reason }} <strong> >> </strong> </a>
+           <a *ngIf="res.sub_reasons.length == 0" (click)="setPrimaryReason(res.reason)">{{ res.reason }} </a>
+           <ul *ngIf="res.sub_reasons.length != 0" class="sub-menu dropdown-menu">
+             <li *ngFor="let subReason of res.sub_reasons"><a (click)="setPrimaryReason(res.reason, subReason.reason)"> {{ subReason.reason }} </a></li>
+           </ul>
+         </li>
+       </ul>
+     </div>
+
+     <div style="width: 20%;" class="btn-group">
+       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+         <strong *ngIf="selectedSecondaryReason"> {{ selectedSecondaryReason }} </strong>
+         <span *ngIf="!selectedSecondaryReason"> Secondary Reason </span> <span class="caret"></span>
+       </button>
+       <ul style="cursor: pointer;" class="dropdown-menu" role="menu">
+         <li *ngFor="let res of secondaryReasons">
+           <a *ngIf="res.sub_reasons.length != 0">{{ res.reason }} <strong> >> </strong> </a>
+           <a *ngIf="res.sub_reasons.length == 0" (click)="setSecondaryReason(res.reason)">{{ res.reason }} </a>
+           <ul *ngIf="res.sub_reasons.length != 0" class="sub-menu dropdown-menu">
+             <li *ngFor="let subReason of res.sub_reasons"><a (click)="setSecondaryReason(res.reason, subReason.reason)"> {{ subReason.reason }} </a></li>
+           </ul>
+         </li>
+       </ul>
+     </div>
+     <div style="margin-top: 4px; cursor: pointer;">
+       <span (click)="clearReasons()" *ngIf="selectedPrimaryReason || selectedSecondaryReason" style="color: #af1f70;">Clear</span>
+     </div>
+
+     <!-- <h4 style="margin-top: 20px; margin-bottom: 0;">Admin Notes: </h4> -->
+
+     <div>
+       <!-- <mat-form-field style="width: 30%"> -->
+         <textarea matInput
+                   style="width: 48%;margin-top: 20px;"
+                   required
+                   [(ngModel)]="notes"
+                   placeholder="Notes"
+                   cols="30"
+                   rows="5"></textarea>
+       <!-- </mat-form-field> -->
+     </div>
+
+     <!-- <div style="margin-top: 15px;padding-left: 0;" class="col-sm-12">
+       <button class="btn btn-primary round-elem" style="background: red; border-color: red">
+         SAVE
+       </button>
+       <img *ngIf="isLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+     </div> -->
+
+     <div>
+       <button [disabled]=" notesLoading || (!notes && !selectedPrimaryReason && !selectedSecondaryReason)" class="btn btn-primary round-elem" style="background: red;
+       border-color: red" (click)="addAdminNotes()" class="btn btn-primary round-elem" style="background: red; border-color: red;margin-top: 19px;">
+         SAVE
+       </button>
+       <img *ngIf="notesLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+     </div>
+
+     <!-- <div style="margin-top: 3px;">
+       <button type="submit" [disabled]="!notes && !selectedPrimaryReason && !selectedSecondaryReason" class="btn btn-primary round-elem" style="background: red;
+         border-color: red" (click)="addAdminNotes()"> {{ notesEdit ? 'UPDATE' : 'ADD' }} NOTE
+       </button>
+       <img *ngIf="isLoading"
+       class="loader-btn-image"
+       src="assets/images/view-loader.gif">
+     </div> -->
+  </div>
+
+  <!-- <button (click)="updateOrder()" class="btn btn-primary round-elem" style="font-size: 13px;background: red;border-color: red;padding: 10px 28px;
+  font-weight: 600;margin-top: 25px;margin-bottom: 20px;" >SAVE ALL UPDATES
+  </button>
+  <img *ngIf="isLoading" class="loader-btn-image" src="assets/images/view-loader.gif"> -->
+
+</ng-container>

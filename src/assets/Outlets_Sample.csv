@@ -1,0 +1,3 @@
+merchant_id,category_ids,name,phone,address,description,neighborhood,timings,latitude,longitude,logo_name,image_name,type,pin,search_tags,emails,special,parents_id
+1262,64, CSV1,123456789, address1, description1,neigh1,23:18:46,-37.56319046,140.3489685,new.png,new.png,0,1234,abc,abc@gmail.com,1,
+1262,15,CSV2,123456789,address2,description2,neigh2,22:18:46,-37.56319046,140.3489685,new.png,new.png,,1234,abc,abc@gmail.com,1,

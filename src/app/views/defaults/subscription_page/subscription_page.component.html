@@ -1,0 +1,56 @@
+<div fxLayout="column">
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="text-pink"
+                  style="font-size: 30px;">
+                SUBSCRIPTIONS PAGE
+            </span>
+            <br>
+        </div>
+        <div class="col-sm-6"
+             style="text-align: right">
+           
+        </div>
+    </div>
+    <div style="margin-top: 20px;width: 100%;" >
+        <base-loader >
+                <div class="data-table">
+                    <table class="table table-responsive table-striped"
+                           style="width:100%; margin-top: 15px">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>TEXT IN ENGLISH</th>
+                                <th>TEXT IN ARABIC</th>
+
+                                <th style="text-align: center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of SubscriptionPage">
+                                <td [title]="item.id">{{item.id}}</td>
+                                <td [title]="item.text">{{item.text}}</td>
+                                <td [title]="item.text">{{item.text_ar}}</td>
+                                <td style="text-align: center; width: 200px;">
+                                   
+                                    <button style="min-width: 50px;"
+                                            mat-raised-button
+                                            color="accent"
+                                            (click)="onEditParagraph(item)">Edit
+                                    </button>
+                                  
+                                </td>
+                            </tr>
+                            <tr *ngIf="SubscriptionPage?.length == 0">
+                                <td colspan="100"
+                                    style="text-align: center">No record found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </base-loader>
+        
+       
+       
+    </div>
+</div>

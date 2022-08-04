@@ -1,0 +1,110 @@
+<div class="row">
+	<div style="width: fit-content;" class="col-sm-2">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			TEAM
+		</span>
+	</div>
+  <div class="col-sm-4">
+		<button class="btn btn-primary round-elem"
+		        style="background: red; border-color: red"
+		        (click)="addNew()">ADD NEW
+		</button>  
+  </div>
+	<div class="col-sm-6"
+	     style="text-align: right">
+		<div class="form-group col-sm-3"
+		     style="padding: 0 10px 0 0;">
+			<!-- <select class="form-control">
+				<option value="">All</option>
+
+			</select> -->
+		</div>
+		<div class="form-group col-sm-9"
+		     style="padding: 0;text-align: left;">
+			<!-- <input type="text"
+				       placeholder="Search"
+					   class="form-control" />
+					    -->
+			<div class="input-group">
+        <span style="cursor: pointer;"
+              (click)="gerAdminsList(1)"
+              class="input-group-addon">
+        <i class="glyphicon glyphicon-search"></i>
+        </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       class="form-control"
+				       [(ngModel)]="search"
+				       (keyup)="onSearchAdmin()"
+				       placeholder="Search">
+			</div>
+		</div>
+		<!-- <br>
+		<button class="btn btn-primary round-elem"
+		        style="background: red; border-color: red"
+		        (click)="addNew()">ADD NEW
+		</button> -->
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+		       style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<!-- <th style="width: 70px;">ID</th> -->
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Access Level</th>
+					<th style="text-align: center">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr *ngFor="let admin of Admins">
+					<!-- <td>{{admin.id}}</td> -->
+					<td>{{admin.name}}</td>
+					<td>{{admin.email}}</td>
+					<td>{{admin.phone}}</td>
+					<td>{{admin.role == 1 ? 'Level One' : admin.role == 2 ? 'Level Two' : admin.role == 3 ? 'Level Three':'N/A'}}</td>
+
+
+					<td style="text-align: center; width: 100px;">
+						<!-- <i title="EDIT"
+					   (click)="onEditAdmin(admin)"
+					   class="action-btn">
+						<img  src="assets/images/actions/edit.png"
+						     alt="">
+					</i> -->
+						<button style="min-width: 50px;"
+						        mat-raised-button
+						        color="accent"
+						        (click)="onEditAdmin(admin)">Edit
+						</button>
+
+						<!-- <i title="Delete"
+					   (click)="onDeleteAdmin(admin)"
+					   class="action-btn">
+						<img src="assets/images/actions/delete.png"
+							 alt="">
+					</i> -->
+					</td>
+				</tr>
+				<tr *ngIf="Admins.length == 0">
+					<td colspan="100"
+					    style="text-align: center">No record found.</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+	<app-pagination *ngIf="Admins.length > 0"
+	                (setPage)="setPage($event)"
+	                [perPage]="perPage"
+	                [totalPages]="totalPages"
+	                [currentPage]="currentPage"></app-pagination>
+</base-loader>

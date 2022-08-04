@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            CODE DETAIL
+        </span>
+    </div>
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button mat-dialog-close
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+            <!-- <i class="glyphicon glyphicon-remove"></i> -->
+        </button>
+        <!-- <pre>{{Code | json}}</pre> -->
+    </div>
+</div>
+<div class="row"
+     style="margin-top: 15px;">
+    <div class="col-sm-6">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">title: </div>{{Code.title == null ?
+        'N/A' : Code.title}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">code: </div>{{Code.code}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">days: </div>{{Code.days == null ?
+        'N/A' : Code.days}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">redemptions: </div>{{Code.redemptions
+        == null ? 'N/A' : Code.redemptions}} <br>
+    </div>
+    <div class="col-sm-6">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">redeemed: </div>{{Code.redeemed ===
+        null ? 'N/A' : Code.redeemed}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">status: </div>{{Code.status == 1 ?
+        'Active' : 'Inactive'}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">created at: </div>{{Code.created_at
+        == null ? 'N/A' : Code.created_at}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">expiry date/time: </div>{{Code.expiry_datetime
+        == null ? 'N/A' : Code.expiry_datetime}} <br>
+    </div>
+</div>

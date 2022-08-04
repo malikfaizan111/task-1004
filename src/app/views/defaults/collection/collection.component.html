@@ -1,0 +1,93 @@
+<div class="row">
+	<div style="width:fit-content" class="col-sm-3">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			{{isMultiple == true ? 'MULTIPLE COLLECTION' : 'COLLECTION'}} 
+		</span>
+	</div>
+  <div class="col-sm-3">
+    &nbsp;&nbsp;
+		<button class="btn btn-primary round-elem"
+		        style="background: red; border-color: red"
+		        (click)="addNew()">ADD NEW
+		</button>
+  </div>
+	<div class="col-sm-6"
+	     style="text-align: right;float: right;">
+		<div class="form-group col-sm-3"
+		     style="padding: 0 10px 0 0;">
+		</div>
+		<div class="form-group col-sm-9"
+		     style="padding: 0;text-align: left;">
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="gerCollectionList(1)"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       [(ngModel)]="search"
+				       class="form-control"
+				       placeholder="Search">
+			</div>
+		</div>
+		<!-- <button class="btn btn-primary round-elem"
+		        style="background: red; border-color: red"
+		        (click)="addNew1()">EDIT BY ORDER
+		</button> -->
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+		       style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th style="width: 70px;">ID.</th>
+					<th>NAME</th>
+					<th>ARABIC NAME</th>
+					<th>IMAGE</th>
+					<th>STATUS</th>
+					<th>FOR DELIVERY</th>
+					<th>CATEGORY NAME</th>
+					<th>CREATED AT</th>
+					<!-- <th style="text-align: center;">ACTION</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let code of Collection">
+					<td>{{code.id}}</td>
+					<td>{{code.name}}</td>
+					<td>{{code.name_ar}}</td>
+					<td>{{code.image}}</td>
+					<td>{{code.status}}</td>
+					<td>{{code.for_delivery}}</td>
+					<td>{{code.category?.name? code.category?.name :'N/A'}}</td>
+					<td>{{code.created_at}}</td>
+					<!-- <td style="text-align: center; width: 200px;">
+						<button style="min-width: 50px;"
+						        mat-raised-button
+						        (click)="onEditCollection(code)"
+						        color="accent">Edit
+						</button>
+					</td>
+					 -->
+					
+				</tr>
+				<tr *ngIf="Collection.length == 0">
+					<td colspan="100"
+					    style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<app-pagination *ngIf="Collection.length > 0"
+	                (setPage)="setPage($event)"
+	                [perPage]="perPage"
+	                [totalPages]="totalPages"
+	                [currentPage]="currentPage"></app-pagination>
+</base-loader>

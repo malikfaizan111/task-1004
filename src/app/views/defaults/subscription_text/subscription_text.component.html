@@ -1,0 +1,149 @@
+<div fxLayout="column">
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="text-pink"
+                  style="font-size: 30px;">
+                SUBSCRIPTIONS TEXTS
+            </span>
+            <br>
+        </div>
+        <div class="col-sm-6"
+             style="text-align: right">
+            <!-- <div>
+                <button class="btn-radius-zero btn btn-primary"
+                        (click)="addNewSetting()">ADD NEW
+                </button>
+            </div> -->
+        </div>
+    </div>
+    <div style="margin-top: 20px;"
+         fxLayout="row"
+         fxLayoutAlign="start space-between"
+         fxLayoutGap="10px">
+         <mat-card fxFlex="50">
+            <div class="row">
+                <div class="col-sm-6">
+                    <span style="font-size: 20px;">
+                        First Paragraph
+                    </span>
+                    <br>
+                </div>
+                <div class="col-sm-6"
+                     style="text-align: right">
+                    <div>
+                        <!-- <button class="btn btn-primary round-elem"
+                                style="background: red; border-color: red"
+                                (click)="onAddParagraph(2)">ADD NEW
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+            <base-loader [isLoading]="firstPara">
+                <div class="data-table">
+                    <table class="table table-responsive table-striped"
+                           style="width:100%; margin-top: 15px">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>TEXT</th>
+                                <th style="text-align: center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of ParagraphTwo">
+                                <td [title]="item.id">{{item.id}}</td>
+                                <td [title]="item.text">{{item.text}}</td>
+                                <td style="text-align: center; width: 200px;">
+                                    <!-- <i title="Update Paragraph"
+                                       (click)="onEditParagraph(item, 2)"
+                                       class="action-btn">
+                                        <img  src="assets/images/actions/edit.png"
+                                             alt="">
+                                    </i> -->
+                                    <button style="min-width: 50px;"
+                                            mat-raised-button
+                                            color="accent"
+                                            (click)="onEditParagraph(item, 2)">Edit
+                                    </button>
+                                    <!-- <i title="Delete Paragraph"
+                                       (click)="onDeleteParagraph(item, 2)"
+                                       class="action-btn">
+                                        <img src="assets/images/actions/delete.png"
+                                             alt="">
+                                    </i> -->
+                                </td>
+                            </tr>
+                            <tr *ngIf="ParagraphTwo?.length == 0">
+                                <td colspan="100"
+                                    style="text-align: center">No record found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </base-loader>
+        </mat-card>
+        <mat-card fxFlex="50">
+            <div class="row">
+                <div class="col-sm-6">
+                    <span style="font-size: 22px;">
+                        Second Paragraph
+                    </span>
+                    <br>
+                </div>
+                <div class="col-sm-6"
+                     style="text-align: right">
+                    <div>
+                        <!-- <button class="btn btn-primary round-elem"
+                                style="background: red; border-color: red"
+                                (click)="onAddParagraph(1)">ADD NEW
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+            <base-loader [isLoading]="secondPara">
+                <div class="data-table">
+                    <table class="table table-responsive table-striped"
+                           style="width:100%; margin-top: 15px">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>TEXT</th>
+                                <th style="text-align: center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of ParagraphOne">
+                                <td [title]="item.id">{{item.id}}</td>
+                                <td [title]="item.text">{{item.text}}</td>
+                                <td style="text-align: center; width: 200px;">
+                                    <!-- <i title="Update Paragraph"
+                                       (click)="onEditParagraph(item, 1)"
+                                       class="action-btn">
+                                        <img  src="assets/images/actions/edit.png"
+                                             alt="">
+                                    </i> -->
+                                    <button style="min-width: 50px;"
+                                            mat-raised-button
+                                            color="accent"
+                                            (click)="onEditParagraph(item, 1)">Edit
+                                    </button>
+                                    <!-- <i title="Delete Paragraph"
+                                       (click)="onDeleteParagraph(item, 1)"
+                                       class="action-btn">
+                                        <img src="assets/images/actions/delete.png"
+                                             alt="">
+                                    </i> -->
+                                </td>
+                            </tr>
+                            <tr *ngIf="ParagraphOne?.length == 0">
+                                <td colspan="100"
+                                    style="text-align: center">No record found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </base-loader>
+        </mat-card>
+       
+    </div>
+</div>

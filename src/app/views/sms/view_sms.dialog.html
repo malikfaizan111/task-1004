@@ -1,0 +1,70 @@
+<div class="row">
+    <app-loader [totalRecords]="ArrayCSVCount"
+                [completedRecords]="ArrayCSV.length"
+                [loaderMessage]="loaderMessage"></app-loader>
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            ALL SMS DETAIL
+        </span>
+    </div>
+
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button mat-dialog-close
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>
+<!-- <base-loader> -->
+<div *ngIf="isLoading"
+     style="min-width: 300px;">
+    <div class="row">
+        <div style="text-align: center"
+             class="col-sm-12">
+            <img width="50"
+                 height="50"
+                 src="assets/images/view-loader.gif"
+                 alt="">
+        </div>
+    </div>
+</div>
+<div *ngIf="!isLoading"
+     style="max-height: 60vh;overflow: auto;margin-top: 20px;"
+     class="data-table">
+    <!-- <base-loader> -->
+    <!-- <div class="data-table"> -->
+    <table class="table table-responsive table-striped"
+           style="width:100%; margin-top: 15px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>PHONE Numbers</th>
+                <th>Response</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let code of mAccessSms">
+                <td>{{code.id}}</td>
+                <td>{{code.phone}}</td>
+                <td>{{code.response}}</td>
+            </tr>
+            <tr *ngIf="mAccessSms.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No record found.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- </div> -->
+
+
+    <!-- </base-loader> -->
+</div>
+<app-pagination *ngIf="mAccessSms.length > 0"
+                (setPage)="setPage($event)"
+                [perPage]="perPage"
+                [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-pagination>
+<!-- </base-loader> -->

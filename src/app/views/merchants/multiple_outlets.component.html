@@ -1,0 +1,47 @@
+<div class="row"
+     style="margin: 0;">
+    <app-outlets-form [isMultiple]="true"
+                      [is_button_shown]="true"
+                      [is_heading_shown]="true"
+                      [is_child]="true"
+                      [parent_key]="id"
+                      heading_label="MULTIPLE OUTLETS"
+                      (onFormChanges)="onOutletFormChanges($event)"
+                      (onOutletSuccess)="onOutletSuccess($event)"></app-outlets-form>
+
+</div>
+
+<div style="max-height: 50vh;overflow: auto;margin-top: 20px;"
+     class="data-table">
+    <table class="table table-responsive table-striped"
+           style="width:100%; margin-top: 15px">
+        <thead>
+            <tr>
+                <th style="width: 70px;">NO.</th>
+                <th>NAME</th>
+                <th>phone</th>
+                <th>neighborhood</th>
+                <th>TYPE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let outlet of Outlets; let i = index;">
+                <td>{{i+1}}</td>
+                <td [title]="outlet.name">{{outlet.name}}</td>
+                <td [title]="outlet.phone">{{outlet.phone}}</td>
+                <td [title]="outlet.neighborhood">{{outlet.address}}</td>
+                <td>
+                    <span *ngIf="outlet.type == 0">All</span>
+                    <span *ngIf="outlet.type == 1">Gents</span>
+                    <span *ngIf="outlet.type == 2">Ladies</span>
+                </td>
+            </tr>
+            <tr *ngIf="Outlets.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No Outlet Added.</td>
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>

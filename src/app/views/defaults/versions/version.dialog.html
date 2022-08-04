@@ -1,0 +1,52 @@
+<div style="min-width: 300px;">
+    <div class="content-head clearfix">
+        <div style="font-size: 25px;"
+             class="title">Are you sure to update {{platform.type == 'ios'? 'IOS' : 'Android'}} Version?</div>
+    </div>
+
+    <div class="row">
+        <div style="margin-top: 10px;"
+             class="col-sm-12">
+            <mat-checkbox [(ngModel)]="forcefully_updated"
+                          color="accent">Forcefully UPDATE</mat-checkbox>
+        </div>
+        <div style="margin-top: 10px;"
+             class="col-sm-12">
+
+            <mat-radio-group [(ngModel)]="platform.upDown"
+                            >
+                <mat-radio-button value="1" style="margin-right: 8px;">Up</mat-radio-button> 
+                <mat-radio-button value="0">Down</mat-radio-button>
+            </mat-radio-group>
+
+            <!-- <mat-checkbox [(ngModel)]="platform.upDown" value="" color="primary">Checkbox label</mat-checkbox> -->
+        </div>
+        <div *ngIf="isLoading"
+             style="text-align: center"
+             class="col-sm-12">
+            <img *ngIf="isLoading"
+                 width="50"
+                 height="50"
+                 src="assets/images/view-loader.gif"
+                 alt="">
+        </div>
+        <div class="col-sm-12"
+             style="text-align: right;">
+
+            <button mat-raised-button
+            style="margin-right: 4px;"
+                    color="primary"
+                    class="btn btn-clear"
+                    [disabled]="isLoading"
+                    type="button"
+                    (click)="onCancelClick()">Cancel</button>
+
+            <button mat-raised-button
+                    color="primary"
+                    class="btn btn-submit btn-primary"
+                    [disabled]="isLoading"
+                    type="button"
+                    (click)="onSubmitClick()">Submit</button>
+        </div>
+    </div>
+</div>

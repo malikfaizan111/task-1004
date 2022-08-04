@@ -1,0 +1,196 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} SUB MENU </span>
+			</div>
+		</span>
+	</div>
+	<div *ngIf="!is_child">
+		<div *ngIf="!isEditing"
+			 class="col-sm-6"
+			 style="text-align: right">
+
+
+			<div class="form-group col-sm-6"
+				 style="padding: 0 10px 0 0;">
+
+			</div>
+			<div class="form-group col-sm-6"
+				 style="padding: 0;text-align: left;">
+				<input type="file"
+					   accept=".csv"
+					   (change)="getFile($event)"
+					   placeholder="Search"
+					   class="form-control" />
+			</div>
+			<br>
+
+			<button class="btn btn-primary round-elem"
+					style="background: red; border-color: red;height: 30px;padding: 4px 14px;"
+					[disabled]="!csvFile" (click)="onUploadSubMenuCSV()">UPLOAD CSV
+			</button>
+			<a download
+			   target="_blank"
+			   href="assets/Sub_Menu_Items_Sample.csv"
+			   class="btn btn-primary round-elem"
+			   style="background: red; border-color: red;height: 30px;padding: 4px 14px;">SAMPLE
+			</a>
+		</div>
+	</div>
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="heading"
+						   type="text"
+						   required
+						   placeholder="heading ">
+					<mat-error
+							   *ngIf="getValue('heading')?.invalid && (getValue('heading')?.dirty || getValue('heading')?.touched)">
+						heading is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="48"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="heading_ar"
+						   type="text"
+						   dir="rtl"
+						   style="text-align: right"
+						   required
+						   placeholder="Arabic Heading">
+					<mat-error
+							   *ngIf="getValue('heading_ar')?.invalid && (getValue('heading_ar')?.dirty || getValue('heading_ar')?.touched)">
+						Name Arabic
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="title"
+						   type="text"
+						   required
+						   placeholder="title ">
+					<mat-error
+							   *ngIf="getValue('title')?.invalid && (getValue('title')?.dirty || getValue('title')?.touched)">
+						heading is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="48"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="title_ar"
+						   type="text"
+						   dir="rtl"
+						   style="text-align: right"
+						   required
+						   placeholder="Arabic Title">
+					<mat-error
+							   *ngIf="getValue('title_ar')?.invalid && (getValue('title_ar')?.dirty || getValue('title_ar')?.touched)">
+						Name TITLE
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="menu_type"
+								placeholder="Menu Type">
+						<mat-option value="mandatory">mandatory</mat-option>
+						<mat-option value="optional">optional</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('menu_type')?.invalid && (getValue('menu_type')?.dirty || getValue('menu_type')?.touched)">
+						Menu Type
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="selection_type"
+								placeholder="Selection Type">
+						<mat-option value="single">single</mat-option>
+						<mat-option value="multiple">multiple</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('selection_type')?.invalid && (getValue('selection_type')?.dirty || getValue('selection_type')?.touched)">
+						Selection Type
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+    </div>
+    <!-- <div fxFlex.xl="48"
+      fxFlex.lg="48"
+      fxFlex.md="48">
+    <div class="form-group mb-0">
+      <mat-form-field style="width: 100%">
+       <input matInput
+            formControlName="id_csv"
+            type="text"
+            placeholder="ID CSV">
+       <mat-error
+              *ngIf="getValue('title_ar')?.invalid && (getValue('title_ar')?.dirty || getValue('title_ar')?.touched)">
+         Name TITLE
+         is required</mat-error>
+     </mat-form-field>
+   </div>
+ </div> -->
+	</div>
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="button"
+					(click)="doSubmit()"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				{{isEditing? 'UPDATE': 'ADD'}}
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

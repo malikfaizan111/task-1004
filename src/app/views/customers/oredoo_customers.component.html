@@ -1,0 +1,76 @@
+<div class="row">
+	<app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length" [loaderMessage]="loaderMessage">
+	</app-loader>
+	<div style="width: fit-content;" class="col-sm-2">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			Ooredoo Billing Users
+		</span>
+	</div>
+	<div class="col-sm-2">
+		<button *ngIf="userRole.role == '1'" class="btn btn-primary round-elem" style="background: red; border-color: red"
+			[disabled]="BilingCustomers.length == 0" (click)="onExportCSV()">Export CSV
+		</button>
+	</div>
+
+	<div class="col-sm-7" style="text-align: right">
+		<div class="col-sm-6">
+
+		</div>
+		<div class="form-group col-sm-2" style="padding: 0 10px 0 0;">
+
+		</div>
+		<div class="form-group col-sm-4" style="padding: 0;text-align: left;">
+			<div class="input-group">
+				<span style="cursor: pointer;" (click)="getBilingCustomers(1)" class="input-group-addon">
+					<i class="glyphicon glyphicon-search"></i>
+
+				</span>
+				<input autocomplete="false" type="text" maxlength="50" [(ngModel)]="search" (keyup)="onSearchCustomer()"
+					class="form-control" placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped" style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th class="weight-600">ID</th>
+					<th class="weight-600">Phone</th>
+					<th class="weight-600">Subscription Date</th>
+					<th class="weight-600">Subscription Time</th>
+					<th class="weight-600">User Created-At Date</th>
+					<th class="weight-600">User Created-At Time</th>
+					<th class="weight-600">Approx Saving</th>
+					<th class="weight-600">Total Deals Used</th>
+					<th class="weight-600">lastOrderDate</th>
+					<th class="weight-600">lastOrderTime</th>
+					<th class="weight-600">Active In Last Month</th>
+					<th class="weight-600">Active Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let customer of BilingCustomers">
+					<td>{{customer.Id}}</td>
+					<td>{{customer.phone == null ? 'N/A' : customer.phone}}</td>
+					<td>{{customer.subscriptionDate == null ? 'N/A' : customer.subscriptionDate}}</td>
+					<td>{{customer.subscriptionTime == null ? 'N/A' : customer.subscriptionTime}}</td>
+					<td>{{customer.UserCreatedAtDate == null ? 'N/A' : customer.UserCreatedAtDate}}</td>
+					<td>{{customer.UserCreatedAtTime == null ? 'N/A' : customer.UserCreatedAtTime}}</td>
+					<td>{{customer.approx_saving == null ? 'N/A' : customer.approx_saving}}</td>
+					<td>{{customer.totalDealsUsed == null ? 'N/A' : customer.totalDealsUsed}}</td>
+					<td>{{customer.lastOrderDate == null ? 'N/A' : customer.lastOrderDate}}</td>
+					<td>{{customer.lastOrderTime == null ? 'N/A' : customer.lastOrderTime}}</td>
+					<td>{{customer.activeInLastMonth == null ? 'N/A' : customer.activeInLastMonth}}</td>
+					<td>{{customer.activeType == null ? 'N/A' : customer.activeType}}</td>
+				</tr>
+				<tr *ngIf="BilingCustomers.length == 0">
+					<td colspan="100" style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</base-loader>
+<app-pagination *ngIf="BilingCustomers.length > 0" (setPage)="setPage($event)" [perPage]="perPage"
+	[totalPages]="totalPages" [currentPage]="currentPage"></app-pagination>

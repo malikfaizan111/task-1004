@@ -1,0 +1,90 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+				<button mat-icon-button (click)="onLocationBack()" color="accent">
+					<img src="assets/images/actions/back.png" alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} INTEREST TAG</span>
+			</div>
+		</span>
+	</div>
+</div>
+<form [formGroup]="Form" (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px" fxLayout="row" fxLayoutAlign="space-between start">
+		<div fxFlex="100">
+			<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+				<div fxFlex.xl="49" fxFlex.lg="49" fxFlex.md="49">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="tags" type="text" required placeholder="TAG">
+							<mat-error
+								*ngIf="getValue('tag')?.invalid && (getValue('tag')?.dirty || getValue('tag')?.touched)">
+								Tag is
+								required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="49" fxFlex.lg="49" fxFlex.md="49">
+					<div class="form-group mb-0">
+
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="title" type="text" required placeholder="Title">
+							<mat-error
+								*ngIf="getValue('title')?.invalid && (getValue('title')?.dirty || getValue('title')?.touched)">
+								Title
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="100">
+			<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+				<div fxFlex="49">
+					<div style="width: 80% !important;">
+						<label style="width: 80%;">Select Image
+							<span style="font-size: 12px;"> (square image):</span>
+						</label>
+						<file-picker (onFileSelect)="onFileSelect($event)" controlName="image" [isIconHidden]="false"
+							[image]="getImage('image')" type="Square" [size]="{width: 172, height: 172}">
+						</file-picker>
+						<span style="float: right;font-size: 12px; color: #ff2c54" *ngIf="errorMsg">{{errorMsg}}</span>
+					</div>
+				</div>
+				<div fxFlex.xl="49" fxFlex.lg="49" fxFlex.md="49">
+					<div class="form-group mb-0">
+
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="outlet_ids" readonly type="text" placeholder="Outlets"
+								(click)="onAddOutlets()">
+						</mat-form-field>
+					</div>
+					<div style="height: 175px;	overflow-y: auto;">
+						<ul class="tag">
+							<li *ngFor="let item of getoutletid">
+								{{item?.name}}
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div style="margin-top: 20px" class="col-sm-12">
+			<button type="submit" *ngIf="!isEditing" [disabled]="Form.invalid || isLoading"
+				class="btn btn-primary round-elem" style="background: red; border-color: red">
+				ADD INTEREST TAG
+			</button>
+			<button type="submit" *ngIf="isEditing" [disabled]="Form.invalid || isLoading"
+				class="btn btn-primary round-elem" style="background: red; border-color: red">
+				UPDATE INTEREST TAG
+			</button>
+			<img *ngIf="isLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

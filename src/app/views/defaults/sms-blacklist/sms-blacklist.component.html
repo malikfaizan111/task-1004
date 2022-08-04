@@ -1,0 +1,89 @@
+<div class="row">
+	<div class="col-sm-2">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<!-- <button *ngIf="id != 'All'"
+				        mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button> -->
+				<span style="color: red;font-weight: 600;">SMS BLACKLIST</span>
+			</div>
+		</span>
+		<strong>Total: {{smsArrayCount}} users</strong>
+	</div>
+	<div class="col-md-2">
+		<button (click)="onAddNewNumber()" class="btn btn-primary round-elem"
+		style="background: red; border-color: red"
+		>Add a Number
+		</button>
+	</div>
+	<!-- <div class="col-sm-8"
+	     style="text-align: right">
+
+		<div class="form-group col-sm-7"
+		     style="padding: 0;float: right;">
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="getSMSList(1)"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       [(ngModel)]="search"
+				       (keyup)="onSearchSubscription()"
+				       class="form-control"
+				       placeholder="Search">
+			</div>
+    
+		</div>
+	</div> -->
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+		       style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th class="weight-600" style="width: 170px;">ID</th>
+					<th class="weight-600">NAME</th>
+					<th class="weight-600">SUBSCRIPTION</th>
+					<th class="weight-600">SMS SENT</th>
+					<th class="weight-600" style="text-align: center; width: 200px;">ACTION</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let sms of SMSArray">
+					<td>{{sms.id}}</td>
+					<td>{{sms.name? sms.name : 'N/A'}}</td>
+					<td>{{sms.phone}}</td>
+					<td>{{sms.push_send_count}}</td>
+					<td style="text-align: center; width: 200px;">
+            <button (click)="onDelete(sms)" tyle="min-width: 50px;"
+			mat-raised-button
+			color="accent">
+              <mat-icon style="font-size: 17px;margin-top: 6px;">cancel</mat-icon>
+              Delete
+            </button>
+          </td>
+				</tr>
+				<tr *ngIf="SMSArray.length == 0">
+					<td colspan="100"
+					    style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</base-loader>
+<app-pagination *ngIf="SMSArray.length > 0"
+                (setPage)="setPage($event)"
+                [perPage]="perPage"
+                [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-pagination>

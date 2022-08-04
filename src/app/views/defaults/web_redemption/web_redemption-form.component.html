@@ -1,0 +1,203 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+				<button mat-icon-button (click)="onLocationBack()" color="accent">
+					<img src="assets/images/actions/back.png" alt="">
+				</button>
+				<span>ADD NEW</span>
+			</div>
+		</span>
+	</div>
+</div>
+<form [formGroup]="Form" (ngSubmit)="doSubmit()" style="margin-left: 10px;">
+	<div style="margin-top: 20px" fxLayout="row" fxLayoutAlign="space-between start">
+		<div fxFlex="60">
+			<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+				<div fxFlex.xl="35" fxFlex.lg="35" fxFlex.md="35">
+					<div class="mb-0" container>
+						<mat-form-field style="width: 100%;">
+							<mat-label style="color: #3D8F96; text-align: left;">Web Voucher Type</mat-label>
+							<mat-select matInput [(ngModel)]="selectedPackage" [ngModelOptions]="{standalone: true}"
+								disableOptionCentering (selectionChange)="onOptionChange(selectedPackage)">
+								<mat-option value="free">Free - Single Link</mat-option>
+								<mat-option value="paid">Paid - Multiple Links</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="40">
+			<div fxFlex.xl="12" fxFlex.lg="18" fxFlex.md="18" style="padding-top: 2%;">
+				<label>Name</label>
+			</div>
+			<div fxFlex.xl="41" fxFlex.lg="38" fxFlex.md="38">
+				<div class="form-group mb-0">
+					<mat-form-field style="width: 100%; border-radius: 10px; text-align: left !important;">
+						<input matInput formControlName="voucher_name" required type="text" placeholder="Enter name"
+							style="text-align: left">
+						<mat-error
+							*ngIf="getValue('voucher_name')?.invalid && (getValue('voucher_name')?.dirty || getValue('voucher_name')?.touched)">
+							Name
+							is required</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex.xl="43" fxFlex.lg="40" fxFlex.md="40">
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="40">
+			<div fxFlex.xl="12" fxFlex.lg="18" fxFlex.md="18" style="padding-top: 2%;">
+				<label>Brand</label>
+			</div>
+			<div fxFlex.xl="61" fxFlex.lg="58" fxFlex.md="58">
+				<div class="form-group mb-0" style="border-radius: 20px !important;">
+					<mat-form-field style="width: 100%; text-align: left !important;">
+						<input matInput formControlName="parent_outlet_id" required readonly type="text"
+							placeholder="Select Brand" (click)="onAddOutlets()" style="text-align: left !important;">
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex.xl="23" fxFlex.lg="20" fxFlex.md="20"></div>
+		</div>
+	</div>
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="40">
+			<div fxFlex.xl="12" fxFlex.lg="18" fxFlex.md="18" style="padding-top: 2%;">
+				<label>Offer</label>
+			</div>
+			<div fxFlex.xl="61" fxFlex.lg="58" fxFlex.md="58">
+				<div class="form-group mb-0">
+					<mat-form-field style="width: 100%; border-radius: 10px; text-align: left !important;">
+						<input matInput formControlName="offer_name" required type="text" placeholder="Enter offer name"
+							style="text-align: left !important">
+						<mat-error
+							*ngIf="getValue('offer_name')?.invalid && (getValue('offer_name')?.dirty || getValue('offer_name')?.touched)">
+							Offer name
+							is required</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex.xl="23" fxFlex.lg="20" fxFlex.md="20"></div>
+		</div>
+	</div>
+	<div *ngIf="selectedPackage == 'paid'" style="margin-top: 20px" fxLayout="row wrap"
+		fxLayoutAlign="space-between start">
+		<div fxFlex="40">
+			<div fxFlex.xl="12" fxFlex.lg="18" fxFlex.md="18" style="padding-top: 2%;">
+				<label>Links</label>
+			</div>
+			<div fxFlex.xl="61" fxFlex.lg="58" fxFlex.md="58">
+				<div class="form-group mb-0">
+					<mat-form-field style="width: 100%; border-radius: 10px;text-align: left !important;">
+						<input matInput formControlName="links" required type="text" min="1" max="50000" mask="99999"
+							placeholder="Enter links" style="text-align: left !important">
+						<mat-error
+							*ngIf="getValue('links')?.invalid && (getValue('links')?.dirty || getValue('links')?.touched)">
+							Please generate 1 - 50,000 links
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex.xl="23" fxFlex.lg="20" fxFlex.md="20"></div>
+		</div>
+	</div>
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="40">
+			<div fxFlex.xl="12" fxFlex.lg="18" fxFlex.md="18" style="padding-top: 2%;">
+				<label>Save Amount</label>
+			</div>
+			<div fxFlex.xl="61" fxFlex.lg="58" fxFlex.md="58">
+				<div class="form-group mb-0">
+					<mat-form-field style="width: 100%; border-radius: 10px; text-align: left !important;">
+						<input matInput formControlName="saving_amount" required type="text"
+							placeholder="Enter saving amount" style="text-align: left !important">
+						<mat-error
+							*ngIf="getValue('saving_amount')?.invalid && (getValue('saving_amount')?.dirty || getValue('saving_amount')?.touched)">
+							Saving amount
+							is required</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex.xl="23" fxFlex.lg="20" fxFlex.md="20"></div>
+		</div>
+	</div>
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="40">
+			<div fxFlex.xl="12" fxFlex.lg="18" fxFlex.md="18" style="padding-top: 2%;">
+				<label>Sub Text</label>
+			</div>
+			<div fxFlex.xl="61" fxFlex.lg="58" fxFlex.md="58">
+				<div class="form-group mb-0">
+					<mat-form-field style="width: 100%; text-align: left !important;">
+						<textarea matInput formControlName="sub_text" required placeholder="Sub text" cols="30"
+							maxlength="300" rows="1"></textarea>
+						<mat-error
+							*ngIf="getValue('sub_text')?.invalid && (getValue('sub_text')?.dirty || getValue('sub_text')?.touched)">
+							Sub text
+							is required</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex.xl="23" fxFlex.lg="20" fxFlex.md="20"></div>
+		</div>
+	</div>
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="40">
+			<div fxFlex.xl="12" fxFlex.lg="18" fxFlex.md="18" fxFlex.sm="20" style="padding-top: 2%;">
+				<label>Details Exclusion</label>
+			</div>
+			<div fxFlex.xl="61" fxFlex.lg="58" fxFlex.md="58" fxFlex.sm="56">
+				<div class="form-group mb-0">
+					<mat-form-field style="width: 100%;text-align: left !important;">
+						<textarea matInput formControlName="details_exclusions" required placeholder="Details exclusion"
+							cols="30" maxlength="200" rows="1"></textarea>
+						<mat-error
+							*ngIf="getValue('details_exclusions')?.invalid && (getValue('details_exclusions')?.dirty || getValue('details_exclusions')?.touched)">
+							Details exclusion
+							is required</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex.xl="23" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="18"></div>
+		</div>
+	</div>
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="40">
+			<div fxFlex.xl="12" fxFlex.lg="18" fxFlex.md="18" style="padding-top: 2%;">
+				<label>Expiry</label>
+			</div>
+			<div fxFlex.xl="41" fxFlex.lg="38" fxFlex.md="38">
+				<div class="form-group mb-0">
+					<mat-form-field style="width: 100%; border-radius: 10px;text-align: left !important;">
+						<input matInput [owlDateTime]="datetime" [owlDateTimeTrigger]="datetime" readonly
+							[min]="currentDate" [(ngModel)]="expiryDatetime" [ngModelOptions]="{standalone: true}"
+							(dateTimeChange)="onSelectDate()" type="text" required placeholder="Set expiry date"
+							step="text-align: left !important">
+						<owl-date-time [pickerType]="'calendar'" #datetime></owl-date-time>
+
+						<mat-error
+							*ngIf="getValue('expiry_date')?.invalid && (getValue('expiry_date')?.dirty || getValue('expiry_date')?.touched)">
+							Expiry
+							Date is required</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxFlex.xl="43" fxFlex.lg="40" fxFlex.md="40"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div style="margin-top: 20px" class="col-sm-12">
+			<button type="submit" [disabled]="Form.invalid" class="btn btn-primary round-elem"
+				style="background: red; border-color: red">
+				GENERATE
+			</button>
+			<img *ngIf="isLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+		</div>
+	</div>
+</form>

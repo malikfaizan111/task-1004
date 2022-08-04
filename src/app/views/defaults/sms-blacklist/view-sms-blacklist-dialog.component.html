@@ -1,0 +1,89 @@
+<div style="min-width: 550px;" class="wrapper">
+  <!-- For Adding Number inn Blacklist -->
+  <div class="content-head clearfix" *ngIf="showMessage" style="margin-top:10px;margin-bottom:20px;">
+    <h3>{{title_heading}}</h3>
+  </div>
+
+  <form (ngSubmit)="postToken()" [formGroup]="Form" *ngIf="showMessage">
+    <div class="form-group" style="margin-top:20px;">
+      <mat-form-field class="col-md-12" style="width:100%; align-self: center;">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phone" type="text" required placeholder="Phone Number"
+          class="phone-field">
+      </mat-form-field>
+    </div>
+    <!-- <div class="form-group mb-0">
+        <mat-slide-toggle 
+        style="margin-left: 50px; margin-top: 8px;"
+        [(ngModel)]="is_sms_blacklist"
+        [ngModelOptions]="{standalone: true}"
+        color="accent">Is Sms Blacklist</mat-slide-toggle>
+      </div> -->
+    <div class="col-md-12 text-center bottom" style="margin-top:20px;margin-bottom:20px;">
+      <button type="submit" class="btn btn-primary round-elem"
+        style="background: red; border-color: red;min-width: 90px;"> Add
+      </button>
+      <button (click)="closedialog()" class="btn btn-default round-elem"
+        style="background: transparent; border-color: transparent;color:grey !important" type="button"> Cancel
+      </button>
+    </div>
+
+  </form>
+  <!-- Number Added dialog -->
+  <div class="col-md-12 text-center bottom" *ngIf="showAddMessage">
+    <h4 for="" style="font-size: 20px; margin-bottom: 15px;">Success!</h4>
+    <div class="col-md-12" *ngIf="showAddMessage">
+      <p style="font-size: 18px;">{{phoneNumber}} is successfully added.</p>
+      <p style="font-size: 18px;">The user will no longer receive SMS</p>
+    </div>
+    <div class="col-md-12 text-center" style="margin-top:20px;margin-bottom:20px;">
+      <button (click)="closedialog()" type="button"
+        style="color:green; background: transparent; border: none;font-size: 20px;font-weight: 900;">
+        Okay
+      </button>
+    </div>
+
+  </div>
+<!-- Error On Number Addition -->
+  <div class="col-md-12 text-center bottom" *ngIf="showAddErrorMessage">
+    <h4 for="" style="font-size: 20px; margin-bottom: 15px;">Alert !</h4>
+    <div class="col-md-12" *ngIf="showAddErrorMessage">
+      <!-- <p style="font-size: 18px;">{{phoneNumber}} is successfully added.</p> -->
+      <p style="font-size: 18px;">{{adderrormessage}}</p>
+    </div>
+    <div class="col-md-12 text-center" style="margin-top:20px;margin-bottom:20px;">
+      <button (click)="closedialog()" type="button"
+        style="background: transparent; border: none;font-size: 20px;font-weight: 900;">
+        Close
+      </button>
+    </div>
+
+  </div>
+  <!-- For deleting a number -->
+  <div class="col-md-12 text-center bottom" *ngIf="showDeleteDialog">
+    <div class="col-md-12" *ngIf="showDeleteDialog">
+      <h4>Are you sure you want to remove</h4>
+      <h4><b>{{phoneNumber}}</b> from the SMS Blacklist</h4>
+    </div>
+    <div class="col-md-12 text-center" style="margin-top:20px;margin-bottom:20px;">
+      <button (click)="delete()" type="button" class="btn btn-primary round-elem"
+        style="background: red; border-color: red">Remove</button>
+      <button (click)="closedialog()" class="btn btn-default round-elem"
+        style="background: transparent; border-color: transparent;color:grey !important" type="button"> Cancel </button>
+    </div>
+
+  </div>
+  <!-- Number Delete Success Dialog -->
+  <div class="col-md-12 text-center bottom" *ngIf="showDeleteMessage">
+    <h4 for="" style="font-size: 20px; margin-bottom: 15px;">Success!</h4>
+    <div class="col-md-12">
+      <h4 style="font-size: 18px;">{{phoneNumber}} is removed from the list</h4>
+      <h4 style="font-size: 18px;">This user will now receive SMS</h4>
+    </div>
+    <div class="col-md-12 text-center" style="margin-top:20px;margin-bottom:20px;">
+      <button (click)="closedialog()" type="button"
+        style="color:green; background: transparent; border: none;font-size: 20px;font-weight: 900;">Okay</button>
+    </div>
+
+  </div>
+</div>

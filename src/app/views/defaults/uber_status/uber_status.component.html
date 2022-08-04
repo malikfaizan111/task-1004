@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span class="text-pink"
+              style="font-size: 30px;">
+            UBER STATUS
+        </span>
+        <br>
+    </div>
+</div>
+<base-loader>
+    <div class="data-table">
+        <table class="table table-responsive table-striped"
+               style="width:100%; margin-top: 15px">
+            <thead>
+                <tr>
+                    <th>Heading Status</th>
+                    <th>Status</th>
+                    <th style="text-align: center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Uber Status</td>
+                    <td>{{UberStatus?.uber == 0 ? 'No' : 'Yes' }}</td>
+
+                    <td style="text-align: center">
+                        <mat-slide-toggle [(ngModel)]="uberValue"
+                                          (change)="updateUberStatusList()"
+                                          color="accent">
+                        </mat-slide-toggle>
+                    </td>
+                </tr>
+                <!-- <tr *ngIf="UberStatus == null">
+                <td colspan="100"
+                    style="text-align: center">No record found.</td>
+            </tr> -->
+
+            </tbody>
+        </table>
+    </div>
+</base-loader>

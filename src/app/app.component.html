@@ -1,0 +1,15 @@
+<!-- <router-outlet></router-outlet> -->
+
+<ng-container *ngIf="UrbanpointAdmin?.email != 'mayar.andpercent@gmail.com'">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-container *ngIf="UrbanpointAdmin?.email == 'mayar.andpercent@gmail.com'">
+  <div class="preloader"
+       style="position: absolute;left: 50%;top: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+      <img src="assets/images/logo.png"
+           alt=""
+           style="width: 130px">
+      <p style="text-align: center">Loading...</p>
+  </div>
+</ng-container>

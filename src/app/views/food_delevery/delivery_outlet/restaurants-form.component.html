@@ -1,0 +1,340 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} DELIVERY OUTLETS</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name"
+						   type="text"
+						   required
+						   placeholder="Outlet Name">
+					<mat-error
+							   *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+						Name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="title"
+						   type="text"
+						   required
+						   placeholder=" Cuisine Type ">
+					<mat-error
+							   *ngIf="getValue('title')?.invalid && (getValue('title')?.dirty || getValue('title')?.touched)">
+							   Title is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="commission_charges"
+						   type="text"
+						   required
+						   placeholder=" Commission Charges ">
+					<mat-error
+							   *ngIf="getValue('commission_charges')?.invalid && (getValue('commission_charges')?.dirty || getValue('commission_charges')?.touched)">
+							   Commission Charges is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="delivery_charges"
+						   type="text"
+						   required
+						   placeholder="Delivery Charges">
+					<mat-error
+							   *ngIf="getValue('delivery_charges')?.invalid && (getValue('delivery_charges')?.dirty || getValue('delivery_charges')?.touched)">
+						Delivery Charges is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="opening_time"
+						   type="text"
+						   required
+						   placeholder="Opening Time">
+					<mat-error
+							   *ngIf="getValue('opening_time')?.invalid && (getValue('opening_time')?.dirty || getValue('opening_time')?.touched)">
+						Opening Time is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="closing_time"
+						   type="text"
+						   placeholder="Closing Time">
+					<mat-error
+							   *ngIf="getValue('closing_time')?.invalid && (getValue('closing_time')?.dirty || getValue('closing_time')?.touched)">
+						Closing Time is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="approx_delivery_time"
+						   type="text"
+						   placeholder="Approx Delivery Time">
+					<mat-error
+							   *ngIf="getValue('approx_delivery_time')?.invalid && (getValue('approx_delivery_time')?.dirty || getValue('approx_delivery_time')?.touched)">
+						Approx Delivery Time is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="special"
+								placeholder="Special">
+						<mat-option value="0"> No</mat-option>
+						<mat-option value="1"> Yes</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('special')?.invalid && (getValue('special')?.dirty || getValue('special')?.touched)">
+						App
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="delivery_featured"
+								placeholder="Delivery Featured">
+						<mat-option value="0"> No</mat-option>
+						<mat-option value="1"> Yes</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('delivery_featured')?.invalid && (getValue('delivery_featured')?.dirty || getValue('delivery_featured')?.touched)">
+							   delivery_featured
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="delivery_status"
+								placeholder="Delivery status">
+						<mat-option value="0"> No</mat-option>
+            <mat-option value="1"> Yes</mat-option>
+            <mat-option value="2"> Both</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('delivery_status')?.invalid && (getValue('delivery_status')?.dirty || getValue('delivery_status')?.touched)">
+							   delivery_status
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="min_order_charges"
+						   type="text"
+						   mask="999999999999999999999"
+						   placeholder="Min Order Charges ">
+					<mat-error
+							   *ngIf="getValue('min_order_charges')?.invalid && (getValue('min_order_charges')?.dirty || getValue('min_order_charges')?.touched)">
+						Min Order Charges is required</mat-error>
+				</mat-form-field>
+			</div>
+    </div>
+    <div fxFlex.xl="32"
+    fxFlex.lg="48"
+    fxFlex.md="48">
+   <div class="form-group mb-0">
+     <mat-form-field style="width: 100%">
+       <input matInput
+            formControlName="contratually_agreed_delivery_charges"
+            type="text"
+            (keypress)="isNumberKey('contratually_agreed_delivery_charges',$event)"
+            placeholder="Contratually Agreed Delivery Charges">
+       <mat-error
+            *ngIf="getValue('contratually_agreed_delivery_charges')?.invalid && (getValue('contratually_agreed_delivery_charges')?.dirty || getValue('contratually_agreed_delivery_charges')?.touched)">
+         Min Order Charges is required</mat-error>
+     </mat-form-field>
+   </div>
+ </div>
+ <div fxFlex.xl="32"
+ fxFlex.lg="48"
+ fxFlex.md="48">
+<div class="form-group mb-0">
+  <mat-form-field style="width: 100%">
+    <input matInput
+         formControlName="credit_card_fee"
+         type="text"
+         (keypress)="isNumberKey('credit_card_fee',$event)"
+         placeholder="Credit Card Fee">
+    <mat-error
+           *ngIf="getValue('credit_card_fee')?.invalid && (getValue('credit_card_fee')?.dirty || getValue('credit_card_fee')?.touched)">
+      Min Order Charges is required</mat-error>
+  </mat-form-field>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="contract_commission_standard"
+        type="text"
+        (keypress)="isNumberKey('contract_commission_standard',$event)"
+        placeholder="Contract Commission Standard">
+   <mat-error
+          *ngIf="getValue('min_order_charges')?.invalid && (getValue('min_order_charges')?.dirty || getValue('min_order_charges')?.touched)">
+     Min Order Charges is required</mat-error>
+ </mat-form-field>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="contract_commission_up_driver"
+        type="text"
+        (keypress)="isNumberKey('contract_commission_up_driver',$event)"
+        placeholder="Contract Commission Up Driver">
+   <mat-error
+          *ngIf="getValue('min_order_charges')?.invalid && (getValue('min_order_charges')?.dirty || getValue('min_order_charges')?.touched)">
+     Min Order Charges is required</mat-error>
+ </mat-form-field>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+<div class="form-group mb-0">
+
+ <mat-form-field style="width: 100%">
+   <input matInput
+        formControlName="contract_merchant_driver_fee"
+        type="text"
+        (keypress)="isNumberKey('contract_merchant_driver_fee',$event)"
+        required
+        placeholder="Contract Merchant Driver Fee">
+   <mat-error
+          *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+     Fee is required</mat-error>
+ </mat-form-field>
+</div>
+</div>
+		<div fxFlex="25">
+			<label style="width: 100%;">Select Image
+			</label>
+			<file-picker (onFileSelect)="onFileSelect($event)"
+						 controlName="image"
+						 [isIconHidden]="false"
+						 [image]="getImage('image')"
+						 type="Custom"
+						 [size]="{width: 172, height: 172}">
+			</file-picker>
+			<span style="float: right;font-size: 12px; color: #ff2c54"
+				  *ngIf="errorMsgimage">{{errorMsgimage}}</span>
+
+			<label style="width: 100%;">Select Logo:
+
+			</label>
+			<file-picker (onFileSelect)="onFileSelect($event)"
+						 [isIconHidden]="false"
+						 [image]="getImage('logo')"
+						 controlName="logo"
+						 type="Custom"
+						 [size]="{width: 172, height: 172}">
+			</file-picker>
+			<span style="float: right;font-size: 12px; color: #ff2c54"
+				  *ngIf="errorMsglogo">{{errorMsglogo}}</span>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ADD NEW
+			</button>
+			<button type="submit"
+					*ngIf="isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				UPDATE
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

@@ -1,0 +1,87 @@
+<app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length" [loaderMessage]="loaderMessage">
+</app-loader>
+
+<div class="row">
+	<div style="width:fit-content" class="col-sm-3">
+		<button mat-icon-button (click)="onLocationBack()" color="accent">
+			<img src="assets/images/Path.png" alt="">
+		</button>
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600; text-transform: capitalize;">
+			{{voucherdetails?.voucher_name}} ({{voucher_type}})
+		</span>
+	</div>
+	<div class="col-sm-6" style="text-align: right;float: right;">
+		<div class="form-group col-sm-3" style="padding: 0 10px 0 0;">
+		</div>
+		<div class="form-group col-sm-9" style="padding: 0;text-align: left;">
+			<div class="input-group">
+				<span style="cursor: pointer;" (click)="gerAccessCodesList(1)" class="input-group-addon">
+					<i class="glyphicon glyphicon-search"></i>
+				</span>
+				<input autocomplete="false" type="text" maxlength="50" [(ngModel)]="search"
+					(keyup)="onSearchAccessCode(search)" class="form-control" placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="padding-left: 40px;">
+	<div flex>
+		<span><strong>Offer: </strong>{{headerdata?.offer_name}}</span><br>
+		<span><strong>Brand: </strong>{{headerdata?.outlets_parents.name}}</span><br>
+		<span><strong>Expiry: </strong>{{headerdata?.expiry_date}}</span>
+	</div>
+	<div fxFlex="30">
+		<span *ngIf="headerdata?.voucher_type == 'paid'"><strong>Offer Links Generated :
+			</strong>{{vouchercount}}</span>
+		<span *ngIf="headerdata?.voucher_type == 'free'"><strong>Voucher ID: </strong>{{headerdata?.id}}</span><br>
+		<span *ngIf="headerdata?.voucher_type == 'free'"><strong>Offer Link: </strong>{{headerdata?.offer_link?
+			headerdata?.offer_link : 'N/A'}}</span><br>
+		<span *ngIf="headerdata?.voucher_type == 'free'"><strong>Codes Generated: </strong>{{linkscount}}</span>
+	</div>
+	<div fxFlex="50px">
+		<button *ngIf="headerdata?.voucher_type == 'paid'"
+			style="background: none; color: #148F96; border: none;font-weight: 700;" (click)="onRefresh()">Refresh
+		</button>
+	</div>
+	<div fxFlex="300px">
+		<button *ngIf="headerdata?.voucher_type == 'paid'" style=" border-radius: 25px; width: 150px;" mat-raised-button
+			color="accent" (click)="onExportCSVData()">Download Links
+		</button>
+		<button style="background: none; color: #148F96; border: none;font-weight: 700;"
+			(click)="onExportCSVLink()">Export data
+		</button>
+	</div>
+</div>
+<base-loader>
+<div class="data-table" style=" padding-left: 40px;">	
+	<table class="table table-responsive table-striped"	
+		style="width:100%; margin-top: 15px;border: 1px solid #E8E8E8;">	
+		<thead>	
+			<tr>	
+				<th>ID</th>	
+				<th>Phone</th>	
+				<th style="width: 55%; text-align:center;">Offer code link</th>	
+				<th>generated on</th>	
+				<th>Status</th>	
+				<th>used on</th>	
+	
+			</tr>	
+		</thead>	
+		<tbody>	
+			<tr *ngFor="let code of PromoCodes">	
+				<td>{{code.id? code.id: 'N/A'}}</td>	
+				<td>{{code.phone? code.phone : 'N/A'}}</td>	
+				<td style="width:55% !important">{{code.offer_code_link}}</td>	
+				<td style="text-transform: capitalize;">{{code.offer_code_generated_on}}</td>	
+				<td style="text-transform: capitalize;">{{onTypeChange(code.status)}}</td>	
+				<td style="text-transform: capitalize;">{{code.offer_used_on? code.offer_used_on : 'N/A'}}</td>	
+			</tr>	
+			<tr *ngIf="PromoCodes.length === 0">	
+				<td colspan="100" style="text-align: center">No record found.</td>	
+			</tr>	
+		</tbody>	
+	</table>	
+</div>
+	<app-pagination *ngIf="PromoCodes.length > 0" (setPage)="setPage($event)" [perPage]="perPage"
+		[totalPages]="totalPages" [currentPage]="currentPage"></app-pagination>
+</base-loader>

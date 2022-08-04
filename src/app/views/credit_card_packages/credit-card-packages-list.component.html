@@ -1,0 +1,119 @@
+<div class="row">
+    <div style="width: fit-content;" class="col-sm-4">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			CREDIT CARD PACKAGES
+		</span>
+    </div>
+    <div class="col-sm-2">
+      <button *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
+              style="background: red; border-color: red"
+              (click)="addNew()">ADD NEW
+      </button>
+    </div>
+    <div class="col-sm-6"
+         style="text-align: right;float: right;">
+        <div class="form-group col-sm-3"
+             style="padding: 0 10px 0 0;">
+            <!-- <select [(ngModel)]="operator"
+                    (change)="onSearchNotification()"
+                    class="form-control">
+                <option value="All">All</option>
+                <option value="ooredoo">Ooredoo</option>
+                <option value="vodafone">Vadafone</option>
+            </select> -->
+        </div>
+        <div class="form-group col-sm-9"
+             style="padding: 0;text-align: left;">
+            <!-- <input type="text"
+                       placeholder="Search"
+                       class="form-control" />
+                        -->
+            <div class="input-group">
+              <span style="cursor: pointer;"
+              (click)="gerCreditCardPackagesList(1)"
+              class="input-group-addon">
+  <i class="glyphicon glyphicon-search"></i>
+
+</span>
+                <input autocomplete="false"
+                       type="text"
+                       maxlength="50"
+                       class="form-control"
+                       [(ngModel)]="search"
+                       (keyup)="onSearchNotification()"
+                       placeholder="Search">
+            </div>
+        </div>
+    </div>
+</div>
+<base-loader>
+    <div class="data-table">
+        <table class="table table-responsive table-striped"
+               style="width:100%; margin-top: 15px">
+            <thead>
+            <tr>
+                <th style="width: 70px;">NO.</th>
+                <th style="text-align: center">name</th>
+                <th style="text-align: center">type</th>
+                <th style="text-align: center">{{selectedApp == 4? 'Kuwait' : 'Qatar'}} value</th>
+                <!-- <th>kuwait value</th> -->
+                <th style="text-align: center">dollar value</th>
+                <!-- <th style="text-align: center">savings</th> -->
+                <th style="text-align: center">Sub Text</th>
+                <th style="text-align: center; width: 100px;">status</th>
+                <!-- <th>CREATED AT</th> -->
+                <th style="text-align: center">ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of CreditCardPackagesItem" (click)="onViewDetails(item)">
+                <td>{{item.id}}</td>
+                <td style="text-align: center" [title]="item.name">{{item.name}}</td>
+                <td style="text-align: center" [title]="item.type">{{item.type}}</td>
+                <td style="text-align: center;" [title]="item.qatar_value">{{item.qatar_value}}</td>
+                <!-- <td style="text-align: center;" [title]="item.kuwait_value">{{item.kuwait_value}}</td> -->
+                <td style="text-align: center;">{{item.doller_value}}</td>
+                <!-- <td style="text-align: center;" [title]="item.savings">{{item.savings ? item.savings : 'N/A'}}</td> -->
+                <td style="text-align: center;" [title]="item.sub_text">{{item.sub_text ? item.sub_text : 'N/A'}}</td>
+                <td style="text-align: center;" (click)="$event.stopPropagation()"
+                    style="text-align: center; width: 100px;">
+                    <mat-slide-toggle title="Status"
+                                      (change)="onChangeStatus(item, $event)"
+                                      [(ngModel)]="item.slide"
+                                      color="accent"></mat-slide-toggle>
+                </td>
+                <!-- <td [title]="item.created_at">{{item.created_at}}</td> -->
+                <td style="text-align: center; width: 100px;">
+                    <button style="min-width: 50px;"
+                            mat-raised-button
+                            color="accent"
+                            (click)="onEdit(item)">Edit
+                    </button>
+                </td>
+
+                <!--<td style="text-align: center; width: 100px;">
+                    <i title="Resend"
+                       (click)="onResendNotification(item, $event)"
+                       class="action-btn">
+                        <img width="18"
+                             src="assets/images/actions/re-send@1x.png"
+                             alt="">
+                    </i>
+                </td>-->
+            </tr>
+            <tr *ngIf="CreditCardPackagesItem.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No record found.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!--<app-pagination *ngIf="Notifications.length > 0"
+                    (setPage)="setPage($event)"
+                    [perPage]="perPage"
+                    [totalPages]="totalPages"
+                    [currentPage]="currentPage"></app-pagination>-->
+</base-loader>

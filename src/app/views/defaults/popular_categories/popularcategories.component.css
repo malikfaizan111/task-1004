@@ -1,0 +1,6 @@
+.text-under-csv{
+    display: flex;
+    justify-content: center;
+    color: #757575;
+    padding-top: 1rem;
+}

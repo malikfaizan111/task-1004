@@ -1,0 +1,45 @@
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-sm-6">
+        <button mat-icon-button (click)="onLocationBack()" color="accent">
+            <img src="assets/images/actions/back.png" alt="">
+        </button>
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            In-App Image
+        </span>
+    </div>
+    <div class="col-sm-6" style="position: relative;">
+        <!-- <button mat-dialog-close
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div> -->
+    </div>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGimageap="10px" fxLayoutGap="10px">
+    <div fxFlex.xl="98" fxFlex.lg="98" fxFlex.md="98">
+        <div fxFlex="35">
+            <label style="width: 100%; margin-left: 8%;text-transform: capitalize; margin-bottom: 3%;">{{scenario}} Subscribers Image
+            </label>
+        </div>
+    </div>
+    <div fxFlex.xl="98" fxFlex.lg="98" fxFlex.md="98">
+        <div fxFlex="35">
+            <label style="width: 100%;margin-left: 8%; font-size: 13px;">Select Image
+            </label>
+            <file-picker (onFileSelect)="onFileSelect($event)" controlName="image" [isIconHidden]="false"
+                [image]="imagePath" type="Custom" [size]="{width: 172, height: 172}">
+            </file-picker>
+            <span style="float: right;font-size: 12px; color: #ff2c54" *ngIf="errorMsgimage">{{errorMsgimage}}</span>
+        </div>
+    </div>
+    <div class="row">
+		<div style="margin-top: 35px; margin-left: 35px;" class="col-sm-12">
+			<button type="button" (click)="doSubmit()"
+				class="btn btn-primary round-elem" style="background: red; border-color: red; width : 100%">
+				Save
+			</button>
+			<!-- <img *ngIf="isLoading" class="loader-btn-image" src="assets/images/view-loader.gif"> -->
+		</div>
+	</div>
+</div>

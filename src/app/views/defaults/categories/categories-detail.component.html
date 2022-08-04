@@ -1,0 +1,108 @@
+<div style="height: 85vh; margin: auto;">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+                EDIT ORDER
+            </span>
+        </div>
+        <div class="col-sm-6"
+             style="position: relative;">
+            <button (click)="onCloseClick()"
+                    style="position: absolute;top: -20px;right: -5px;"
+                    mat-icon-button>
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="data-table">
+        <table class="table table-responsive table-striped"
+               style="width:100%; margin-top: 15px">
+            <thead>
+                <tr>
+                    <th style="width: 70px;">ID.</th>
+                    <th>NAME</th>
+                    <th>ORDER BY</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of catArray">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td> <input style="color: black;width: 60px;"
+                               type="number"
+                               [(ngModel)]="item.orderby"></td>
+
+                </tr>
+                <tr *ngIf="catArray.length == 0">
+                    <td colspan="100"
+                        style="text-align: center">No record found.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="button"
+                (click)="onSubmitData()"
+                class="btn btn-primary round-elem"
+                style="background: red; border-color: red;margin-top: 30px;" >
+            Save
+        </button>
+    </div>
+
+</div>
+<!--
+<form [formGroup]="Form"
+      (ngSubmit)="onSubmit()">
+    <div style="margin-top: 20px"
+         fxLayout="row wrap"
+         fxLayoutAlign="space-between start"
+         fxLayoutGap="10px"
+         >
+
+
+		<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="orderby"
+								   type="text"
+								   required
+								   placeholder="Order By">
+							<mat-error
+									   *ngIf="getValue('orderby')?.invalid && (getValue('orderby')?.dirty || getValue('orderby')?.touched)">
+								orderby
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+    </div>
+
+
+    <div class="row">
+        <div style="margin-top: 20px; text-align: right;"
+             class="col-sm-12">
+            <button type="button"
+                    (click)="onCloseClick()"
+                    [disabled]="isLoading"
+                    class="btn btn-primary round-elem"
+                    style="background: red; border-color: red">
+                Cancel
+            </button>
+            <button type="submit"
+                    [disabled]="Form.invalid || isLoading"
+                    class="btn btn-primary round-elem"
+                    style="background: red; border-color: red">
+                Submit
+            </button>
+            <img *ngIf="isLoading"
+                 class="loader-btn-image"
+                 src="assets/images/view-loader.gif">
+        </div>
+
+    </div>
+</form> -->

@@ -1,0 +1,140 @@
+<div class="row">
+	<div class="col-sm-12">
+		<button mat-icon-button (click)="onLocationBack()" color="accent">
+			<img src="assets/images/actions/back.png" alt="">
+		</button>
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			Order Log
+		</span>
+	</div>
+	<!-- <div class="form-group col-sm-2"
+		 style="padding: 0 10px 0 0;">
+		<select [(ngModel)]="orderby"
+				(change)="gerParentOutletsList(orderby)"
+				placeholder="Order By"
+				class="form-control">
+			<option disabled>Order By</option>
+			<option value="">All</option>
+			<option value="outlet_dispatched">outlet_dispatched</option>
+			<option value="completed">completed</option>
+			<option value="outlet_rejected">outlet_rejected</option>
+			<option value="pending">Pending</option>
+		</select>
+	</div>
+	<div class="col-sm-4"
+		 style="text-align: right">
+		<div class="form-group col-sm-3"
+			 style="padding: 0 10px 0 0;">
+		</div>
+		<div class="form-group col-sm-9"
+			 style="padding: 0;text-align: left;">
+			<div class="input-group">
+				<input autocomplete="false"
+					   type="number"
+					   maxlength="50"
+					   class="form-control"
+					   [(ngModel)]="search"
+					   (keyup)="onSearchParentOutlet()"
+					   placeholder="Search with Order Id">
+				<span style="cursor: pointer;"
+					  (click)="gerParentOutletsList(1)"
+					  class="input-group-addon">
+					<i class="glyphicon glyphicon-search"></i>
+				</span>
+			</div>
+		</div>
+		<br>
+		<button class="btn btn-primary round-elem"
+				style="background: red; border-color: red"
+				(click)="addNew()">ADD NEW
+		</button>
+	</div> -->
+</div>
+
+<base-loader>
+	<div style="background: #a9a9a936;width: 100%; height: 2px;margin-bottom: 15px;margin-top: 15px;"></div>
+
+	<div class="data-table">
+		<table class="table table-responsive table-striped" style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th>Created At</th>
+					<th>Driver Accepted At</th>
+					<th>Ready for Pick up</th>
+					<!-- <th style="text-align: center;">Own Accepted AT</th>
+					<th style="text-align: center;">UrbanPoint Accepted AT</th> -->
+					<th>Dispatched At</th>
+					<th>Delivered At</th>
+					<th>Rejected At</th>
+					<th>Cancelled At</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- <tr style="text-align: center;">
+					<td>{{this.created == null ? 'N/A' :this.created}}</td>
+					<td>{{this.outlet_own_accepted == null ? 'N/A' :this.outlet_own_accepted}}</td>
+					<td>{{this.outlet_urbanpoint_accepted == null ? 'N/A' :this.outlet_urbanpoint_accepted}}</td>
+					<td>{{this.outlet_dispatched == null ? 'N/A' :this.outlet_dispatched}}</td>
+					<td>{{this.outlet_delivered == null ? 'N/A' :this.outlet_delivered}}</td>
+					<td>{{this.outlet_rejected == null ? 'N/A' :this.outlet_rejected}}</td>
+					<td>{{this.cancelled_by_user == null ? 'N/A' :this.cancelled_by_user}}</td>
+
+        </tr> -->
+				<tr>
+					<td>{{this.orderLogDetail.created_at == null ? 'N/A' :this.orderLogDetail.created_at}}</td>
+					<td> {{!this.driverAccepted ? 'N/A' : this.driverAccepted}} </td>
+					<td> {{!this.readyforPickup ? 'N/A' : this.readyforPickup}} </td>
+					<!-- <td>{{this.outlet_own_accepted == null ? 'N/A' :this.outlet_own_accepted}}</td> -->
+					<!-- <td *ngIf="!orderLogDetail.unAttended" >{{orderLogDetail.order_logs.outlet_own_accepted == null && orderLogDetail.order_logs.outlet_urbanpoint_accepted == null ? 'N/A' : (orderLogDetail.order_logs.outlet_own_accepted == null ? orderLogDetail.order_logs.outlet_urbanpoint_accepted.created_at : orderLogDetail.order_logs.outlet_own_accepted.created_at)}}</td> -->
+					<!-- <td>{{this.outlet_urbanpoint_accepted == null ? 'N/A' :this.outlet_urbanpoint_accepted}}</td> -->
+					<td>{{this.outlet_dispatched == null ? 'N/A' :this.outlet_dispatched}}</td>
+					<td>{{this.outlet_delivered == null ? 'N/A' :this.outlet_delivered}}</td>
+					<td>{{this.outlet_rejected == null ? 'N/A' :this.outlet_rejected}}</td>
+					<td>{{this.cancelled_by_user == null ? 'N/A' :this.cancelled_by_user}}</td>
+
+				</tr>
+				<!-- <tr *ngFor="let code of testarr"
+					style="text-align: center;">
+						<td>{{orderLogDetail.created_at == null ? 'N/A' :orderLogDetail.created_at | date : 'yyyy-MM-dd HH:mm a'}}</td>
+						<td>{{code?.outlet_own_accepted?.created_at == null ? 'N/A' :code?.outlet_own_accepted?.created_at | date : 'yyyy-MM-dd HH:mm a' }}</td>
+						<td>{{code?.outlet_urbanpoint_accepted?.created_at == null ? 'N/A' :code?.outlet_urbanpoint_accepted?.created_at | date : 'yyyy-MM-dd HH:mm a' }}</td>
+						<td>{{code?.outlet_dispatched?.created_at == null ? 'N/A' :code?.outlet_dispatched?.created_at | date : 'yyyy-MM-dd HH:mm a'}}</td>
+						<td>{{code?.outlet_delivered?.created_at == null ? 'N/A' :code?.outlet_delivered?.created_at| date : 'yyyy-MM-dd HH:mm a' }}</td>
+						<td>{{code?.outlet_rejected?.created_at == null ? 'N/A' :code?.outlet_rejected?.created_at | date : 'yyyy-MM-dd HH:mm a'}}</td>
+						<td>{{code?.cancelled_by_user?.created_at == null ? 'N/A' :code?.cancelled_by_user?.created_at | date : 'yyyy-MM-dd HH:mm a'}}</td>
+
+					</tr> -->
+
+			</tbody>
+
+		</table>
+
+		<table class="table table-responsive table-striped" style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th>Order Received</th>
+					<th>Order Assigned</th>
+					<th>Rider Arrived</th>
+					<th>Order Picked</th>
+					<th>Waiting Time</th>
+					<th>Order Delivered</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{ beeDeliveryLogs?.delivery_requested ? beeDeliveryLogs?.delivery_requested.created_at: 'N/A'
+						}}
+					</td>
+					<td> {{ beeDeliveryLogs?.delivery_assigned ? beeDeliveryLogs.delivery_assigned.created_at: 'N/A' }}
+					</td>
+					<td>{{ beeDeliveryLogs?.delivery_arrived ? beeDeliveryLogs.delivery_arrived.created_at: 'N/A'}}</td>
+					<td>{{ beeDeliveryLogs?.delivery_picked_up ? beeDeliveryLogs.delivery_picked_up.created_at :'N/A' }}
+					</td>
+					<td> {{ beeDeliveryLogs?.waiting_time}} {{ beeDeliveryLogs?.waiting_time ? 'mins': '' }}</td>
+					<td>{{ beeDeliveryLogs?.delivery_completed ? beeDeliveryLogs.delivery_completed.created_at : 'N/A'
+						}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</base-loader>

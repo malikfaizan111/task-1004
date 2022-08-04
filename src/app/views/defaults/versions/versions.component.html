@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span class="text-pink"
+              style="font-size: 30px;">
+            VERSIONS
+        </span>
+        <br>
+    </div>
+    <div class="col-sm-6"
+         style="text-align: right">
+        <!-- <form name="form"> -->
+
+        <div class="form-group col-sm-3"
+             style="padding: 0 10px 0 0;">
+            <!-- <select class="form-control">
+					<option value="1">Pending</option>
+					<option value="2">Completed</option>
+					<option value="3">All</option>
+				</select> -->
+        </div>
+        <div class="form-group col-sm-9"
+             style="padding: 0;text-align: left;">
+            <!-- <input type="text"
+				       placeholder="Search"
+					   class="form-control" />
+					    -->
+            <!-- <div class="input-group">
+				<input autocomplete="false"
+				       type="text"
+				       [(ngModel)]="search" (change)="onSearchModelChange($event)"
+				       class="form-control"
+				       placeholder="Search">
+				<span style="cursor: pointer;"
+				      (click)="onSearchSetting()"
+				      class="input-group-addon">
+					<i class="glyphicon glyphicon-search"></i>
+
+				</span>
+			</div> -->
+
+        </div>
+        <!-- </form> -->
+        <br>
+        <!-- <div>
+			<button class="btn-radius-zero btn btn-primary"
+			        (click)="addNewSetting()">ADD NEW Setting
+				<i class="glyphicon glyphicon-plus"></i>
+			</button>
+		</div> -->
+    </div>
+</div>
+<base-loader>
+    <table class="table"
+           style="width:100%; margin-top: 15px">
+        <thead>
+            <tr>
+                <th>Platform</th>
+                <th>Forcefully Updated</th>
+                <th style="text-align: center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Android ({{Versions?.version_android}})</td>
+                <td>{{Versions?.forcefully_updated_android == 0 ? 'No' : 'Yes' }}</td>
+
+                <td style="text-align: center; width: 200px;">
+                    <!-- <i title="UPDATE Version"
+                       (click)="onEditSetting('android')"
+                       class="action-btn glyphicon glyphicon-upload"></i> -->
+                    <button style="min-width: 50px;"
+                            mat-raised-button
+                            color="accent"
+                            (click)="onEditSetting('android')">Update Version
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>IOS ({{Versions?.version_ios}})</td>
+                <td>{{Versions?.forcefully_updated_ios == 0 ? 'No' : 'Yes' }}</td>
+
+                <td style="text-align: center; width: 200px;">
+                    <!-- <i title="UPDATE Version"
+                       (click)="onEditSetting('ios')"
+                       class="action-btn glyphicon glyphicon-upload"></i> -->
+                    <button style="min-width: 50px;"
+                            mat-raised-button
+                            color="accent"
+                            (click)="onEditSetting('ios')">Update Version
+                    </button>
+                </td>
+            </tr>
+            <tr>
+              <td>Order Portal</td>
+              <td> - </td>
+
+              <td style="text-align: center; width: 200px;">
+                  <!-- <i title="UPDATE Version"
+                     (click)="onEditSetting('ios')"
+                     class="action-btn glyphicon glyphicon-upload"></i> -->
+                  <button style="min-width: 50px;width: 71%;"
+                          mat-raised-button
+                          color="accent"
+                          (click)="refreshPortal()">Refresh App
+                  </button>
+              </td>
+          </tr>
+            <tr *ngIf="Versions == null">
+                <td colspan="100"
+                    style="text-align: center">No record found.</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</base-loader>

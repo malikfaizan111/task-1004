@@ -1,0 +1,3 @@
+outlet_id,title,description,search_tags,image,approx_saving,start_datetime,end_datetime,valid_for,renew,per_user,total_redemptions,special,SKU,special_type,interest_tags
+866,DEAL 121,dsadsa,abc,new.png,0,2/12/2018 0:00,2/12/2018 0:00,Dine-in,Yes,0,,1,new sku,other,aaaa
+866,DEAL2121,dsadsad,abc,new.png,0,4/9/1900 0:00,4/9/1900 0:00,Dine-in,No,0,10,1,other sku,other,bbbb

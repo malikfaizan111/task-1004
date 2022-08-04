@@ -1,0 +1,146 @@
+<div class="row">
+	<app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length" [loaderMessage]="loaderMessage">
+	</app-loader>
+	<div class="col-sm-2">
+		<span style="font-size: 19px; line-height: 36px; font-weight: 600">
+			PARENT COMPANIES
+		</span>
+	</div>
+	<div class="col-sm-4">
+		<button class="btn btn-primary round-elem" *ngIf="UpAdmin.role == 1" style="background: red; border-color: red"
+			[disabled]="Merchants.length === 0" (click)="onExportCSV()">
+			Export CSV
+		</button>
+		&nbsp;
+		<button class="btn btn-primary round-elem" *ngIf="UpAdmin.role == 1" style="background: red; border-color: red"
+			(click)="addNew()">
+			ADD NEW
+		</button>
+	</div>
+	<div class="col-sm-6" style="text-align: right">
+		<div class="form-group col-sm-3" style="padding: 0 10px 0 0">
+			<select [(ngModel)]="sortby" (change)="onSearchMerchant()" placeholder="Sort By" class="form-control">
+				<option disabled>Sort By</option>
+				<option value="">All</option>
+				<option value="name">Name</option>
+				<option value="email">Email</option>
+				<option value="created_at">Date Added</option>
+			</select>
+		</div>
+		<div class="form-group col-sm-3" style="padding: 0 10px 0 0">
+			<select [(ngModel)]="orderby" (change)="onSearchMerchant()" placeholder="Order By" class="form-control">
+				<option disabled>Order By</option>
+				<option value="ASC">ASC</option>
+				<option value="DESC">DESC</option>
+			</select>
+		</div>
+		<div class="form-group col-sm-6" style="padding: 0; text-align: left">
+			<!-- <input type="text"
+						 placeholder="Search"
+						 class="form-control" />
+						  -->
+			<div class="input-group">
+				<span style="cursor: pointer" (click)="gerMerchantsList(1)" class="input-group-addon">
+					<i class="glyphicon glyphicon-search"></i>
+				</span>
+				<input autocomplete="false" type="text" maxlength="50" class="form-control" [(ngModel)]="search"
+					(keyup)="onSearchMerchant()" placeholder="Search" />
+			</div>
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped" style="width: 100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th >PARENT COMPANY ID</th>
+					<th>PARENT COMPANY NAME</th>
+					<th>EMAIL</th>
+					<th>phone</th>
+					<!-- <th>UP Account Manager</th> -->
+					<!-- <th>Date Added</th> -->
+					<th>status</th>
+					<th *ngIf="UpAdmin.role == 1" style="text-align: center">ACTIONS</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let merchant of Merchants" (click)="onViewDetails(merchant)">
+					<td>{{ merchant.id }}</td>
+					<td [title]="merchant.name">{{ merchant.name }}</td>
+					<td [title]="merchant.email">{{ merchant.email }}</td>
+					<td [title]="merchant.phone">{{ merchant.phone }}</td>
+					<!-- <td [title]="merchant.up_account_manager">
+			  {{ merchant.up_account_manager }}
+			</td> -->
+					<!-- <td [title]="merchant.created_at">{{ merchant.created_at }}</td> -->
+					<td >
+						<span *ngIf="merchant.active == 1" style="
+				  background: green;
+				  color: white;
+				  padding: 3px 7px;
+				  border-radius: 3px;
+				">Enabled</span>
+						<span *ngIf="merchant.active == 0" style="
+				  background: red;
+				  color: white;
+				  padding: 3px 7px;
+				  border-radius: 3px;
+				">Disabled</span>
+					</td>
+					<td *ngIf="UpAdmin.role == 1" style="text-align: center; max-width: 250px">
+						<!-- <i title="EDIT"
+							 (click)="onEditMerchant(merchant, $event)"
+							 class="action-btn">
+							  <img  src="assets/images/actions/edit.png"
+								   alt="">
+						  </i> -->
+						<button style="min-width: 50px; margin-right: 5px" mat-raised-button color="accent"
+							(click)="onEditMerchant(merchant, $event)">
+							Edit
+						</button>
+						<button style="min-width: 50px" mat-raised-button color="accent"
+							(click)="onAddMultiple(merchant, $event)">
+							Add Outlets
+						</button>
+						<!--<i title="Delete"
+							 (click)="onDeleteMerchant(merchant)"
+							 class="action-btn">
+							  <img src="assets/images/actions/delete.png"
+								   alt="">
+						  </i>-->
+					</td>
+				</tr>
+				<!--<tr *ngFor="let merchant of Merchants">
+					  <td>{{merchant.id}}</td>
+					  <td [title]="merchant.name">{{merchant.name}}</td>
+					  <td [title]="merchant.email">{{merchant.email}}</td>
+					  <td [title]="merchant.authorize_name">{{merchant.authorize_name}}</td>
+					  <td [title]="merchant.gender">{{merchant.gender == null ? 'N/A' : merchant.gender == '' ? 'N/A' : merchant.gender}}</td>
+					  <td [title]="merchant.phone">{{merchant.phone}}</td>
+					  <td [title]="merchant.address">{{merchant.address}}</td>
+					  <td [title]="merchant.created_at">{{merchant.created_at}}</td>
+					  <td style="text-align: center; width: 100px;">
+						  <i title="EDIT"
+							 (click)="onEditMerchant(merchant)"
+							 class="action-btn">
+							  <img  src="assets/images/actions/edit.png"
+								   alt="">
+						  </i>
+						  &lt;!&ndash;<i title="Delete"
+							 (click)="onDeleteMerchant(merchant)"
+							 class="action-btn">
+							  <img src="assets/images/actions/delete.png"
+								   alt="">
+						  </i>&ndash;&gt;
+					  </td>
+				  </tr>-->
+				<tr *ngIf="Merchants.length === 0">
+					<td colspan="100" style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<app-pagination *ngIf="Merchants.length > 0" (setPage)="setPage($event)" [perPage]="perPage"
+		[totalPages]="totalPages" [currentPage]="currentPage"></app-pagination>
+</base-loader>

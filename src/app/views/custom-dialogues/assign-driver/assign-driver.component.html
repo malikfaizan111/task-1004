@@ -1,0 +1,47 @@
+<div fxLayout="row wrap"
+fxLayoutAlign="center"
+fxLayoutGap="10px">
+
+<div fxFlex="100"><span style="padding-left: 5%;margin-bottom: 20px;display: block;"><strong style="font-weight: 900;">Whose driver will be used for this order?</strong></span>
+</div>
+
+<div fxFlex="130px"
+  style="margin-top: 15px;">
+ <mat-card style="padding: 17px;cursor: pointer;text-align: center;font-weight: 600;"
+       [class.driverSelect]="driver_type == 'outlet'"
+       (click)="onDriverSelect('outlet')">
+   Own driver
+ </mat-card>
+</div>
+<div fxFlex="300px"
+  style="margin-top: 15px;cursor: pointer;text-align: center;font-weight: 600;">
+ <mat-card style="padding: 7px;"
+       [class.driverSelect]="driver_type == 'urbanpoint'"
+       (click)="onDriverSelect('urbanpoint')">
+   <strong> Urban Point Driver  </strong>
+   <div style="font-weight: 100;"> <small> Only available from 9AM - 11PM </small></div>
+ </mat-card>
+</div>
+<div fxFlex="200px"
+  style="margin-top: 15px;">
+ <mat-card style="padding: 17px;cursor: pointer;text-align: center;font-weight: 600;"
+       [class.driverSelect]="driver_type == 'customer'"
+       (click)="onDriverSelect('customer')">
+   Customer - Pickup
+ </mat-card>
+</div>
+</div>
+
+<div style="margin-top: 20px;"
+class="text-center">
+
+<button style="background-color: #FF001F;
+border: none;
+padding: 8px 18px;
+border-radius: 3px;
+color: white;"
+   [disabled]="!driver_type || isLoading"
+   type="button"
+   (click)="assignDriver()">Confirm
+</button>
+</div>

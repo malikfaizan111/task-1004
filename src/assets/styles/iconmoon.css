@@ -1,0 +1,92 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?bwmbul');
+  src:  url('../fonts/icomoon.eot?bwmbul#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?bwmbul') format('truetype'),
+    url('../fonts/icomoon.woff?bwmbul') format('woff'),
+    url('../fonts/icomoon.svg?bwmbul#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="custom-icon-"], [class*=" custom-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.custom-icon-discount:before {
+  content: "\e915";
+}
+.custom-icon-menu-button:before {
+  content: "\e914";
+}
+.custom-icon-app-users:before {
+  content: "\e913";
+}
+.custom-icon-add:before {
+  content: "\e900";
+}
+.custom-icon-back:before {
+  content: "\e901";
+}
+.custom-icon-calendar:before {
+  content: "\e902";
+}
+.custom-icon-categories:before {
+  content: "\e903";
+}
+.custom-icon-close:before {
+  content: "\e904";
+}
+.custom-icon-dashboard:before {
+  content: "\e905";
+}
+.custom-icon-default:before {
+  content: "\e906";
+}
+.custom-icon-down-arrow:before {
+  content: "\e907";
+}
+.custom-icon-list:before {
+  content: "\e908";
+}
+.custom-icon-logout:before {
+  content: "\e909";
+}
+.custom-icon-medical-history:before {
+  content: "\e90a";
+}
+.custom-icon-notification:before {
+  content: "\e90b";
+}
+.custom-icon-orders:before {
+  content: "\e90c";
+}
+.custom-icon-search:before {
+  content: "\e90d";
+}
+.custom-icon-settings:before {
+  content: "\e90e";
+}
+.custom-icon-tests:before {
+  content: "\e90f";
+}
+.custom-icon-up-arrow:before {
+  content: "\e910";
+}
+.custom-icon-users:before {
+  content: "\e911";
+}
+.custom-icon-warning:before {
+  content: "\e912";
+}

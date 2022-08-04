@@ -1,0 +1,212 @@
+<div class="row">
+    <app-loader [totalRecords]="ArrayCSVCount"
+                [completedRecords]="ArrayCSV.length"
+                [loaderMessage]="loaderMessage"></app-loader>
+    <div style="width: fit-content;" class="col-sm-2">
+      <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+        OFFERS
+      </span>
+    </div>
+    <div class="col-sm-4">
+        <button *ngIf="role == '1'"
+        [disabled]="selectedDeals.length == 0"
+        class="btn btn-primary round-elem"
+        style="background: red; border-color: red"
+        (click)="onEditSelectedDeals()">Edit
+        </button>
+  &nbsp;
+       <button *ngIf="role == '1'"
+        class="btn btn-primary round-elem"
+        style="background: red; border-color: red"
+        [disabled]="Deals.length == 0"
+        (click)="onExportCSV()">Export CSV
+        </button>
+  &nbsp;
+       <button *ngIf="role == '1'"
+        class="btn btn-primary round-elem"
+        style="background: red; border-color: red"
+        (click)="addNew()">ADD NEW
+       </button>
+    </div>
+    <div class="col-sm-6"
+         style="text-align: right">
+        <div class="form-group col-sm-3"
+             style="padding: 0 10px 0 0;">
+            <select [(ngModel)]="sortby"
+                    (change)="gerDealsList(1)"
+                    placeholder="Sort By"
+                    class="form-control">
+                <option disabled>Sort By</option>
+                <option value="">All</option>
+                <option value="outlet_name">Outlet</option>
+                <option value="name">Name</option>
+                <option value="email">Email</option>
+                <option value="tags">Tags</option>
+                <option value="created_at">Date Added</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-3"
+             style="padding: 0 10px 0 0;">
+            <select [(ngModel)]="orderby"
+                    (change)="gerDealsList(1)"
+                    placeholder="Order By"
+                    class="form-control">
+                <option disabled>Order By</option>
+                <option value="ASC">ASC</option>
+                <option value="DESC">DESC</option>
+            </select>
+        </div>
+        <!-- <div class="form-group col-sm-3"
+             style="padding: 0 10px 0 0;">
+            <select [(ngModel)]="search_type"
+                    (change)="gerDealsList(1)"
+                    placeholder="Search Type"
+                    class="form-control">
+                <option disabled>Search Type</option>
+                <option value="">All</option>
+                <option value="interest_tags">Interest Tags</option>
+            </select>
+        </div> -->
+        <div class="form-group col-sm-6"
+             style="padding: 0;text-align: left;">
+            <!-- <input type="text"
+                       placeholder="Search"
+                       class="form-control" />
+                        -->
+            <div class="input-group">
+              <span style="cursor: pointer;"
+              (click)="gerDealsList(1)"
+              class="input-group-addon">
+            <i class="glyphicon glyphicon-search"></i>
+
+        </span>
+                <input autocomplete="false"
+                       type="text"
+                       maxlength="50"
+                       class="form-control"
+                       [(ngModel)]="search"
+                       (keyup)="onSearchDeal()"
+                       placeholder="Search">
+            </div>
+        </div>
+    </div>
+</div>
+<base-loader>
+    <div class="data-table">
+        <table class="table table-responsive table-striped"
+               style="width:100%; margin-top: 15px">
+            <thead>
+                <tr>
+                    <th>
+                        <mat-checkbox (change)="onSelectAll()"
+                                      [(ngModel)]="selectAll"
+                                      value=""
+                                      color="primary">&nbsp;</mat-checkbox>
+                    </th>
+                    <th style="width: 100px">OFFER ID</th>
+                    <th>OFFER name</th>
+                    <!-- <th>Time Remaining</th>
+                    <th>SKU</th>
+                    <th>Interest Tags</th> -->
+                    <th>outlet name</th>
+                    <!-- <th>Special Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th> -->
+                    <th style="text-align: center;">Status</th>
+                    <th *ngIf="role == '1'"
+                        style="text-align: center;"
+                        class="weight-600">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let deal of Deals"
+                    (click)="onViewDetails(deal)">
+                    <td (click)="onSelectOne($event, deal)">
+                        <mat-checkbox [(ngModel)]="deal.selected"
+                                      value=""
+                                      color="primary">&nbsp;</mat-checkbox>
+                    </td>
+                    <td>{{deal.id}}</td>
+                    <td [title]="deal.title">{{deal.title}}</td>
+                    <!-- <td>{{deal.remaining_days == null || deal.remaining_days == ''? 'N/A' : deal.remaining_days > 0 ?
+                        deal.remaining_days + ' days' : 'Ended'}}</td>
+                    <td [title]="deal.SKU">{{deal.SKU}}</td>
+                    <td [title]="deal.interest_tags">{{deal.interest_tags}}</td> -->
+                    <td [title]="deal.outlet_name">{{deal.outlet_name}}</td>
+                    <!-- <td [title]="deal.special_type">{{deal.special_type == "null"? 'N/A' : deal.special_type == null? 'N/A' :  deal.special_type}}</td>
+                    <td>{{deal.start_datetime == null ? 'N/A' : deal.start_datetime}}</td>
+                    <td>{{deal.end_datetime == null ? 'N/A' : deal.end_datetime}}</td> -->
+                    <td style="text-align: center;">
+                        <span *ngIf="deal.active == 1"
+                              style="background: green;color: white;padding: 3px 7px;width: 46px;border-radius: 3px;">Enabled</span>
+                        <span *ngIf="deal.active == 0"
+                              style="background: red;color: white;padding: 3px 7px;width: 46px;border-radius: 3px;">Disabled</span>
+                    </td>
+
+                    <td *ngIf="role == '1'" style="text-align: center; width: 100px;">
+                        <!-- <i title="EDIT"
+                           (click)="onEditDeal(deal, $event)"
+                           class="action-btn">
+                            <img  src="assets/images/actions/edit.png"
+                                 alt="">
+                        </i> -->
+                        <button
+                                style="min-width: 50px;"
+                                mat-raised-button
+                                color="accent"
+                                (click)="onEditDeal(deal, $event)">Edit
+                        </button>
+
+                        <!-- <i title="Delete"
+                       (click)="onDeleteDeal(deal)"
+                       class="action-btn">
+                        <img src="assets/images/actions/delete.png"
+                             alt="">
+                    </i> -->
+                    </td>
+                </tr>
+
+
+                <!--<tr *ngFor="let deal of Deals">
+                <td>{{deal.id}}</td>
+                <td [title]="deal.title">{{deal.title}}</td>
+                <td [title]="deal.deal_name">{{deal.deal_name}}</td>
+                <td>{{deal.price}}</td>
+                <td>{{deal.valid_for == null ? 'N/A' : deal.valid_for}}</td>
+                <td>{{deal.start_datetime == null ? 'N/A' : deal.start_datetime}}</td>
+                <td>{{deal.end_datetime == null ? 'N/A' : deal.end_datetime}}</td>
+                <td style="text-align: center; width: 100px;">
+                    <i title="EDIT"
+                       (click)="onEditDeal(deal)"
+                       class="action-btn">
+                        <img  src="assets/images/actions/edit.png"
+                             alt="">
+                    </i>
+
+                    &lt;!&ndash; <i title="Delete"
+                       (click)="onDeleteDeal(deal)"
+                       class="action-btn">
+                        <img src="assets/images/actions/delete.png"
+                             alt="">
+                    </i> &ndash;&gt;
+                </td>
+            </tr>-->
+
+                <tr *ngIf="Deals.length == 0">
+                    <td colspan="100"
+                        style="text-align: center">No record found.
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <app-pagination *ngIf="Deals.length > 0"
+                    (setPage)="setPage($event)"
+                    [perPage]="perPage"
+                    [totalPages]="totalPages"
+                    [currentPage]="currentPage"></app-pagination>
+</base-loader>

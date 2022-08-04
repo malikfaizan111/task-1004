@@ -1,0 +1,72 @@
+<div class="row">
+	<!-- <div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<span style="font-weight: 600;">EDITING HISTORY</span>
+			</div>
+		</span>
+	</div> -->
+	<div class="col-sm-12"
+	     style="text-align: center">
+
+		<div class="form-group col-sm-12"
+		     style="padding: 0;">
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="getOutletList(1)"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       [(ngModel)]="search"
+				       (keyup)="onSearchSubscription()"
+				       class="form-control"
+				       placeholder="Search for an outlet">
+			</div>
+      <!-- <button mat-raised-button class="btn btn-primary" style="background: red;margin-bottom: 10px;margin-top: 16px;border-color: red; font-weight: 600;width: 150px;color: white;">Add a number
+      </button> -->
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+		       style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th class="weight-600">ID</th>
+					<th class="weight-600">OUTLET NAME</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let outlet of outletList" (click)="onSelectOutlet(outlet)">
+					<td>{{outlet.id}}</td>
+					<td>{{outlet?.name ? outlet?.name : 'N/A' }}</td>
+					<!-- <td>
+            <button mat-raised-button class="btn btn-primary" style="background: #008B8B;margin-bottom: 10px;margin-top: 16px;border-color: #008B8B; font-weight: 600;color: white;">
+              <mat-icon style="font-size: 17px;margin-top: 6px;">cancel</mat-icon>
+              Remove
+            </button>
+          </td> -->
+				</tr>
+				<tr *ngIf="outletList.length == 0">
+					<td colspan="100"
+					    style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</base-loader>
+<!-- <app-pagination *ngIf="historyList.length > 0"
+                (setPage)="setPage($event)"
+                [perPage]="perPage"
+                [show] = "false"
+                [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-pagination> -->
+
+

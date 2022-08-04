@@ -1,0 +1,238 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} PARENT OUTLET</span>
+			</div>
+		</span>
+	</div>
+</div>
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name"
+						   type="text"
+						   required
+						   placeholder="Name">
+					<mat-error
+							   *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+						Name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<mat-select formControlName="delivery_status"
+								placeholder="Delivery Status">
+						<mat-option value="0"> No</mat-option>
+						<mat-option value="1"> Yes</mat-option>
+						<mat-option value="2"> Both</mat-option>
+					</mat-select>
+					<mat-error
+							   *ngIf="getValue('delivery_status')?.invalid && (getValue('delivery_status')?.dirty || getValue('delivery_status')?.touched)">
+							   Delivery Status
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48" style="margin-top: 7px; padding-left: 50px;">
+			
+				<mat-slide-toggle [(ngModel)]="status" [ngModelOptions]="{standalone: true}" (change)="toggleView()">
+				</mat-slide-toggle>
+				<span style="color: #706666; padding-left: 7px;">Featured</span>
+		</div>
+	</div>
+	<div style="margin-top: 20px"
+	fxLayout="row wrap"
+	fxLayoutAlign="space-between start"
+	>
+   <div fxFlex.xl="32"
+		fxFlex.lg="48"
+		fxFlex.md="48">
+	   <!-- <div class="form-group mb-0">
+		   <mat-form-field style="width: 100%">
+			   <input matInput
+					  formControlName="name"
+					  type="text"
+					  required
+					  placeholder="Name">
+			   <mat-error
+						  *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+				   Name is required</mat-error>
+		   </mat-form-field>
+	   </div> -->
+   </div>
+   <div fxFlex.xl="32"
+		fxFlex.lg="48"
+		fxFlex.md="48">
+	   <div class="form-group mb-0">
+		   <!-- <mat-form-field style="width: 100%">
+			   <mat-select formControlName="delivery_status"
+						   placeholder="Delivery Status">
+				   <mat-option value="0"> No</mat-option>
+				   <mat-option value="1"> Yes</mat-option>
+				   <mat-option value="2"> Both</mat-option>
+			   </mat-select>
+			   <mat-error
+						  *ngIf="getValue('delivery_status')?.invalid && (getValue('delivery_status')?.dirty || getValue('delivery_status')?.touched)">
+						  Delivery Status
+				   is required</mat-error>
+		   </mat-form-field> -->
+	   </div>
+   </div>
+   <div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48" style="margin-top: 7px; padding-left: 50px;">
+	<div fxlayout="row nowrap" fxLayoutAign="space-between center">
+		<div fxFlex="40" style="margin-top: 10px;">
+			<label class="container text-nowrap"> 
+				<span style="font-size:14px;white-space: nowrap;">Add to New Brands</span>
+				<input type="checkbox" [checked]="enableBrandNewDate" (change)="checkNewBrand($event)">
+				<span class="checkmark"></span>
+			  </label>
+		   </div>
+
+		  <div *ngIf="Form.get('isnew_brand')?.value == 1 && Form.get('isnew_brand')?.value != ''" fxFlex="40">
+			<mat-form-field style="width: 100%">
+				<input matInput
+					   [owlDateTime]="startDate"
+					   [owlDateTimeTrigger]="startDate"
+					   readonly
+					   [min]="currentDate"
+					   [max]="EndDate"
+					   [(ngModel)]="StartDate"
+					   [ngModelOptions]="{standalone: true}"
+					   (dateTimeChange)="onStartDate()"
+					   type="text"
+					   placeholder="End Date"
+					   required>
+				<i matSuffix
+				   class="glyphicon glyphicon-time"></i>
+				<owl-date-time pickerType="both"
+							   #startDate></owl-date-time>
+				<mat-error *ngIf="getValue('start_datetime')?.invalid && (getValue('start_datetime')?.dirty || getValue('start_datetime')?.touched)">Start
+					Date is required</mat-error>
+			</mat-form-field>
+		</div>
+   </div>
+	</div>
+	
+</div>
+  <div style="margin-top: 20px"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between start"
+  >
+  <div fxFlex.xl="32"
+  fxFlex.lg="48"
+  fxFlex.md="48">
+  <div style="margin-top: 18px;border: 2px dotted #E8E8E8;border-radius: 10px; padding-top: 10px">
+			
+	<ul style="list-style: none; padding-left: 24px;">
+		<li *ngIf="!urltext">
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<div fxFlex="55">
+					<a (click)="uploadMenuSection('link')">Upload menu as link</a>
+				</div>
+				<div fxFlex="45">
+				</div>
+			</div>
+		</li>
+		<li *ngIf="urltext">
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<div fxFlex="55">
+					<a (click)="uploadMenuSection('link')">Edit menu as link</a>
+				</div>
+				<div fxFlex="45">
+					<span style="color: #757575;margin-left: 16px;font-weight: 200;font-size: 13px;">Menu uploaded</span>
+				</div>
+			</div>
+		</li>
+		<li *ngIf="!pdftext">
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<div fxFlex="55">
+					<a (click)="uploadMenuSection('pdf')">Upload menu as PDF</a>
+				</div>
+				<div fxFlex="45">
+				</div>
+			</div>
+		</li>
+		<li *ngIf="pdftext">
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<div fxFlex="55">
+					<a (click)="uploadMenuSection('pdf')">Edit menu as PDF</a>
+				</div>
+				<div fxFlex="45">
+					<span style="color: #757575;margin-left: 16px;font-weight: 200;font-size: 13px;">Menu uploaded</span>
+				</div>
+			</div>
+		</li>
+		<li *ngIf="!imagetext">
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<div fxFlex="55">
+					<a (click)="uploadMenuSection('image')">Upload menu as image</a>
+				</div>
+				<div fxFlex="45">
+				</div>
+			</div>
+		</li>
+		<li *ngIf="imagetext">
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<div fxFlex="55">
+					<a (click)="uploadMenuSection('image')">Edit menu as image</a>
+				</div>
+				<div fxFlex="45">
+					<span style="color: #757575; margin-left: 17px;font-weight: 200;font-size: 13px;">Menu uploaded</span>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+</div>
+<div fxFlex.xl="32"
+fxFlex.lg="48"
+fxFlex.md="48">
+</div>
+<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48" style="margin-top: 7px; padding-left: 50px;">
+</div>
+</div>
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ADD NEW PARENT OUTLET
+			</button>
+			<button type="submit"
+					*ngIf="isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				UPDATE PARENT OUTLET
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+	</div>
+</form>

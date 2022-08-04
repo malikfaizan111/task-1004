@@ -1,0 +1,174 @@
+.wrapper {
+    padding: 10px;
+
+  }
+  .mat-form-field-flex {
+    border: 1px solid lightgray;
+    border-radius: 23px;
+    padding: 6px 8px;
+    /* border-right: 0px solid #fff;
+    border-left: 0px solid !important;
+    border-top: 0px solid; */
+    /* border-radius: 0px; */
+  }
+  .bottom .btn{
+    font-size:20px;
+  }
+  .btn{
+    font-weight: bolder;
+  }
+  .btn-default:hover{
+    color: grey !important;
+  }
+  // new SCSS
+  
+  .drag-list__wrap {
+    display: flex;
+  }
+  
+  .drag-list__item {
+    border:  1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+    transition: opacity 0.4s ease-in-out;
+    display: block;
+    background: #f9f9f9;
+    min-width: 150px
+  }
+  
+  .drag-list__item.active,
+  .drag-list__item:hover {
+    background: #005de8;
+    border: 1px solid blue;
+    color: #fff;
+    cursor: move;
+    transform: scale(1.05);
+    transition: all 500ms;
+  }
+  
+  .drag-list__item.empty {
+    border: 1px dashed #ddd;
+    padding: 15px;
+  }
+  
+  .drag-list__item.empty:hover {
+    background: #f9f9f9;
+  }
+  
+  
+  .drag-list__move-items {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 5rem;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    button {
+      background-color: transparent;
+      border: none;
+      width: 100%;
+      margin: 0;
+      outline: none;
+    }
+    &.active button {
+      color: #005de8;
+    }
+    &.active  button[disabled] {
+      color: gray;
+    }
+  }
+  
+  /* ng2-dnd: overwrite don't change them */
+  // .gu-mirror {
+  //   position: fixed !important;
+  //   margin: 0 !important;
+  //   z-index: 9999 !important;
+  //   opacity: 0.8;
+  //   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  //   filter: alpha(opacity=80); 
+  // }
+  
+  // .gu-hide {
+  //   display: none !important; 
+  // }
+  
+  // .gu-unselectable {
+  //   -webkit-user-select: none !important;
+  //   -moz-user-select: none !important;
+  //   -ms-user-select: none !important;
+  //   user-select: none !important; 
+  // }
+  
+  // .gu-transit {
+  //   border: 1px dashed #ddd;
+  //   color: #ddd;
+  // } 
+  
+  // new CSS for new
+  
+  .example-list {
+    width: 500px;
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: block;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .example-box {
+    padding: 5px 5px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-custom-placeholder {
+    background: #ccc;
+    border: dotted 3px #999;
+    min-height: 40px;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .cdk-overlay-container {
+    z-index: 1000 !important;
+  }
+  
+  

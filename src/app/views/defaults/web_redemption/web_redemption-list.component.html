@@ -1,0 +1,87 @@
+<div class="row">
+	<div style="width:fit-content" class="col-sm-3">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			WEB VOUCHERS
+		</span>
+	</div>
+	<div class="col-sm-3">
+		&nbsp;&nbsp;
+		<button class="btn btn-primary round-elem" style="background: red; border-color: red"
+			(click)="addNew()">Generate New
+		</button>
+	</div>
+	<div class="col-sm-6" style="text-align: right;float: right;">
+		<div class="form-group col-sm-3" style="padding: 0 10px 0 0;">
+			<!-- <select class="form-control"
+			        [(ngModel)]="appName"
+			        (change)="onAppChange()">
+				<option value="1">APP 1</option>
+				<option value="2">APP 2</option>
+			</select> -->
+			<!-- <user-app-selector (onAppSelect)="onAppChange($event)"></user-app-selector> -->
+		</div>
+		<div class="form-group col-sm-9" style="padding: 0;text-align: left;">
+			<!-- <input type="text"
+				  placeholder="Search"
+				  class="form-control" />
+				   -->
+			<div class="input-group">
+				<span style="cursor: pointer;" (click)="gerAccessCodesList(1)" class="input-group-addon">
+					<i class="glyphicon glyphicon-search"></i>
+
+				</span>
+				<input autocomplete="false" type="text" maxlength="50" [(ngModel)]="search"
+					(keyup)="onSearchAccessCode(search)" class="form-control" placeholder="Search">
+			</div>
+		</div>
+		<!-- <button *ngIf="!isMultiple"
+		        class="btn btn-primary round-elem"
+		        style="background: red; border-color: red"
+		        (click)="onSwitchCodes(true)">MULTIPLE ACCESS CODES
+		</button>
+		<button *ngIf="isMultiple"
+		        class="btn btn-primary round-elem"
+		        style="background: red; border-color: red"
+		        (click)="onSwitchCodes(false)">ACCESS CODES
+		</button> -->
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped" style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th style="width: 70px;">ID.</th>
+					<th>NAME</th>
+					<th>BRAND</th>
+					<th>OFFER</th>
+					<th>TYPE</th>
+					<th style="text-align: center;" class="weight-600">ACTION</th>
+					<th>STATUS</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let code of PromoCodes">
+					<td>{{code.id}}</td>
+					<td>{{code.voucher_name}}</td>
+					<td>{{code.outlets_parents.name}}</td>
+					<td>{{code.offer_name}}</td>
+					<td style="text-transform: capitalize;">{{code.voucher_type}}</td>
+					<td style="text-align: center; width: 100px;">
+						<button style="min-width: 50px;" mat-raised-button color="accent" (click)="onEdit(code)">View
+						</button>
+					</td>
+					<td>
+						<mat-slide-toggle [(ngModel)]="code.voucher_status" (change)="toggleView(code)">
+						</mat-slide-toggle>
+					</td>
+				</tr>
+				<tr *ngIf="PromoCodes.length === 0">
+					<td colspan="100" style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<app-pagination *ngIf="PromoCodes.length > 0" (setPage)="setPage($event)" [perPage]="perPage"
+		[totalPages]="totalPages" [currentPage]="currentPage"></app-pagination>
+</base-loader>

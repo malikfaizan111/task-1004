@@ -1,0 +1,7 @@
+<select style="border-radius: 10px !important;" *ngIf="UrbanpointAdmin.name == 1"  class="form-control"
+        [(ngModel)]="appID"
+        (change)="onAppChange()">
+    <option *ngFor="let app of UserApps"
+            [value]="app.key">{{app.title}}</option>
+    <!-- <option value="2">APP 2</option> -->
+</select>

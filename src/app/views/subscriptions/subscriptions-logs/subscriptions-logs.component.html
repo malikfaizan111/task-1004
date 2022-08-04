@@ -1,0 +1,124 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button *ngIf="id != 'All'"
+				        mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span>SUBSCRIPTIONS LOGS</span>
+			</div>
+		</span>
+	</div>
+	<div class="col-sm-6"
+	     style="text-align: right">
+		<div class="form-group col-sm-3"
+		     style="padding: 0 10px 0 0;">
+			<!-- <select [(ngModel)]="operator"
+                (change)="onSearchSubscription()"
+                class="form-control">
+          <option value="All">All</option>
+          <option value="Ooredoo">Ooredoo</option>
+          <option value="Vadafone">Vadafone</option>
+        </select> -->
+		</div>
+		<div class="form-group col-sm-9"
+		     style="padding: 0;text-align: left;">
+			<!-- <input type="text"
+              placeholder="Search"
+              class="form-control" />
+               -->
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="onSearchSubscription()"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       [(ngModel)]="search"
+				       class="form-control"
+				       placeholder="Search">
+			</div>
+		</div>
+		<br>
+		<!-- <button class="btn btn-primary round-elem"
+           style="background: red; border-color: red"
+           (click)="addNew()">ADD NEW
+       </button> -->
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+		       style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th class="weight-600">ID</th>
+					<th class="weight-600">Name</th>
+					<th *ngIf="Roles?.role != '2'" class="weight-600">Email</th>
+					<th *ngIf="Roles?.role != '2'" class="weight-600">Phone #</th>
+					<th class="weight-600">Subscription Type</th>
+					<th class="weight-600">language</th>
+					<th class="weight-600">response code</th>
+					<th class="weight-600">type</th>
+					<th class="weight-600">price point</th>
+					<th class="weight-600">Starts On</th>
+					<th class="weight-600">Expires On</th>
+					<th class="weight-600">Created Time</th>
+
+					<!-- <th style="text-align: center; width: 200px;"
+				    class="weight-600">Actions</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let subscription of SubscriptionLogs">
+					<td>{{subscription.id == null ? 'N/A' : subscription.id}}</td>
+					<td>{{subscription.name == null ? 'N/A' : subscription.name}}</td>
+					<td *ngIf="Roles?.role != '2'" [title]="subscription.email">{{subscription.email == null ? 'N/A' : subscription.email}}</td>
+					<td *ngIf="Roles?.role != '2'">{{subscription.phone == null ? 'N/A' : subscription.phone}}</td>
+					<td>{{subscription.network == null ? 'N/A' : subscription.network}}</td>
+					<td>{{subscription.language == null ? 'N/A' : subscription.language}}</td>
+					<td>{{subscription.response_code == null ? 'N/A' : subscription.response_code}}</td>
+					<td>{{subscription.type == null ? 'N/A' : subscription.type}}</td>
+					<td>{{subscription.price_point == null ? 'N/A' : subscription.price_point}}</td>
+					<td>{{subscription.start_datetime == null ? 'N/A' : subscription.start_datetime}}</td>
+					<td>{{subscription.expiry_datetime == null ? 'N/A' : subscription.expiry_datetime}}</td>
+					<td>{{subscription.created_at == null ? 'N/A' : subscription.created_at}}</td>
+
+
+					<!-- <td style="text-align: center; width: 200px;">
+					<i title="EDIT"
+					   (click)="onEditSubscription(subscription)"
+					   class="action-btn">
+						<img  src="assets/images/actions/edit.png"
+						     alt="">
+					</i>
+					<i title="Delete"
+					   (click)="onDeleteSubscription(subscription)"
+					   class="action-btn">
+						<img src="assets/images/actions/delete.png"
+						     alt="">
+					</i>
+				</td> -->
+				</tr>
+				<tr *ngIf="SubscriptionLogs.length == 0">
+					<td colspan="100"
+					    style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</base-loader>
+<app-pagination *ngIf="SubscriptionLogs.length > 0"
+                (setPage)="setPage($event)"
+                [perPage]="perPage"
+                [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-pagination>

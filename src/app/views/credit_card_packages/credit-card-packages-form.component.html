@@ -1,0 +1,211 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} CREDIT CARD PACKAGE</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form">
+	<div style="margin-top: 20px"
+	     fxLayout="row wrap"
+	     fxLayoutAlign="space-between start"
+	     >
+		<div fxFlex="100">
+			<div fxLayout="row wrap"
+			     fxLayoutAlign="start start"
+			     fxLayoutGap="10px"
+			     >
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="name"
+							       type="text"
+							       required
+							       placeholder="Name">
+							<mat-error *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">Name
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="name_ar"
+								   type="text"
+								   dir="rtl"
+								   style="text-align: right"
+							       required
+							       placeholder="Name Arabic">
+							<mat-error *ngIf="getValue('name_ar')?.invalid && (getValue('name_ar')?.dirty || getValue('name')?.touched)">Name Arabic
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="sub_text"
+							       type="text"
+							       placeholder="Sub Text">
+							<mat-error *ngIf="getValue('sub_text')?.invalid && (getValue('sub_text')?.dirty || getValue('sub_text')?.touched)">Sub Text
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="sub_text_ar"
+								   type="text"
+								   dir="rtl"
+								   style="text-align: right"
+							       placeholder="Sub Text Arabic">
+							<mat-error *ngIf="getValue('sub_text_ar')?.invalid && (getValue('sub_text_ar')?.dirty || getValue('sub_text_ar')?.touched)">Sub Text
+								Arabic is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-select placeholder="Type"
+							            required
+							            formControlName="type"
+							            (change)="onChangeType($event)">
+								<mat-option value="1 month">1 Month</mat-option>
+								<mat-option value="3 months">3 Months</mat-option>
+								<mat-option value="6 months">6 Months</mat-option>
+								<mat-option value="1 year">1 Year</mat-option>
+								<mat-option value="days">Days</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('type')?.invalid && (getValue('type')?.dirty || getValue('type')?.touched)">Type
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48"
+				     *ngIf="isTypeDays">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="duration"
+							       type="number"
+							       required
+							       placeholder="Duration in days">
+							<mat-error *ngIf="getValue('duration')?.invalid && (getValue('duration')?.dirty || getValue('duration')?.touched)">Duration
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="qatar_value"
+							       type="number"
+							       required
+							       placeholder="{{selectedApp == 4? 'Kuwait' : 'Qatar'}} Value">
+							<mat-error *ngIf="getValue('qatar_value')?.invalid && (getValue('qatar_value')?.dirty || getValue('qatar_value')?.touched)">{{selectedApp == 4? 'Kuwait' : 'Qatar'}}
+								Value
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<!-- <div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="kuwait_value"
+							       type="number"
+							       required
+							       placeholder="Kuwait Value">
+							<mat-error *ngIf="getValue('kuwait_value')?.invalid && (getValue('kuwait_value')?.dirty || getValue('kuwait_value')?.touched)">Kuwait
+								Value
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div> -->
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="doller_value"
+							       type="number"
+							       required
+							       placeholder="Doller Value">
+							<mat-error *ngIf="getValue('doller_value')?.invalid && (getValue('doller_value')?.dirty || getValue('doller_value')?.touched)">Doller
+								Value
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<!--<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="savings"
+							       type="number"
+							       required
+							       placeholder="Savings">
+							<mat-error *ngIf="getValue('savings')?.invalid && (getValue('savings')?.dirty || getValue('savings')?.touched)">Savings
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>-->
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div style="margin-top: 20px"
+		     class="col-sm-12">
+			<button type="button"
+			        (click)="doSubmit()"
+			        [disabled]="Form.invalid || isLoading"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				{{isEditing? 'UPDATE': 'ADD'}}
+			</button>
+			<img *ngIf="isLoading"
+			     class="loader-btn-image"
+			     src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

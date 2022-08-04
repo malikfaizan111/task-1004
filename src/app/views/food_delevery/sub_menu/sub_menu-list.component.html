@@ -1,0 +1,119 @@
+<div class="row">
+	<div class="col-sm-6">
+		<button mat-icon-button
+				(click)="onLocationBack()"
+				color="accent">
+			<img src="assets/images/actions/back.png"
+				 alt="">
+		</button>
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			SUB MENU
+
+		</span>
+	</div>
+	<div class="col-sm-6"
+		 style="text-align: right">
+		<div class="form-group col-sm-3"
+			 style="padding: 0 10px 0 0;">
+		</div>
+		<div class="form-group col-sm-9"
+			 style="padding: 0;text-align: left;">
+			<div class="input-group">
+				<input autocomplete="false"
+					   type="text"
+					   maxlength="50"
+					   class="form-control"
+					   [(ngModel)]="search"
+					   (keyup)="onSearchParentOutlet()"
+					   placeholder="Search">
+				<span style="cursor: pointer;"
+					  (click)="gerParentOutletsList(1)"
+					  class="input-group-addon">
+					<i class="glyphicon glyphicon-search"></i>
+				</span>
+			</div>
+		</div>
+		<br>
+		<button class="btn btn-primary round-elem"
+				style="background: red; border-color: red"
+				(click)="addNew()">ADD NEW
+		</button>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+			   style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>HEADING</th>
+          <th>ARABIC HEADING</th>
+          <!-- <th>ID CSV</th> -->
+          <th>MENU TYPE</th>
+          <th>STATUS</th>
+					<th>SELECTION TYPE</th>
+					<th>TITLE</th>
+					<th>ARABIC TITLE</th>
+					<th>Action</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr *ngFor="let deal of RestaurantsParentOutlets">
+					<td>{{deal.id == null ? 'N/A' : deal.id}}</td>
+					<td>{{deal.heading == null ? 'N/A' : deal.heading}}</td>
+          <td>{{deal.heading_ar == null ? 'N/A' : deal.heading_ar}}</td>
+          <!-- <td>{{deal?.id_csv}}</td> -->
+          <td>{{deal.menu_type == null ? 'N/A' : deal.menu_type}}</td>
+          <td>
+            <mat-slide-toggle [(ngModel)]="deal.slide"
+            color="accent" (change)="changeMenuStatus(deal)"></mat-slide-toggle>
+          </td>
+					<td>{{deal.selection_type == null ? 'N/A' : deal.selection_type}}</td>
+					<td>{{deal.title == null ? 'N/A' : deal.title}}</td>
+					<td>{{deal.title_ar == null ? 'N/A' : deal.title_ar}}</td>
+
+					<td style="min-width: 375px;">
+						<button style="min-width: 50px;"
+								mat-raised-button
+								color="accent"
+								(click)="onDelete(deal)">Delete
+						</button>
+
+
+						<button style="min-width: 50px;"
+								mat-raised-button
+								color="accent"
+								(click)="onEditSubMenu(deal)">
+							EDIT
+						</button>
+
+
+						<button style="min-width: 50px;"
+								mat-raised-button
+								color="accent"
+								(click)="onSubMenuItem(deal)">
+							SUB MENU ITEM
+						</button>
+
+					</td>
+
+				</tr>
+				<!-- <tr *ngIf="RestaurantsParentOutlets.length == 0">
+					<td colspan="100"
+						style="text-align: center">No record found.</td>
+
+				</tr> -->
+
+			</tbody>
+		</table>
+	</div>
+
+	<app-pagination *ngIf="RestaurantsParentOutlets.length > 0"
+					(setPage)="setPage($event)"
+					[perPage]="perPage"
+					[totalPages]="totalPages"
+					[currentPage]="currentPage"></app-pagination>
+</base-loader>

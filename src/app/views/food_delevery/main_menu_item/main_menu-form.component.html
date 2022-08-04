@@ -1,0 +1,126 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} MAIN MENU ITEM</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<!-- <div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<input type="text"
+						   placeholder="Select Restaurant"
+						   matInput
+						   formControlName="parentObject"
+						   [matAutocomplete]="auto">
+					<mat-autocomplete #auto="matAutocomplete"
+									  [displayWith]="displayFnParent">
+						<mat-option *ngFor="let option of filteredParentOptions | async"
+									[value]="option">
+							{{option.name}}
+						</mat-option>
+					</mat-autocomplete>
+					<mat-error
+							   *ngIf="getValue('parentObject')?.invalid && (getValue('parentObject')?.dirty || getValue('parentObject')?.touched)">
+						Restaurant
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div> -->
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name"
+						   type="text"
+						   required
+						   placeholder="name">
+					<mat-error
+							   *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+						name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="48"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name_ar"
+						   type="text"
+						   dir="rtl"
+						   style="text-align: right"
+						   required
+						   placeholder="Name Arabic">
+					<mat-error
+							   *ngIf="getValue('name_ar')?.invalid && (getValue('name_ar')?.dirty || getValue('name')?.touched)">
+						Name Arabic
+						is required</mat-error>
+				</mat-form-field>
+			</div>
+    </div>
+    <div fxFlex.xl="32"
+    fxFlex.lg="48"
+    fxFlex.md="48">
+   <div class="form-group mb-0">
+     <mat-form-field style="width: 100%">
+       <input matInput
+            formControlName="id_csv"
+            type="text"
+            placeholder="ID CSV">
+       <!-- <mat-error
+              *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+         name is required</mat-error> -->
+     </mat-form-field>
+   </div>
+ </div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ADD NEW MENU
+			</button>
+			<button type="submit"
+					*ngIf="isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				UPDATE MENU
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

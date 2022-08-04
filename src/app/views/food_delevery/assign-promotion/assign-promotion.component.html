@@ -1,0 +1,92 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>ASSIGN PROMOTION</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+       <div class="ng-autocomplete">
+        <ng-autocomplete [data]="parentsList"
+								 formControlName="outlets_parent_name"
+								 searchKeyword="name"
+								 placeHolder="Select Restaurant"
+								 (selected)='selectEvent($event)'
+								 (inputChanged)='onChangeSearch($event)'
+								 (inputCleared)='onCleared($event)'
+								 [itemTemplate]="itemTemplate1"
+								 [notFoundTemplate]="notFoundTemplate1">
+				</ng-autocomplete>
+
+				<ng-template #itemTemplate1
+							 let-item>
+					<a [innerHTML]="item.name"></a>
+				</ng-template>
+
+				<ng-template #notFoundTemplate1
+							 let-notFound>
+					<div [innerHTML]="notFound"></div>
+				</ng-template>
+			</div>
+		</div>
+  </div>
+
+  <div style="margin-top: 15px;">
+    <span > <strong> Selected Outlet: </strong>
+       <span *ngIf="!selectedOutlet" style="color: darkgray;margin-left: 13px;">No Outlet Selected</span>
+       <span>{{ selectedOutlet?.name }}</span>
+    </span>
+  </div>
+
+
+  <!-- <h3 class="ml-10">Selected Outlets</h3> -->
+  <!-- <button style="display: flex;justify-content: flex-end;" mat-icon-button>
+    <mat-icon>highlight_off</mat-icon>
+  </button> -->
+
+  <!-- <div id="outletList" *ngIf="selectedOutlets.length != 0">
+    <div *ngFor="let outlet of selectedOutlets">
+      <span> {{ outlet.name }} </span> <span class="cross"> <mat-icon (click)="removeOutlet(outlet)">highlight_off</mat-icon></span>
+    </div>
+  </div>
+
+  <span *ngIf="selectedOutlets.length == 0" style="color: darkgray;margin-left: 13px;">No Outlet Selected</span> -->
+
+  <div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					[disabled]="!selectedOutlet || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ASSIGN
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+  </div>
+</form>
+
+

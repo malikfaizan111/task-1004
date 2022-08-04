@@ -1,0 +1,45 @@
+<div style="width: 550px; height: 90vh;" class="wrapper">
+  <div style="height: 170px; overflow-y: auto;">
+    <ul class="tag">
+      <li *ngFor="let item of formdataid">
+        {{item.name}}
+      </li>
+    </ul>
+  </div>
+  <div class="content-head clearfix" style="margin-top:10px;margin-bottom:20px;">
+    <input autocomplete="false" type="text" maxlength="50" class="form-control" [(ngModel)]="search"
+      (keyup)="onSearchOutlet()" placeholder="Search">
+  </div>
+  <div class="data-table" style="max-height : 330px; overflow-y: auto; min-height: 330px;">
+    <table *ngIf="Outlets.length != 0" class="table table-responsive table-striped"
+      style="width:100%; margin-top: 15px">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>OUTLET NAME</th>
+          <th>SELECT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let outlet of Outlets">
+          <td>{{outlet.id}}</td>
+          <td [title]="outlet.name">{{outlet.name}}</td>
+          <td><input (change)="onChecked(outlet)" type="checkbox" [(ngModel)]="outlet.checked"></td>
+        </tr>
+        <tr *ngIf="outletsCount == 0">
+          <td colspan="100" style="text-align: center">No record found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row text-center" style="margin-top: 5px;  margin-bottom: 25px;">
+    <button [disabled]="formdataid.length == 0" (click)="onSelectChange($event)" type="button" class="btn btn-primary round-elem"
+      style="background: red; border-color: red; width: 75px; margin-right: 5px;">
+      Save
+    </button>
+    <button (click)="closingdialog()" type="button" class="btn btn-primary round-elem"
+      style="background: #ccc; border-color: #ccc; width: 75px;">
+      Close
+    </button>
+  </div>
+</div>

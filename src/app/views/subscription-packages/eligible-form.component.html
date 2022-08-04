@@ -1,0 +1,336 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+				<button mat-icon-button (click)="onLocationBack()" color="accent">
+					<img src="assets/images/actions/back.png" alt="">
+				</button>
+				<span>Add New</span>
+			</div>
+		</span>
+	</div>
+</div>
+
+<form [formGroup]="Form">
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start" >
+		<div fxFlex="50">
+			<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px" >
+				<div fxFlex="100">
+					<div *ngIf="scenario == 'card_only'" fxFlex.xl="40" fxFlex.lg="40" fxFlex.md="40">
+						<mat-form-field style="width: 100%;">
+							<mat-label style="color: #3D8F96;">Package Type</mat-label>
+							<mat-select matInput [(ngModel)]="selectVariable" disableOptionCentering [ngModelOptions]="{standalone: true}" (selectionChange)="onOptionChange(selectVariable)">
+								<mat-option value="card_package">Card Package</mat-option>
+								<mat-option value="special_package">Special Package</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div *ngIf="scenario == 'not_eligible'" fxFlex.xl="40" fxFlex.lg="40" fxFlex.md="40">
+						<mat-form-field style="width: 100%;">
+							<mat-label style="color: #3D8F96;">Package Type</mat-label>
+							<mat-select matInput [(ngModel)]="selectVariable" disableOptionCentering [ngModelOptions]="{standalone: true}" (selectionChange)="onOptionChange(selectVariable)">
+								<mat-option value="monthly_renewing">Monthly Renewing</mat-option>
+								<mat-option value="card_package">Card Package</mat-option>
+								<mat-option value="special_package">Special Package</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div *ngIf="scenario == 'eligible'" fxFlex.xl="40" fxFlex.lg="40" fxFlex.md="40">
+						<mat-form-field style="width: 100%;">
+							<mat-label style="color: #3D8F96;">Package Type</mat-label>
+							<mat-select matInput [(ngModel)]="selectVariable" disableOptionCentering [ngModelOptions]="{standalone: true}" (selectionChange)="onOptionChange(selectVariable)">
+								<!-- <mat-option value="free_subscription">Free Subscription</mat-option> -->
+								<mat-option value="card_package">Card Package</mat-option>
+								<mat-option value="special_package">Special Package</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxflex="100" fxLayoutAlign="space-between start"
+					style="width: 100%; margin-top: 10px !important; padding-left: 10px; text-align: center;">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10">
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<label>English</label>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+
+						<label>Arabic</label>
+					</div>
+				</div>
+				<div fxflex="100" fxLayoutAlign="space-between start"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;">
+					<div *ngIf="selectVariable != 'free_subscription'" fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>Title</label>
+					</div>
+					<div *ngIf="selectVariable == 'free_subscription'" fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>Subtext 1</label>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input matInput formControlName="name" type="text" required placeholder="Name" style="text-align: left">
+								<mat-error
+									*ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+									Name
+									is required / Character limit exceeded</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input matInput formControlName="name_ar" type="text"
+									style="text-align: right;" required placeholder="Name Arabic">
+								<mat-error
+									*ngIf="getValue('name_ar')?.invalid && (getValue('name_ar')?.dirty || getValue('name_ar')?.touched)">
+									Name Arabic
+									is required / Character limit exceeded</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+				</div>
+
+				<div fxflex="100" fxLayoutAlign="space-between start"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;">
+					<div *ngIf="selectVariable != 'free_subscription'" fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>Subtext</label>
+					</div>
+					<div *ngIf="selectVariable == 'free_subscription'" fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>Subtext 2</label>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<textarea matInput placeholder="Sub Text" formControlName="sub_text" style="resize: none; height: 45px; overflow: hidden; text-align: left;"
+									cols="30" rows="2"></textarea>
+								<mat-error
+									*ngIf="getValue('sub_text')?.invalid && (getValue('sub_text')?.dirty || getValue('sub_text')?.touched)">
+									Sub Text
+									is required / Character limit exceeded</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<textarea matInput placeholder="Sub Text Arabic" formControlName="sub_text_ar" style="resize: none; height: 45px; text-align: right; overflow: hidden;"
+									 cols="30" rows="2"></textarea>
+								<mat-error
+									*ngIf="getValue('sub_text_ar')?.invalid && (getValue('sub_text_ar')?.dirty || getValue('sub_text_ar')?.touched)">
+									Sub Text
+									Arabic is required /  Character limit exceeded</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+				</div>
+				<!-- <div fxflex="100" fxLayoutAlign="space-between start"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;"
+					*ngIf="selectVariable == 'free_subscription'">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>Subtext</label>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<textarea matInput placeholder="Sub Text" formControlName="sub_text" maxlength="112" style="resize: none; height: 55px; overflow: hidden; text-align: left;"
+									cols="30" rows="3"></textarea>
+								<mat-error
+									*ngIf="getValue('sub_text')?.invalid && (getValue('sub_text')?.dirty || getValue('sub_text')?.touched)">
+									Sub Text
+									is required</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<textarea matInput placeholder="Sub Text Arabic" formControlName="sub_text_ar" style="resize: none; height: 55px; text-align: right; overflow: hidden;"
+									maxlength="112" cols="30" rows="3"></textarea>
+								<mat-error
+									*ngIf="getValue('sub_text_ar')?.invalid && (getValue('sub_text_ar')?.dirty || getValue('sub_text_ar')?.touched)">
+									Sub Text
+									Arabic is required</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+				</div> -->
+				<div fxflex="100" fxLayoutAlign="space-between start" fxLayoutGap="10px"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;"
+					*ngIf="selectVariable != 'free_subscription' && selectVariable != 'special_package'">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>Days</label>
+					</div>
+					<div fxFlex.xl="35" fxFlex.lg="35" fxFlex.md="35">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input style="height: 15px; text-align: left; padding-left: 10px;" matInput formControlName="duration" type="number" placeholder="No of Days">
+								<mat-error
+									*ngIf="getValue('duration')?.invalid && (getValue('duration')?.dirty || getValue('duration')?.touched)">
+									Days
+									are required</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="51" fxFlex.lg="51" fxFlex.md="51">
+						<div class="form-group mb-0">
+						</div>
+					</div>
+				</div>
+				<div fxflex="100" fxLayoutAlign="space-between start"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;"
+					*ngIf="selectVariable != 'free_subscription' && selectVariable != 'special_package'">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>QAR</label>
+					</div>
+					<div fxFlex.xl="35" fxFlex.lg="35" fxFlex.md="35">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input style="height: 15px; text-align: left; padding-left: 10px;" matInput formControlName="qatar_value" type="number" placeholder="QAR">
+								<!-- <mat-error
+									*ngIf="getValue('qatar_value')?.invalid && (getValue('qatar_value')?.dirty || getValue('qatar_value')?.touched)">
+									QAR
+									is required</mat-error> -->
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="51" fxFlex.lg="51" fxFlex.md="51">
+						<div class="form-group mb-0">
+						</div>
+					</div>
+				</div>
+				<div fxflex="100" fxLayoutAlign="space-between start"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;"
+					*ngIf="selectVariable != 'free_subscription' && selectVariable != 'special_package'">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>USD</label>
+					</div>
+					<div fxFlex.xl="35" fxFlex.lg="35" fxFlex.md="35">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input matInput formControlName="doller_value" type="number" placeholder="USD" style="height: 15px; text-align: left; padding-left: 10px;">
+								<!-- <mat-error
+									*ngIf="getValue('doller_value')?.invalid && (getValue('doller_value')?.dirty || getValue('doller_value')?.touched)">
+									Dollar
+									is required</mat-error> -->
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="51" fxFlex.lg="51" fxFlex.md="51">
+						<div class="form-group mb-0">
+						</div>
+					</div>
+				</div>
+
+				<!-- Special Package Feilds Here  -->
+
+				<div fxflex="100" fxLayoutAlign="space-between start" fxLayoutGap="10px"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;"
+					*ngIf="selectVariable == 'special_package'">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>Days</label>
+					</div>
+					<div fxFlex.xl="35" fxFlex.lg="35" fxFlex.md="35">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input matInput formControlName="duration" type="number" placeholder="No of Days" 
+								style="height: 15px; text-align: left; padding-left: 10px;">
+								<mat-error
+									*ngIf="getValue('duration')?.invalid && (getValue('duration')?.dirty || getValue('duration')?.touched)">
+									Days
+									are required</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="51" fxFlex.lg="51" fxFlex.md="51">
+						<div class="form-group mb-0">
+						</div>
+					</div>
+				</div>
+				<div fxflex="100" fxLayoutAlign="space-between start" *ngIf="selectVariable == 'special_package'"
+					style="width: 100%; margin-top: 10px; padding-left: 10px; text-align: center;">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10">
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<label>Standard</label>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+
+						<label>Special</label>
+					</div>
+				</div>
+				<div fxflex="100" fxLayoutAlign="space-between start"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;"
+					*ngIf="selectVariable == 'special_package'">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>QAR</label>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input style="height: 15px; text-align: left; padding-left: 10px;" matInput formControlName="standard_value" type="number" placeholder="QAR">
+								<!-- <mat-error
+									*ngIf="getValue('standard_value')?.invalid && (getValue('standard_value')?.dirty || getValue('standard_value')?.touched)">
+									Standard QAR
+									is required</mat-error> -->
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input style="height: 15px; text-align: left; padding-left: 10px;" matInput formControlName="qatar_value" type="number" 
+									  placeholder="QAR Special">
+								<!-- <mat-error
+									*ngIf="getValue('qatar_value')?.invalid && (getValue('qatar_value')?.dirty || getValue('qatar_value')?.touched)">
+									QAR Special
+									is required</mat-error> -->
+							</mat-form-field>
+						</div>
+					</div>
+				</div>
+				<div fxflex="100" fxLayoutAlign="space-between start"
+					style="width: 100%; margin-top: 10px; padding-left: 10px;"
+					*ngIf="selectVariable == 'special_package'">
+					<div fxFlex.xl="10" fxFlex.lg="10" fxFlex.md="10" style="padding-top: 2%;">
+						<label>USD</label>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field appearance="fill" style="width: 100%">
+								<input matInput formControlName="standard_doller_value" type="number" placeholder="USD" style="height: 15px; text-align: left; padding-left: 10px;">
+								<!-- <mat-error
+									*ngIf="getValue('standard_doller_value')?.invalid && (getValue('standard_doller_value')?.dirty || getValue('standard_doller_value')?.touched)">
+									Standard Dollar Value
+									is required</mat-error> -->
+							</mat-form-field>
+						</div>
+					</div>
+					<div fxFlex.xl="43" fxFlex.lg="43" fxFlex.md="43">
+						<div class="form-group mb-0">
+							<mat-form-field  appearance="fill" style="width: 100%">
+								<input matInput formControlName="doller_value" type="number" 
+									  placeholder="USD Special" style="height: 15px; text-align: left; padding-left: 10px;">
+								<!-- <mat-error
+									*ngIf="getValue('doller_value')?.invalid && (getValue('doller_value')?.dirty || getValue('doller_value')?.touched)">
+									Special Dollar
+									is required</mat-error> -->
+							</mat-form-field>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div style="margin-top: 20px" class="col-sm-12">
+			<button type="button" (click)="doSubmit()" 
+			
+				class="btn btn-primary round-elem" style="background: red; border-color: red; width: 100px;" [disabled]="Form.invalid">
+				Add
+			</button>
+			<img *ngIf="isLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+		</div>
+	</div>
+</form>

@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            EDIT SELECTED DEALS
+        </span>
+    </div>
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button (click)="onCloseClick()"
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>
+
+<form [formGroup]="Form"
+      (ngSubmit)="onSubmit()">
+    <div style="margin-top: 20px"
+         fxLayout="row wrap"
+         fxLayoutAlign="space-between start"
+         fxLayoutGap="10px"
+         >
+        <div fxFlex.xl="32"
+             fxFlex.lg="48"
+             fxFlex.md="48">
+            <div class="form-group mb-0">
+                <mat-form-field style="width: 100%">
+                    <input matInput
+                           [owlDateTime]="startDate"
+                           [owlDateTimeTrigger]="startDate"
+                           readonly
+                           [min]="currentDate"
+                           [max]="EndDate"
+                           [(ngModel)]="StartDate"
+                           [ngModelOptions]="{standalone: true}"
+                           (dateTimeChange)="onStartDate()"
+                           type="text"
+                           placeholder="Start Date">
+
+                    <i matSuffix
+                       class="glyphicon glyphicon-time"></i>
+
+                    <owl-date-time pickerType="both"
+                                   #startDate></owl-date-time>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxFlex.xl="32"
+             fxFlex.lg="48"
+             fxFlex.md="48">
+            <div class="form-group mb-0">
+                <mat-form-field style="width: 100%;">
+                    <input matInput
+                           [owlDateTime]="endDate"
+                           [owlDateTimeTrigger]="endDate"
+                           readonly
+                           [min]="StartDate"
+                           [(ngModel)]="EndDate"
+                           [ngModelOptions]="{standalone: true}"
+                           (dateTimeChange)="onEndDate()"
+                           type="text"
+                           placeholder="End Date">
+
+                    <i matSuffix
+                       class="glyphicon glyphicon-time"></i>
+
+                    <owl-date-time pickerType="both"
+                                   #endDate></owl-date-time>
+                </mat-form-field>
+            </div>
+        </div>
+        <mat-slide-toggle (change)="onChangeStatus()"
+                          [(ngModel)]="status"
+                          [ngModelOptions]="{standalone: true}"
+                          color="accent">
+        </mat-slide-toggle>
+    </div>
+
+
+    <div class="row">
+        <div style="margin-top: 20px; text-align: right;"
+             class="col-sm-12">
+            <button type="button"
+                    (click)="onCloseClick()"
+                    [disabled]="isLoading"
+                    class="btn btn-primary round-elem"
+                    style="background: red; border-color: red;margin-right: 4px;">
+                Cancel
+            </button>
+            <button type="submit"
+                    [disabled]="Form.invalid || isLoading"
+                    class="btn btn-primary round-elem"
+                    style="background: red; border-color: red">
+                Submit
+            </button>
+            <img *ngIf="isLoading"
+                 class="loader-btn-image"
+                 src="assets/images/view-loader.gif">
+        </div>
+
+    </div>
+</form>

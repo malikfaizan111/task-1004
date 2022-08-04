@@ -1,0 +1,332 @@
+<div *ngIf="!wallet" class="row">
+	<app-loader [totalRecords]="ArrayCSVCount"
+				[completedRecords]="ArrayCSV.length"
+				[loaderMessage]="loaderMessage"></app-loader>
+  <div style="width: fit-content;" class="col-sm-2">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			{{title}}
+		</span>
+  </div>
+  <div class="col-sm-2">
+    <ng-container *ngIf="type == 'registered' && Roles.role == '1'">
+      <button class="btn btn-primary round-elem"
+              style="background: red; border-color: red"
+              [disabled]="Customers.length == 0"
+              (click)="onExportCSV()">Export CSV
+      </button>
+    </ng-container>
+    <ng-container *ngIf="type == 'non_registered' && Roles.role == '1'">
+			<button class="btn btn-primary round-elem"
+					    style="background: red; border-color: red"
+					    [disabled]="Customers.length == 0"
+					    (click)="onExportCSV()">Export CSV
+			</button>
+    </ng-container>
+  </div>
+	<ng-container *ngIf="type == 'registered'">
+		<div class="col-sm-8"
+			 style="text-align: right">
+			<div class="form-group col-sm-2"
+				 style="padding: 0 10px 0 0;">
+				<select [(ngModel)]="operator"
+						(change)="gerCustomersList(1)"
+						class="form-control">
+					<option disabled>Network</option>
+					<option value="All">All</option>
+					<option value="ooredoo">Ooredoo</option>
+					<option value="vodafone">Vodafone</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-3"
+				 style="padding: 0 10px 0 0;">
+				<select [(ngModel)]="sortby"
+						(change)="gerCustomersList(1)"
+						placeholder="Sort By"
+						class="form-control">
+					<option disabled>Sort By</option>
+					<option value="network">All</option>
+					<option value="name">Name</option>
+					<option value="email">Email</option>
+					<option value="created_at">Created Date</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-3"
+				 style="padding: 0 10px 0 0;">
+				<select [(ngModel)]="orderby"
+						(change)="gerCustomersList(1)"
+						placeholder="Order By"
+						class="form-control">
+					<option disabled>Order By</option>
+					<option value="ASC">ASC</option>
+					<option value="DESC">DESC</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-4"
+				 style="padding: 0;text-align: left;">
+				<div class="input-group">
+          <span style="cursor: pointer;"
+          (click)="gerCustomersList(1)"
+          class="input-group-addon">
+        <i class="glyphicon glyphicon-search"></i>
+
+      </span>
+					<input autocomplete="false"
+						   type="text"
+						   maxlength="50"
+						   [(ngModel)]="search"
+						   (keyup)="onSearchCustomer()"
+						   class="form-control"
+						   placeholder="Search">
+				</div>
+			</div>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="type == 'non_registered'">
+		<div class="col-sm-7"
+			 style="text-align: right">
+			<div class="col-sm-6">
+
+			</div>
+			<div class="form-group col-sm-2"
+				 style="padding: 0 10px 0 0;">
+				<select [(ngModel)]="isPremier"
+						(change)="gerCustomersList(1)"
+						class="form-control">
+					<option disabled>Filter By</option>
+					<option value="All">All</option>
+					<option value="premier">Premier</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-4"
+				 style="padding: 0;text-align: left;">
+				<div class="input-group">
+          <span style="cursor: pointer;"
+          (click)="gerCustomersList(1)"
+          class="input-group-addon">
+        <i class="glyphicon glyphicon-search"></i>
+
+      </span>
+					<input autocomplete="false"
+						   type="text"
+						   maxlength="50"
+						   [(ngModel)]="search"
+						   (keyup)="onSearchCustomer()"
+						   class="form-control"
+						   placeholder="Search">
+				</div>
+			</div>
+		</div>
+	</ng-container>
+</div>
+<base-loader>
+	<div *ngIf="!wallet" class="data-table">
+		<table class="table table-responsive table-striped"
+			   style="width:100%; margin-top: 15px">
+
+			<ng-container *ngIf="type == 'registered'">
+				<thead>
+					<tr>
+						<th class="weight-600">ID</th>
+						<th class="weight-600">Name</th>
+						<th *ngIf="Roles?.role != '2'"
+							class="weight-600">Email</th>
+						<th *ngIf="Roles?.role != '2'"
+							class="weight-600">Phone #</th>
+						<th class="weight-600">GENDER</th>
+						<th class="weight-600">Operator</th>
+						<th class="weight-600">Created At</th>
+						<th class="weight-600">nationality</th>
+						<th class="weight-600">Last Login</th>
+						<!-- <th class="weight-600">Last Login Time</th> -->
+						<th class="weight-600">Last Order</th>
+						<!-- <th class="weight-600">Last Order Time</th> -->
+						<th class="weight-600">device Type</th>
+						<th class="weight-600">device info</th>
+						<th class="weight-600">Savings</th>
+						<th class="weight-600">Deal Used</th>
+						<th *ngIf="Roles?.role != '3'" style="text-align: center; width: 200px;"
+							class="weight-600">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let customer of Customers"
+						(click)="onViewDetails(customer)">
+						<td>{{customer.id}}</td>
+						<td [title]="customer.name">{{customer.name == null ? 'N/A' : customer.name}}</td>
+						<td *ngIf="Roles?.role != '2'"
+							[title]="customer.email">{{customer.email == null ? 'N/A' : customer.email}}</td>
+						<td *ngIf="Roles?.role != '2'"
+							[title]="customer.phone">{{customer.phone == null ? 'N/A' : customer.phone}}</td>
+						<td [title]="customer.gender">{{customer.gender == null ? 'N/A' : customer.gender}}</td>
+						<td [title]="customer.network">{{customer.network == null ? 'N/A' : customer.network}}</td>
+						<td [title]="customer.created_at">{{customer.created_at}}</td>
+						<td [title]="customer.nationality">{{customer.nationality == null || customer.nationality == '' ? 'N/A' :
+							customer.nationality}}</td>
+						<!-- <td [title]="customer.last_timestamp | date : 'yyyy-MM-dd'">{{customer.last_timestamp == null ? 'N/A' : customer.last_timestamp | date : 'yyyy-MM-dd'}}</td> -->
+						<td [title]="customer.last_timestamp | date : 'yyyy-MM-dd HH:mm a'">
+							{{customer.last_timestamp == null ? 'N/A' : customer.last_timestamp | date : 'yyyy-MM-dd HH:mm a'}}
+						</td>
+						<!-- <td [title]="customer.last_order_timestamp | date : 'yyyy-MM-dd'">{{customer.last_order_timestamp == null ? 'N/A' : customer.last_order_timestamp | date : 'yyyy-MM-dd'}}</td> -->
+						<td [title]="customer.last_order_timestamp | date : 'yyyy-MM-dd HH:mm a'">
+							{{customer.last_order_timestamp == null ? 'N/A' : customer.last_order_timestamp | date : 'yyyy-MM-dd HH:mm a'}}
+						</td>
+						<td [title]="customer.deviceType">{{customer.deviceType == null ? 'N/A' : customer.deviceType}}
+						</td>
+						<td [title]="customer.device_info">
+							{{customer.device_info == null ? 'N/A' : customer.device_info}}</td>
+						<td [title]="customer.totalsaving">
+							{{customer.totalsaving == null ? 'N/A' : customer.totalsaving}}</td>
+						<td [title]="customer.totalDealsUsed">
+							{{customer.totalDealsUsed == null ? 'N/A' : customer.totalDealsUsed}}</td>
+						<td *ngIf="Roles?.role != '3'" style="text-align: center; max-width: 200px;">
+							<i title="Edit Customer"
+							   (click)="onEditCustomer(customer)"
+							   class="action-btn">
+								<img width="18"
+									 src="assets/images/actions/edit.png"
+                   onmouseover="this.src='assets/images/actions-white/user-white.png'"
+                   onmouseout="this.src='assets/images/actions/edit.png'"
+									 alt="">
+							</i>
+							<i title="Subscriptions"
+							   (click)="onViewSubscriptions(customer)"
+							   class="action-btn">
+								<img width="18"
+									 src="assets/images/actions/subscribe.png"
+                   onmouseover="this.src='assets/images/actions-white/subscription-white.png'"
+                   onmouseout="this.src='assets/images/actions/subscribe.png'"
+									 alt="">
+							</i>
+							<i title="Subscriptions Logs"
+							   (click)="onViewSubscriptionLogs(customer)"
+							   class="action-btn">
+								<img width="18"
+									 src="assets/images/actions/subscribe-log.png"
+                   onmouseover="this.src='assets/images/actions-white/subscription-logs.png'"
+                   onmouseout="this.src='assets/images/actions/subscribe-log.png'"
+									 alt="">
+							</i>
+							<i title="Orders"
+							   (click)="onViewOrders(customer)"
+							   class="action-btn">
+								<img width="18"
+									 src="assets/images/actions/orders.png"
+                   onmouseover="this.src='assets/images/actions-white/order-white.png'"
+                   onmouseout="this.src='assets/images/actions/orders.png'"
+									 alt="">
+							</i>
+							<i 		title="SMS Logs"
+									(click)="onViewSMSLogs(customer)"
+									class="action-btn">
+									<img width="18"
+									 src="assets/images/actions/sms-logs.png"
+                   onmouseover="this.src='assets/images/actions-white/sms-log-white.png'"
+                   onmouseout="this.src='assets/images/actions/sms-logs.png'"
+									 alt="">
+              </i>
+              <!-- <i title="Wallet"
+              (click)="openWallet()"
+              class="action-btn">
+              <mat-icon style="vertical-align: middle;">account_balance_wallet</mat-icon>
+              </i> -->
+						</td>
+					</tr>
+					<tr *ngIf="Customers.length == 0">
+						<td colspan="100"
+							style="text-align: center">No record found.</td>
+					</tr>
+				</tbody>
+			</ng-container>
+			<ng-container *ngIf="type == 'non_registered'">
+				<thead>
+					<tr>
+						<th class="weight-600">ID</th>
+						<th *ngIf="Roles?.role != '2'"
+							class="weight-600">Phone</th>
+						<th class="weight-600">language</th>
+						<th class="weight-600">Premier</th>
+						<th class="weight-600">created at</th>
+						<th style="text-align: center">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let customer of Customers">
+						<td>{{customer.id}}</td>
+						<td *ngIf="Roles?.role != '2'"
+							[title]="customer.phone">{{customer.phone == null ? 'N/A' : customer.phone}}</td>
+						<td [title]="customer.language">{{customer.language == null ? 'N/A' : customer.language}}</td>
+						<td>{{customer.premier_user == '1' ? 'Yes' : 'No'}}</td>
+						<td [title]="customer.created_at">{{customer.created_at == null ? 'N/A' : customer.created_at}}
+						</td>
+						<!-- <button style="min-width: 50px;"
+								mat-raised-button
+								title="SMS Logs"
+								(click)="onViewSMSLogs(customer)"
+								color="accent"> -->
+                <td style="text-align: center;">
+                  <img width="18"
+                  (click)="onViewSMSLogs(customer)"
+                   src="assets/images/actions/subscribe-log.png"
+                   alt="">
+                </td>
+						<!-- </button> -->
+					</tr>
+					<tr *ngIf="Customers.length == 0">
+						<td colspan="100"
+							style="text-align: center">No record found.</td>
+					</tr>
+				</tbody>
+			</ng-container>
+		</table>
+  </div>
+
+
+  <!-- Wallet Form-->
+  <ng-container *ngIf="wallet">
+    <div class="row">
+      <div class="col-sm-3">
+        <button (click)="wallet = false" mat-icon-button color="accent">
+          <img style="vertical-align: baseline;" src="assets/images/actions/back.png" alt="">
+        </button>
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+          WALLET
+        </span>
+    </div>
+    </div>
+    <div style="margin-top: 10px;">
+      <div style="padding-top: 6px;font-weight: bold;">
+        Add amount in wallet:
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field style="width: 100%" floatPlaceholder="auto">
+            <input matInput [(ngModel)]="amount" type="text" placeholder="Amount">
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group" style="padding: 0 10px 0 0;">
+         <select style="width: 63%;" [(ngModel)]="currency"
+             (change)="gerCustomersList(1)"
+             class="form-control">
+           <option selected value="qar">QAR</option>
+           <option value="omr">OMR</option>
+         </select>
+       </div>
+        </div>
+      </div>
+      <button  class="btn btn-primary round-elem" style="background: red; border-color: red" [disabled]="!amount"
+      (click)="onExportCSV()">SAVE
+      </button>
+  </div>
+  </ng-container>
+
+
+<!-- Wallet Form-->
+
+
+</base-loader>
+<app-pagination *ngIf="!wallet && Customers.length > 0"
+				(setPage)="setPage($event)"
+				[perPage]="perPage"
+				[totalPages]="totalPages"
+				[currentPage]="currentPage"></app-pagination>

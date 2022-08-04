@@ -1,0 +1,92 @@
+<div class="row">
+	<div style="width: fit-content;" class="col-sm-4">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			BRANDS
+		</span>
+	</div>
+  <div *ngIf="UpAdmin.role == 1" class="col-sm-2">
+		<button class="btn btn-primary round-elem"
+		        style="background: red; border-color: red"
+		        (click)="addNew()">ADD NEW
+		</button>
+  </div>
+	<div class="col-sm-6"
+	     style="text-align: right;float: right;">
+		<div class="form-group col-sm-3"
+		     style="padding: 0 10px 0 0;">
+		</div>
+		<div class="form-group col-sm-9"
+		     style="padding: 0;text-align: left;">
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="getParentOutletsList(1)"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       class="form-control"
+				       [(ngModel)]="search"
+				       (keyup)="onSearchParentOutlet()"
+				       placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+		       style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th >BRAND ID</th>
+					<th>BRAND Name</th>
+					<th>Delivery Status</th>
+          <!-- <th *ngIf="UpAdmin.role == 1">Pickup Status</th> -->
+					<th *ngIf="UpAdmin.role == 1" style="text-align: center">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr *ngFor="let parentOutlet of ParentOutlets">
+					<td>{{parentOutlet.id}}</td>
+					<td>{{parentOutlet.name}}</td>
+          <td *ngIf="parentOutlet.delivery_status != '2'">{{parentOutlet.delivery_status=== null || parentOutlet.delivery_status=== '' ? 'N/A' : parentOutlet.delivery_status== 1 ? 'Yes' :'No' }}  </td>
+          <td *ngIf="parentOutlet.delivery_status == '2'"> Both </td>
+          <!-- <td *ngIf="UpAdmin.role == 1">
+            <mat-slide-toggle style="margin-left: 23px;" title="Change Status"
+              [(ngModel)]="parentOutlet.pickup"
+              (change)="updatePickUpStatus(parentOutlet)"
+              color="accent">
+            </mat-slide-toggle>
+          </td> -->
+					<td *ngIf="UpAdmin.role == 1" style="text-align: center; width: 100px;">
+						<button style="min-width: 50px;"
+						        mat-raised-button
+						        color="accent"
+						        (click)="onEditParentOutlet(parentOutlet)">Edit
+						</button>
+						<!-- <button style="min-width: 50px;"
+						        mat-raised-button
+						        color="accent"
+						        (click)="onDeleteParentOutlet(parentOutlet)">Delete
+						</button> -->
+					</td>
+				</tr>
+				<tr *ngIf="ParentOutlets.length == 0">
+					<td colspan="100"
+					    style="text-align: center">No record found.</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+	<app-pagination *ngIf="ParentOutlets.length > 0"
+	                (setPage)="setPage($event)"
+	                [perPage]="perPage"
+	                [totalPages]="totalPages"
+	                [currentPage]="currentPage"></app-pagination>
+</base-loader>

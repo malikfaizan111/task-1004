@@ -1,0 +1,114 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span>EDIT CUSTOMER</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+      (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+	     fxLayout="row wrap"
+	     fxLayoutAlign="space-between start"
+	     >
+		<div fxFlex="100">
+			<div fxLayout="row wrap"
+			     fxLayoutAlign="start start"
+			     fxLayoutGap="10px"
+			     >
+				<!-- <div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="pin"
+							       type="text"
+							       mask="9999"
+							       placeholder="Pin">
+							<mat-error *ngIf="getValue('pin')?.invalid && (getValue('pin')?.dirty || getValue('pin')?.touched)">Pin
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div> -->
+
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%"
+						                floatPlaceholder="auto">
+							<input matInput
+							       formControlName="email"
+							       type="email"
+							       placeholder="Email">
+							<mat-error *ngIf="getValue('email')?.invalid && (getValue('email')?.dirty || getValue('email')?.touched)">Email
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-select formControlName="gender"
+							            placeholder="Gender">
+								<mat-option value="male">Male</mat-option>
+								<mat-option value="female">Female</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('gender')?.invalid && (getValue('gender')?.dirty || getValue('gender')?.touched)">Gender
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-select formControlName="nationality"
+							            placeholder="Nationality">
+								<mat-option *ngFor="let country of Countries"
+								            [value]="country">
+									{{country}}
+								</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('nationality')?.invalid && (getValue('nationality')?.dirty || getValue('nationality')?.touched)">Nationality
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+		     class="col-sm-12">
+			<button type="submit"
+			        [disabled]="Form.invalid || isLoading"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				UPDATE CUSTOMER
+			</button>
+			<img *ngIf="isLoading"
+			     class="loader-btn-image"
+			     src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

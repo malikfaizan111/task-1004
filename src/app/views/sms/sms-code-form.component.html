@@ -1,0 +1,87 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+			     fxLayoutAlign="start center"
+			     fxLayoutGap="10px">
+				<button mat-icon-button
+				        (click)="onLocationBack()"
+				        color="accent">
+					<img src="assets/images/actions/back.png"
+					     alt="">
+				</button>
+				<span>SMS CODE</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form">
+	<div style="margin-top: 20px"
+	     fxLayout="row wrap"
+	     fxLayoutAlign="space-between start"
+	     >
+		<div fxFlex="100">
+			<div fxLayout="row wrap"
+			     fxLayoutAlign="start start"
+			     fxLayoutGap="10px"
+			     >
+				<div fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<textarea matInput
+							          placeholder="Message"
+							          formControlName="message"
+							          maxlength="1000"
+							          cols="30"
+							          rows="5"></textarea>
+							<mat-error *ngIf="getValue('message')?.invalid && (getValue('message')?.dirty || getValue('message')?.touched)">Message
+								is required and max 1000 characters.</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div style="margin-top: 20px"
+				     fxFlex.xl="48"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div>
+						<input (change)="convertFile($event)"
+						       style="margin-top: 20px"
+						       accept=".csv"
+						       type="file">
+
+						<a download
+						   target="_blank"
+						   href="assets/Sample-with-code.csv"
+						   class="btn btn-primary round-elem"
+						   style="background: red; border-color: red;height: 30px;margin-top: 15px;padding: 4px 14px;">
+							Download Sample
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+		     class="col-sm-12">
+			<button type="button"
+			        (click)="doSubmit()"
+			        [disabled]="Form.invalid || isLoading || Form.get('phones')?.value == null || Form.get('phones')?.value == ''|| Form.get('codes')?.value == null || Form.get('codes')?.value == ''"
+			        class="btn btn-primary round-elem"
+			        style="background: red; border-color: red">
+				SEND SMS WITH CODE
+			</button>
+			&nbsp;&nbsp;
+			<img *ngIf="isLoading"
+			     class="loader-btn-image"
+			     src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

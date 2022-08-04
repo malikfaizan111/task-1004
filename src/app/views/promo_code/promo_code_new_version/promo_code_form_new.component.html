@@ -1,0 +1,207 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+				<button mat-icon-button (click)="onLocationBack()" color="accent">
+					<img src="assets/images/actions/back.png" alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} CODE</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form" (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px" fxLayout="row wrap" fxLayoutAlign="space-between start">
+		<div fxFlex="100">
+			<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="title" type="text" required placeholder="Title">
+							<mat-error
+								*ngIf="getValue('title')?.invalid && (getValue('title')?.dirty || getValue('title')?.touched)">
+								Title
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<!-- <div fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+							       formControlName="days"
+							       type="text"
+							       mask="9999999"
+							       required
+							       placeholder="Days">
+							<mat-error *ngIf="getValue('days')?.invalid && (getValue('days')?.dirty || getValue('days')?.touched)">Days is
+								required</mat-error>
+						</mat-form-field>
+					</div>
+				</div> -->
+				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-label>Select Discount Type</mat-label>
+							<mat-select formControlName="discount_type">
+								<mat-option value="0">Percentage Discount</mat-option>
+								<mat-option value="1">Flat Discount</mat-option>
+
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="discount_value" type="number" min="1" required
+								placeholder="Discount">
+							<mat-error
+								*ngIf="getValue('discount_value')?.invalid && (getValue('discount_value')?.dirty || getValue('discount_value')?.touched)">
+								Discount is
+								required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<!-- <input matInput
+							       formControlName="expiry_datetime"
+							       type="text"
+							       required
+							       placeholder="expiry_datetime"> -->
+
+							<input matInput [owlDateTime]="datetime" [owlDateTimeTrigger]="datetime" readonly
+								[min]="currentDate" [(ngModel)]="expiryDatetime" [ngModelOptions]="{standalone: true}"
+								(dateTimeChange)="onSelectDate()" type="text" required placeholder="Expiry DateTime">
+							<i matSuffix class="glyphicon glyphicon-time"></i>
+							<owl-date-time pickerType="both" #datetime></owl-date-time>
+
+
+							<mat-error
+								*ngIf="getValue('expiry_datetime')?.invalid && (getValue('expiry_datetime')?.dirty || getValue('expiry_datetime')?.touched)">
+								Expiry
+								DateTime is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="redemptions" type="text" mask="999999" required
+								placeholder="Redemption">
+							<mat-error
+								*ngIf="getValue('redemptions')?.invalid && (getValue('redemptions')?.dirty || getValue('redemptions')?.touched)">
+								Redemption
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<!-- <div *ngIf="!isEditing"
+				     fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+
+						<mat-form-field style="width: 100%">
+							<mat-select formControlName="user_app_id"
+							            placeholder="App">
+								<mat-option value="1">App 1</mat-option>
+								<mat-option value="2">App 2</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('user_app_id')?.invalid && (getValue('user_app_id')?.dirty || getValue('user_app_id')?.touched)">App
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div> -->
+				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48" style="padding-top: 10px;">
+					<div class="form-group mb-0" style="margin-left: 7px;margin-top: 5px;">
+						<mat-checkbox [(ngModel)]="isMultiple" (change)="onChangeMultiple($event)"
+							[ngModelOptions]="{standalone: true}" value="false" color="primary">Multiple Access Codes
+						</mat-checkbox>
+					</div>
+				</div>
+				<div *ngIf="isMultiple" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="number" type="text"  mask="99999" required
+								placeholder="No Of Codes">
+							<mat-error
+								*ngIf="getValue('number')?.invalid && (getValue('number')?.dirty || getValue('number')?.touched)">
+								Number
+								Of Code is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="!isMultiple" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput formControlName="code" type="text" minlength="6" maxlength="6"
+								placeholder="Code">
+							<mat-error
+								*ngIf="getValue('code')?.invalid && (getValue('code')?.dirty || getValue('code')?.touched)">
+								6
+								characters.</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<mat-label>Select CreditCard Packages</mat-label>
+							<mat-select [(ngModel)]="creditcarditem" formControlName="creditcard_packages_id">
+								<mat-option *ngFor="let item of CreditCardPackagesItem" [value]="item.id">
+										<!-- {{item.name}} -->
+										&nbsp;&nbsp; {{item.scenario == 'card_only' ? '(CO)' : item.scenario == 'eligible' ? '(E)' : item.scenario == 'not_eligible' ? '(NE)' : '' }}
+										&nbsp;&nbsp; {{item.sub_text}}</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<!-- <div
+				fxFlex.xl="32"
+				fxFlex.lg="48"
+				fxFlex.md="48">
+			   <div class="form-group mb-0">
+				   <mat-form-field style="width: 100%">
+					   <input matInput
+							  formControlName="Discount"
+							  type="text"
+							  minlength="6"
+							  maxlength="6"
+							  placeholder="Enter Discount">
+					   <mat-error *ngIf="getValue('code')?.invalid && (getValue('code')?.dirty || getValue('code')?.touched)">6
+						   characters.</mat-error>
+				   </mat-form-field>
+			   </div>
+		   </div> -->
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px" class="col-sm-12">
+			<button type="submit" *ngIf="!isEditing" [disabled]="Form.invalid || isLoading || isDiscountType"
+				class="btn btn-primary round-elem" style="background: red; border-color: red">
+				ADD CODE
+			</button>
+			<button type="submit" *ngIf="isEditing" [disabled]="Form.invalid || isLoading || isDiscountType"
+				class="btn btn-primary round-elem" style="background: red; border-color: red">
+				UPDATE CODE
+			</button>
+			<img *ngIf="isLoading" class="loader-btn-image" src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

@@ -1,0 +1,225 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} CATEGORIES </span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex="100">
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start start"
+				 fxLayoutGap="10px"
+				 >
+
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="id"
+								   type="text"
+								   required
+								   placeholder="ID">
+							<mat-error
+									   *ngIf="getValue('id')?.invalid && (getValue('id')?.dirty || getValue('id')?.touched)">
+								id
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="name"
+								   type="text"
+								   required
+								   placeholder="name">
+							<mat-error
+									   *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('Name')?.touched)">
+								name
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="description"
+								   type="text"
+								   required
+								   placeholder="Description">
+							<mat-error
+									   *ngIf="getValue('description')?.invalid && (getValue('description')?.dirty || getValue('description')?.touched)">
+								description
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="name_ar"
+								   type="text"
+							   required
+								   dir="rtl"
+								   lang="ar"
+								   placeholder="Arabic Name">
+							<mat-error
+								   *ngIf="getValue('name_ar')?.invalid && (getValue('name_ar')?.dirty || getValue('name_ar')?.touched)">
+							Arabic name
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%"
+										>
+							<mat-label>Select Status</mat-label>
+							<mat-select formControlName="status">
+								<mat-option value='0'>status zero</mat-option>
+								<mat-option value='1'>status one</mat-option>
+
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+				<!-- <div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%"
+										appearance="outline">
+							<mat-label>Select Status</mat-label>
+							<mat-select formControlName="app_access">
+								<mat-option value='all'>ALL</mat-option>
+								<mat-option value='1'>Urban Point</mat-option>
+								<mat-option value='2'>Doha Insurance</mat-option>
+								<mat-option value='3'>Doha Takaful</mat-option>
+								<mat-option value='4'>UP Kuwait</mat-option>
+								<mat-option value='5'>UP Oman</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div> -->
+				<div fxFlex.xl="32"
+					 fxFlex.lg="48"
+					 fxFlex.md="48">
+					<div *ngIf="!isEditing"
+						 class="form-group mb-0">
+						<mat-form-field style="width: 100%">
+							<input matInput
+								   formControlName="orderby"
+								   type="number"
+								   min="0"
+								   required
+								   placeholder="Order By">
+							<mat-error
+									   *ngIf="getValue('orderby')?.invalid && (getValue('orderby')?.dirty || getValue('orderby')?.touched)">
+								orderby
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxFlex="25">
+					<label style="width: 100%;">Select Image
+					</label>
+					<file-picker (onFileSelect)="onFileSelect($event)"
+								 controlName="image"
+								 [isIconHidden]="false"
+								 [image]="getImage1('image')"
+								 type="Custom"
+								 [size]="{width: 172, height: 172}">
+					</file-picker>
+					<span style="float: right;font-size: 12px; color: #ff2c54"
+						  *ngIf="errorMsgimage">{{errorMsgimage}}</span>
+
+					<label style="width: 100%;">Select Logo:
+
+					</label>
+					<file-picker (onFileSelect)="onFileSelect($event)"
+								 [isIconHidden]="false"
+								 [image]="getImage1('logo')"
+								 controlName="logo"
+								 type="Custom"
+								 [size]="{width: 172, height: 172}">
+					</file-picker>
+					<span style="float: right;font-size: 12px; color: #ff2c54"
+						  *ngIf="errorMsglogo">{{errorMsglogo}}</span>
+				</div>
+
+
+				<!-- <div *ngIf="!isEditing"
+				     fxFlex.xl="32"
+				     fxFlex.lg="48"
+				     fxFlex.md="48">
+					<div class="form-group mb-0">
+
+						<mat-form-field style="width: 100%">
+							<mat-select formControlName="user_app_id"
+							            placeholder="App">
+								<mat-option value="1">App 1</mat-option>
+								<mat-option value="2">App 2</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getValue('user_app_id')?.invalid && (getValue('user_app_id')?.dirty || getValue('user_app_id')?.touched)">App
+								is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading || isDiscountType"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ADD CATEGORIES
+			</button>
+			<button type="submit"
+					*ngIf="isEditing"
+					[disabled]="Form.invalid || isLoading || isDiscountType"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				UPDATE CATEGORIES
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

@@ -1,0 +1,30 @@
+<div style="width: 550px; height: 90vh; overflow: hidden;" class="wrapper">
+  <div class="content-head clearfix" style="margin-top:10px;margin-bottom:20px;">
+    <input autocomplete="false" type="text" maxlength="50" class="form-control" [(ngModel)]="search"
+      (keyup)="onSearchOutlet()" placeholder="Search">
+  </div>
+  <div class="data-table" style="max-height : 525px; overflow-y: auto; min-height: 525px;">
+    <table *ngIf="outletsCount != 0" class="table table-responsive table-striped" style="width:100%; margin-top: 15px">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>OUTLET NAME</th>
+          <th>SELECT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let outlet of temparray">
+          <td>{{outlet.id}}</td>
+          <td [title]="outlet.name">{{outlet.name}}</td>
+          <td>
+            <button style="min-width: 50px;" mat-raised-button color="accent" (click)="onSelect(outlet)">Select
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="outletsCount == 0">
+          <td colspan="100" style="text-align: center">No record.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

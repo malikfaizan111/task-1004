@@ -1,0 +1,43 @@
+<div class="row"
+     style="margin: 0;">
+    <app-deals-form [isMultiple]="true"
+                      [is_button_shown]="true"
+                      [is_heading_shown]="true"
+                      [is_child]="true"
+                      [parent_key]="id"
+                      heading_label="MULTIPLE OFFERS"
+                      (onFormChanges)="onOfferFormChanges($event)"
+                      (onOfferSuccess)="onOfferSuccess($event)"></app-deals-form>
+
+</div>
+
+<div style="max-height: 50vh;overflow: auto;margin-top: 20px;"
+     class="data-table">
+    <table class="table table-responsive table-striped"
+           style="width:100%; margin-top: 15px">
+        <thead>
+            <tr>
+                <th style="width: 70px;">NO.</th>
+                <th>title</th>
+                <th>Search tags</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let deal of Deals; let i = index;">
+                <td>{{i+1}}</td>
+                <td [title]="deal.title">{{deal.title}}</td>
+                <td>{{deal.search_tags == null ? 'N/A' : deal.search_tags}}</td>
+                <td>{{deal.start_datetime == null ? 'N/A' : deal.start_datetime}}</td>
+                <td>{{deal.end_datetime == null ? 'N/A' : deal.end_datetime}}</td>
+                
+            </tr>
+            <tr *ngIf="Deals.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No record found.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

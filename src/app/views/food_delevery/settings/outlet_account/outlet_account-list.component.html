@@ -1,0 +1,125 @@
+<div class="row">
+	<div style="width: fit-content;" class="col-sm-4">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			OUTLETS ACCOUNTS
+		</span>
+	</div>
+  <div class="col-sm-2">
+		<button *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
+				style="background: red; border-color: red"
+				(click)="addNew()">ADD NEW
+		</button>
+  </div>
+	<div class="col-sm-6"
+		 style="text-align: right;float: right;">
+		<div class="form-group col-sm-3"
+			 style="padding: 0 10px 0 0;">
+			<!-- <select class="form-control">
+				<option value="">All</option>
+
+			</select> -->
+		</div>
+		<div class="form-group col-sm-9"
+			 style="padding: 0;text-align: left;">
+			<!-- <input type="text"
+				       placeholder="Search"
+					   class="form-control" />
+					    -->
+			<div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="getMerchantAccountList(1)"
+        class="input-group-addon">
+      <i class="glyphicon glyphicon-search"></i>
+
+    </span>
+				<input autocomplete="false"
+					   type="text"
+					   maxlength="50"
+					   class="form-control"
+					   [(ngModel)]="search"
+					   (keyup)="onSearchMerchantAccount()"
+					   placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped"
+			   style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<th>OUTLET ACCOUNT NAME</th>
+					<th>USERNAME</th>
+					<th>OUTLET ID</th>				
+					<th>OUTLET NAME</th>
+						<!-- <th style="width: 70px;">ID</th> -->
+					<!-- <th>EMAIL</th> -->
+				
+					<th *ngIf="UpAdmin.role == 1">ACTION</th>
+
+
+					<!-- <th>Action</th> -->
+					<!-- <th style="text-align: center">Status</th> -->
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr *ngFor="let merchant of merchantAccount">
+					<td>{{merchant.name}}</td>
+					<td>{{merchant.username}}</td>
+					<td>{{merchant.outlet_id}}</td>			
+					<td>{{merchant.outlets?.name}}</td>
+					<!-- <td>{{merchant.id}}</td> -->
+					<!-- <td>{{merchant.email}}</td> -->
+					
+					<!-- <td style="text-align: center;" (click)="$event.stopPropagation()"
+                    style="text-align: center; width: 100px;">
+                    <mat-slide-toggle title="Status"
+                                      (change)="onChangeStatus(merchant, $event)"
+                                      [(ngModel)]="merchant.slide"
+                                      color="accent"></mat-slide-toggle>
+                </td> -->
+
+					<td *ngIf="UpAdmin.role == 1" style="text-align: left; width: 100px;">
+
+						<button style="min-width: 50px; margin-right: 2px;"
+								mat-raised-button
+								color="accent"
+								(click)="onEditAdmin(merchant)">Edit
+						</button>
+						<button style="min-width: 50px;"
+								mat-raised-button
+								color="accent"
+								(click)="onDelete(merchant)">Delete
+						</button>
+						<!-- <button style="min-width: 50px;"
+						        mat-raised-button
+						        color="accent"
+						        (click)="onEditAccount(merchant)">Edit
+						</button> -->
+
+						<!-- <i title="Delete"
+					   (click)="onDeleteAdmin(admin)"
+					   class="action-btn">
+						<img src="assets/images/actions/delete.png"
+							 alt="">
+					</i> -->
+					</td>
+				</tr>
+				<tr *ngIf="merchantAccount.length == 0">
+					<td colspan="100"
+						style="text-align: center">No record found.</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+	<app-pagination *ngIf="merchantAccount.length > 0"
+	                (setPage)="setPage($event)"
+	                [perPage]="perPage"
+	                [totalPages]="totalPages"
+	                [currentPage]="currentPage"></app-pagination>
+</base-loader>

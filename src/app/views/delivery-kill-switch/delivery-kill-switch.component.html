@@ -1,0 +1,105 @@
+<div class="row">
+	<div style="padding-left: 8px;" class="col-sm-12">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+         <div fxFlex="50">
+            <button (click)="back()" mat-icon-button color="accent">
+              <img src="assets/images/actions/back.png" alt="">
+            </button>
+            <span>DELIVERY KILL SWITCH</span>
+         </div>
+
+        <div fxFlex="50" fxLayoutAlign="end end">
+          <button routerLink="/main/kill_switch/logs" class="btn btn-primary round-elem" style="background: red;margin-bottom: 10px; border-color: red;margin-right: 6px;font-weight: 700;">KILLSWITCH LOGS
+          </button>
+        </div>
+			</div>
+		</span>
+	</div>
+</div>
+
+<ng-container *ngFor="let switch of switches">
+  <div fxLayout="row wrap"
+       fxLayoutAlign="space-between start"
+       >
+  <div style="margin-top: 38px">
+    <h4 style="font-weight: 900;">  {{ switch.type == 'kill_switch' ? 'UP' : switch.type == 'bee_delivery_kill_switch' ? 'Bee' : 'Majoor'   }} Delivery Kill Switch</h4>
+  </div>
+    <div fxFlex="100">
+    <div fxLayout="row wrap"
+        fxLayoutAlign="start start"
+        fxLayoutGap="10px"
+        >
+    <div fxFlex.xl="48"
+          fxFlex.lg="48"
+          fxFlex.md="48">
+      <div class="form-group mb-0">
+        <mat-form-field style="width: 100%">
+          <textarea matInput
+                    [(ngModel)]="switch.title"
+                    placeholder="Title"
+                    maxlength="1000"
+                    cols="30"
+                    rows="2"></textarea>
+          <!-- <mat-error *ngIf="getValue('message')?.invalid && (getValue('message')?.dirty || getValue('message')?.touched)">Message
+            is required and max 1000 characters.</mat-error> -->
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxFlex.xl="48"
+          fxFlex.lg="48"
+          fxFlex.md="48">
+      <div class="form-group mb-0">
+        <mat-form-field style="width: 100%">
+          <textarea matInput
+                    [(ngModel)]="switch.body"
+                    placeholder="Body"
+                    maxlength="1000"
+                    cols="30"
+                    rows="2"></textarea>
+          <!-- <mat-error *ngIf="getValue('message')?.invalid && (getValue('message')?.dirty || getValue('message')?.touched)">Message
+            is required and max 1000 characters.</mat-error> -->
+        </mat-form-field>
+      </div>
+    </div>
+
+    <span>Kill Delivery: </span>
+    <mat-slide-toggle (change)="onChangeSwitch(killSwitch)"
+    [(ngModel)]="switch.special_status"
+    color="accent"></mat-slide-toggle>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+  <div style="margin-top: 15px"
+     class="col-sm-12">
+    <button (click)="updateKillSwitchStatus(switch)"
+        [disabled]="switch.special_status && (!switch.title || !switch.body)"
+        class="btn btn-primary round-elem"
+        style="background: red; border-color: red">
+      SAVE
+    </button>
+    <img *ngIf="isLoading == switch.id"
+       class="loader-btn-image"
+       src="assets/images/view-loader.gif">
+  </div>
+  </div>
+</ng-container>
+
+
+<!-- <div class="row">
+  <div style="margin-top: 15px"
+     class="col-sm-12">
+    <button (click)="updateKillSwitchStatus()"
+        [disabled]="killSwitch && (!title || !body)"
+        class="btn btn-primary round-elem"
+        style="background: red; border-color: red">
+      SAVE
+    </button>
+    <img *ngIf="isLoading"
+       class="loader-btn-image"
+       src="assets/images/view-loader.gif">
+  </div>
+</div> -->

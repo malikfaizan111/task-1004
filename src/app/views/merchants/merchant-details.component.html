@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            ORGANIZATION DETAIL
+        </span>
+    </div>
+    <div class="col-sm-6"
+         style="position: relative;">
+        <button (click)="onDialogClose()"
+                style="position: absolute;top: -20px;right: -5px;"
+                mat-icon-button>
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="row"
+     style="margin-top: 15px;">
+    <div class="col-sm-5">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Name: </div>{{Merchant.name}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Phone: </div>{{Merchant.phone}} <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">UP Account Manager: </div>{{Merchant.up_account_manager}}
+        <br>
+    </div>
+    <div class="col-sm-5">
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Email: </div>{{Merchant.email}}
+        <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Contract Start Date: </div>{{Merchant.contract_start_date}}
+        <br>
+        <div style="margin-top:10px; text-transform: capitalize;font-weight: bold">Contract Expiry Date: </div>{{Merchant.contract_expiry_date}}
+    </div>
+    <div class="col-sm-2"
+         style="text-align: right">
+        <mat-slide-toggle title="Change Status"
+                          [(ngModel)]="status"
+                          (change)="onChangeStatus($event)"
+                          color="accent">
+
+        </mat-slide-toggle><br>
+        <button style="min-width: 50px;margin-top: 10px;"
+                mat-raised-button
+                color="accent"
+                (click)="onEditMerchant($event)">Edit
+        </button>
+    </div>
+</div>
+<div style="max-height: 50vh;overflow: auto;margin-top: 20px;"
+     class="data-table">
+    <table class="table table-responsive table-striped"
+           style="width:100%; margin-top: 15px">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>phone</th>
+                <th>address</th>
+                <th style="text-align: center">status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let outlet of Outlets">
+                <td [title]="outlet.name">
+                    <span (click)="onOutletNameClick(outlet)"
+                          class="on-hover">{{outlet.name}}</span>
+                </td>
+                <td [title]="outlet.phone">{{outlet.phone}}</td>
+                <td [title]="outlet.address">{{outlet.address}}</td>
+                <td style="text-align: center">
+                    <span *ngIf="outlet.active == 1"
+                          style="background: green;color: white;padding: 3px 7px;border-radius: 3px;">Enabled</span>
+                    <span *ngIf="outlet.active == 0"
+                          style="background: red;color: white;padding: 3px 7px;border-radius: 3px;">Disabled</span>
+                </td>
+                <td style="text-align: center; width: 100px;">
+                    <mat-slide-toggle (change)="onChangeOutletStatus(outlet)"
+                                      [(ngModel)]="outlet.slide"
+                                      color="accent"></mat-slide-toggle>
+                </td>
+            </tr>
+            <tr *ngIf="Outlets.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No record found.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

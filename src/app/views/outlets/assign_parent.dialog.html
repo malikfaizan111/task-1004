@@ -1,0 +1,64 @@
+<h1 matDialogTitle>Assign Parent Outlet</h1>
+
+<mat-dialog-content>
+    <form [formGroup]="Form"
+          (ngSubmit)="onSubmitClick()">
+        <div style="min-width: 300px;min-height: 285px;">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ng-autocomplete">
+                        <ng-autocomplete [data]="parentsList"
+                                         formControlName="name"
+                                         searchKeyword="name"
+                                         placeHolder="Select Restaurant"
+                                         (selected)='selectEvent($event)'
+                                         (inputChanged)='onChangeSearch($event)'
+                                         (inputCleared)='onCleared($event)'
+                                         [itemTemplate]="itemTemplate1"
+                                         [notFoundTemplate]="notFoundTemplate1">
+                        </ng-autocomplete>
+
+                        <ng-template #itemTemplate1
+                                     let-item>
+                            <a [innerHTML]="item.name"></a>
+                        </ng-template>
+
+                        <ng-template #notFoundTemplate1
+                                     let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div *ngIf="showLoading"
+                     style="text-align: center"
+                     class="col-sm-12">
+                    <img *ngIf="isLoading"
+                         width="50"
+                         height="50"
+                         src="assets/images/view-loader.gif"
+                         alt="">
+                </div>
+
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions  class="row">
+    <div class="col-sm-12"
+         style="text-align: right;margin-top: 20px;">
+        <button mat-raised-button
+                color="primary"
+                class="btn btn-clear"
+                [disabled]="isLoading"
+                type="button"
+                (click)="onCancelClick()">Cancel</button>
+
+        <button mat-raised-button
+                color="primary"
+                class="btn btn-submit btn-primary"
+                [disabled]="isLoading"
+                type="button"
+                (click)="onSubmitClick()">Assign</button>
+    </div>
+</mat-dialog-actions>

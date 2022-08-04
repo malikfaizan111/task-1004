@@ -1,0 +1,190 @@
+<div class="row">
+	<div class="col-sm-6">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			<div fxLayout="row"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="10px">
+				<button mat-icon-button
+						(click)="onLocationBack()"
+						color="accent">
+					<img src="assets/images/actions/back.png"
+						 alt="">
+				</button>
+				<span>{{isEditing? 'EDIT': 'ADD'}} ACCOUNT</span>
+			</div>
+		</span>
+	</div>
+
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="doSubmit()">
+	<div style="margin-top: 20px"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="space-between start"
+		 >
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			 <!-- [(ngModel)]="parentName" -->
+			 <!-- [ngModelOptions]="{standalone: true}" -->
+			<div class="ng-autocomplete">
+				<ng-autocomplete [data]="parentsList"
+								 formControlName="outlets_parent_name"
+								 searchKeyword="name"
+								 placeHolder="Select Brand"
+								 (selected)='selectEvent($event)'
+								 (inputChanged)='onChangeSearch($event)'
+								 (inputCleared)='onCleared($event)'
+								 [itemTemplate]="itemTemplate1"
+								 [notFoundTemplate]="notFoundTemplate1">
+				</ng-autocomplete>
+
+				<ng-template #itemTemplate1
+							 let-item>
+					<a [innerHTML]="item.name"></a>
+				</ng-template>
+
+				<ng-template #notFoundTemplate1
+							 let-notFound>
+					<div [innerHTML]="notFound"></div>
+				</ng-template>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<!-- <input type="text"
+						   placeholder="Select Outlet"
+						   matInput
+						   formControlName="outletParentObject"
+						   [matAutocomplete]="auto">
+					<mat-autocomplete #auto="matAutocomplete"
+									  [displayWith]="displayFnParentOne">
+						<mat-option *ngFor="let option of filteredParentOptionsOne | async"
+									[value]="option">
+							{{option.name}}
+						</mat-option>
+					</mat-autocomplete> -->
+					<mat-select formControlName="outlet_id"
+								placeholder="Select Outlet">
+						<mat-option *ngFor="let item of ParentsOutlet"
+									[value]="item.id">{{item.name}}</mat-option>
+					</mat-select>
+					<!-- <mat-error
+							   *ngIf="getValue('outletParentObject')?.invalid && (getValue('outletParentObject')?.dirty || getValue('outletParentObject')?.touched)">
+						outletParentObject
+						is required</mat-error> -->
+				</mat-form-field>
+			</div>
+		</div>
+		<!-- <div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%; margin-bottom: 10px">
+					<mat-select placeholder="Outlet Name"
+								formControlName="outlet_id">
+						<mat-option *ngFor="let col of Outlets"
+									[value]="col.id">
+							{{col.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div> -->
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="name"
+						   type="text"
+						   required
+						   placeholder="Outlet Account Name">
+					<mat-error
+							   *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
+						Outlet Account Name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<!-- <div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="email"
+						   type="text"
+						   required
+						   placeholder="Email">
+					<mat-error
+							   *ngIf="getValue('email')?.invalid && (getValue('email')?.dirty || getValue('email')?.touched)">
+						Email is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div> -->
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="username"
+						   type="text"
+						   required
+						   placeholder="UserName">
+					<mat-error
+							   *ngIf="getValue('username')?.invalid && (getValue('username')?.dirty || getValue('username')?.touched)">
+						Name is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex.xl="32"
+			 fxFlex.lg="48"
+			 fxFlex.md="48">
+			<div class="form-group mb-0">
+				<mat-form-field style="width: 100%">
+					<input matInput
+						   formControlName="password"
+						   type="text"
+						   placeholder="Password">
+					<mat-error
+							   *ngIf="getValue('password')?.invalid && (getValue('password')?.dirty || getValue('password')?.touched)">
+						Password is required</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="row">
+		<div style="margin-top: 20px"
+			 class="col-sm-12">
+			<button type="submit"
+					*ngIf="!isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				ADD NEW ACCOUNT
+			</button>
+			<button type="submit"
+					*ngIf="isEditing"
+					[disabled]="Form.invalid || isLoading"
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+				UPDATE ACCOUNT
+			</button>
+			<img *ngIf="isLoading"
+				 class="loader-btn-image"
+				 src="assets/images/view-loader.gif">
+		</div>
+
+	</div>
+</form>

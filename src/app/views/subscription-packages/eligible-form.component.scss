@@ -1,0 +1,39 @@
+
+:host ::ng-deep .mat-form-field .mat-form-field-flex {
+  border-radius: 9px !important;
+
+}
+
+:host ::ng-deep .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+  border-radius: 13px !important;
+}
+
+.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  background: transparent;
+  margin-left: 10px;
+  width: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
+
+}
+
+.mat-form-field-can-float .mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label {
+  background: transparent;
+  margin-left: 10px;
+  width: 0px;
+  padding-left: 3px; 
+  padding-right: 3px;
+}
+
+// mat-label focused style
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #3D8F96!important;
+}
+
+::ng-deep .cdk-overlay-pane{
+top: 193.125px !important;
+}
+
+:host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
+box-shadow:none !important;
+}

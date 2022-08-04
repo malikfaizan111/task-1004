@@ -1,0 +1,12 @@
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #e6e8eb;
+  }
+
+
+  table{	
+    text-align: center !important;	
+    overflow-x: scroll;	
+  }	
+  th{	
+    text-align: center !important;	
+   }

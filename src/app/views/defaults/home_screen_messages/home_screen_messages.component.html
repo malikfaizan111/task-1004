@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span class="text-pink"
+              style="font-size: 30px;">
+            HOME SCREEN MESSAGES
+        </span>
+        <br>
+    </div>
+</div>
+<base-loader>
+    <div class="data-table">
+        <table class="table table-responsive table-striped"
+               style="width:100%; margin-top: 15px">
+            <thead>
+                <tr>
+                    <th class="weight-600">Heading Status</th>
+                    <th class="weight-600">MESSAGE</th>
+                    <th style="text-align: center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Home Screen Message</td>
+                    <td>{{HomeScreenMessage?.home_page_text}}</td>
+                    <td style="text-align: center; width: 200px;">
+                        <!-- <i title="UPDATE Home Screen Message"
+                           (click)="onEditSetting('android')"
+                           class="action-btn">
+                            <img  src="assets/images/actions/edit.png"
+                                 alt="">
+                        </i> -->
+                        <button style="min-width: 50px;"
+                                mat-raised-button
+                                color="accent"
+                                (click)="onEditSetting('android')">Edit
+                        </button>
+                    </td>
+                </tr>
+                <!-- <tr *ngIf="HomeScreenMessages == null">
+                <td colspan="100"
+                    style="text-align: center">No record found.</td>
+            </tr> -->
+
+            </tbody>
+        </table>
+    </div>
+</base-loader>

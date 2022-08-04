@@ -1,0 +1,177 @@
+<div class="row">
+	<app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length" [loaderMessage]="loaderMessage">
+	</app-loader>
+	<div style="width: fit-content;" class="col-sm-2">
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+			OUTLETS
+		</span>
+	</div>
+	<div class="col-sm-3">
+		<button *ngIf="role == '1'" class="btn btn-primary round-elem" style="background: red; border-color: red"
+			[disabled]="Outlets.length == 0" (click)="onExportCSV()">Export CSV
+		</button>
+		&nbsp;
+		<button *ngIf="role == '1'" class="btn btn-primary round-elem" style="background: red; border-color: red"
+			(click)="addNew()">ADD NEW
+		</button>
+	</div>
+	<div class="col-sm-7" style="text-align: right">
+		<div class="form-group col-sm-2" style="padding: 0 10px 0 0;">
+			<select [(ngModel)]="sortby" (change)="gerOutletsList(1)" placeholder="Sort By" class="form-control">
+				<option disabled>Sort By</option>
+				<option value="">All</option>
+				<option value="merchant_name">Organization</option>
+				<option value="name">Name</option>
+				<option value="created_at">Date Added</option>
+				<!-- <option value="no_of_offers_redeemed">In-Store</option>
+        <option value="total_delivery_orders">Delivery</option> -->
+			</select>
+		</div>
+		<div class="form-group col-sm-2" style="padding: 0 10px 0 0;">
+			<select [(ngModel)]="active" (change)="gerOutletsList(1)" placeholder="Status" class="form-control">
+				<option disabled>Status</option>
+				<option value="">All</option>
+				<option value="1">Enabled</option>
+				<option value="0">Disabled</option>
+			</select>
+		</div>
+
+		<div class="form-group col-sm-2" style="padding: 0 10px 0 0;">
+			<select [(ngModel)]="orderby" (change)="gerOutletsList(1)" placeholder="Order By" class="form-control">
+				<option disabled>Order By</option>
+				<option value="ASC">ASC</option>
+				<option value="DESC">DESC</option>
+			</select>
+		</div>
+		<div class="form-group col-sm-3" style="padding: 0 10px 0 0;">
+			<select (change)="gerOutletsList(1)" [(ngModel)]="category_id" class="form-control">
+				<option value="">All</option>
+				<option disabled>Select Category</option>
+				<option *ngFor="let item of Categories" [value]="item.id">{{item.name}}</option>
+			</select>
+		</div>
+		<div class="form-group col-sm-3" style="padding: 0;text-align: left;">
+			<!-- <input type="text"
+				       placeholder="Search"
+					   class="form-control" />
+					    -->
+			<div class="input-group">
+				<span style="cursor: pointer;" (click)="gerOutletsList(1)" class="input-group-addon">
+					<i class="glyphicon glyphicon-search"></i>
+
+				</span>
+				<input autocomplete="false" type="text" maxlength="50" class="form-control" [(ngModel)]="search"
+					(keyup)="onSearchOutlet()" placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div>
+<base-loader>
+	<div class="data-table">
+		<table class="table table-responsive table-striped" style="width:100%; margin-top: 15px">
+			<thead>
+				<tr>
+					<!-- <th style="width: 70px;">NO.</th> -->
+					<th>Outlet ID</th>
+					<th>Outlet NAME</th>
+					<th>Brand NAME</th>
+					<th>Parent Company Name</th>
+					<!-- <th>CollectionId</th>
+					<th>Playlist</th> -->
+					<th>Outlet Phone</th>
+					<th>Outlet Pin</th>
+					<th>Outlet Address</th>
+					<!-- <th>Neighborhood</th>
+					<th>SKU</th>
+					<th>Portal</th>
+					<th>Special</th>
+					<th>Date added</th> -->
+					<!-- <th>search tags</th> -->
+					<th style="text-align: center">status</th>
+					<th>In-Store</th>
+					<!-- <th>Delivery</th> -->
+					<th *ngIf="role == '1'" style="text-align: center">ACTIONS</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let outlet of Outlets" (click)="onViewDetails(outlet)">
+					<!-- <td>{{outlet.id}}</td> -->
+					<td>{{outlet.id}}</td>
+					<td [title]="outlet.name">{{outlet.name}}</td>
+					<td [title]="outlet.outletParent?.name == null ? 'N/A' : outlet.outletParent?.name">
+						{{outlet.outletParent?.name}}</td>
+					<td [title]="outlet.merchant_name">{{outlet.merchant_name}}</td>
+					<!-- <td style="text-align: center;" [title]="outlet.collection_id == null ? 'N/A' : outlet.collection_id">{{outlet.collection_id == null ? 'N/A' : outlet.collection_id}}</td>
+					<td style="text-align: center;" [title]="outlet.playlist_id == null ? 'N/A' : outlet.playlist_id">{{outlet.playlist_id == null ? 'N/A' : outlet.playlist_id}}</td> -->
+					<td [title]="outlet.phone">{{outlet.phone}}</td>
+					<td [title]="outlet.pin">{{outlet.pin}}</td>
+					<td [title]="outlet.address">{{outlet.address}}</td>
+					<!-- <td [title]="outlet.neighborhood">{{outlet.neighborhood}}</td>
+					<td [title]="outlet.SKU">{{outlet.SKU}}</td>
+					<td> {{ outlet.delivery_operate_status }} </td>
+					<td [title]="outlet.special">{{outlet.special== null || outlet.special== '' ? 'n/a' :
+						outlet.special== 1 ? 'Yes' :'No' }} </td>
+					<td [title]="outlet.created_at">{{outlet.created_at}}</td> -->
+					<!-- <td [title]="outlet.search_tags">{{outlet.search_tags == null ? 'N/A' : outlet.search_tags == '' ? 'N/A' : outlet.search_tags}}</td> -->
+					<!-- <td>
+						<span *ngIf="outlet.type == 0">All</span>
+						<span *ngIf="outlet.type == 1">Gents</span>
+						<span *ngIf="outlet.type == 2">Ladies</span>
+					</td> -->
+					<td style="text-align: center">
+						<span *ngIf="outlet.active == 1"
+							style="background: green;color: white;padding: 3px 7px;border-radius: 3px;">Enabled</span>
+						<span *ngIf="outlet.active == 0"
+							style="background: red;color: white;padding: 3px 7px;border-radius: 3px;">Disabled</span>
+					</td>
+					 <td style="text-align: center;" [title]="outlet.no_of_offers_redeemed">
+						{{outlet.no_of_offers_redeemed}}</td>
+					<!--<td style="text-align: center;" [title]="outlet.total_delivery_orders">
+						{{outlet.total_delivery_orders}}</td> -->
+					<td *ngIf="role == '1'" style="text-align: center; max-width: 800px;">
+						<!-- <i title="EDIT"
+						   (click)="onEditOutlet(outlet, $event)"
+						   class="action-btn">
+							<img  src="assets/images/actions/edit.png"
+							     alt="">
+						</i> -->
+						<button style="min-width: 50px;margin-right: 3px;" mat-raised-button color="accent"
+							(click)="onEditOutlet(outlet, $event)">Edit
+						</button>
+						<!-- <button style="min-width: 50px;"
+						        mat-raised-button
+						        color="accent"
+						        (click)="onAddMultiple(outlet, $event)">Add Deals
+						</button>
+						<button style="min-width: 50px;"
+						        mat-raised-button
+						        color="accent"
+						        (click)="onAssignParent(outlet, $event)">Assign Parent
+						</button> -->
+						<button style="min-width: 50px; margin-right: 3px;" mat-raised-button color="accent"
+							(click)="onAssignTiming(outlet, $event)">Delivery Timings
+						</button>
+						<button style="min-width: 50px; margin-right: 3px;" mat-raised-button color="accent"
+							[disabled]="!outlet.delivery_status || outlet.delivery_status == '0'"
+							(click)="onDeliveryOptions(outlet, $event)">Delivery Driver Options
+						</button>
+						<button *ngIf="userApp == '1'" style="min-width: 50px;" mat-raised-button color="accent"
+							(click)="beeDeliveryToken(outlet, $event)">Bee Delivery Token
+						</button>
+						<!--<i title="Delete"
+						   (click)="onDeleteOutlet(outlet)"
+						   class="action-btn">
+							<img src="assets/images/actions/delete.png"
+							     alt="">
+						</i>-->
+					</td>
+				</tr>
+				<tr *ngIf="Outlets.length == 0">
+					<td colspan="100" style="text-align: center">No record found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<app-pagination *ngIf="Outlets.length > 0" (setPage)="setPage($event)" [perPage]="perPage" [totalPages]="totalPages"
+		[currentPage]="currentPage"></app-pagination>
+</base-loader>

@@ -1,0 +1,2 @@
+parent_id,menu_id,category_id,exclude_menu_id,option_category_id,option_category_name_english,option_category_name_arabic,option_name_english,option_name_arabic,option_description_english,option_description_arabic,option_price,multi_choice,is_base_price
+1361,5,4,7,22,testcase,testcase,testcase,testcase,testcase,testcase,52,no,yes

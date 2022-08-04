@@ -1,0 +1,48 @@
+<div class="row">
+    <app-loader [totalRecords]="ArrayCSVCount"
+                [completedRecords]="ArrayCSV.length"
+                [loaderMessage]="loaderMessage"></app-loader>
+    <div class="col-sm-12">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            Reports
+        </span>
+    </div>
+
+</div>
+<div class="row"
+     style="margin-top: 40px;">
+    <div class="col-sm-3"
+         style="padding-top: 6px;font-weight: bold;">
+        Select Report Type:
+    </div>
+    <div class="col-sm-3">
+        <select [(ngModel)]="report_type"
+                (change)="onReportTypeChange()"
+                placeholder="Report Type"
+                class="form-control">
+            <option disabled>Report Type</option>
+            <option value="interest_tags">Interest Tags</option>
+
+        </select>
+    </div>
+    <div class="col-sm-6">
+        &nbsp;
+    </div>
+</div>
+<div class="row"
+     style="margin-top: 20px;">
+    <div class="col-sm-6">
+        <multi-text-input (onTagAdd)="onTagAdd($event)"
+                          [texts]="tags"
+                          [required]="true"
+                          placeholder="Interest Tags"></multi-text-input>
+    </div>
+    <div class="col-sm-12"
+         style="margin-top: 20px;">
+        <button *ngIf="Roles.role == '1'" class="btn btn-primary round-elem"
+                style="background: red; border-color: red"
+                [disabled]="report_type == '' || tags == ''"
+                (click)="onExportCSV()">Export CSV
+        </button>
+    </div>
+</div>
