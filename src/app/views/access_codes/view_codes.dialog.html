@@ -77,6 +77,7 @@
                 <td>{{code.status == 0 ? 'Inactive' : 'Active'}}</td> -->
                 <td fxFlex="25" fxLayoutAlign="center center">
                     <mat-slide-toggle (change)="onChangemAccessCode(code)"
+                    (click)="$event.stopPropagation()"
                                       [(ngModel)]="code.slide"
                                       color="accent"></mat-slide-toggle>
                 </td>
