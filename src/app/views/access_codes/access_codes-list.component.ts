@@ -9,6 +9,8 @@ import { AlertDialog } from '../../lib';
 import {ViewCodesComponent} from "./view_codes.dialog";
 import { appConfig } from '../../../config';
 import { UserAppSelectorService } from '../../lib/app-selector/app-selector.service';
+import { ViewSingleCodeComponent } from './view-single-code.component';
+
 
 
 @Component({
@@ -25,6 +27,7 @@ export class AccessCodesListComponent implements OnInit
 	totalItems: any;
 	currentPage:  any = 1;
 	merchantsCount: any;
+	accessCodesCount: any
 	PromoCodes: any;
 	isMultiple: any;
 	searchTimer:any;
@@ -201,9 +204,36 @@ export class AccessCodesListComponent implements OnInit
 		})
 	}
 
+	viewCodes(code: any)
+	{
+		let url = 'getUsedAccessCodes?id=' + code.id
+		this.mainApiService.getList(appConfig.base_url_slug + url ).then((res)=>{
+			this.accessCodesCount = res.data.accesscodesCount
+			if(this.accessCodesCount == 1)
+			{
+
+				this.onViewSingleCode(code)
+				
+			}
+			else
+			{
+				this.onViewAllAccessCodes(code)
+
+				
+			}
+		})
+		
+	}
+
 	onViewAllAccessCodes(code:any)
 	{
 		let dialogRef = this.dialog.open(ViewCodesComponent, {autoFocus: false});
 		dialogRef.componentInstance.Deal = code;
+	}
+	onViewSingleCode(code: any)
+	{
+		let dialogRef = this.dialog.open(ViewSingleCodeComponent, {autoFocus: false, panelClass: 'mat-dialog-changes-1' });
+		let compInstance = dialogRef.componentInstance;
+		compInstance.Code = code;
 	}
 }

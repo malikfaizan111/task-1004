@@ -141,6 +141,7 @@ import { WebRedemptionFormComponent } from './views/defaults/web_redemption/web_
 import { AddOutletDialogWebComponent } from './views/defaults/web_redemption/add-outlet-dialog.component';
 import { WebRedemptionDetailListComponent } from './views/defaults/web_redemption/web_redemption-detail-list.component';
 import { ChangeOutletImage } from './views/outlets/outlets-change-image.component';
+import {ViewSingleCodeComponent} from './views/access_codes/view-single-code.component'
 
 @NgModule({
   imports: [
@@ -334,6 +335,8 @@ import { ChangeOutletImage } from './views/outlets/outlets-change-image.componen
     AddOutletDialogWebComponent,
     WebRedemptionDetailListComponent,
     imagePreviewComponent,
+    ViewSingleCodeComponent
+  
   ],
   entryComponents: [
     AlertDialog,
@@ -351,6 +354,7 @@ import { ChangeOutletImage } from './views/outlets/outlets-change-image.componen
     CategoriesDetailsComponent,
     MerchantDetailsComponent,
     ViewCodesComponent,
+    ViewSingleCodeComponent,
     ViewSmsComponent,
     CodeDetailsComponent,
     ExportCSVDialog,

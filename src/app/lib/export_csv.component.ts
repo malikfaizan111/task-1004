@@ -187,7 +187,7 @@ export class ExportCSVComponent implements OnInit {
 				else if (this.method == 'getNonUsers') {
 					this.ArrayCSVCount = result.data.usersCount;
 				}
-				else if (this.method == 'getMultipleAccessCode') {
+				else if (this.method == 'getUsedAccessCodes') {
 					this.ArrayCSVCount = result.data.accesscodesCount;
 				}
 				else if (this.method == 'getTagsCustomers') {
@@ -629,7 +629,7 @@ export class ExportCSVComponent implements OnInit {
 						// console.log("user data for registered ",usersData)
 
 					}
-					else if (this.method == 'getMultipleAccessCode') {
+					else if (this.method == 'getUsedAccessCodes') {
 						csvName = 'multiple_access_codes.csv';
 						usersData = result.data.accesscodes;
 					}

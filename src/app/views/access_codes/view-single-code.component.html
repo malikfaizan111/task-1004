@@ -1,28 +1,3 @@
-<!-- <div class="row">
-    <app-loader [totalRecords]="ArrayCSVCount"
-                [completedRecords]="ArrayCSV.length"
-                [loaderMessage]="loaderMessage"></app-loader>
-    <div class="col-sm-6">
-        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
-            ALL CODES DETAIL
-        </span>
-    </div>
-
-    <div class="col-sm-6"
-         style="position: relative;">
-        <button mat-dialog-close
-                style="position: absolute;top: -20px;right: -5px;"
-                mat-icon-button>
-            <mat-icon>clear</mat-icon>
-        </button>
-        <br>
-        <button class="btn btn-primary round-elem"
-                style="background: red; border-color: red; float: right;"
-                [disabled]="mAccessCodes.length == 0"
-                (click)="onExportCSV()">Export CSV
-        </button>
-    </div>
-</div> -->
 <div  fxLayout="row" fxLayoutAlign="end none">
    
     <mat-icon mat-dialog-close style="border:none; cursor: pointer;  background-color: transparent; position:absolute; z-index: 10px;margin: -23px -22px 0 0;"
@@ -31,18 +6,17 @@
 </div>
 <div fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row">
-        <app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length"
-            [loaderMessage]="loaderMessage"></app-loader>
+        <!-- <app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length"
+            [loaderMessage]="loaderMessage"></app-loader> -->
         <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
-            MULTIPLE ACCESS CODES
+            SINGLE ACCESS CODE
         </span>
     </div>
     <button style="border: none;background-color: transparent; color: #148F96; font-weight: 600; font-size: 16px;"
-    (click)="onExportCSV()" [disabled]="mAccessCodes.length == 0" >
+    (click)="ExportCSV()" [disabled]="mAccessCodes.length == 0" >
         EXPORT CSV
     </button>
 </div>
-
 <div style="max-height: 60vh;overflow: auto;margin-top: 20px;"
      class="data-table" fxLayout="row">
     <!-- <base-loader> -->
@@ -64,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let code of mAccessCodes" [mat-dialog-close]="true" (click)="onViewSingleCode(code)">
+            <tr *ngFor="let code of mAccessCodes">
                 <td fxFlex="15" fxLayoutAlign="none center">{{code.id}}</td>
                 <!-- <td>{{code.title}}</td> -->
                 <td fxFlex="15" fxLayoutAlign="none center">{{code.code}}</td>
@@ -93,8 +67,3 @@
 
     <!-- </base-loader> -->
 </div>
-<app-pagination *ngIf="mAccessCodes.length > 0"
-                (setPage)="setPage($event)"
-                [perPage]="perPage"
-                [totalPages]="totalPages"
-                [currentPage]="currentPage"></app-pagination>

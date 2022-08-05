@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { AlertDialog } from '../../lib';
 import { appConfig } from '../../../config';
 import { ExportCSVComponent } from '../../lib/export_csv.component';
 import { AppLoaderService } from '../../lib/app-loader/app-loader.service';
+import { ViewSingleCodeComponent } from './view-single-code.component';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class ViewCodesComponent extends ExportCSVComponent implements OnInit, Af
         this.Deal = null;
 		this.mAccessCodes = [];
 		this.perPage = 20;
-		this.method = 'getMultipleAccessCode';
+		this.method = 'getUsedAccessCodes';
 	}
 
 	 ngOnInit() 
@@ -64,17 +65,19 @@ export class ViewCodesComponent extends ExportCSVComponent implements OnInit, Af
 		// 	this.mloaderService.setLoading(true);
         // }
         
-        let url = 'getMultipleAccessCode?index=' + index + '&index2=' + this.perPage + '&id=' + this.Deal.id;
+        let url = 'getUsedAccessCodes?index=' + index + '&index2=' + this.perPage + '&id=' + this.Deal.id;
 		
 		this.mainApiService.getList(appConfig.base_url_slug + url)
 		.then(result => {
 			if (result.status == 200  && result.data) 
 			{
+
 				let mAccessCodes : any = result.data.accesscodes;
 				this.accesscodesCount = result.data.accesscodesCount;
 				this.currentPage = index;
 				this.pages = this.paginationService.setPagination(this.accesscodesCount, index, this.perPage);
 				this.totalPages = this.pages.totalPages;
+				// this.codesLength.emit(this.accesscodesCount);
 				// this.mloaderService.setLoading(false);
 
 				mAccessCodes.forEach((element : any) => {
@@ -148,5 +151,12 @@ export class ViewCodesComponent extends ExportCSVComponent implements OnInit, Af
 				promoCode.slide = !promoCode.slide;
 			}
 		})
+	}
+
+	onViewSingleCode(code: any)
+	{
+		let dialogRef = this.dialog.open(ViewSingleCodeComponent, {autoFocus: false, panelClass: 'mat-dialog-changes-1' });
+		let compInstance = dialogRef.componentInstance;
+		compInstance.Code = code;
 	}
 }

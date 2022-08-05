@@ -60,41 +60,41 @@
 	</div>
 </div>
 <base-loader>
-	<div class="data-table">
+	<div class="data-table" fxLayout="row">
 		<table class="table table-responsive table-striped"
-		       style="width:100%; margin-top: 15px">
+		       style="width:100%; margin-top: 15px;">
 			<thead>
 				<tr>
-					<th style="width: 70px;">NO.</th>
-					<th>Title</th>
-					<th>Code</th>
-					<th>Redemptions</th>
-					<th>Redeemed</th>
-					<th>Expiry date/time</th>
-					<th>Days</th>
-					<th>Multiple</th>
-					<th style="text-align: center">Status</th>
+					<th fxFlex="10" >ID</th>
+					<th fxFlex="13" >Title</th>
+					<th fxFlex="10">Code</th>
+					<th fxFlex="7">Days</th>
+					<th fxFlex="20">Expiry date/time</th>
+					<!-- <th>Redemptions</th> -->
+					<th fxFlex="13">Redeemed by</th>
+					<!-- <th>Multiple</th> -->
+					<th fxFlex="5" style="text-align: center">Status</th>
 					<!-- <th style="text-align: center">Update</th> -->
-					<th style="text-align: center; width: 260px;">Actions</th>
+					<th fxFlex="22" style="text-align: center">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr *ngFor="let code of PromoCodes">
-					<td>{{code.id}}</td>
-					<td>{{code.title}}</td>
-					<td>{{code.code}}</td>
-					<td>{{code.redemptions}}</td>
-					<td>{{code.redeemed}}</td>
-					<td>{{code.expiry_datetime}}</td>
-					<td>{{code.days}}</td>
-					<td>{{code.multiple == 0 ? 'No' : 'Yes'}}</td>
+					<td fxFlex="10" fxLayoutAlign="none center">{{code.id}}</td>
+					<td fxFlex="13" fxLayoutAlign="none center">{{code.title}}</td>
+					<td fxFlex="10" fxLayoutAlign="none center">{{code.code}}</td>
+					<td fxFlex="7" fxLayoutAlign="none center">{{code.days}}</td>
+					<td fxFlex="20" fxLayoutAlign="none center">{{code.expiry_datetime}}</td>
+					<!-- <td>{{code.redemptions}}</td> -->
+					<td fxFlex="13" fxLayoutAlign="none center">{{code.redeemed}} out of {{code.redemptions}}</td>
+					<!-- <td>{{code.multiple == 0 ? 'No' : 'Yes'}}</td> -->
 					<!-- <td>{{code.status == 0 ? 'Inactive' : 'Active'}}</td> -->
-					<td style="text-align: center; width: 100px;">
+					<td fxFlex="5" fxLayoutAlign="center center">
 						<mat-slide-toggle (change)="onChangeAccessCode(code)"
 						                  [(ngModel)]="code.slide"
 						                  color="accent"></mat-slide-toggle>
 					</td>
-					<td style="text-align: center; width: 260px;">
+					<td fxFlex="22" fxLayoutAlign="center center">
 						<!-- <i *ngIf="code.multiple == 1"
 						   title="View Codes"
 						   class="action-btn">
@@ -109,17 +109,17 @@
 							     src="assets/images/actions/paper-plane@2x.png"
 							     alt="">
 						</i> -->
-						<button style="min-width: 50px; margin-right: 4px;"
+						<button style="min-width: 80px; margin-right: 4px;"
 						        mat-raised-button
 						        (click)="onEditAccessCodes(code)"
 						        color="accent">Edit
 						</button>
-						<button style="min-width: 50px;"
+						<button style="min-width: 120px;"
 						        mat-raised-button
-						        (click)="onViewAllAccessCodes(code)"
+						        (click)="viewCodes(code)"
 						        [disabled]="code.multiple == 0"
-						        color="accent">Multiple Access Codes
-						</button>				
+						        color="accent">View Details
+						</button>					
 						
 					</td>
 				</tr>
