@@ -39,7 +39,7 @@ import { SMSLogsComponent } from './views/subscriptions/sms-logs/sms_logs.compon
 import { AppsGuard } from './guards/apps.guard';
 import { PromoCodesListComponent, PromoCodesFormComponent, PromoCodesFormNewComponent, PromoCodesListNewComponent } from './views/promo_code';
 import { OfferDetailMessagesComponent } from "./views/defaults/offer_detail_message/offer_detail_messages.component";
-import { SmsFormComponent, SmsListComponent, SmsCodeFormComponent } from './views/sms';
+import { SmsFormComponent, SmsListComponent, SmsCodeFormComponent, SmsDetailComponent } from './views/sms';
 import { parentMenuOutlet, ParentOutletsFormComponent, ParentOutletsListComponent } from './views/parent_outlets';
 import { ReportsComponent } from './views/customers/reports/reports.component';
 import { CreditCardPackagesListComponent, CreditCardPackagesFormComponent } from "./views/credit_card_packages";
@@ -175,6 +175,7 @@ const mainApp: Routes = [
 
 
 	{ path: 'sms/list', component: SmsListComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
+	{ path: 'sms/detail', component: SmsDetailComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'sms/form', component: SmsFormComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'sms/code/form', component: SmsCodeFormComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 

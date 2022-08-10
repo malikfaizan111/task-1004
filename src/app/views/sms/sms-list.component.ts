@@ -136,11 +136,14 @@ export class SmsListComponent implements OnInit
 		});
 	}
 
-	onViewAllAccessSms(sms:any)
+	onViewAllAccessSmsDetail(sms:any)
 	{
-		let dialogRef = this.dialog.open(ViewSmsComponent, {autoFocus: false});
-		dialogRef.componentInstance.Deal = sms;
+		// let dialogRef = this.dialog.open(ViewSmsComponent, {autoFocus: false});
+		// dialogRef.componentInstance.Deal = sms;
+		this.router.navigateByUrl('main/sms/detail')
 	}
+
+
 
 	setPage(pageDate: any) 
 	{
