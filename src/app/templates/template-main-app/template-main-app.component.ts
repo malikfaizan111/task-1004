@@ -492,7 +492,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					]
 				},
 				{ routerLink: '/main/notifications', image: 'notifications', label: 'NOTIFICATIONS' },
-				{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
+				{ routerLink: '/main/newsms/list', image: 'notifications', label: 'SMS' },
 				{ routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
 				{ routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
@@ -519,6 +519,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/trending_search', image: 'defaults', label: 'TRENDING SEARCH' },
 						{ routerLink: '/main/edit-history-list', image: 'defaults', label: 'CMS EDITING HISTORY' },
 						{ routerLink: '/main/kill_switch', image: 'defaults', label: 'KILL SWITCH' },
+						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
 					]
 				},
 				{

@@ -141,7 +141,11 @@ import { WebRedemptionFormComponent } from './views/defaults/web_redemption/web_
 import { AddOutletDialogWebComponent } from './views/defaults/web_redemption/add-outlet-dialog.component';
 import { WebRedemptionDetailListComponent } from './views/defaults/web_redemption/web_redemption-detail-list.component';
 import { ChangeOutletImage } from './views/outlets/outlets-change-image.component';
-import {ViewSingleCodeComponent} from './views/access_codes/view-single-code.component'
+import {ViewSingleCodeComponent} from './views/access_codes/view-single-code.component';
+import { NewSmsListComponent } from './views/newsms/new-sms-list.component';
+import { NewSmsFormComponent } from './views/newsms/new-sms-form.component';
+import { SmsDetailComponent } from './views/newsms/sms-detail.component';
+
 
 @NgModule({
   imports: [
@@ -335,7 +339,11 @@ import {ViewSingleCodeComponent} from './views/access_codes/view-single-code.com
     AddOutletDialogWebComponent,
     WebRedemptionDetailListComponent,
     imagePreviewComponent,
-    ViewSingleCodeComponent
+    ViewSingleCodeComponent,
+    NewSmsListComponent,
+    NewSmsFormComponent,
+    SmsDetailComponent,
+
   
   ],
   entryComponents: [

@@ -1,0 +1,141 @@
+<!-- <div fxLayout.lg="row" fxLayout.xs="column" fxLayoutAlign.lg="space-between none" fxLayoutAlign.xl="space-between none">
+    <div fxFlexOffset="1" fxLayout="column">
+        <div fxLayout="row">
+            <button mat-icon-button fxFlex="12" (click)="onLocationBack()" color="accent">
+                <img width="75%" height="40%" src="assets/images/actions/back.png" alt="">
+            </button>
+            <span fxFlexOffset="3"
+                style="font-size: 18px;line-height: 36px;font-weight: 900; padding-top: 3px;"><strong>SMS Campaign
+                    Details</strong></span>
+        </div>
+
+        <span fxFlexOffset="1" style="font-size: 16px;font-weight: 300;"><strong>Channel :</strong> {{smsInfo.sms_type}}</span>
+        <span style="font-size: 16px;font-weight: 300;"><strong>Message:</strong> {{smsInfo.message}}..&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{smsInfo.total_sent}}/{{smsInfo.total_count}} Sent</span>
+    </div>
+    <app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length" [loaderMessage]="loaderMessage">
+	</app-loader>
+
+    <div fxLayout="column" ngStyle.lg="width: 29%;" ngStyle.xl="width: 25%;" ngStyle.xs="width: 100%">
+        <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlexOffset="1">
+            <div style="font-size: 15px;font-weight: 300;">
+                <strong>
+                    Search
+                </strong>
+            </div>
+            <input fxFlex="76" autocomplete="false" type="number" maxlength="50" style="text-align: center;"
+                class="form-control" [(ngModel)]="search"
+                (keyup)="onSearchPhoneNumber()" placeholder="Enter phone number">
+        </div>
+        <div fxFlexOffset="2" fxLayout="row" fxLayoutAlign="end center" style="padding-right: 5%;">
+            <select style="margin-right: 4%; color: #148F96" fxFlex="36" (change)="gerSmsDetailList(1)" [(ngModel)]="sent_Status"  placeholder="Sort By" class="form-control" aria-label="Default select example">
+                <option selected >Filter Status</option>
+                <option value="all">All</option>
+                <option value="sent">Sent</option>
+                <option value="not_sent">Not Sent</option>
+            </select>
+            
+            <button style="border-radius: 10px;" fxFlex="36" mat-raised-button color="accent" (click)="onExportCSV()">Export CSV</button>
+        </div>
+    </div>
+</div> -->
+<!-- <div class="row">
+	<div style="width:fit-content; border: 1px solid red;" class="col-sm-3">
+		<button mat-icon-button (click)="onLocationBack()" color="accent">
+			<img src="assets/images/Path.png" alt="">
+		</button>
+		<span style="font-size: 19px;line-height: 36px;font-weight: 600; text-transform: capitalize;">
+			Sms Detail
+		</span>
+	</div>
+	<div class="col-sm-6" style="text-align: right;float: right; border: 1px solid red;">
+		<div class="form-group col-sm-3" style="padding: 0 10px 0 0;">
+		</div>
+		<div class="form-group col-sm-9" style="padding: 0;text-align: left;">
+			<div class="input-group">
+				<input autocomplete="false" type="number" maxlength="50" [(ngModel)]="search"
+					 class="form-control" placeholder="Search">
+			</div>
+		</div>
+	</div>
+</div> -->
+<div fxLayout.lg="row" fxLayout.xs="column" fxLayoutAlign.lg="space-between center">
+    <div fxLayout="row">
+        <button mat-icon-button fxFlex="12" (click)="onLocationBack()" color="accent">
+            <img width="75%" height="40%" src="assets/images/actions/back.png" alt="">
+        </button>
+        <span fxFlexOffset="3" style="font-size: 18px;line-height: 36px;font-weight: 900; padding-top: 3px;"><strong>SMS
+                Campaign
+                Details</strong></span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex.lg="30" fxFlexOffset="1">
+        <div style="font-size: 15px;font-weight: 300;">
+            <strong>
+                Search
+            </strong>
+        </div>
+        <input fxFlex="76" autocomplete="false" type="number" maxlength="50" style="text-align: center;"
+            class="form-control" [(ngModel)]="search" (keyup)="onSearchPhoneNumber()" placeholder="Enter phone number">
+    </div>
+</div>
+<div  fxLayout.lg="row"  fxLayout.xs="column"  fxLayoutAlign.lg="space-between center">
+    <div fxLayout="row wrap" fxFlexOrder.xs="2" fxFlex="40">
+        <span fxFlex="100" style="font-size: 16px;font-weight: 300;"><strong>Channel :</strong>
+            {{smsInfo.sms_type}}</span>
+        <span fxFlex="82" style="font-size: 16px;font-weight: 300;"><strong>Message:</strong>
+            {{smsInfo.message}}..</span>
+        <span fxFlex="17" fxLayoutAlign="start center">{{smsInfo.total_sent}}/{{smsInfo.total_count}}
+            Sent</span>
+    </div>
+    <button ngStyle.lg="margin-top: 16px" style="border: none;background-color: transparent; color: #148F96; font-weight: 600; font-size: 16px;"
+			 (click)="onRefresh()">
+        Refresh
+    </button>
+    <div  fxLayout="row" fxFlexOrder.xs="1" fxFlex="25" fxLayoutAlign="center center">
+        <select style="margin-right: 4%; color: #148F96" fxFlex="38" (change)="gerSmsDetailList(1)" [(ngModel)]="sent_Status"  placeholder="Sort By" class="form-control" aria-label="Default select example">
+            <option value="" disabled selected>Filter Status</option>
+            <option value="all">All</option>
+            <option value="sent">Sent</option>
+            <option value="not_sent">Not Sent</option>
+        </select>
+        
+        <button style="border-radius: 10px;" fxFlex="38" mat-raised-button color="accent" (click)="onExportCSV()">Export CSV</button>
+    </div>
+
+    
+
+</div>
+<base-loader>
+    <div class="data-table" fxLayout="row">
+        <table fxFlexOffset="0.8" class="table table-responsive table-striped" style="width:100%; margin-top: 15px">
+            <thead>
+                <tr>
+                    <th fxFlex.lg="12" fxFlex.xl="12" fxFlex.md="12" fxFlex.sm="12" fxFlex.xs="10">ID</th>
+                    <th fxFlex.lg="15" fxFlex.xl="15" fxFlex.md="15" fxFlex.sm="20" fxFlex.xs="50">Phone Number</th>
+                    <th fxFlex.lg="15" fxFlex.xl="15" fxFlex.md="15" fxFlex.sm="20" fxFlex.xs="20">Status</th>
+                    <th fxFlex.lg="20" fxFlex.xl="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="20">Sent on</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let sm of Sms">
+                    <td fxFlex="12" fxFlex.xl="12" fxFlex.md="12" fxFlex.sm="12" fxFlex.xs="10"
+                        fxLayoutAlign="none center">
+                        {{sm.id}}</td>
+                    <td fxFlex="15" fxFlex.xl="15" fxFlex.md="15" fxFlex.sm="20" fxFlex.xs="50"
+                        fxLayoutAlign="none center">
+                        {{sm.phone}}</td>
+                    <td fxFlex="15" fxFlex.xl="15" fxFlex.md="15" fxFlex.sm="20" fxFlex.xs="20"
+                        fxLayoutAlign="none center">
+                        {{sm.sent_status}}</td>
+                    <td fxFlex="20" fxFlex.xl="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="20"
+                        fxLayoutAlign="none center">
+                        {{sm.created_at}}</td>
+                </tr>
+                <tr *ngIf="Sms.length == 0">
+                    <td colspan="100" style="text-align: center">No record found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-pagination *ngIf="Sms.length > 0" (setPage)="setPage($event)" [perPage]="perPage" [totalPages]="totalPages"
+        [currentPage]="currentPage"></app-pagination>
+</base-loader>

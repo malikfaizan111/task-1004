@@ -76,6 +76,9 @@ import { EligibleFormComponent } from './views/subscription-packages/eligible-fo
 import { WebRedemptionListComponent } from './views/defaults/web_redemption/web_redemption-list.component';
 import { WebRedemptionFormComponent } from './views/defaults/web_redemption/web_redemption-form.component';
 import { WebRedemptionDetailListComponent } from './views/defaults/web_redemption/web_redemption-detail-list.component';
+import {NewSmsListComponent} from './views/newsms/new-sms-list.component';
+import {NewSmsFormComponent} from './views/newsms/new-sms-form.component';
+import {SmsDetailComponent} from './views/newsms/sms-detail.component'
 
 
 
@@ -174,6 +177,9 @@ const mainApp: Routes = [
 	{ path: 'campaign/:id', component: CampaignFormComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 
 
+	{ path: 'newsms/list', component: NewSmsListComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
+	{ path: 'newsms/form', component: NewSmsFormComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
+	{ path: 'sms/detail/:id', component: SmsDetailComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'sms/list', component: SmsListComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'sms/form', component: SmsFormComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'sms/code/form', component: SmsCodeFormComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
