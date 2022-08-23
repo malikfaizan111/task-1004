@@ -5,14 +5,14 @@
 			<!-- {{AccessCodeHeading}} -->
 		</span>
 	</div>
-  <div class="col-sm-4" fxLayout="row">
-	<button fxFlex="30" *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
-        style="background: red; border-color: red"
-        (click)="addNew()">Send SMS
-    </button>
-    <button fxFlex="40" fxFlexOffset="2" *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
+  <div class="col-sm-4">
+    <button *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
             style="background: red; border-color: red;margin-right: 4px;"
-            (click)="sendsmscode()">Send SMS With Code
+            (click)="sendsmscode()">SEND SMS WITH CODE
+    </button>
+    <button *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
+        style="background: red; border-color: red"
+        (click)="addNew()">ADD NEW
     </button>
   </div>
 	<div class="col-sm-6"
@@ -52,17 +52,17 @@
 	</div>
 </div>
 <base-loader>
-	<div class="data-table" fxLayout="row">
+	<div class="data-table">
 		<table class="table table-responsive table-striped"
 		       style="width:100%; margin-top: 15px">
 			<thead>
 				<tr>
-					<th >Campaign ID</th>
+					<th style="width: 170px;">NO.</th>
 					<!-- <th>Phone</th> -->
-					<th >Channel</th>
-					<th style="width: 350px;" >Message</th>
-					<th >Dispatched on</th>
-					<th >Status</th>
+					<th>Sent</th>
+					<th>failed</th>
+					<th>Message</th>
+					<th>Created At</th>
 					<th style="text-align: center; width: 200px;">Action</th>
 				</tr>
 			</thead>
@@ -77,8 +77,8 @@
 					<td style="text-align: center; width: 200px;">
 						<button style="min-width: 50px;"
 						        mat-raised-button
-						        (click)="onViewAllAccessSmsDetail(sm)"
-						        color="accent">View Details
+						        (click)="onViewAllAccessSms(sm)"
+						        color="accent">View Sms
 						</button>
 					</td>
 				</tr>

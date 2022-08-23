@@ -17,7 +17,8 @@ import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 export class ViewSingleCodeComponent implements OnInit {
 
   Code: any;
-  mAccessCodes: any[];
+  mAccessCodes: any;
+  mutilpleToSingle:boolean;
 
   constructor(protected mainApiService: MainService,
     protected appLoaderService: AppLoaderService,
@@ -30,8 +31,13 @@ export class ViewSingleCodeComponent implements OnInit {
     }
 
   ngOnInit(): void {
-	this.mAccessCodes.push(this.Code)
-	console.log(this.mAccessCodes)
+	if(this.mutilpleToSingle){
+		this.mAccessCodes.push(this.Code);
+		console.log(this.mAccessCodes)
+	}
+	else{
+		
+	}
   }
 
   
@@ -77,13 +83,26 @@ export class ViewSingleCodeComponent implements OnInit {
 
 	ExportCSV()
 	{
-		const codes = this.mAccessCodes.map(({slide, ...rest})=>{
-			return rest
-		})
-		var CSVHeader = {
-			headers: ["ID", "user_id", "redeemed_on",  "Code", "code_user", "status", "user_id" ]
-		  }
-		new AngularCsv(codes, 'single-access-code', CSVHeader)
+		if(this.mutilpleToSingle){
+			const codes = this.mAccessCodes.map(({slide, ...rest})=>{
+				return rest
+			});
+			var CSVHeader = {
+				headers: ["ID", "user_id", "redeemed_on",  "Code", "code_user", "status", "Redeemed_By" ]
+			  }
+			new AngularCsv(codes, 'single-access-code', CSVHeader)
+		}
+		else{
+			const codes = this.Code.map(({slide, ...rest})=>{
+				return rest
+			});
+			var CSVHeader = {
+				headers: ["ID", "user_id", "redeemed_on",  "Code", "code_user", "status", "Redeemed_By" ]
+			  }
+			new AngularCsv(codes, 'single-access-code', CSVHeader)
+		}
+
+	
 	}
 
 }

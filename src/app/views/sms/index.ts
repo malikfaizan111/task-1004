@@ -6,6 +6,4 @@ export { SmsFormComponent } from "./sms-form.component";
 
 export { SmsCodeFormComponent } from "./sms-code-form.component";
 
-export {SmsDetailComponent } from "./sms-detail.component"
-
 

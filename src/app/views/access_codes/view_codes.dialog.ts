@@ -158,5 +158,6 @@ export class ViewCodesComponent extends ExportCSVComponent implements OnInit, Af
 		let dialogRef = this.dialog.open(ViewSingleCodeComponent, {autoFocus: false, panelClass: 'mat-dialog-changes-1' });
 		let compInstance = dialogRef.componentInstance;
 		compInstance.Code = code;
+		compInstance.mutilpleToSingle = true;
 	}
 }
