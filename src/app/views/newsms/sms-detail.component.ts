@@ -30,7 +30,7 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
   smsCount: any;
   Sms: any;
   smsInfo: any;
-  sent_Status: string 
+  filterstatus: string 
   componentSettings: any = {
 		name: null,
 		paggination: null,
@@ -49,7 +49,7 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
        protected appSelectorService: UserAppSelectorService) {
     super(mainApiService, appLoaderService, dialog);
     this.search = '';
-    this.sent_Status = ''
+    this.filterstatus = ''
     this.Sms = [];
     this.smsInfo = []
 		this.perPage = 20;
@@ -98,19 +98,18 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
 		// 	{key: 'sentstatus', value: this.sent_Status, title: 'Sent Status'},
 		// ];
     
-    
     this.loaderService.setLoading(true);
 
     let url = 'getCampaignDetails?campaign_id='+ this.smsId + 'page='  + index + '&index2=' + this.perPage;
 
-		if(this.search != '')
+		if(this.search)
 		{
-			url = url + '&search=' + this.search;
+			url = url + '&phone=' + this.search;
 		}
 
-    if(this.sent_Status != '')
+    if(this.filterstatus)
     {
-      url = url + '&status=' + this.sent_Status
+      url = url + '&status=' + this.filterstatus
     }
 
 

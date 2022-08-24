@@ -91,9 +91,9 @@
         Refresh
     </button>
     <div  fxLayout="row" fxFlexOrder.xs="1" fxFlex="25" fxLayoutAlign="center center">
-        <select style="margin-right: 4%; color: #148F96" fxFlex="38" (change)="gerSmsDetailList(1)" [(ngModel)]="sent_Status"  placeholder="Sort By" class="form-control" aria-label="Default select example">
+        <select style="margin-right: 4%; color: #148F96" fxFlex="38" (change)="gerSmsDetailList(1)" [(ngModel)]="filterstatus"  placeholder="Sort By" class="form-control" aria-label="Default select example">
             <option value="" disabled selected>Filter Status</option>
-            <option value="all">All</option>
+            <option value="">All</option>
             <option value="sent">Sent</option>
             <option value="not_sent">Not Sent</option>
         </select>

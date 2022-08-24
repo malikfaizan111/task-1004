@@ -12,25 +12,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 	selector: 'app-new-sms-form',
 	templateUrl: './new-sms-form.component.html'
 })
-export class NewSmsFormComponent implements OnInit
-{
+export class NewSmsFormComponent implements OnInit {
 	Form: FormGroup;
 	isLoading: boolean;
 	csvFile: any;
 	csvJSON: any;
 	specificPhones: string = '';
-	isEditing:any;
+	isEditing: any;
 	arrSms: Array<any> = []
-	blockSms:any
-	headersms:HttpHeaders
+	blockSms: any
+	headersms: HttpHeaders
 	token = 'UP!and$'
-	option:any
+	option: any
 	constructor(protected router: Router,
 		protected _route: ActivatedRoute,
 		protected mainApiService: MainService,
 		protected formbuilder: FormBuilder, protected dialog: MatDialog,
-		private http: HttpClient)
-	{
+		private http: HttpClient) {
 		this.Form = this.formbuilder.group({
 			message: [null, [Validators.required, Validators.maxLength(1000)]],
 			phones: [null],
@@ -44,24 +42,19 @@ export class NewSmsFormComponent implements OnInit
 		// this.smsStatus()
 	}
 
-	ngOnInit()
-	{
+	ngOnInit() {
 	}
 
-	getValue(name : any)
-	{
+	getValue(name: any) {
 		return this.Form.get(name);
 	}
 
-	onLocationBack(): void
-	{
+	onLocationBack(): void {
 		window.history.back();
 	}
 
-	doSubmit(): void
-	{
-		if(this.Form.get('phones')?.value == null || this.Form.get('phones')?.value == null)
-		{
+	doSubmit(): void {
+		if (this.Form.get('phones')?.value == null || this.Form.get('phones')?.value == null) {
 			let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
 			let cm = dialogRef.componentInstance;
 			cm.heading = 'Error';
@@ -72,13 +65,14 @@ export class NewSmsFormComponent implements OnInit
 		}
 
 		let sms = this.arrSms.map((x) => {
-		let obj : sms = {
-			type : x.type.replace('\r',''),
-			phone: x.phone,
-			message: this.Form.value.message
-		}
-		return obj
+			let obj: sms = {
+				type: x.type.replace('\r', ''),
+				phone: x.phone,
+				message: this.Form.value.message
+			}
+			return obj
 		})
+
 
 		this.isLoading = true;
 
@@ -120,8 +114,7 @@ export class NewSmsFormComponent implements OnInit
 			})
 	}
 
-	public csv_JSON(csv: any)
-	{
+	public csv_JSON(csv: any) {
 		// var lines = csv.split("\n");
 		// var result = [];
 
@@ -146,33 +139,33 @@ export class NewSmsFormComponent implements OnInit
 		// this.Form.get('phones')?.setValue(myJsonString);
 		// this.Form.get('type').setValue(myJsonString)
 		var lines = csv.split("\n");
-		for (let index = 0; index < lines.length ; index++) {
-			let row = lines[index].split(",");
-			this.arrSms.push({phone:row[0],type:row[1]})
-		  }
-		  this.Form.get('phones').setValue(this.arrSms)
+		for (let index = 0; index < lines.length; index++) {
+			if (lines[index] != '') {
+				let row = lines[index].split(",");
+				this.arrSms.push({ phone: row[0], type: row[1] })
+			}
+		}
+		this.Form.get('phones').setValue(this.arrSms)
 	}
 
-	convertFile(event: any)
-	{
+	convertFile(event: any) {
 		this.arrSms = []
 		this.csvJSON = event.target.files;
 		let file: File = this.csvJSON[0];
-		if (file != undefined)
-		{
+		if (file != undefined) {
 			var reader: FileReader = new FileReader();
 			reader.readAsText(file);
 			reader.onload = (event: any) => {
 				let text: any = reader.result;
 				text.substring(0);
 				this.csv_JSON(text);
+				console.log('text', text)
 			};
 		}
-		else
-		{
+		else {
 
 		}
-	}	
+	}
 }
 
 export interface sms {
