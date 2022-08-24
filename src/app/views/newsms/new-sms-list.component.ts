@@ -84,7 +84,6 @@ export class NewSmsListComponent implements OnInit
 				// this.search = this.componentSettings.search;
 			}
 		}
-		console.log('s', this.currentPage)
 		this.gerSmsList(this.currentPage);
 	}
 
@@ -139,7 +138,6 @@ export class NewSmsListComponent implements OnInit
 				this.currentPage = index;
 				this.pages = this.paginationService.setPagination(this.smsCount, index, this.perPage);
 				this.totalPages = this.pages.totalPages;
-				console.log('page', this.totalPages)
 				this.loaderService.setLoading(false);
 
 				this.Sms = Sms;
@@ -151,7 +149,6 @@ export class NewSmsListComponent implements OnInit
 				this.currentPage = 1;
 				this.pages = this.paginationService.setPagination(this.smsCount, index, this.perPage);
 				this.totalPages = this.pages.totalPages;
-				console.log('page', this.totalPages)
 				this.loaderService.setLoading(false);
 			}
 		});
@@ -162,7 +159,7 @@ export class NewSmsListComponent implements OnInit
 		// let dialogRef = this.dialog.open(ViewSmsComponent, {autoFocus: false});
 		// dialogRef.componentInstance.Deal = sms;
 		// localStorage.setItem('Sms', JSON.stringify(sms));
-    localStorage.removeItem('componentSettings')
+    // localStorage.removeItem('componentSettings')
 		this.router.navigateByUrl('main/sms/detail/' + sms.id)
 	}
 

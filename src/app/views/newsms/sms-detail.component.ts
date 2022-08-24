@@ -65,7 +65,7 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
   ngOnInit(): void {
     this.smsId = this.route.snapshot.paramMap.get('id')
     // console.log('check', this.smsId)
-    let abcd = localStorage.getItem('componentSettings') as string;
+    let abcd = localStorage.getItem('componentSmsSettings') as string;
 		this.componentSettings = JSON.parse(abcd)
     if(this.componentSettings)
 		{
@@ -97,7 +97,7 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
     // this.url_values = [
 		// 	{key: 'sentstatus', value: this.sent_Status, title: 'Sent Status'},
 		// ];
-    debugger
+    
     
     this.loaderService.setLoading(true);
 
@@ -114,7 +114,7 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
     }
 
 
-		localStorage.setItem('componentSettings', JSON.stringify(
+		localStorage.setItem('componentSmsSettings', JSON.stringify(
 			{
 				name: 'Sms',
 				paggination: this.index,
@@ -164,6 +164,7 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
   ngOnDestroy(): void 
 	{
 		this.appSelectorSubscription.unsubscribe();	
+    localStorage.removeItem('componentSmsSettings')
 	}
 
   onRefresh()

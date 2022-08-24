@@ -155,6 +155,7 @@ export class NewSmsFormComponent implements OnInit
 
 	convertFile(event: any)
 	{
+		this.arrSms = []
 		this.csvJSON = event.target.files;
 		let file: File = this.csvJSON[0];
 		if (file != undefined)
