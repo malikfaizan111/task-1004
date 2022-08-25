@@ -78,7 +78,8 @@ import { WebRedemptionFormComponent } from './views/defaults/web_redemption/web_
 import { WebRedemptionDetailListComponent } from './views/defaults/web_redemption/web_redemption-detail-list.component';
 import {NewSmsListComponent} from './views/newsms/new-sms-list.component';
 import {NewSmsFormComponent} from './views/newsms/new-sms-form.component';
-import {SmsDetailComponent} from './views/newsms/sms-detail.component'
+import {SmsDetailComponent} from './views/newsms/sms-detail.component';
+import {TransactionsComponent} from './views/defaults/transactions/transactions.component'
 
 
 
@@ -242,6 +243,7 @@ const mainApp: Routes = [
 	{ path: 'web_redemption', component: WebRedemptionListComponent, canActivate: [AppsGuard] },
 	{ path: 'web_redemption/add', component: WebRedemptionFormComponent, canActivate: [AppsGuard] },
 	{ path: 'web_redemption/:id', component: WebRedemptionDetailListComponent, canActivate: [AppsGuard] },
+	{ path: 'Transactions', component: TransactionsComponent, canActivate: [AppsGuard], data: { roles: ['other', '2', '3'] } },
 
 	// { path: 'Ooredo-Billing', component: OoredoBillingComponent, canActivate: [AppsGuard], data: { roles: ['1'] } },
 

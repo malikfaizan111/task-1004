@@ -140,6 +140,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
+						{routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
 						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
 						// { routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
 						// { routerLink: '/main/uber_status', image: 'defaults', label: 'UBER STATUS' },
@@ -387,6 +388,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
+						{routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
 						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
 						{ routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
 						{ routerLink: '/main/subscription_page', image: 'defaults', label: 'SUBSCRIPTION PAGE' },
@@ -504,6 +506,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
+						{routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
 						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
 						{ routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
 						{ routerLink: '/main/subscription_page', image: 'defaults', label: 'SUBSCRIPTION PAGE' },

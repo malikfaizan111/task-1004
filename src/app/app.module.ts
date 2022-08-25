@@ -145,6 +145,7 @@ import {ViewSingleCodeComponent} from './views/access_codes/view-single-code.com
 import { NewSmsListComponent } from './views/newsms/new-sms-list.component';
 import { NewSmsFormComponent } from './views/newsms/new-sms-form.component';
 import { SmsDetailComponent } from './views/newsms/sms-detail.component';
+import { TransactionsComponent } from './views/defaults/transactions/transactions.component';
 
 
 @NgModule({
@@ -343,6 +344,7 @@ import { SmsDetailComponent } from './views/newsms/sms-detail.component';
     NewSmsListComponent,
     NewSmsFormComponent,
     SmsDetailComponent,
+    TransactionsComponent,
 
   
   ],
