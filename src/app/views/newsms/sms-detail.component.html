@@ -125,7 +125,7 @@
                         {{sm.phone}}</td>
                     <td fxFlex="15" fxFlex.xl="15" fxFlex.md="15" fxFlex.sm="20" fxFlex.xs="20"
                         fxLayoutAlign="none center">
-                        {{sm.sent_status}}</td>
+                        {{sm.sent_status  ? sm.sent_status : 'N/A'}}</td>
                     <td fxFlex="20" fxFlex.xl="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="20"
                         fxLayoutAlign="none center">
                         {{sm.created_at}}</td>

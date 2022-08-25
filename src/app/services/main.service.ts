@@ -491,7 +491,7 @@ export class MainService
 	public getSms(params: any):Promise<any>
 	{
 		this.user_app = this.appSelectorService.getApp();
-		var url = this.baseSmsUrl + params + '?user_app_id=' + this.user_app.user_app_id;
+		var url = this.baseSmsUrl + params + '&user_app_id=' + this.user_app.user_app_id;
 		
 		return this.http.get(url, this.optionsms)
 		.toPromise().then((response: any) =>
