@@ -208,10 +208,21 @@ export class AccessCodesListComponent implements OnInit
 	{
 		let url = 'getUsedAccessCodes?id=' + code.id
 		this.mainApiService.getList(appConfig.base_url_slug + url ).then((res)=>{
-			this.accessCodesCount = res.data.accesscodesCount
-			if(this.accessCodesCount == 1)
+			this.accessCodesCount = res.data.accesscodesCount;
+			if(code.multiple == 0)
 			{
-
+				code = res.data.accesscodes;
+				console.log(code);
+				code.forEach(element => {
+					if(element.status == 1)
+					{
+						element['slide'] = true;
+					}
+					else if(element.status == 0)
+					{
+						element['slide'] = false;
+					}
+				});
 				this.onViewSingleCode(code)
 				
 			}
@@ -232,7 +243,7 @@ export class AccessCodesListComponent implements OnInit
 	}
 	onViewSingleCode(code: any)
 	{
-		let dialogRef = this.dialog.open(ViewSingleCodeComponent, {autoFocus: false, panelClass: 'mat-dialog-changes-1' });
+		let dialogRef = this.dialog.open(ViewSingleCodeComponent, {autoFocus: false, panelClass: 'mat-dialog-changes-1', height:'fit-content'});
 		let compInstance = dialogRef.componentInstance;
 		compInstance.Code = code;
 	}

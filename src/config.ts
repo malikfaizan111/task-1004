@@ -10,20 +10,10 @@ export const appConfig =
 
   //-----------------------------STAGING URLs---------------------------//
 
-
-
-    // base_url: 'http://staging.adminurban.com/up_qatar/api/v1/',
-    // base_urlV2: 'http://staging.adminurban.com/up_qatar_v2/api/v2/',
-    
-    // file_url: 'http://staging.adminurban.com/uploads/',
-    // file_urlV2: 'https://d35lr39dcxnup6.cloudfront.net/uploads_staging/uploads/',
-
-
-      base_url : 'https://staging-v1.adminurban.com/api/v1/',
-      base_urlV2: 'https://staging-v2.adminurban.com/api/v2/',
-
-       file_url: 'https://urbanpoint-storage.azureedge.net/test/uploads/',
-       file_urlV2: 'https://urbanpoint-storage.azureedge.net/test/uploads_staging/uploads/',
+  base_url : 'http://staging-v1.adminurban.com/api/v1/',
+  base_urlV2: 'http://staging-v2.adminurban.com/api/v2/',
+   file_url: 'https://urbanpoint-storage.azureedge.net/test/uploads/',
+   file_urlV2: 'https://urbanpoint-storage.azureedge.net/test/uploads_staging/uploads/',
 
 
     //-----------------------------PRE-PRODUCTION URLs---------------------------//

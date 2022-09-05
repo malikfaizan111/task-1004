@@ -12,8 +12,12 @@
             SINGLE ACCESS CODE
         </span>
     </div>
-    <button style="border: none;background-color: transparent; color: #148F96; font-weight: 600; font-size: 16px;"
+    <button *ngIf="mutilpleToSingle" style="border: none;background-color: transparent; color: #148F96; font-weight: 600; font-size: 16px;"
     (click)="ExportCSV()" [disabled]="mAccessCodes.length == 0" >
+        EXPORT CSV
+    </button>
+    <button *ngIf="!mutilpleToSingle" style="border: none;background-color: transparent; color: #148F96; font-weight: 600; font-size: 16px;"
+    (click)="ExportCSV()" [disabled]="Code.length == 0" >
         EXPORT CSV
     </button>
 </div>
@@ -37,7 +41,7 @@
                 <!-- <th style="text-align: center">Update</th> -->
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="mutilpleToSingle">
             <tr *ngFor="let code of mAccessCodes">
                 <td fxFlex="15" fxLayoutAlign="none center">{{code.id}}</td>
                 <!-- <td>{{code.title}}</td> -->
@@ -59,6 +63,37 @@
                 <td colspan="100"
                     style="text-align: center">No record found.</td>
             </tr>
+        </tbody>
+        <tbody *ngIf="!mutilpleToSingle">
+            <tr *ngFor="let code of Code">
+                <td fxFlex="15" fxLayoutAlign="none center">{{code.id}}</td>
+                <!-- <td>{{code.title}}</td> -->
+                <td fxFlex="15" fxLayoutAlign="none center">{{code.code}}</td>
+                <!-- <td>{{code.redemptions}}</td> -->
+                <td fxFlex="25" fxLayoutAlign="none center">{{code.redeemed_by != '' ? code.redeemed_by : 'NA' }}</td>
+                <td fxFlex="25" fxLayoutAlign="none center">{{code.redeemed_on != null ? code.redeemed_on : 'NA'}}</td>
+                <!-- <td>{{code.expiry_datetime}}</td> -->
+                <!-- <td>{{code.days}}</td>
+                <td>{{code.multiple == 0 ? 'No' : 'Yes'}}</td>
+                <td>{{code.status == 0 ? 'Inactive' : 'Active'}}</td> -->
+                <td fxFlex="25" fxLayoutAlign="center center">
+                    <mat-slide-toggle (change)="onChangemAccessCode(code)"
+                                      [(ngModel)]="code.slide"
+                                      color="accent"></mat-slide-toggle>
+                </td>
+            </tr>
+            <div *ngIf="multipleToSingle">
+                <tr *ngIf="mAccessCodes.length == 0">
+                    <td colspan="100"
+                        style="text-align: center">No record found.</td>
+                </tr>
+            </div>
+            <div *ngIf="!multipleToSingle">
+                <tr *ngIf="Code == 0">
+                    <td colspan="100"
+                        style="text-align: center">No record found.</td>
+                </tr>
+            </div>
         </tbody>
     </table>
 

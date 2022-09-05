@@ -64,7 +64,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let code of mAccessCodes" [mat-dialog-close]="true" (click)="onViewSingleCode(code)">
+            <tr *ngFor="let code of mAccessCodes">
                 <td fxFlex="15" fxLayoutAlign="none center">{{code.id}}</td>
                 <!-- <td>{{code.title}}</td> -->
                 <td fxFlex="15" fxLayoutAlign="none center">{{code.code}}</td>
