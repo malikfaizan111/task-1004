@@ -76,6 +76,7 @@ import { EligibleFormComponent } from './views/subscription-packages/eligible-fo
 import { WebRedemptionListComponent } from './views/defaults/web_redemption/web_redemption-list.component';
 import { WebRedemptionFormComponent } from './views/defaults/web_redemption/web_redemption-form.component';
 import { WebRedemptionDetailListComponent } from './views/defaults/web_redemption/web_redemption-detail-list.component';
+import {KpiReportComponent} from './views/kpi-report/kpi-report.component'
 
 
 
@@ -209,6 +210,8 @@ const mainApp: Routes = [
 	{ path: 'promo_codes/:id', component: PromoCodesFormComponent, canActivate: [AppsGuard], data: { roles: ['other', '2'] } },
 	{ path:'promo_codesNew', component: PromoCodesListNewComponent, canActivate: [AppsGuard], data:{roles:['other', '2']}},
 	{ path:'promo_codesNew/:id', component:PromoCodesFormNewComponent, canActivate: [AppsGuard], data:{roles:['other', '2']}},
+
+	{path: 'kpi_report', component: KpiReportComponent, canActivate: [AppsGuard], data: {roles: ['1', '2']}},
 
 	{ path: 'team', component: AdminsListComponent, canActivate: [AppsGuard], data: { roles: ['other'] } },
 	{ path: 'team/:id', component: AdminsFormComponent, canActivate: [AppsGuard], data: { roles: ['other'] } },

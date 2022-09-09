@@ -206,6 +206,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				{ routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
 				{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'PROMO CODES'},
+				{routerLink: 'kpi_report', image: 'kpi-report', label: 'KPI REPORT' },
 				{
 					image: 'credit card packages',
 					label: 'PACKAGES',
@@ -264,6 +265,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				// { routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
 				// { routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
 				{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'PROMO CODES'},
+				{routerLink: 'kpi_report', image: 'kpi-report', label: 'KPI REPORT' },
 				{
 					image: 'credit card packages',
 					label: 'PACKAGES',
@@ -380,6 +382,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				{ routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
 				{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'PROMO CODES'},
+				{routerLink: 'kpi_report', image: 'kpi-report', label: 'KPI REPORT' },
 				{ routerLink: '/main/merchant_report', image: 'orders', label: 'MERCHANT REPORT' },
 				{
 					image: 'default',
@@ -497,6 +500,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				{ routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
 				{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'PROMO CODES'},
+				{routerLink: 'kpi_report', image: 'kpi-report', label: 'KPI REPORT' },
 				{ routerLink: '/main/merchant_report', image: 'orders', label: 'MERCHANT REPORT' },
 				{
 					image: 'default',

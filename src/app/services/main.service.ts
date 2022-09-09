@@ -32,6 +32,12 @@ export class MainService
 	appSelectorSubscription: Subscription;
 	user_app: any;
 
+	// kpi static api
+	baseSmsUrl = 'http://internal-v2.adminurban.com/api/v2/cms/';
+	headersms: HttpHeaders;
+	optionsms: any;
+	testingToken = '17aaa5c8a1626085df91cb1eea873908'
+
 	constructor(private http: HttpClient, private router: Router, protected loaderService: BaseLoaderService, protected appSelectorService: UserAppSelectorService)
 	{
 		let abc = localStorage.getItem('UrbanpointAdmin') as string;
@@ -43,6 +49,11 @@ export class MainService
 		this.headers = new HttpHeaders({ 'Authorization': this.UrbanpointAdmin.auth_key, 'Cache-Control': 'no-cache',});
 
 		this.options = {headers: this.headers, observe: 'response'};
+
+		// kpi api
+		this.headersms = new HttpHeaders({ 'Authorization':this.testingToken, 'Cache-Control': 'no-cache',})
+		this.optionsms = {headers : this.headersms, observe: 'response'}
+		console.log('tobe', this.headersms)
 
 		this.appSelectorSubscription = this.appSelectorService.selectedApp.subscribe((response: any) =>
         {
@@ -476,6 +487,24 @@ export class MainService
 
 	// 		}).catch(this.handleError);
 	// }
+
+
+	postcsv(endpoint:any): Promise<any>
+	{
+		let url = this.baseSmsUrl + endpoint
+		return this.http.get(url, this.optionsms).toPromise().then((res: any) =>{
+			if (res.status === 401)
+				{
+					// localStorage.clear();
+					// this.router.navigate(['auth/login']);
+					window.location.reload();
+				}
+				else
+				{
+					return res.body;
+				}
+		})
+	}
 
 
 
