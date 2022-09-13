@@ -4,6 +4,10 @@ import { DatePipe } from '@angular/common';
 import { MainService } from 'src/app/services/main.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialog } from '../../lib';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 
 @Component({
@@ -126,7 +130,7 @@ export class KpiReportComponent implements OnInit {
           {
             //empty fields
             mainObj[month_date] = ""
-            console.log('if called: ' + i)
+            console.log('if called: ' + mainObj);
           } else {
             //handle single object length with subcategory indexes additions
             var tempIndex = i;
@@ -168,7 +172,8 @@ export class KpiReportComponent implements OnInit {
         tempData.push(mainObj)
       }
       console.log('new object: ' + JSON.stringify(tempData));
-      this.downloadFile(tempData, 'Monthly kpi Report');
+      // this.downloadFile(tempData, 'Monthly kpi Report');
+      this.exportAsExcelFile(tempData, 'Monthly kpi Report');
     } 
     else 
     {
@@ -183,30 +188,47 @@ export class KpiReportComponent implements OnInit {
 
   }
 
-  downloadFile(data: any, fileName: any) {
-    const replacer = (key, value) => (value === null ? '' : value); // specify how you want to handle null values here
-    const header = Object.keys(data[0]);
-    console.log('head', header)
-    const csv = data.map((row) =>
-      header
-        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
-        .join(',')
-    );
-    csv.unshift(header.join(','));
-    console.log('vvv', csv)
-    const csvArray = csv.join('\r\n');
-    console.log('array', csvArray)
+  // downloadFile(data: any, fileName: any) {
+  //   const replacer = (key, value) => (value === null ? '' : value); // specify how you want to handle null values here
+  //   const header = Object.keys(data[0]);
+  //   console.log('head', header)
+  //   const csv = data.map((row) =>
+  //     header
+  //       .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+  //       .join(',')
+  //   );
+  //   csv.unshift(header.join(','));
+  //   console.log('vvv', csv)
+  //   const csvArray = csv.join('\r\n');
+  //   console.log('array', csvArray)
 
-    const a = document.createElement('a');
-    const blob = new Blob([csvArray], { type: 'text/csv;charset=UTF-8' });
-    const url = window.URL.createObjectURL(blob);
+  //   const a = document.createElement('a');
+  //   const blob = new Blob([csvArray], { type: 'text/csv;charset=UTF-8' });
+  //   const url = window.URL.createObjectURL(blob);
 
-    a.href = url;
-    a.download = fileName;
-    a.click();
-    window.URL.revokeObjectURL(url);
-    a.remove();
-  }
+  //   a.href = url;
+  //   a.download = fileName;
+  //   a.click();
+  //   window.URL.revokeObjectURL(url);
+  //   a.remove();
+  // }
+
+  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    
+		const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+		console.log('worksheet',worksheet);
+		const workbook: XLSX.WorkBook = { Sheets: { 'sheet1': worksheet }, SheetNames: ['sheet1'] };
+		const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+		//const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+		this.saveAsExcelFile(excelBuffer, excelFileName);
+	  }
+	
+	  private saveAsExcelFile(buffer: any, fileName: string): void {
+		const data: Blob = new Blob([buffer], {
+		  type: EXCEL_TYPE
+		});
+		FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
+	  }
 
 
 
