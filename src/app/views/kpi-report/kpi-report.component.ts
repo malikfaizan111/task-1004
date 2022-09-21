@@ -88,19 +88,19 @@ export class KpiReportComponent implements OnInit {
       console.log('kpi data response: ' + data);
       var tempData = [];
       //rows length //    6 = additional sub categories for default values array (firstColumnData)
-      const objLength = Object.keys(data[0].report).length + 6;
+      const objLength = Object.keys(data[0].report).length + 18;
       console.log('obejct length: ' + objLength)
 
       //1st column default values
-      let firstColumnData = ["Acquisition A: Registration", "Total # of new registration", "growth as %", "Acquisition B: Subscription", "Total # of new subscriptions", "growth as %", "as % of total # of new registrations",
-        "Activation: 1st time Usage", "Total # of new activations - 1st time offer usage", "growth as % ", "as % of total # of new subscriptions", "Retention & Engagement", "In-Store Offer Redemptions", "Total # of In-Store Offer Redemptions",
-        "growth as %", "Total # of Unique Users who Redeemed an Offer", "Avg. # of redemptions per user", "Days in month", "Avg Daily Redemptions",
-        "Highest Redemption within 1 Day", "Total Approximate Savings", "Avg. approximate savings per user", "Delivery Orders", "Total # of Delivery Orders",
-        " growth as % ", "Total # of Unique Users who Placed an Order", "Avg. # of orders per user", "Days in month", "Avg Daily Orders", "Avg Order Amount",
-        "Total Revenue", "Highest # of Orders within 1 Day", "Total # of cancelled orders", "Total # of refunded orders", "Total amount refunded"] 
+      let firstColumnData = ["","Acquisition A: Registration", "Total # of new registration", "growth as %","", "Acquisition B: Subscription", "Total # of new subscriptions", "growth as %", "as % of total # of new registrations","",
+        "Activation: 1st time Usage", "Total # of new activations - 1st time offer usage", "growth as % ", "as % of total # of new subscriptions","", "Retention & Engagement","", "In-Store Offer Redemptions","" ,"Total # of In-Store Offer Redemptions",
+        "growth as %","", "Total # of Unique Users who Redeemed an Offer", "Avg. # of redemptions per user", "Days in month", "Avg Daily Redemptions",
+        "Highest Redemption within 1 Day","", "Total Approximate Savings", "Avg. approximate savings per user","", "Delivery Orders","", "Total # of Delivery Orders",
+        " growth as % ","","Total # of Unique Users who Placed an Order", "Avg. # of orders per user", "Days in month", "Avg Daily Orders", "Avg Order Amount",
+        "Total Revenue", "Highest # of Orders within 1 Day", "","Total # of cancelled orders", "Total # of refunded orders", "Total amount refunded"] 
 
-        let key = ["A.", "", "", "B.", "", "", "","C.", "", "", "", "D.", "D.I.", "D.I.a.","", "D.I.b.", "", "", "",
-        "", "D.I.c.", "", "D.II.", "D.II.a.", "","D.II.b.", "", "", "", "", "","", "D.II.c.", "", "", ""]
+        let key = ["","A.", "", "", "","B.", "", "", "","","C.", "", "", "","", "D.","", "D.I.","", "D.I.a.","","", "D.I.b.", "", "", "",
+        "","", "D.I.c.", "","", "D.II.","", "D.II.a.","", "","D.II.b.", "", "", "", "", "","", "","D.II.c.", "", "", ""]
 
       var mainObj = {} //initialize empty object on every iteration
 
@@ -123,41 +123,139 @@ export class KpiReportComponent implements OnInit {
           // const month_date = newDate[0]+"("+newDate[1]+")"
 
           //get report object from api data
-          const tempReportObj = data[j].report
+          let tempvalueStore = data[j].report;
+
+          debugger
+          Object.keys(data[j].report).forEach((key,index)=>{
+            if(i == 0){
+            if(key == 'Activation growth as %')
+            {
+                data[j].report[key] = data[j].report[key] + '%';
+            }
+            if(key == 'growth as %')
+            {
+                data[j].report[key] = data[j].report[key] + '%';
+            }
+            if(key == 'Delivery growth as %')
+            {
+                data[j].report[key] = data[j].report[key] + '%';
+            }
+            if(key == 'Instore growth as %')
+            {
+                data[j].report[key] = data[j].report[key] + '%';
+            }
+            if(key == 'Subscription growth as %')
+            {
+                data[j].report[key] = data[j].report[key] + '%';
+            }
+            if(key == 'as % of total # of new registrations')
+            {
+                data[j].report[key] = data[j].report[key] + '%';
+            }
+            if(key == 'as % of total # of new subscriptions')
+            {
+                data[j].report[key] = data[j].report[key] + '%';
+            }
+            if(key == 'Total Approximate Savings')
+            {
+                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+            }
+            if(key == 'Total amount refunded')
+            {
+                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+            }
+            if(key == 'Total Revenue')
+            {
+                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+            }
+            if(key == 'Avg Order Amount')
+            {
+                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+            }
+            if(key == 'Avg. approximate savings per user')
+            {
+                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+            }
+
+
+          }
+          })
+          console.log(data[j].report);
+
+
+          const tempReportObj = tempvalueStore;
 
           //handle sub category additions in updated rows
-          if (i == 0 || i == 3 || i == 7 || i == 11 || i == 12 || i == 22) 
+          if (i == 0 || i == 1 || i ==4 || i == 5 || i== 9  || i== 10 || i == 14 || i ==15 || i == 16 || i== 17 || i== 18 || i ==21 || i == 27 || i == 30 || i ==31 || i== 32 || i == 35 || i == 43 ) 
           {
             //empty fields
             mainObj[month_date] = ""
-            console.log('if called: ' + mainObj);
+            console.log('if called: ' + mainObj );
           } else {
             //handle single object length with subcategory indexes additions
             var tempIndex = i;
-            if (i > 0 && i < 3) 
-            {
-              tempIndex = i - 1;
-            }
-            if (i > 3 && i < 7) 
+
+            if(i> 1 && i <4)
             {
               tempIndex = i - 2;
             }
-
-            if (i > 7 && i < 11) 
+            if(i>5 && i< 9)
             {
-              tempIndex = i - 3;
+              tempIndex = i - 4;
             }
-            // if (i > 11 && i < 12) {
-            //   tempIndex = i - 4;
-            // }
-            if (i > 12 && i < 22) 
-            {
-              tempIndex = i - 5;
-            }
-            if (i > 22) 
+            if(i>10 && i<14)
             {
               tempIndex = i - 6;
             }
+            if(i>18 && i<21)
+            {
+              tempIndex = i - 11;
+            }
+            if(i>21 && i<27)
+            {
+              tempIndex = i - 12;
+            }
+            if(i>27 && i<30)
+            {
+              tempIndex = i - 13;
+            }
+            if(i>32 && i<35)
+            {
+              tempIndex = i - 16;
+            }
+            if(i>35 && i<43)
+            {
+              tempIndex = i - 17;
+            }
+            if(i>43)
+            {
+              tempIndex = i - 18;
+            }
+            // if (i > 0 && i < 3) 
+            // {
+            //   tempIndex = i - 1;
+            // }
+            // if (i > 3 && i < 7) 
+            // {
+            //   tempIndex = i - 2;
+            // }
+
+            // if (i > 7 && i < 11) 
+            // {
+            //   tempIndex = i - 3;
+            // }
+            // // if (i > 11 && i < 12) {
+            // //   tempIndex = i - 4;
+            // // }
+            // if (i > 12 && i < 22) 
+            // {
+            //   tempIndex = i - 5;
+            // }
+            // if (i > 22) 
+            // {
+            //   tempIndex = i - 6;
+            // }
+
             console.log('else called: ' + tempIndex)
             // var keyName = Object.keys(tempReportObj)[tempIndex];
 
@@ -165,7 +263,7 @@ export class KpiReportComponent implements OnInit {
             value = Object.values(tempReportObj)[tempIndex];
 
             //add value to updates object as  months values e.g {monthName : "value"}
-            mainObj[month_date] = value == null ? "--" : value
+            mainObj[month_date] = value == null || value == 'null%' || value == 'QARnull' ? "--" : value
           }
         }
         //push object to aarray
@@ -217,7 +315,7 @@ export class KpiReportComponent implements OnInit {
     
 		const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
 		console.log('worksheet',worksheet);
-		const workbook: XLSX.WorkBook = { Sheets: { 'sheet1': worksheet }, SheetNames: ['sheet1'] };
+		const workbook: XLSX.WorkBook = { Sheets: { 'sheet1': worksheet }, SheetNames: ['sheet1']};
 		const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 		//const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
 		this.saveAsExcelFile(excelBuffer, excelFileName);
