@@ -2,15 +2,46 @@
     <span fxFlexOffset="1" style="font-size: 19px;line-height: 36px;font-weight: 600; opacity: 1; margin-left: 1%;">
         KPI Report
     </span>
-    <form fxLayout="column" fxFlexOffset="3" [formGroup]="form" (ngSubmit)="doSubmit()" #formDirective="ngForm" style="width: 22%; margin-left: 15px;">
-        <mat-form-field ngClass.lg="mat" appearance="legacy">
+    <div fxLayout="column" fxFlexOffset="3" style="width: 22%; margin-left: 15px;">
+        <!-- <mat-form-field ngClass.lg="mat" appearance="legacy">
             <mat-label ngClass.lg="lglabel">Report Date</mat-label>
             <input matInput [matDatepicker]="picker0" formControlName="date" [max]="today" [min]="startDate">
             <mat-datepicker-toggle style="color: #3F638F; font-size: 17px" matSuffix [for]="picker0">
             </mat-datepicker-toggle>
             <mat-datepicker #picker0></mat-datepicker>
             <mat-error *ngIf="getValue('date')?.invalid && (getValue('date')?.dirty || getValue('date')?.touched)">Date required</mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <!-- <mat-form-field>
+            <mat-label> Report Date</mat-label>
+            <input matInput [matDatepicker]="monthPicker">
+            <mat-datepicker-toggle matSuffix [for]="monthPicker"></mat-datepicker-toggle>
+            <mat-datepicker #monthPicker startView="multi-year"
+            (monthSelected)="chosenMonthHandler($event, monthPicker, 'start')" >
+            </mat-datepicker>
+           </mat-form-field>
+            <br />
+            Month Picker : {{getMonth()}} -->
+
+
+            <!-- <mat-form-field>
+                <mat-label> Start Date</mat-label>
+                <input matInput [matDatepicker]="monthPicker" [formControl]='startDate'>
+                <mat-datepicker-toggle matSuffix [for]="monthPicker"></mat-datepicker-toggle>
+                <mat-datepicker #monthPicker startView="multi-year"
+                (monthSelected)="chosenMonthHandler($event, monthPicker, 'start')" >
+                </mat-datepicker>
+                </mat-form-field> -->
+
+                <mat-form-field ngClass.lg="mat" appearance="legacy">
+                    <mat-label ngClass.lg="lglabel">Report Date</mat-label>
+                    <input matInput [matDatepicker]="monthPicker"  [value]="date.value"  [formControl]='startDate'>
+                    <mat-datepicker-toggle style="color: #3F638F; font-size: 17px" matSuffix [for]="monthPicker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker  #monthPicker startView="multi-year"
+                    (monthSelected)="chosenMonthHandler($event, monthPicker, 'start')"></mat-datepicker>
+                  </mat-form-field>
+
           <!-- <mat-form-field appearance="legacy">
             <mat-label>Report Date</mat-label>
             <mat-date-range-input [rangePicker]="picker" [max]="today" [min]="startDate">
@@ -41,10 +72,11 @@
         </div> --> 
         <button style="width: 140px;"
 						        mat-raised-button
-						        [disabled]="form.invalid"
+						        [disabled]="!isDate"
+                                (click)="doSubmit()"
 						        color="accent">Download Report
 						</button>
-</form>
+    </div>
     <!-- <div fxLayout="row" style="border: 1px solid red;">
         <section  class="example-section" style="border: 1px solid red;">
             <mat-checkbox  class="example-margin checkbox" [(ngModel)]="checked">Select Date</mat-checkbox>

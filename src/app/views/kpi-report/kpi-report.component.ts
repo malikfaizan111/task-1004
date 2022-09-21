@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Inject, OnDestroy, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { MainService } from 'src/app/services/main.service';
@@ -8,7 +8,22 @@ import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
+import {MatDatepicker} from '@angular/material/datepicker';
+import * as moment from 'moment';
+import { Moment } from 'moment';
+import { MatDateFormats, MAT_DATE_FORMATS } from '@angular/material/core';
 
+export const MONTH_YEAR_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-kpi-report',
@@ -19,7 +34,7 @@ const EXCEL_EXTENSION = '.xlsx';
   ],
   providers: [DatePipe]
 })
-export class KpiReportComponent implements OnInit {
+export class KpiReportComponent implements OnInit , OnDestroy {
 
 
   @ViewChild('formDirective') protected formDirective: FormGroupDirective;
@@ -27,17 +42,54 @@ export class KpiReportComponent implements OnInit {
   enableBrandNewDate: boolean = false;
   btn: boolean = true
   today: any = new Date()
-  startDate: any = new Date('2022-01-02')
+  // startDate: any = new Date('2022-01-02')
+  startDate = new FormControl(moment([2020, 0, 1]));
+  isDate:boolean;
+  date = new FormControl();
+
+  constructor(private datePipe: DatePipe, protected mainApiService: MainService, protected dialog: MatDialog,
+    @Inject(MAT_DATE_FORMATS) private dateFormats) {
+      this.isDate = false;
+     }
 
 
-  constructor(private datePipe: DatePipe, protected mainApiService: MainService, protected dialog: MatDialog,) { }
+  getMonth(): string {
+    let out = this.startDate.value;
+    console.log(out);
+    return JSON.stringify(out);
+
+  }
+
+
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      'date': new FormControl(null, [Validators.required]),
-      // 'start': new FormControl(null, [Validators.required]),
-      // 'end': new FormControl(null, [Validators.required])
-    })
+
+    // this.dateFormats = MONTH_YEAR_FORMATS;
+    // console.log(this.dateFormats);
+    // this.dateFormats.display.dateInput = 'YYYY';
+    // this.form = new FormGroup({
+    //   'date': new FormControl(null, [Validators.required]),
+    //   // 'start': new FormControl(null, [Validators.required]),
+    //   // 'end': new FormControl(null, [Validators.required])
+    // })
+  }
+
+
+  chosenMonthHandler(
+    normalizedMonth: Moment,
+    datepicker: MatDatepicker<Moment>,
+    inputValue?: 'start' | 'end'
+  ) {
+    console.log(normalizedMonth);
+    this.startDate.setValue(moment(normalizedMonth).endOf('month'));
+    this.date = new FormControl(new Date(this.startDate.value));
+    console.log(this.date);
+    this.isDate = true;
+    datepicker.close();
+  }
+
+  ngOnDestroy(): void {
+      this.isDate = false;
   }
 
   getValue(name: any) {
@@ -66,18 +118,19 @@ export class KpiReportComponent implements OnInit {
   doSubmit() {
 
 
-    var date = this.datePipe.transform(this.form.value.date, "yyyy-MM-dd")
+    var date = this.datePipe.transform(this.startDate.value, "yyyy-MM-dd")
     // var abc = this.datePipe.transform(this.form.value.start, "yyyy-MM-dd")
     // var bcd = this.datePipe.transform(this.form.value.end, "yyyy-MM-dd")
     console.log('start', date)
-    this.formDirective.resetForm()
+    // this.formDirective.resetForm()
 
     // satatic api
     let url = 'controlTowerReport?report_date=' + date
 
     this.mainApiService.postcsv(url).then((result) => {
       console.log('api res', result)
-      this.generateCsvData(result.data)
+      this.generateCsvData(result.data);
+      this.isDate = false;
     })
 
   }
