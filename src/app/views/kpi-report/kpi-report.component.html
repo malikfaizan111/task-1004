@@ -35,7 +35,7 @@
 
                 <mat-form-field ngClass.lg="mat" appearance="legacy">
                     <mat-label ngClass.lg="lglabel">Report Date</mat-label>
-                    <input matInput [matDatepicker]="monthPicker"  [value]="date.value"  [formControl]='startDate'>
+                    <input matInput [matDatepicker]="monthPicker"  [value]="date.value"  [formControl]='startDate'  [max]="max" >
                     <mat-datepicker-toggle style="color: #3F638F; font-size: 17px" matSuffix [for]="monthPicker">
                     </mat-datepicker-toggle>
                     <mat-datepicker  #monthPicker startView="multi-year"

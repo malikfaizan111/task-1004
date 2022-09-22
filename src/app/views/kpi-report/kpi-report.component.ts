@@ -46,10 +46,12 @@ export class KpiReportComponent implements OnInit , OnDestroy {
   startDate = new FormControl(moment([2020, 0, 1]));
   isDate:boolean;
   date = new FormControl();
-
+  max:any
   constructor(private datePipe: DatePipe, protected mainApiService: MainService, protected dialog: MatDialog,
     @Inject(MAT_DATE_FORMATS) private dateFormats) {
       this.isDate = false;
+      this.max = new Date();
+      this.max.setMonth(this.max.getMonth() - 1);
      }
 
 
@@ -145,7 +147,7 @@ export class KpiReportComponent implements OnInit , OnDestroy {
       console.log('obejct length: ' + objLength)
 
       //1st column default values
-      let firstColumnData = ["","Acquisition A: Registration", "Total # of new registration", "growth as %","", "Acquisition B: Subscription", "Total # of new subscriptions", "growth as %", "as % of total # of new registrations","",
+      let firstColumnData = ["","Acquisition A: Registration", "Total # of new registrations", "growth as %","", "Acquisition B: Subscription", "Total # of new subscriptions", "growth as %", "as % of total # of new registrations","",
         "Activation: 1st time Usage", "Total # of new activations - 1st time offer usage", "growth as % ", "as % of total # of new subscriptions","", "Retention & Engagement","", "In-Store Offer Redemptions","" ,"Total # of In-Store Offer Redemptions",
         "growth as %","", "Total # of Unique Users who Redeemed an Offer", "Avg. # of redemptions per user", "Days in month", "Avg Daily Redemptions",
         "Highest Redemption within 1 Day","", "Total Approximate Savings", "Avg. approximate savings per user","", "Delivery Orders","", "Total # of Delivery Orders",
@@ -164,7 +166,7 @@ export class KpiReportComponent implements OnInit , OnDestroy {
 
         //default value from firstColumnData array.
         mainObj[""] = key[i]
-        mainObj["name"] = firstColumnData[i]
+        mainObj["Months"] = firstColumnData[i]
 
         //iterate on api response every object to get the values for row conversion      
         for (var j = 0; j < data.length; j++) {
@@ -183,51 +185,58 @@ export class KpiReportComponent implements OnInit , OnDestroy {
             if(i == 0){
             if(key == 'Activation growth as %')
             {
-                data[j].report[key] = data[j].report[key] + '%';
+                data[j].report[key] = parseFloat(data[j].report[key]).toFixed(2) + '%';
+                data[j].report[key] = data[j].report[key].toString(); + '%';
             }
             if(key == 'growth as %')
             {
-                data[j].report[key] = data[j].report[key] + '%';
+              data[j].report[key] = parseFloat(data[j].report[key]).toFixed(2) + '%';
+              data[j].report[key] = data[j].report[key].toString(); + '%';
             }
             if(key == 'Delivery growth as %')
             {
-                data[j].report[key] = data[j].report[key] + '%';
+              data[j].report[key] = parseFloat(data[j].report[key]).toFixed(2) + '%';
+              data[j].report[key] = data[j].report[key].toString(); + '%';
             }
             if(key == 'Instore growth as %')
             {
-                data[j].report[key] = data[j].report[key] + '%';
+              data[j].report[key] = parseFloat(data[j].report[key]).toFixed(2) + '%';
+              data[j].report[key] = data[j].report[key].toString(); + '%';
             }
             if(key == 'Subscription growth as %')
             {
-                data[j].report[key] = data[j].report[key] + '%';
+              data[j].report[key] = parseFloat(data[j].report[key]).toFixed(2) + '%';
+              data[j].report[key] = data[j].report[key].toString(); + '%';
             }
             if(key == 'as % of total # of new registrations')
             {
-                data[j].report[key] = data[j].report[key] + '%';
+              data[j].report[key] = parseFloat(data[j].report[key]).toFixed(2) + '%';
+              data[j].report[key] = data[j].report[key].toString(); + '%';
             }
             if(key == 'as % of total # of new subscriptions')
             {
-                data[j].report[key] = data[j].report[key] + '%';
+              data[j].report[key] = parseFloat(data[j].report[key]).toFixed(2) + '%';
+              data[j].report[key] = data[j].report[key].toString(); + '%';
             }
             if(key == 'Total Approximate Savings')
             {
-                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+                data[j].report[key] =  'QAR ' +  data[j].report[key] ;
             }
             if(key == 'Total amount refunded')
             {
-                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+                data[j].report[key] =  'QAR ' +  data[j].report[key] ;
             }
             if(key == 'Total Revenue')
             {
-                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+                data[j].report[key] =  'QAR ' +  data[j].report[key] ;
             }
             if(key == 'Avg Order Amount')
             {
-                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+                data[j].report[key] =  'QAR ' +  data[j].report[key] ;
             }
             if(key == 'Avg. approximate savings per user')
             {
-                data[j].report[key] =  'QAR' +  data[j].report[key] ;
+                data[j].report[key] =  'QAR ' +  data[j].report[key] ;
             }
 
 
@@ -316,7 +325,7 @@ export class KpiReportComponent implements OnInit , OnDestroy {
             value = Object.values(tempReportObj)[tempIndex];
 
             //add value to updates object as  months values e.g {monthName : "value"}
-            mainObj[month_date] = value == null || value == 'null%' || value == 'QARnull' ? "--" : value
+            mainObj[month_date] = value == null || value == 'null%'|| value == 'NaN%' || value == 'QAR null' ? "--" : value
           }
         }
         //push object to aarray
