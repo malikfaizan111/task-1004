@@ -17,6 +17,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {MatDatepickerModule, } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
 
 // import {  } from '@angular/material/expansion';
 
@@ -96,7 +97,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     // PortalModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ]
 })
 export class AgularMaterialModule { }

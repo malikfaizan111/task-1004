@@ -30,6 +30,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 	show: any;
 	appSelectorSubscription: Subscription;
 	selectedApp: any;
+	userName: any;
 	// notificationClick:any;
 	public scrollbarOptions = { axis: 'y', theme: 'minimal' };
 	menus: SideMenuItems[];
@@ -38,6 +39,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 		private baseService: BaseLoaderService,
 		private messagingService: MessagingService,  protected appSelectorService: UserAppSelectorService) {
 		this.adminClick = false;
+		this.userName = JSON.parse(localStorage.getItem('UrbanpointAdmin'))
+		// console.log('name', this.userName)
 		this.menus = [
 			// { routerLink: '/main/dashboard', image: 'dashboard@2x', label: 'Dashboard' },
 			// {
@@ -103,16 +106,35 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 			let UrbanpointAdmin = JSON.parse(localStorage.getItem('UrbanpointAdmin'));
 		if ((UrbanpointAdmin.name == 5) && (UrbanpointAdmin.role == 3)) {
 			this.menus = [
-				{ routerLink: '/main/orders/All', image: 'orders', label: 'REDEMPTIONS' },
-				{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'SUBSCRIPTIONS' },
-				{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-				{ routerLink: '/main/deals', image: 'deals', label: 'OFFERS' },
-				{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
+				{
+					image: 'Merchant',
+					label: 'Merchant',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'deals', label: 'OFFERS' },
+					]
+				},
+				{
+					image: 'Customers',
+					label: 'Customers',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
+						{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'SUBSCRIPTIONS' },
+					]
+				},
+				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
+				
+				
+				
 			]
 		}
 		else if (UrbanpointAdmin.name == 2) {
 			this.menus = [
-				{ routerLink: '/main/team', image: 'admin', label: 'TEAM' },
+				{ routerLink: '/main/team', image: 'Team', label: 'Team' },
 				// { routerLink: '/main/merchants', image: 'merchants', label: 'ORGANIZATIONS' },
 				// { routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
 				// { routerLink: '/main/deals', image: 'deals', label: 'OFFERS' },
@@ -127,7 +149,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						// { routerLink: '/main/customer/oredoo_billing', image: 'defaults', label: 'OREDOO BILLING' },
 					]
 				},
-				{ routerLink: '/main/orders/All', image: 'orders', label: 'REDEMPTIONS' },
+				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
 				{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'SUBSCRIPTIONS' },
 				// { routerLink: '/main/notifications', image: 'notifications', label: 'NOTIFICATIONS' },
 				{ routerLink: '/main/access_codes', image: 'access_codes', label: 'ACCESS CODES' },
@@ -180,7 +202,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'UNATTENDED ORDERS' }
 					]
 				},
-				{ routerLink: '/main/orders/All', image: 'orders', label: 'REDEMPTIONS' },
+				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
 				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },
 				{
 					image: 'credit card packages',
@@ -251,7 +273,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'UNATTENDED ORDERS' }
 					]
 				},
-				{ routerLink: '/main/orders/All', image: 'orders', label: 'REDEMPTIONS' },
+				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
 				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },
 				{
 					image: 'campaign',
@@ -311,14 +333,14 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'UNATTENDED ORDERS' },
 					]
 				},
-				{ routerLink: '/main/orders/All', image: 'orders', label: 'REDEMPTIONS' },
+				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
 				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },
 				{ routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
 			]
 		}
 		else if (UrbanpointAdmin.role == 1 && this.selectedApp != 1){
 			this.menus = [
-				{ routerLink: '/main/team', image: 'admin', label: 'TEAM' },
+				{ routerLink: '/main/team', image: 'Team', label: 'Team' },
 				{ routerLink: '/main/parent_companies', image: 'organization', label: 'PARENT COMPANIES' },
 				{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Merchants Accounts' },
 				{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'OUTLETS ACCOUNTS' },
@@ -367,7 +389,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'SETTINGS' },
 					]
 				},
-				{ routerLink: '/main/orders/All', image: 'orders', label: 'REDEMPTIONS' },
+				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
 				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },		
 				{
 					image: 'campaign',
@@ -425,7 +447,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 		}
 		else {
 			this.menus = [
-				{ routerLink: '/main/team', image: 'admin', label: 'TEAM' },
+				{ routerLink: '/main/team', image: 'Team', label: 'Team' },
 				{ routerLink: '/main/parent_companies', image: 'organization', label: 'PARENT COMPANIES' },
 				{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Merchants Accounts' },
 				{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'OUTLETS ACCOUNTS' },
@@ -474,7 +496,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'SETTINGS' },
 					]
 				},
-				{ routerLink: '/main/orders/All', image: 'orders', label: 'REDEMPTIONS' },
+				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
 				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },
 				{
 					image: 'credit card packages',

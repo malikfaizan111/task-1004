@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+$primary_font_family: 'Manrope';
+$color_1: #148F96;
+
 .dropdown-item {
     display: flex;
     padding: 10px;
@@ -25,6 +30,34 @@
 .side-image {
     position: absolute;
 }
+.matmenu{
+    margin: 9.5px 0 0 10px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.mat-menu-item{
+    font-family: $primary_font_family;
+    font-variation-settings: 'wght' 600;
+    width: 170px;
+    &:hover{
+        color: $color_1;
+        .icon{
+            color: $color_1;
+        }
+    }
+    
+}
+.font_style{
+    font-family: $primary_font_family;
+    font-variation-settings: 'wght' 800;
+    font-size: 15px;
+}
+
+
+
+
+
 
 $primary: #c0c0c0;
 $primaryLight: #af1f71af;
@@ -38,17 +71,21 @@ $font_family_1: 'Glyphicons Halflings';
             display: block;
             font-size: 13px;
             padding: 15px 10px 15px 20px;
-            color: black;
+            color: #1f1f1f;
             cursor: pointer;
-            font-weight: bold;
+            font-family: $primary_font_family;
+            font-variation-settings: 'wght' 800;
             &:focus {
                 outline: none;
                 text-decoration: none;
             }
             &:hover {
-                background: $primary;
+                // background: $primary;
                 text-decoration: none;
-                color: $white;
+                color: $color_1;
+                img{
+                    filter: invert(22%) sepia(72%) saturate(3569%) hue-rotate(169deg) brightness(107%) contrast(84%)
+                }
             }
         }
         .nav-dropdown-trigger {
@@ -57,9 +94,12 @@ $font_family_1: 'Glyphicons Halflings';
     }
     li.active {
         a {
-            background: $primary;
+            // background: $primary;
             text-decoration: none;
-            color: $white;
+            color: $color_1;
+            img{
+                filter: invert(22%) sepia(72%) saturate(3569%) hue-rotate(169deg) brightness(107%) contrast(84%)
+            }
         }
     }
     li.sub-nav {
@@ -69,7 +109,8 @@ $font_family_1: 'Glyphicons Halflings';
                 right: 20px;
                 top: 18px;
                 font-size: 12px;
-                content: "\e080";
+                // content: "\e080";
+                content:"\e113";
                 color: $white;
                 font-family: $font_family_1;
                 font-style: normal;
@@ -78,11 +119,11 @@ $font_family_1: 'Glyphicons Halflings';
                 -moz-osx-font-smoothing: grayscale;
                 color: $primary;
             }
-            &:hover {
-                &:after {
-                    color: black;
-                }
-            }
+            // &:hover {
+            //     &:after {
+            //         color: black;
+            //     }
+            // }
         }
         .nav-dropdown {
             display: none;
@@ -96,11 +137,11 @@ $font_family_1: 'Glyphicons Halflings';
     li.sub-nav.active {
         .nav-dropdown-trigger {
             &:after {
-                color: $white !important;
+                color: $primary !important;
             }
             &:hover {
                 &:after {
-                    color: $white !important;
+                    color: $primary !important;
                 }
             }
         }
@@ -113,17 +154,17 @@ $font_family_1: 'Glyphicons Halflings';
             }
         }
         >a {
-            color: $white !important;
-            background: $primary !important;
+            color: $color_1 !important;
+            // background: $primary !important;
         }
         >ul {
             >li.active {
                 a {
-                    color: $white !important;
-                    background: $primary !important
+                    color: $color_1!important;
+                    // background: $primary !important
                 }
-                color: $white !important;
-                background: $primary !important
+                color: $color_1 !important;
+                // background: $primary !important
             }
         }
     }
@@ -131,10 +172,13 @@ $font_family_1: 'Glyphicons Halflings';
         .nav-dropdown-trigger {
             &:after {
                 content: "\e114";
-                color: $white;
+                color: $primary;
             }
-            color: $white;
-            background: $primary;
+            color: $color_1;
+            // background: $primary;
+            img{
+                filter: invert(22%) sepia(72%) saturate(3569%) hue-rotate(169deg) brightness(107%) contrast(84%)
+            }
         }
         .nav-dropdown {
             display: block;
@@ -143,8 +187,8 @@ $font_family_1: 'Glyphicons Halflings';
                     color: black;
                     background: white;
                     &:hover {
-                        background: $primary;
-                        color: $white;
+                        // background: $primary;
+                        color: $color_1;
                         text-decoration: none;
                     }
                 }
@@ -155,20 +199,20 @@ $font_family_1: 'Glyphicons Halflings';
         .nav-dropdown-trigger2 {
             &:after {
                 content: "\e114";
-                color: $white;
+                color: $primary;
             }
-            color: $white;
-            background: $primary;
+            color: $primary;
+            // background: $primary;
         }
         .nav-dropdown2 {
             display: block;
             li {
                 a {
                     color: black;
-                    background: $white;
+                    // background: $white;
                     &:hover {
-                        background: $primary;
-                        color: $white;
+                        // background: $primary;
+                        color: $color_1;
                         text-decoration: none;
                     }
                 }
@@ -176,3 +220,9 @@ $font_family_1: 'Glyphicons Halflings';
         }
     }
 }
+
+
+
+  
+
+  
