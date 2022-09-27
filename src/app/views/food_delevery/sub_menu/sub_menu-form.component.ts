@@ -285,16 +285,27 @@ export class SubMenuFormComponent extends ImportCSVComponent implements OnInit {
 		// this.afterJSON = JSON.parse(JSON.stringify(result));
 
 		// (500 error thats why did not use stringify)
+		console.log("result", this.result)
+		Object.keys(result).forEach((key,index)=>{
+
+			console.log(result[key]);
+			if(result[key].parent_id)
+			{
+				result[key].parent_id  = Number(result[key].parent_id);
+			}
+			if(result[key].menu_id)
+			{
+				result[key].menu_id  = Number(result[key].menu_id);
+			}
+		});
 		this.afterJSON = result;
 		console.log("jesonnn", this.afterJSON)
 	}
 
 	onUploadCSV(): void {
-		this.afterSelectionCsv(this.result, this.headersObj, this.objTemp);
 		this.JsonToServer = { "data": this.afterJSON };
 		this.urlVersion = 2;
 		super.onUploadCSV();
-		this.isCsv = true;
 	}
 
 	afterSuccess(): void {

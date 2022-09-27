@@ -59,19 +59,19 @@ export class AccessCodesFormComponent implements OnInit
 				let abc = localStorage.getItem('PromoCode') as string;
 				this.codeGet = JSON.parse(abc);
 				this.Form.patchValue(this.codeGet);
-				// if(this.codeGet.multiple == 1){
-				// 	this.isMultiple = true;
-				// 	this.Form.addControl('number', new FormControl(null, [Validators.required]));
-				// 	this.Form.addControl('multiple', new FormControl(null, [Validators.required]));
-				// 	this.Form.get('number').setValue(this.codeGet.code);
-				// 	this.Form.get('multiple').setValue(1);
-				// }
-				// else
-				// {
-				// 	this.Form.removeControl('number');
-				// 	this.Form.removeControl('multiple');
-				// 	this.isMultiple = false;
-				// }
+				if(this.codeGet.multiple == 1){
+					this.isMultiple = true;
+					this.Form.addControl('number', new FormControl(null, [Validators.required]));
+					this.Form.addControl('multiple', new FormControl(null, [Validators.required]));
+					this.Form.get('number').setValue(this.codeGet.code);
+					this.Form.get('multiple').setValue(1);
+				}
+				else
+				{
+					this.Form.removeControl('number');
+					this.Form.removeControl('multiple');
+					this.isMultiple = false;
+				}
 				this.expiryDatetime = new Date(this.codeGet.expiry_datetime);
 			}
 			else 

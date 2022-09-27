@@ -82,6 +82,35 @@
 		</tbody>	
 	</table>	
 </div>
+	<div class="data-table" style=" padding-left: 40px;">	
+		<table class="table table-responsive table-striped"	
+			style="width:100%; margin-top: 15px;border: 1px solid #E8E8E8;">	
+			<thead>	
+				<tr>	
+					<th>ID</th>	
+					<th>Phone</th>	
+					<th style="width: 55%; text-align:center;">Offer code link</th>	
+					<th>generated on</th>	
+					<th>Status</th>	
+					<th>used on</th>	
+		
+				</tr>	
+			</thead>	
+			<tbody>	
+				<tr *ngFor="let code of PromoCodes">	
+					<td>{{code.id? code.id: 'N/A'}}</td>	
+					<td>{{code.phone? code.phone : 'N/A'}}</td>	
+					<td style="width:55% !important">{{code.offer_code_link}}</td>	
+					<td style="text-transform: capitalize;">{{code.offer_code_generated_on}}</td>	
+					<td style="text-transform: capitalize;">{{onTypeChange(code.status)}}</td>	
+					<td style="text-transform: capitalize;">{{code.offer_used_on? code.offer_used_on : 'N/A'}}</td>	
+				</tr>	
+				<tr *ngIf="PromoCodes.length === 0">	
+					<td colspan="100" style="text-align: center">No record found.</td>	
+				</tr>	
+			</tbody>	
+		</table>	
+	</div>
 	<app-pagination *ngIf="PromoCodes.length > 0" (setPage)="setPage($event)" [perPage]="perPage"
 		[totalPages]="totalPages" [currentPage]="currentPage"></app-pagination>
 </base-loader>

@@ -28,15 +28,15 @@ export class MainService
     public auth_key: string = '';
 	public baseUrl: string;
 	public baseUrlV2: string;
+	// sms...........
+	baseSmsUrl = 'http://notifications.adminurban.com/api/sms/';
+	headersms: HttpHeaders;
+	optionsms: any;
+	testingToken = '0238592d447cce94284ba68279474311'
+	// ...............
 
 	appSelectorSubscription: Subscription;
 	user_app: any;
-
-	// kpi static api
-	baseSmsUrl = 'http://internal-v2.adminurban.com/api/v2/cms/';
-	headersms: HttpHeaders;
-	optionsms: any;
-	testingToken = '17aaa5c8a1626085df91cb1eea873908'
 
 	constructor(private http: HttpClient, private router: Router, protected loaderService: BaseLoaderService, protected appSelectorService: UserAppSelectorService)
 	{
@@ -45,15 +45,15 @@ export class MainService
 
         this.baseUrl = appConfig.base_url;
         this.baseUrlV2 = appConfig.base_urlV2;
+		// header for sms.........
+		this.headersms = new HttpHeaders({'Authorization': this.testingToken, 'Cache-Control': 'no-cache',})
+		this.optionsms = {headers: this.headersms, observe: 'response'}
+		console.log('tobe', this.headersms)
+		// .......................
 
 		this.headers = new HttpHeaders({ 'Authorization': this.UrbanpointAdmin.auth_key, 'Cache-Control': 'no-cache',});
 
 		this.options = {headers: this.headers, observe: 'response'};
-
-		// kpi api
-		this.headersms = new HttpHeaders({ 'Authorization':this.testingToken, 'Cache-Control': 'no-cache',})
-		this.optionsms = {headers : this.headersms, observe: 'response'}
-		console.log('tobe', this.headersms)
 
 		this.appSelectorSubscription = this.appSelectorService.selectedApp.subscribe((response: any) =>
         {
@@ -488,22 +488,97 @@ export class MainService
 	// 		}).catch(this.handleError);
 	// }
 
-
-	postcsv(endpoint:any): Promise<any>
+	public getSms(params: any):Promise<any>
 	{
-		let url = this.baseSmsUrl + endpoint
-		return this.http.get(url, this.optionsms).toPromise().then((res: any) =>{
-			if (res.status === 401)
+		this.user_app = this.appSelectorService.getApp();
+		var url = this.baseSmsUrl + params + '&user_app_id=' + this.user_app.user_app_id;
+		
+		return this.http.get(url, this.optionsms)
+		.toPromise().then((response: any) =>
+		{
+			if (response.status === 401)
+			{
+				localStorage.clear();
+				// this.router.navigate(['auth/login']);
+				window.location.reload();
+			}
+			else
+			{
+				return response.body;
+			}
+		},
+		(reason: any) =>
+        {
+			if (reason.error.status === 401)
+			{
+				localStorage.clear();
+				// this.router.navigate(['auth/login']);
+				window.location.reload();
+				return reason;
+			}
+			return reason;
+
+        }).catch(this.handleError);
+		
+
+	}
+
+	public postSms(apiurl: any,formData: any): Promise<any>
+	{
+		
+		this.user_app = this.appSelectorService.getApp();
+		
+		let abc = formData.map(obj => ({ ...obj, user_app_id: this.user_app.user_app_id }))
+		let bcd = {
+			msgs: abc
+		}
+		// formData.append('user_app_id', this.user_app.user_app_id);
+		
+
+		let url = this.baseSmsUrl + apiurl
+
+		return this.http.post(url, bcd, this.optionsms)
+		.toPromise().then((response: any) => 
+		{
+			if (response.status === 401)
 				{
-					// localStorage.clear();
+					localStorage.clear();
 					// this.router.navigate(['auth/login']);
 					window.location.reload();
 				}
 				else
 				{
-					return res.body;
+					return response.body;
 				}
+		},
+		(reason: any) =>
+		{
+			if (reason.error.status === 401)
+			{
+				localStorage.clear();
+				// this.router.navigate(['auth/login']);
+				window.location.reload();
+				return reason;
+			}
+			return reason;
+
+		}).catch(this.handleError);
+
+
+	}
+
+	smsStatus(): Promise<any>
+	{
+		let token = 'UP!and$'
+		let headersms: HttpHeaders = new HttpHeaders({'Authorization': token, 'Cache-Control': 'no-cache',})
+		let option = {headers: this.headersms, observe: 'response'}
+		console.log('sms', headersms)
+		let url = 'http://notifications.adminurban.com/api/cronjob/sendBacklogSms'
+		let blockSms = this.http.post(url, option).toPromise().then((res:any) =>{
+			console.log(res)
+			
 		})
+		return blockSms
 	}
 
 

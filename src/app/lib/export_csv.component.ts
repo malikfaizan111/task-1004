@@ -7,7 +7,12 @@ import { AppLoaderService } from './app-loader/app-loader.service';
 import { appConfig } from '../../config';
 import { AlertDialog } from './alert.dialog';
 import { ExportMonthDialog } from './export_csv_month';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Component({
 	template: ``
@@ -334,7 +339,7 @@ export class ExportCSVComponent implements OnInit {
 						// });
 						// usersData = outletData;
 
-						csvName = 'Outlets_Data_For_Dashboard.xls';
+						csvName = 'Outlets_Data_For_Dashboard';
 						let obj= {};
 						result.data.outlets.forEach(elm => {
 							obj = elm;
@@ -648,6 +653,20 @@ export class ExportCSVComponent implements OnInit {
 							usersData = result.data.subscriptions;
 							usersData.forEach((data) => {
 
+						// if(data.accesscodes && data.accesscodes !== undefined){
+								// 		data['Redemptions'] = data.accesscodes.redemptions;
+								// }
+								// else{
+								// 	data['Redemptions'] = 0;
+								// }
+
+								if(data.totalDealsUsed !== undefined && data.totalDealsUsed){
+									data['Total_Deal_Used'] = data.totalDealsUsed;
+								}
+								else{
+									data['Total_Deal_Used'] = 0;
+								}
+
 								if (data.deliveryOrdersSubscriptionLogs) {
 									data['B1G1_Offers_Used'] = data.deliveryOrdersSubscriptionLogs.promotions_count;
 									data['SXGY_Offers_Used'] = data.deliveryOrdersSubscriptionLogs.promotions_sxgyf_count;
@@ -658,8 +677,9 @@ export class ExportCSVComponent implements OnInit {
 										data['Last_Delivery_Order'] = data.deliveryOrders.last_delivery_order;
 									data['Total_Delivery_Savings'] = data.deliveryOrders.total_saving_amount,
 										data['Avg_Order_Amount'] = data.deliveryOrders.avg_order_amount,
-										data['Total_Activity'] = Number(data.deliveryOrders.orders_count) + Number(data.B1G1_Offers_Used) + Number(data.SXGY_Offers_Used)
+										data['Total_Activity'] = Number(data.deliveryOrders.orders_count) + Number(data.Total_Deal_Used);
 								}
+
 
 								delete data['deliveryOrders'];
 								delete data['deliveryOrdersSubscriptionLogs'];
@@ -897,7 +917,7 @@ export class ExportCSVComponent implements OnInit {
 						// log here(csvContent.split('\r\n'))
 
 						if(this.method == 'getOutlets'){
-							this.downloadOutletFile(csvContent,csvName);
+							this.downloadOutletFile(this.ArrayCSV,csvName);
 						}
 						else{
 							this.downloadFile(csvContent, csvName);
@@ -937,23 +957,43 @@ export class ExportCSVComponent implements OnInit {
 	downloadOutletFile(data, fileName) {
 		this.loaderMessage = "Please wait CSV file is preparing to download.";
 		this.appLoaderService.setLoading(false);
-		var BOM = "\uFEFF";  // For tackling non-english Characters
-		var csvData = BOM + data;
-		var blob = new Blob([csvData], {
-			type: 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(csvData)
-		});
-		if (window.navigator.msSaveBlob) {
-			navigator.msSaveBlob(blob, fileName);
-		}
-		else {
-			// FOR OTHER BROWSERS
-			var link = document.createElement("a");
-			var csvUrl = URL.createObjectURL(blob);
-			link.href = csvUrl;
-			link.download = fileName;
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
-		}
+		// var BOM = "\uFEFF";  // For tackling non-english Characters
+		// var csvData = BOM + data;
+		// var blob = new Blob([csvData], {
+		// 	type: 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(csvData)
+		// });
+		// if (window.navigator.msSaveBlob) {
+		// 	navigator.msSaveBlob(blob, fileName);
+		// }
+		// else {
+		// 	// FOR OTHER BROWSERS
+		// 	var link = document.createElement("a");
+		// 	var csvUrl = URL.createObjectURL(blob);
+		// 	link.href = csvUrl;
+		// 	link.download = fileName;
+		// 	document.body.appendChild(link);
+		// 	link.click();
+		// 	document.body.removeChild(link);
+		// }
+		this.exportAsExcelFile(data,fileName);
+		
 	}
+
+
+	  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    
+		const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+		console.log('worksheet',worksheet);
+		const workbook: XLSX.WorkBook = { Sheets: { 'sheet1': worksheet }, SheetNames: ['sheet1'] };
+		const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+		//const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+		this.saveAsExcelFile(excelBuffer, excelFileName);
+	  }
+	
+	  private saveAsExcelFile(buffer: any, fileName: string): void {
+		const data: Blob = new Blob([buffer], {
+		  type: EXCEL_TYPE
+		});
+		FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
+	  }
 }

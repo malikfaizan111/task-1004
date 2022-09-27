@@ -12,6 +12,7 @@ import {MatDatepicker} from '@angular/material/datepicker';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { MatDateFormats, MAT_DATE_FORMATS } from '@angular/material/core';
+import { appConfig } from 'src/config';
 
 export const MONTH_YEAR_FORMATS = {
   parse: {
@@ -129,10 +130,9 @@ export class KpiReportComponent implements OnInit , OnDestroy {
     // satatic api
     let url = 'controlTowerReport?report_date=' + date
 
-    this.mainApiService.postcsv(url).then((result) => {
+    this.mainApiService.getList(appConfig.base_url_slug+url,false,2).then((result) => {
       console.log('api res', result)
-      this.generateCsvData(result.data);
-      this.isDate = false;
+      this.generateCsvData(result.data)
     })
 
   }

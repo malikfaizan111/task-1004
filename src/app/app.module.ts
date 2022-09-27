@@ -20,7 +20,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 import { NgxEmojiPickerModule } from "ngx-emoji-picker";
 
 // Services
-import { AuthService, MainService, PaginationService, BaseLoaderService } from './services';
+import { AuthService, MainService, PaginationService, BaseLoaderService, ExcelService } from './services';
 
 // Lib
 import { FilterDatePipe, AlertDialog, BaseLoaderComponent, PaginationComponent, MapLocationDialog, GetLocationDialog, FilePickerComponent, ExportCSVDialog, MultiTagInputComponent } from './lib';
@@ -142,6 +142,10 @@ import { AddOutletDialogWebComponent } from './views/defaults/web_redemption/add
 import { WebRedemptionDetailListComponent } from './views/defaults/web_redemption/web_redemption-detail-list.component';
 import { ChangeOutletImage } from './views/outlets/outlets-change-image.component';
 import {ViewSingleCodeComponent} from './views/access_codes/view-single-code.component';
+import { NewSmsListComponent } from './views/newsms/new-sms-list.component';
+import { NewSmsFormComponent } from './views/newsms/new-sms-form.component';
+import { SmsDetailComponent } from './views/newsms/sms-detail.component';
+import { TransactionsComponent } from './views/defaults/transactions/transactions.component';
 import { KpiReportComponent } from './views/kpi-report/kpi-report.component'
 
 @NgModule({
@@ -176,6 +180,7 @@ import { KpiReportComponent } from './views/kpi-report/kpi-report.component'
     AuthGuard,
     AuthService,
     MainService,
+    ExcelService,
     ApiLoaderService,
     MainAuthGuard,
     AppsGuard,
@@ -337,7 +342,12 @@ import { KpiReportComponent } from './views/kpi-report/kpi-report.component'
     WebRedemptionDetailListComponent,
     imagePreviewComponent,
     ViewSingleCodeComponent,
+    NewSmsListComponent,
+    NewSmsFormComponent,
+    SmsDetailComponent,
+    TransactionsComponent,
     KpiReportComponent
+
   
   ],
   entryComponents: [

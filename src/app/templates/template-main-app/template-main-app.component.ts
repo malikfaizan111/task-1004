@@ -134,12 +134,14 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				{ routerLink: '/main/interest_tag', image: 'InterestTags', label: 'INTEREST TAG' },
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
 				{ routerLink:'/main/promo_codesNew', image:'access_codes', label:'PROMO CODES New Version'},
+				{routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
 				{
 					image: 'defaults',
 					label: 'DEFAULTS',
 					is_parent: true,
 					opened: false,
 					children: [
+						// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
 						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
 						// { routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
 						// { routerLink: '/main/uber_status', image: 'defaults', label: 'UBER STATUS' },
@@ -390,6 +392,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
+						// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
 						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
 						{ routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
 						{ routerLink: '/main/subscription_page', image: 'defaults', label: 'SUBSCRIPTION PAGE' },
@@ -495,7 +498,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					]
 				},
 				{ routerLink: '/main/notifications', image: 'notifications', label: 'NOTIFICATIONS' },
-				{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
+				{ routerLink: '/main/newsms/list', image: 'notifications', label: 'SMS' },
 				{ routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
 				{ routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
@@ -508,6 +511,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
+						// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
 						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
 						{ routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
 						{ routerLink: '/main/subscription_page', image: 'defaults', label: 'SUBSCRIPTION PAGE' },
@@ -523,6 +527,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/trending_search', image: 'defaults', label: 'TRENDING SEARCH' },
 						{ routerLink: '/main/edit-history-list', image: 'defaults', label: 'CMS EDITING HISTORY' },
 						{ routerLink: '/main/kill_switch', image: 'defaults', label: 'KILL SWITCH' },
+						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
 					]
 				},
 				{

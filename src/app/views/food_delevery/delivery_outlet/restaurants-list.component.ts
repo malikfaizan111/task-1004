@@ -10,8 +10,8 @@ import { UserAppSelectorService } from '../../../lib/app-selector/app-selector.s
 import jsPDF from 'jspdf';
 import * as jsZip from 'jszip';
 import * as html2canvas from 'html2canvas';
-// import * as saveAs from 'file-saver';
-declare var saveAs : any;
+import {saveAs} from 'file-saver';
+// declare var saveAs : any;
 @Component({
 	selector: 'app-restaurants',
 	templateUrl: './restaurants-list.component.html'

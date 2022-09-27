@@ -28,7 +28,7 @@
 				 style="padding: 0;text-align: left;">
 				<input type="file"
 					   accept=".csv"
-					   (change)="getFile($event)"
+					   (change)="convertFile($event)"
 					   placeholder="Search"
 					   class="form-control" />
 			</div>
@@ -36,7 +36,7 @@
 
 			<button class="btn btn-primary round-elem"
 					style="background: red; border-color: red;height: 30px;padding: 4px 14px;"
-					[disabled]="!csvFile" (click)="onUploadSubMenuCSV()">UPLOAD CSV
+					[disabled]="!csvFile" (click)="onUploadCSV()">UPLOAD CSV
 			</button>
 			<a download
 			   target="_blank"

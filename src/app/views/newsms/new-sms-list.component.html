@@ -1,0 +1,92 @@
+<div class="row">
+    <div style="width: fit-content;" class="col-sm-2">
+        <span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+            SMS
+            <!-- {{AccessCodeHeading}} -->
+        </span>
+    </div>
+    <div class="col-sm-4" fxLayout="row">
+        <button fxFlex="30" *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
+            style="background: red; border-color: red" (click)="addNew()">Send SMS
+        </button>
+        <button fxFlex="44" fxFlexOffset="2" *ngIf="UpAdmin.role == 1" class="btn btn-primary round-elem"
+            style="background: red; border-color: red;margin-right: 4px;" (click)="sendsmscode()">Send SMS With Code
+        </button>
+    </div>
+    <div class="col-sm-6" style="text-align: right;float:right">
+        <div class="form-group col-sm-3" style="padding: 0 10px 0 0;">
+            <!-- <select class="form-control"
+			        [(ngModel)]="appName"
+			        (change)="onAppChange()">
+				<option value="1">APP 1</option>
+				<option value="2">APP 2</option>
+			</select> -->
+            <!-- <user-app-selector (onAppSelect)="onAppChange($event)"></user-app-selector> -->
+        </div>
+        <div class="form-group col-sm-9" style="padding-top: 10px;text-align: left;">
+            <button
+                style="border: none;background-color: transparent; color: #148F96; font-weight: 600; font-size: 16px;"
+                (click)="onRefresh()">
+                Refresh
+            </button>
+            <!-- <input type="text"
+				  placeholder="Search"
+				  class="form-control" />
+				   -->
+            <!-- <div class="input-group">
+        <span style="cursor: pointer;"
+        (click)="gerSmsList(1)"
+        class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+
+  </span>
+				<input autocomplete="false"
+				       type="text"
+				       maxlength="50"
+				       [(ngModel)]="search"
+				       (keyup)="onSearchPromoCode()"
+				       class="form-control"
+				       placeholder="Search">
+			</div> -->
+        </div>
+    </div>
+</div>
+<base-loader>
+    <div class="data-table" fxLayout="row">
+        <table class="table table-responsive table-striped" style="width:100%; margin-top: 20px">
+            <thead>
+                <tr>
+                    <th>Campaign ID</th>
+                    <!-- <th>Phone</th> -->
+                    <th>Channel</th>
+                    <th style="width: 350px;">Message</th>
+                    <th>Dispatched on</th>
+                    <th>Status</th>
+                    <th style="text-align: center; width: 200px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let sm of Sms">
+                    <td>{{sm.campaign_id}}</td>
+                    <!-- <td>{{sm.phone}}</td> -->
+                    <td>{{sm.sms_type}}</td>
+                    <td>{{sm.message}}</td>
+                    <td>{{sm.created_at}}</td>
+                    <td>{{sm.total_sent}}/{{sm.total_count}}</td>
+                    <td style="text-align: center; width: 200px;">
+                        <button style="min-width: 50px;" mat-raised-button (click)="onViewAllAccessSmsDetail(sm)"
+                            color="accent">View Details
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="Sms.length == 0">
+                    <td colspan="100" style="text-align: center">No record found.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <app-pagination *ngIf="Sms.length > 0" (setPage)="setPage($event)" [perPage]="perPage" [totalPages]="totalPages"
+        [currentPage]="currentPage"></app-pagination>
+</base-loader>

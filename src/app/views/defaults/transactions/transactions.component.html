@@ -1,0 +1,48 @@
+
+<div fxLayout.lg="row" fxLayout.xs="column" fxLayoutAlign.lg="space-between center">
+    <div fxLayout.xs="column" fxLayoutAlign.lg="space-between center" fxFlex.lg="27">
+      <span style="font-size: 19px;line-height: 36px;font-weight: 600;">Balance Transactions</span>
+      <button mat-raised-button color="accent" ngStyle.xs="width: 40%" fxFlex="33"  style="border-radius: 20px; height: 34px;">Export CSV</button>
+    </div>
+    <div fxFlexOffset.xs="4" fxLayout="row" fxFlex="30" fxLayoutAlign.lg="space-between center">
+      <span style="cursor: pointer; height: 34px;" class="input-group-addon" fxFlex.lg="10"
+        fxLayoutAlign="center center">
+        <i class="glyphicon glyphicon-search"></i>
+      </span>
+      <input autocomplete="false" type="text" 
+               maxlength="50"
+				       class="form-control"
+				       placeholder="Search">
+    </div>
+  </div>
+<!-- <base-loader> -->
+	<div class="data-table">
+		<table class="table table-responsive table-striped" style="width: 100%; margin-top: 18px">
+			<thead>
+				<tr>
+					<th class="w-auto">Transaction ID</th>
+					<th>Phone</th>
+					<th>Transaction</th>
+					<th>Type</th>
+					<th>Amount (QAR)</th>
+					<th>Transactions Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr >
+					<td class="w-auto">Welcome</td>
+					<td>Welcome</td>
+					<td>Welcome</td>
+					<td>Welcome</td>
+					<td>Welcome</td>
+					<td>Welcome</td>
+				</tr>
+				<!-- <tr *ngIf="Merchants.length === 0">
+					<td colspan="100" style="text-align: center">No record found.</td>
+				</tr> -->
+			</tbody>
+		</table>
+	</div>
+	<!-- <app-pagination *ngIf="Merchants.length > 0" (setPage)="setPage($event)" [perPage]="perPage"
+		[totalPages]="totalPages" [currentPage]="currentPage"></app-pagination> -->
+<!-- </base-loader> -->

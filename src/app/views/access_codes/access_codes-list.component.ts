@@ -243,7 +243,7 @@ export class AccessCodesListComponent implements OnInit
 	}
 	onViewSingleCode(code: any)
 	{
-		let dialogRef = this.dialog.open(ViewSingleCodeComponent, {autoFocus: false, panelClass: 'mat-dialog-changes-1', height:'fit-content'});
+		let dialogRef = this.dialog.open(ViewSingleCodeComponent, {autoFocus: false, panelClass: 'mat-dialog-changes-1' });
 		let compInstance = dialogRef.componentInstance;
 		compInstance.Code = code;
 	}
