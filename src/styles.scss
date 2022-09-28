@@ -2347,7 +2347,7 @@ input {
     z-index: 999;
     -moz-box-shadow: 0px 1px 22px #cfcfcf;
     -webkit-box-shadow: 0px 1px 22px #cfcfcf;
-    box-shadow: 0px 1px 22px #cfcfcf;
+    box-shadow: 0px 1px 18px #cfcfcf;
 }
 
 .welcome {
@@ -2475,9 +2475,9 @@ input {
         position: fixed;
         top: 0;
         z-index: 999;
-        -moz-box-shadow: 1px 0px 22px #cfcfcf;
-        -webkit-box-shadow: 1px 0px 22px #CFCFCF;
-        box-shadow: 1px 0px 22px #CFCFCF;
+        // -moz-box-shadow: 1px 0px 22px #cfcfcf;
+        // -webkit-box-shadow: 1px 0px 22px #CFCFCF;
+        // box-shadow: 1px 0px 22px #CFCFCF;
         transition: All 0.5s ease;
         -webkit-transition: All 0.5s ease;
         -moz-transition: All 0.5s ease;
@@ -2945,6 +2945,13 @@ input[autocomplete="false"] {
 
 .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label {
     width: unset;
+}
+// cms Component title
+.mainTitle{
+    font-size: 22px;
+    line-height: 32px;
+    font-family: $font_family_4;
+    font-variation-settings: 'wght' 800;
 }
 
 // .col-sm-2 {

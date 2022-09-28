@@ -65,7 +65,7 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
 
     @Input() is_heading_shown: boolean = true;
     @Input() is_button_shown: boolean = true;
-    @Input() heading_label: string = 'OUTLET';
+    @Input() heading_label: string = 'Outlet';
     @Input() is_child: boolean = false;
     @Input() parent_key: number = 0;
     @Output() onFormChanges: EventEmitter<any> = new EventEmitter<any>();

@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="col-sm-6">
-		<span *ngIf="is_heading_shown" style="font-size: 25px;">
+		<span *ngIf="is_heading_shown" class="mainTitle">
 			<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
 				<button mat-icon-button (click)="onLocationBack()" color="accent">
 					<img src="assets/images/actions/back.png" alt="">
 				</button>
-				<span>{{isEditing? 'EDIT': 'ADD'}} {{heading_label}}</span>
+				<span>{{isEditing? 'Edit': 'Add'}} {{heading_label}}</span>
 			</div>
 		</span>
 	</div>

@@ -42,7 +42,7 @@ export class DealsFormComponent extends ImportCSVComponent implements OnInit, On
 
 	@Input() is_heading_shown: boolean = true;
 	@Input() is_button_shown: boolean = true;
-	@Input() heading_label: string = 'OFFER';
+	@Input() heading_label: string = 'Offer';
 	@Input() is_child: boolean = false;
 	@Input() parent_key: number = 0;
 	@Output() onFormChanges: EventEmitter<any> = new EventEmitter<any>();

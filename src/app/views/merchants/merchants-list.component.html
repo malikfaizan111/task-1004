@@ -1,9 +1,9 @@
 <div class="row">
 	<app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length" [loaderMessage]="loaderMessage">
 	</app-loader>
-	<div class="col-sm-2">
-		<span style="font-size: 19px; line-height: 36px; font-weight: 600">
-			PARENT COMPANIES
+	<div class="col-sm-3" >
+		<span class="mainTitle" style="margin-left: 6px;">
+			Parent Companies
 		</span>
 	</div>
 	<div class="col-sm-4">
@@ -17,7 +17,7 @@
 			ADD NEW
 		</button>
 	</div>
-	<div class="col-sm-6" style="text-align: right">
+	<div class="col-sm-5" style="text-align: right">
 		<div class="form-group col-sm-3" style="padding: 0 10px 0 0">
 			<select [(ngModel)]="sortby" (change)="onSearchMerchant()" placeholder="Sort By" class="form-control">
 				<option disabled>Sort By</option>

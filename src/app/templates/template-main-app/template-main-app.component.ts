@@ -112,8 +112,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-						{ routerLink: '/main/deals', image: 'deals', label: 'OFFERS' },
+						{ routerLink: '/main/outlets', image: 'outlets', label: 'Outlets' },
+						{ routerLink: '/main/deals', image: 'deals', label: 'Offers' },
 					]
 				},
 				{
@@ -122,8 +122,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
-						{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'SUBSCRIPTIONS' },
+						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'Subscriptions' },
 					]
 				},
 				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
@@ -139,241 +139,449 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				// { routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
 				// { routerLink: '/main/deals', image: 'deals', label: 'OFFERS' },
 				{
-					image: 'customers',
-					label: 'CUSTOMERS',
+					image: 'Categories',
+					label: 'Categories & Tags',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
+						{ routerLink: '/main/interest_tag', image: 'InterestTags', label: 'Interests' },
+					]
+				},
+				{
+					image: 'Customers',
+					label: 'Customers',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'Subscriptions' },
 						// { routerLink: '/main/customers/non_registered', image: 'defaults', label: 'NON REGISTERED' },
 						// { routerLink: '/main/customer/oredoo_billing', image: 'defaults', label: 'OREDOO BILLING' },
 					]
 				},
 				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
-				{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'SUBSCRIPTIONS' },
 				// { routerLink: '/main/notifications', image: 'notifications', label: 'NOTIFICATIONS' },
-				{ routerLink: '/main/access_codes', image: 'access_codes', label: 'ACCESS CODES' },
-				{ routerLink: '/main/interest_tag', image: 'InterestTags', label: 'INTEREST TAG' },
-				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
-				{ routerLink:'/main/promo_codesNew', image:'access_codes', label:'PROMO CODES New Version'},
-				{routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
 				{
-					image: 'defaults',
-					label: 'DEFAULTS',
+					image: 'Marketing',
+					label: 'Marketing',
 					is_parent: true,
 					opened: false,
 					children: [
-						// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
-						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
-						// { routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
-						// { routerLink: '/main/uber_status', image: 'defaults', label: 'UBER STATUS' },
-						{ routerLink: '/main/versions', image: 'defaults', label: 'VERSIONS' },
+						{ routerLink:'/main/promo_codesNew', image:'access_codes', label:'Promo Code'},
+						{ routerLink: '/main/access_codes', image: 'access_codes', label: 'Access Code' },
 					]
 				},
+				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
+				{
+					image: 'Configurations',
+					label: 'Configurations',
+					is_parent: true,
+					opened: false,
+					children: [
+						{routerLink: 'kpi_report', image: 'kip-report', label: 'Kpi Report' },
+						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'Home Screen Messages' },
+						{ routerLink: '/main/versions', image: 'defaults', label: 'Versions' },
+					]
+				},
+				
+				// {
+				// 	image: 'defaults',  
+				// 	label: 'DEFAULTS',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+				// 		// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
+						
+				// 		// { routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
+				// 		// { routerLink: '/main/uber_status', image: 'defaults', label: 'UBER STATUS' },
+						
+				// 	]
+				// },
 			]
 		}
 		else if (UrbanpointAdmin.role == 2) {
 			this.menus = [
-				{ routerLink: '/main/parent_companies', image: 'organization', label: 'PARENT COMPANIES' },
-				{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Merchants Accounts' },
-				{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'OUTLETS ACCOUNTS' },
-				{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-				{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-				{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
 				{
-					image: 'customers',
-					label: 'CUSTOMERS',
+					image: 'Merchant_Portals',
+					label: 'Merchant Portals',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'NON REGISTERED' },
-						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'REPORTS' },
+						{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Parent Company Accounts' },
 					]
 				},
 				{
-					image: 'customers',
-					label: 'FOOD & DELIVERY',
+					image: 'Merchant',
+					label: 'Merchant',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'DELIVERY ORDER' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'UNATTENDED ORDERS' }
+						{ routerLink: '/main/parent_companies', image: 'organization', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
+						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
+					]
+				},
+				{
+					image: 'Customers',
+					label: 'Customers',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'Non Registered' },
+						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },	
 					]
 				},
 				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
-				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },
 				{
-					image: 'credit card packages',
-					label: 'SUBSCRIPTION PACKAGES',
+					image: 'Subscription_Packages',
+					label: 'Subscription Packages',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/subscription-packages/eligible', image: 'dashboard', label: 'ELIGIBLE' },
-						{ routerLink: '/main/subscription-packages/not_eligible', image: 'dashboard', label: 'NOT ELIGIBLE' },
-						{ routerLink: '/main/subscription-packages/card_only', image: 'dashboard', label: 'CARD ONLY' },
+						{ routerLink: '/main/subscription-packages/eligible', image: 'dashboard', label: 'Eligible' },
+						{ routerLink: '/main/subscription-packages/not_eligible', image: 'dashboard', label: 'Not Eligible' },
+						{ routerLink: '/main/subscription-packages/card_only', image: 'dashboard', label: 'Card Only' },
 					]
 				},
 				{
-					image: 'campaign',
-					label: 'CAMPAIGN',
+					image: 'Marketing',
+					label: 'Marketing',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/campaign', image: 'dashboard', label: 'PROMO IMAGE' },
+						{ routerLink: '/main/notifications', image: 'notifications', label: 'Push Notifications' },
+						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
+						{ routerLink: '/main/campaign', image: 'dashboard', label: 'In-App Banner' },
+						{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'Promo Code'},
+						{ routerLink: '/main/access_codes', image: 'access codes', label: 'Access Code' },
 					]
 				},
-				{ routerLink: '/main/notifications', image: 'notifications', label: 'NOTIFICATIONS' },
-				{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
+				{
+					image: 'Delivery',
+					label: 'Delivery',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'Unattended Orders' }
+					]
+				},
+				
+				
+				
+				// {
+				// 	image: 'campaign',
+				// 	label: 'CAMPAIGN',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+				// 	]
+				// },
+				
+				
 				// { routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
-				{ routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
+				
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
-				{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'PROMO CODES'},
-				{routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
+				
+				
+				// {
+				// 	image: 'credit card packages',
+				// 	label: 'PACKAGES',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+						
+				// 	]
+				// },
 				{
-					image: 'credit card packages',
-					label: 'PACKAGES',
+					image: 'Configurations',
+					label: 'Configurations',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'OOREDOO' },
-						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'NON OOREDOO' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'PROMO CODES' },
+						{ routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
+						{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'Outlets Accounts' }, 
+						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Code' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'Ooredoo' }, 
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Non Ooredoo' },
+						
 					]
 				},
 			]
 		 } 	else if (UrbanpointAdmin.role == 2 && this.selectedApp != 1) {
 			this.menus = [
-				{ routerLink: '/main/parent_companies', image: 'organization', label: 'PARENT COMPANIES' },
-				{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Merchants Accounts' },
-				{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'OUTLETS ACCOUNTS' },
-				{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-				{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-				{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
 				{
-					image: 'customers',
-					label: 'CUSTOMERS',
+					image: 'Merchant_Portals',
+					label: 'Merchant Portals',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'NON REGISTERED' },
-						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'REPORTS' },
+						{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Parent Company Accounts' },
 					]
 				},
 				{
-					image: 'customers',
-					label: 'FOOD & DELIVERY',
+					image: 'Merchant',
+					label: 'Merchant',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'DELIVERY ORDER' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'UNATTENDED ORDERS' }
+						{ routerLink: '/main/parent_companies', image: 'organization', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
+						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
+					]
+				},
+				
+				
+				{
+					image: 'Customers',
+					label: 'Customers',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'Non Registered' },
+						
+						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
+						
 					]
 				},
 				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
-				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },
 				{
-					image: 'campaign',
-					label: 'CAMPAIGN',
+					image: 'Marketing',
+					label: 'Marketing',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/campaign', image: 'dashboard', label: 'PROMO IMAGE' },
+						{ routerLink: '/main/notifications', image: 'notifications', label: 'Push Notifications' },
+						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
+						{ routerLink: '/main/campaign', image: 'dashboard', label: 'In-App Banner' },
+						{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'Promo Code'},
+						
 					]
 				},
-				{ routerLink: '/main/notifications', image: 'notifications', label: 'NOTIFICATIONS' },
-				{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
+				{
+					image: 'Delivery',
+					label: 'Delivery',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'Unattended Orders' }
+					]
+				},
+				{
+					image: 'Configurations',
+					label: 'Configurations',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
+						{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'Outlets Accounts' }, 
+						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Code' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'Ooredoo' }, 
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Non Ooredoo' },
+						
+					]
+				},
+				
+				// {
+				// 	image: 'campaign',
+				// 	label: 'CAMPAIGN',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+				// 		{ routerLink: '/main/campaign', image: 'dashboard', label: 'PROMO IMAGE' },
+				// 	]
+				// },
+				
 				// { routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
 				// { routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
-				{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'PROMO CODES'},
-				{routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
-				{
-					image: 'credit card packages',
-					label: 'PACKAGES',
-					is_parent: true,
-					opened: false,
-					children: [
-						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'OOREDOO' },
-						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'NON OOREDOO' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'PROMO CODES' },
-					]
-				},
+				// {
+				// 	image: 'credit card packages',
+				// 	label: 'PACKAGES',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+				// 		{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'OOREDOO' },
+				// 		{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'NON OOREDOO' },
+				// 		{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'PROMO CODES' },
+				// 	]
+				// },
 			]
 		}  
 		else if (UrbanpointAdmin.role == 3) {
 			this.menus = [
-				{ routerLink: '/main/parent_companies', image: 'organization', label: 'PARENT COMPANIES' },
-				{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Merchants Accounts' },
-				{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'OUTLETS ACCOUNTS' },
-				{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-				{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-				{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
 				{
-					image: 'customers',
-					label: 'CUSTOMERS',
+					image: 'Merchant_Portals',
+					label: 'Merchant Portals',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'NON REGISTERED' },
-						{ routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'REPORTS' },
+						{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Parent Company Accounts' },
 					]
 				},
 				{
-					image: 'customers',
-					label: 'FOOD & DELIVERY',
+					image: 'Merchant',
+					label: 'Merchant',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'DELIVERY ORDER' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'UNATTENDED ORDERS' },
+						{ routerLink: '/main/parent_companies', image: 'organization', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
+						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
+					]
+				},
+				{
+					image: 'Customers',
+					label: 'Customers',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'Non Registered' },
+						
+						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
+						
 					]
 				},
 				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
-				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },
-				{ routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
+				
+				
+				
+				// {
+				// 	image: 'customers',
+				// 	label: 'CUSTOMERS',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+						
+				// 	]
+				// },
+				{
+					image: 'Delivery',
+					label: 'Delivery',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'Unattended Orders' }
+					]
+				},
+				{
+					image: 'Configurations',
+					label: 'Configurations',
+					is_parent: true,
+					opened: false,
+					children: [
+						
+						{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'Outlets Accounts' }, 
+						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Code' },
+						{ routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'Ooredoo Billing' },
+						
+						
+					]
+				},
+				
+				
 			]
 		}
 		else if (UrbanpointAdmin.role == 1 && this.selectedApp != 1){
 			this.menus = [
 				{ routerLink: '/main/team', image: 'Team', label: 'Team' },
-				{ routerLink: '/main/parent_companies', image: 'organization', label: 'PARENT COMPANIES' },
-				{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Merchants Accounts' },
-				{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'OUTLETS ACCOUNTS' },
-				{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-				{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-				{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
-				// { routerLink: '/main/Ooredo-Billing', image: 'deals', label: 'Ooredoo Billing' },
 				{
-					image: 'customers',
-					label: 'CUSTOMERS',
+					image: 'Merchant_Portals',
+					label: 'Merchant Portals',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'NON REGISTERED' },
-						{ routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'REPORTS' },
+						{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'Outlet Accounts' },
 					]
 				},
 				{
-					image: 'customers',
-					label: 'FOOD & DELIVERY',
+					image: 'Merchant',
+					label: 'Merchant',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/restaurants', image: 'defaults', label: 'DELIVERY BRANDS' },
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'DELIVERY ORDER' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'UNATTENDED ORDERS' },
-						{ routerLink: '/main/Delivery_categories', image: 'defaults', label: 'DELIVERY CATEGORIES' },
-						{ routerLink: '/main/delivery_playlist', image: 'defaults', label: 'DELIVERY PLAYLIST' },
+						{ routerLink: '/main/parent_companies', image: 'organization', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
+						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
+						{ routerLink: '/main/merchant_report', image: 'orders', label: 'Merchant Reports' },
+					]
+				},
+				{
+					image: 'Categories',
+					label: 'Categories & Tags',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/categories', image: 'defaults', label: 'Main Categories' },
+						{ routerLink: '/main/trending_search', image: 'defaults', label: 'Trending Search Keywords' },
+						{ routerLink: '/main/interest_tag', image: 'InterestTags', label: 'Interests' },
+						{ routerLink: '/main/popularcategories', image: 'defaults', label: 'Popular Categories' },
+						{ routerLink: '/main/collection', image: 'defaults', label: 'Subcategory' },
+					]
+				},
+				{
+					image: 'Customers',
+					label: 'Customers',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'Non Registered' },
+						
+						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
+						
+					]
+				},
+				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
+				{
+					image: 'Marketing',
+					label: 'Marketing',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/notifications', image: 'notifications', label: 'Push Notifications' },
+						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
+						{ routerLink: '/main/campaign', image: 'dashboard', label: 'In-App Banner' },
+						{ routerLink: '/main/web_redemption', image: 'defaults', label: 'Web Vouchers'},
+						{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'Promo Code'},
+						{ routerLink: '/main/access_codes', image: 'access codes', label: 'Access Code' },
+						{ routerLink: '/main/sms-blacklist', image: 'defaults', label: 'SMS Blacklist' },
+						
+					]
+				},
+				{
+					image: 'Delivery',
+					label: 'Delivery',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'Unattended Orders' },
+						{ routerLink: '/main/restaurants', image: 'defaults', label: 'Delivery Brands' },
+						{ routerLink: '/main/Delivery_categories', image: 'defaults', label: 'Delivery Categories' },
+						{ routerLink: '/main/kill_switch', image: 'defaults', label: 'Killswitch' },
+						
 						// { routerLink: '/main/outlet_account', image: 'merchants', label: 'OUTLET ACCOUNT' },
-						{ routerLink: '/main/delivery_playlist_parentOutlet', image: 'defaults', label: 'DELIVERY PLAYLIST PARENT OUTLET' },
-						{ routerLink: '/main/spendXYList', image: 'defaults', label: '25% Offers' },
+						
 						// {
 						// 	image: 'dashboard',
 						// 	label: 'SETTINGS',
@@ -389,180 +597,290 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'SETTINGS' },
 					]
 				},
-				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
-				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },		
+
 				{
-					image: 'campaign',
-					label: 'CAMPAIGN',
+					image: 'Configurations',
+					label: 'Configurations',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/campaign', image: 'dashboard', label: 'PROMO IMAGE' },
+						{routerLink: 'kpi_report', image: 'kip-report', label: 'Kpi Report'},
+						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Code' },
+						{ routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'Ooredoo Billing' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'Ooredoo' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Non Ooredoo' },
+						{ routerLink: '/main/delivery_playlist', image: 'defaults', label: 'Delivery Playlisyt' }, 
+						{ routerLink: '/main/delivery_playlist_parentOutlet', image: 'defaults', label: 'Delivery Playlisyt Parent Ooutlet' },
+						{ routerLink: '/main/spendXYList', image: 'defaults', label: '25% Offers' },
+						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'Home Screen Messages' },
+						{ routerLink: '/main/subscription_text', image: 'defaults', label: 'Subscription Text' }, 
+						{ routerLink: '/main/subscription_page', image: 'defaults', label: 'Subscription Page' },
+						{ routerLink: '/main/uber_status', image: 'defaults', label: 'Uber Status' },
+						{ routerLink: '/main/offer_detail_messages', image: 'defaults', label: 'Offer Detail Messages' },
+						{ routerLink: '/main/versions', image: 'defaults', label: 'Versions' },
+						{ routerLink: '/main/playlist', image: 'defaults', label: 'Category Playlist' },
+						
+						
+						
 					]
 				},
-				{ routerLink: '/main/notifications', image: 'notifications', label: 'NOTIFICATIONS' },
-				{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
-				{ routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
-				{ routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
+				{ routerLink: '/main/edit-history-list', image: 'CMS_History', label: 'CMS Editing History' },
+				
+				
+				// { routerLink: '/main/Ooredo-Billing', image: 'deals', label: 'Ooredoo Billing' },
+				// {
+				// 	image: 'customers',
+				// 	label: 'CUSTOMERS',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+						
+				// 	]
+				// },
+				
+				
+					
+				// {
+				// 	image: 'campaign',
+				// 	label: 'CAMPAIGN',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+				// 	]
+				// },
+				
+				
+				
+				
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
-				{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'PROMO CODES'},
-				{routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
-				{ routerLink: '/main/merchant_report', image: 'orders', label: 'MERCHANT REPORT' },
-				{
-					image: 'default',
-					label: 'DEFAULTS',
-					is_parent: true,
-					opened: false,
-					children: [
-						// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
-						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
-						{ routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
-						{ routerLink: '/main/subscription_page', image: 'defaults', label: 'SUBSCRIPTION PAGE' },
-						{ routerLink: '/main/sms-blacklist', image: 'defaults', label: 'SMS BLACKLIST' },
-						{ routerLink: '/main/web_redemption', image: 'defaults', label: 'WEB REDEMPTION'},
-						{ routerLink: '/main/uber_status', image: 'defaults', label: 'UBER STATUS' },
-						{ routerLink: '/main/offer_detail_messages', image: 'defaults', label: 'OFFER DETAIL MESSAGES' },
-						{ routerLink: '/main/versions', image: 'defaults', label: 'VERSIONS' },
-						{ routerLink: '/main/categories', image: 'defaults', label: 'CATEGORIES' },
-						{ routerLink: '/main/popularcategories', image: 'defaults', label: 'POPULAR CATEGORIES' },
-						{ routerLink: '/main/collection', image: 'defaults', label: 'COLLECTION' },
-						{ routerLink: '/main/playlist', image: 'defaults', label: 'CATEGORY PLAYLIST' },
-						{ routerLink: '/main/trending_search', image: 'defaults', label: 'TRENDING SEARCH' },
-						{ routerLink: '/main/edit-history-list', image: 'defaults', label: 'CMS EDITING HISTORY' },
-						{ routerLink: '/main/kill_switch', image: 'defaults', label: 'KILL SWITCH' },
-					]
-				},
-				{
-					image: 'credit card packages',
-					label: 'PACKAGES',
-					is_parent: true,
-					opened: false,
-					children: [
-						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'OOREDOO' },
-						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'NON OOREDOO' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'PROMO CODES' },
-					]
-				},
+				
+				
+				
+				// {
+				// 	image: 'default',
+				// 	label: 'DEFAULTS',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+				// 		// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
+						
+						
+				// 	]
+				// },
+				// {
+				// 	image: 'credit card packages',
+				// 	label: 'PACKAGES',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+						
+				// 	]
+				// },
 			]
 		}
 		else {
 			this.menus = [
 				{ routerLink: '/main/team', image: 'Team', label: 'Team' },
-				{ routerLink: '/main/parent_companies', image: 'organization', label: 'PARENT COMPANIES' },
-				{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Merchants Accounts' },
-				{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'OUTLETS ACCOUNTS' },
-				{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-				{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-				{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
-				// { routerLink: '/main/Ooredo-Billing', image: 'deals', label: 'Ooredoo Billing' },
 				{
-					image: 'customers',
-					label: 'CUSTOMERS',
+					image: 'Merchant_Portals',
+					label: 'Merchant Portals',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'REGISTERED' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'NON REGISTERED' },
-						{ routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'REPORTS' },
+						{ routerLink: '/main/merchant_account', image: 'Merchant_Portals', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/outlet_account', image: 'Merchant_Portals', label: 'Outlet Accounts' },
 					]
 				},
 				{
-					image: 'customers',
-					label: 'FOOD & DELIVERY',
+					image: 'Merchant',
+					label: 'Merchant',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/restaurants', image: 'defaults', label: 'DELIVERY BRANDS' },
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'DELIVERY ORDER' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'UNATTENDED ORDERS' },
-						{ routerLink: '/main/Delivery_categories', image: 'defaults', label: 'DELIVERY CATEGORIES' },
-						{ routerLink: '/main/delivery_playlist', image: 'defaults', label: 'DELIVERY PLAYLIST' },
-						// { routerLink: '/main/outlet_account', image: 'merchants', label: 'OUTLET ACCOUNT' },
-						{ routerLink: '/main/delivery_playlist_parentOutlet', image: 'defaults', label: 'DELIVERY PLAYLIST PARENT OUTLET' },
-						{ routerLink: '/main/spendXYList', image: 'defaults', label: '25% Offers' },
-						// {
-						// 	image: 'dashboard',
-						// 	label: 'SETTINGS',
-						// 	is_parent: true,
-						// 	opened: false,
-						// 	children: [
-						// 		// { routerLink: '/main/restaurants/mainMenuItem', image: 'defaults', label: 'MAIN MENU ITEM' },
-						// 		{ routerLink: '/main/Delivery_categories', image: 'defaults', label: 'DELIVERY CATEGORIES' },
-						// 		{ routerLink: '/main/delivery_playlist', image: 'defaults', label: 'DELIVERY PLAYLIST' },
-						// 		{ routerLink: '/main/delivery_playlist_parentOutlet', image: 'defaults', label: 'DELIVERY PLAYLIST PARENT OUTLET' },
-						// 	]
-						// },
-						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'SETTINGS' },
+						{ routerLink: '/main/parent_companies', image: 'Merchant', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'Merchant', label: 'Brands' },
+						{ routerLink: '/main/outlets', image: 'Merchant', label: 'Outlets' },
+						{ routerLink: '/main/deals', image: 'Merchant', label: 'Offers' },
+						{ routerLink: '/main/merchant_report', image: 'Merchant', label: 'Merchant Reports' },
+					]
+				},
+				{
+					image: 'Categories',
+					label: 'Categories & Tags',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/categories', image: 'Categories', label: 'Main Categories' },
+						{ routerLink: '/main/trending_search', image: 'Categories', label: 'Trending Search Keywords' },
+						{ routerLink: '/main/interest_tag', image: 'Categories', label: 'Interests' },
+						{ routerLink: '/main/popularcategories', image: 'Categories', label: 'Popular Categories' },
+						{ routerLink: '/main/collection', image: 'Categories', label: 'Subcategory' },
+					]
+				},
+
+				{
+					image: 'Customers',
+					label: 'Customers',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/customers/registered', image: 'Customers', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'Customers', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'Customers', label: 'Non Registered' },
+						
+						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
+						
 					]
 				},
 				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
-				{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'SUBSCRIPTIONS' },
+				// { routerLink: '/main/Ooredo-Billing', image: 'deals', label: 'Ooredoo Billing' },
 				{
-					image: 'credit card packages',
-					label: 'SUBSCRIPTION PACKAGES',
+					image: 'Subscription_Packages',
+					label: 'Subscription Packages',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/subscription-packages/eligible', image: 'dashboard', label: 'ELIGIBLE' },
-						{ routerLink: '/main/subscription-packages/not_eligible', image: 'dashboard', label: 'NOT ELIGIBLE' },
-						{ routerLink: '/main/subscription-packages/card_only', image: 'dashboard', label: 'CARD ONLY' },
+						{ routerLink: '/main/subscription-packages/eligible', image: 'Subscription_Packages', label: 'Eligible' },
+						{ routerLink: '/main/subscription-packages/not_eligible', image: 'Subscription_Packages', label: 'Not Eligible' },
+						{ routerLink: '/main/subscription-packages/card_only', image: 'Subscription_Packages', label: 'Card Only' },
 						// { routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'NON OOREDOO' },
 					]
-				},		
+				},
 				{
-					image: 'campaign',
-					label: 'CAMPAIGN',
+					image: 'Marketing',
+					label: 'Marketing',
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/campaign', image: 'dashboard', label: 'PROMO IMAGE' },
+						{ routerLink: '/main/notifications', image: 'Marketing', label: 'Push Notifications' },
+						{ routerLink: '/main/sms/list', image: 'Marketing', label: 'SMS' },
+						{ routerLink: '/main/campaign', image: 'Marketing', label: 'In-App Banner' },
+						{ routerLink: '/main/web_redemption', image: 'Marketing', label: 'Web Vouchers'},
+						{ routerLink:'/main/promo_codesNew', image:'Marketing', label:'Promo Code'},
+						{ routerLink: '/main/access_codes', image: 'Marketing', label: 'Access Code' },
+						{ routerLink: '/main/sms-blacklist', image: 'Marketing', label: 'SMS Blacklist' },
+						
 					]
 				},
-				{ routerLink: '/main/notifications', image: 'notifications', label: 'NOTIFICATIONS' },
-				{ routerLink: '/main/newsms/list', image: 'notifications', label: 'SMS' },
-				{ routerLink: '/main/access_codes', image: 'access codes', label: 'ACCESS CODES' },
-				{ routerLink: '/main/interest_tag', image: 'interest tag', label: 'INTEREST TAG' },
+				{
+					image: 'Delivery',
+					label: 'Delivery',
+					is_parent: true,
+					opened: false,
+					children: [
+						{ routerLink: '/main/delivery_order', image: 'Delivery', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'Delivery', label: 'Unattended Orders' },
+						{ routerLink: '/main/restaurants', image: 'Delivery', label: 'Delivery Brands' },
+						{ routerLink: '/main/Delivery_categories', image: 'Delivery', label: 'Delivery Categories' },
+						{ routerLink: '/main/kill_switch', image: 'Delivery', label: 'Killswitch' },
+					]
+				},
+				{
+					image: 'Configurations',
+					label: 'Configurations',
+					is_parent: true,
+					opened: false,
+					children: [
+						{routerLink: 'kpi_report', image: 'Configurations', label: 'Kpi Report'},
+						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
+						{ routerLink: '/main/customers/oredoo_billing', image: 'Configurations', label: 'Ooredoo Billing' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'Configurations', label: 'Ooredoo' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'Configurations', label: 'Non Ooredoo' },
+						{ routerLink: '/main/delivery_playlist', image: 'Configurations', label: 'Delivery Playlisyt' }, 
+						{ routerLink: '/main/delivery_playlist_parentOutlet', image: 'Configurations', label: 'Delivery Playlisyt Parent Ooutlet' },
+						{ routerLink: '/main/spendXYList', image: 'Configurations', label: '25% Offers' },
+						{ routerLink: '/main/home_screen_messages', image: 'Configurations', label: 'Home Screen Messages' },
+						{ routerLink: '/main/subscription_text', image: 'Configurations', label: 'Subscription Text' }, 
+						{ routerLink: '/main/subscription_page', image: 'Configurations', label: 'Subscription Page' },
+						{ routerLink: '/main/uber_status', image: 'Configurations', label: 'Uber Status' },
+						{ routerLink: '/main/offer_detail_messages', image: 'Configurations', label: 'Offer Detail Messages' },
+						{ routerLink: '/main/versions', image: 'Configurations', label: 'Versions' },
+						{ routerLink: '/main/playlist', image: 'Configurations', label: 'Category Playlist' },
+						{ routerLink: '/main/sms/list', image: 'Configurations', label: 'SMS' },	
+					]
+				},
+				{ routerLink: '/main/edit-history-list', image: 'CMS_History', label: 'CMS EDITING HISTORY' },
+				// {
+				// 	image: 'customers',
+				// 	label: 'CUSTOMERS',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+						
+						
+						
+				// 	]
+				// },
+				// {
+				// 	image: 'customers',
+				// 	label: 'FOOD & DELIVERY',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+						
+				// 		// { routerLink: '/main/outlet_account', image: 'merchants', label: 'OUTLET ACCOUNT' },
+						
+				// 		// {
+				// 		// 	image: 'dashboard',
+				// 		// 	label: 'SETTINGS',
+				// 		// 	is_parent: true,
+				// 		// 	opened: false,
+				// 		// 	children: [
+				// 		// 		// { routerLink: '/main/restaurants/mainMenuItem', image: 'defaults', label: 'MAIN MENU ITEM' },
+				// 		// 		{ routerLink: '/main/Delivery_categories', image: 'defaults', label: 'DELIVERY CATEGORIES' },
+				// 		// 		{ routerLink: '/main/delivery_playlist', image: 'defaults', label: 'DELIVERY PLAYLIST' },
+				// 		// 		{ routerLink: '/main/delivery_playlist_parentOutlet', image: 'defaults', label: 'DELIVERY PLAYLIST PARENT OUTLET' },
+				// 		// 	]
+				// 		// },
+				// 		// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'SETTINGS' },
+				// 	]
+				// },
+				
+				
+						
+				// {
+				// 	image: 'campaign',
+				// 	label: 'CAMPAIGN',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+				// 	]
+				// },
+				
+				
+				
+				
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
-				{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'PROMO CODES'},
-				{routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
-				{ routerLink: '/main/merchant_report', image: 'orders', label: 'MERCHANT REPORT' },
-				{
-					image: 'default',
-					label: 'DEFAULTS',
-					is_parent: true,
-					opened: false,
-					children: [
-						// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
-						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'HOME SCREEN MESSAGES' },
-						{ routerLink: '/main/subscription_text', image: 'defaults', label: 'SUBSCRIPTION TEXT' },
-						{ routerLink: '/main/subscription_page', image: 'defaults', label: 'SUBSCRIPTION PAGE' },
-						{ routerLink: '/main/sms-blacklist', image: 'defaults', label: 'SMS BLACKLIST' },
-						{ routerLink: '/main/web_redemption', image: 'defaults', label: 'WEB REDEMPTION'},
-						{ routerLink: '/main/uber_status', image: 'defaults', label: 'UBER STATUS' },
-						{ routerLink: '/main/offer_detail_messages', image: 'defaults', label: 'OFFER DETAIL MESSAGES' },
-						{ routerLink: '/main/versions', image: 'defaults', label: 'VERSIONS' },
-						{ routerLink: '/main/categories', image: 'defaults', label: 'CATEGORIES' },
-						{ routerLink: '/main/popularcategories', image: 'defaults', label: 'POPULAR CATEGORIES' },
-						{ routerLink: '/main/collection', image: 'defaults', label: 'COLLECTION' },
-						{ routerLink: '/main/playlist', image: 'defaults', label: 'CATEGORY PLAYLIST' },
-						{ routerLink: '/main/trending_search', image: 'defaults', label: 'TRENDING SEARCH' },
-						{ routerLink: '/main/edit-history-list', image: 'defaults', label: 'CMS EDITING HISTORY' },
-						{ routerLink: '/main/kill_switch', image: 'defaults', label: 'KILL SWITCH' },
-						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
-					]
-				},
-				{
-					image: 'credit card packages',
-					label: 'PACKAGES',
-					is_parent: true,
-					opened: false,
-					children: [
-						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'OOREDOO' },
-						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'NON OOREDOO' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'PROMO CODES' },
-					]
-				},
+				
+				
+				
+				// {
+				// 	image: 'default',
+				// 	label: 'DEFAULTS',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+				// 		// {routerLink: '/main/Transactions', image: 'defaults', label: 'Balance Transaction'},
+				// 	]
+				// },
+				// {
+				// 	image: 'credit card packages',
+				// 	label: 'PACKAGES',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+						
+						
+				// 	]
+				// },
 			]
 		}
 		});
