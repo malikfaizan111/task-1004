@@ -2,9 +2,12 @@
 	<app-loader [totalRecords]="ArrayCSVCount"
 				[completedRecords]="ArrayCSV.length"
 				[loaderMessage]="loaderMessage"></app-loader>
-  <div style="width: fit-content;" class="col-sm-2">
-		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+  <div fxLayout="column" style="width: fit-content;" class="col-sm-2">
+		<span class="mainTitle" style="margin-left: 6px;">
 			{{title}}
+		</span>
+		<span fxFlexOffset="1" class="subTitle" style="margin-left: 6px;">
+			{{subTitle}}
 		</span>
   </div>
   <div class="col-sm-2">
@@ -82,12 +85,12 @@
 		</div>
 	</ng-container>
 	<ng-container *ngIf="type == 'non_registered'">
-		<div class="col-sm-7"
-			 style="text-align: right">
-			<div class="col-sm-6">
+		<div class="col-sm-4"
+			 style="text-align: right;">
+			<div class="col-sm-2">
 
 			</div>
-			<div class="form-group col-sm-2"
+			<div class="form-group col-sm-4"
 				 style="padding: 0 10px 0 0;">
 				<select [(ngModel)]="isPremier"
 						(change)="gerCustomersList(1)"
@@ -97,7 +100,7 @@
 					<option value="premier">Premier</option>
 				</select>
 			</div>
-			<div class="form-group col-sm-4"
+			<div class="form-group col-sm-6"
 				 style="padding: 0;text-align: left;">
 				<div class="input-group">
           <span style="cursor: pointer;"

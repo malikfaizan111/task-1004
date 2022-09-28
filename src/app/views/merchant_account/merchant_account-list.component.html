@@ -1,7 +1,10 @@
 <div class="row">
-	<div style="width: fit-content;" class="col-sm-4">
+	<div fxLayout="column" style="width: fit-content;" class="col-sm-4">
 		<span class="mainTitle" style="margin-left: 6px;">
 			Parent Company Accounts
+		</span>
+		<span class="subTitle" fxFlexOffset="1" style="margin-left: 6px;">
+			Log in information for parent company accounts
 		</span>
 	</div>
 	<div *ngIf="UpAdmin.role == 1" class="col-sm-2">

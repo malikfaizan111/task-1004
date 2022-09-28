@@ -1,7 +1,7 @@
 <div style="min-width: 550px;" class="wrapper">
   <!-- For Adding Number inn Blacklist -->
   <div class="content-head clearfix" *ngIf="showMessage" style="margin-top:10px;margin-bottom:20px;">
-    <h3>{{title_heading}}</h3>
+    <h3 class="mainTitle">{{title_heading}}</h3>
   </div>
 
   <form (ngSubmit)="postToken()" [formGroup]="Form" *ngIf="showMessage">

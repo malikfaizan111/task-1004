@@ -2347,7 +2347,7 @@ input {
     z-index: 999;
     -moz-box-shadow: 0px 1px 22px #cfcfcf;
     -webkit-box-shadow: 0px 1px 22px #cfcfcf;
-    box-shadow: 0px 1px 18px #cfcfcf;
+    box-shadow: 0px 1px 8px #cfcfcf;
 }
 
 .welcome {
@@ -2952,6 +2952,13 @@ input[autocomplete="false"] {
     line-height: 32px;
     font-family: $font_family_4;
     font-variation-settings: 'wght' 800;
+}
+
+.subTitle{
+    font-size: 14px;
+    // line-height: 32px;
+    font-family: $font_family_4;
+    font-variation-settings: 'wght' 600;
 }
 
 // .col-sm-2 {

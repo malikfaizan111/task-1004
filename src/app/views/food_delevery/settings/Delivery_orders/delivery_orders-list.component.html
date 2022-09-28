@@ -18,11 +18,11 @@
     alt="">
    </button> -->
    <!-- <span>{{isEditing? 'EDIT': 'ADD'}} ACCOUNT</span> -->
-   <span *ngIf="!isEditStatus" style="font-size: 25px;">
-    {{ isUnAttended ? 'Un-attended Orders' : 'Delivery Orders' }}
+   <span *ngIf="!isEditStatus" class="mainTitle">
+    {{ isUnAttended ? 'Un-Attended Orders' : 'Delivery Orders' }}
    </span>
-   <span *ngIf="updateAll" style="font-size: 25px;">
-     UPDATE ORDER
+   <span *ngIf="updateAll" class="mainTitle">
+     Update Order
    </span>
  </div>
 		<!-- <span *ngIf="!isEditStatus" style="font-size: 25px;">

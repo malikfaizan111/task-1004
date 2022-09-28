@@ -6,8 +6,8 @@
 		<button mat-icon-button (click)="onLocationBack()" color="accent">
 			<img src="assets/images/Path.png" alt="">
 		</button>
-		<span style="font-size: 19px;line-height: 36px;font-weight: 600; text-transform: capitalize;">
-			{{voucherdetails?.voucher_name}} ({{voucher_type}})
+		<span class="mainTitle" style="text-transform: capitalize;">
+			{{voucherdetails?.voucher_name.toLowerCase()}} ({{voucher_type}})
 		</span>
 	</div>
 	<div class="col-sm-6" style="text-align: right;float: right;">

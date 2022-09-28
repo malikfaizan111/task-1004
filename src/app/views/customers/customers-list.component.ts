@@ -44,6 +44,7 @@ export class CustomersListComponent extends ExportCSVComponent implements OnInit
 	wallet = false;
 	currency = 'qar';
 	amount = '';
+	subTitle: any;
 
 	constructor(protected router: Router,
 		protected _route: ActivatedRoute,
@@ -82,18 +83,20 @@ export class CustomersListComponent extends ExportCSVComponent implements OnInit
 				this.search = this.componentSettings.search;
 			}
 		}
-
+		debugger
 		this.sub = this._route.params.subscribe(params => {
 			this.type = params['type'];
 			this.currentPage = 1;
 			if (this.type == 'registered') {
-				this.title = 'REGISTERED';
+				this.title = 'Registrations';
 				this.method = 'getUsers';
+				this.subTitle = ''
 				this.gerCustomersList(this.currentPage);
 			}
 			else if (this.type == 'non_registered') {
-				this.title = 'NON REGISTERED';
+				this.title = 'Non Registered';
 				this.method = 'getNonUsers';
+				this.subTitle = 'Users who have redeemed free subscription from Ooredoo, but have not registered yet'
 				this.gerCustomersList(this.currentPage);
 			}
 		});
