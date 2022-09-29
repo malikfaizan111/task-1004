@@ -210,22 +210,22 @@
   <div id="OrderStatus" style="margin-top: 20px;margin-bottom: 75px;margin-left: 5px;">
 
      <div style="margin-top: 38px;margin-bottom: 38px">
-       <h4 style="font-weight: 900;"> Update Status</h4>
+       <h4 style="font-weight: 900; font-family: Manrope;"> Update Status</h4>
      </div>
 
-     <div style="margin-bottom: 20px;" fxLayout="row">
-       <div fxFlex="15">Current Status</div>
+     <div style="margin-bottom: 20px;font-family: Manrope;" fxLayout="row">
+       <div fxFlex="15" >Current Status</div>
        <div fxFlex="80">{{ statusLabel }}</div>
      </div>
-     <div fxLayout="row">
+     <div fxLayout="row" style="font-family: Manrope;">
        <div fxFlex="15">Change Status to</div>
        <div fxFlex="80">
          <mat-radio-group aria-label="Select an option" [(ngModel)]="orderStatus" >
-           <mat-radio-button value="outlet_preparing">Preparing Order</mat-radio-button>
-           <mat-radio-button *ngIf="orderTypeSelected == 'delivery'" style="margin-left: 15px;" value="outlet_dispatched">Ready to Deliver</mat-radio-button>
-           <mat-radio-button *ngIf="orderTypeSelected == 'pickup'" style="margin-left: 15px;" value="ready_for_pickup">Ready For Pickup</mat-radio-button>
-           <mat-radio-button style="margin-left: 15px;" value="completed">Completed</mat-radio-button>
-           <mat-radio-button style="margin-left: 15px;" [value]="orderTypeSelected == 'delivery' ? 'outlet_rejected' : 'cancel_by_outlet'">Rejected/Cancelled</mat-radio-button>
+           <mat-radio-button value="outlet_preparing" style="font-family: Manrope;">Preparing Order</mat-radio-button>
+           <mat-radio-button *ngIf="orderTypeSelected == 'delivery'" style="margin-left: 15px;font-family: Manrope;font-weight: 900;" value="outlet_dispatched">Ready to Deliver</mat-radio-button>
+           <mat-radio-button *ngIf="orderTypeSelected == 'pickup'" style="margin-left: 15px;font-family: Manrope;font-weight: 900;" value="ready_for_pickup">Ready For Pickup</mat-radio-button>
+           <mat-radio-button style="margin-left: 15px;font-family: Manrope;font-weight: 900;" value="completed">Completed</mat-radio-button>
+           <mat-radio-button style="margin-left: 15px;font-family: Manrope;font-weight: 900;" [value]="orderTypeSelected == 'delivery' ? 'outlet_rejected' : 'cancel_by_outlet'">Rejected/Cancelled</mat-radio-button>
            </mat-radio-group>
        </div>
      </div>
@@ -247,21 +247,21 @@
   <div id="UpdateDriver" style="margin-top: 20px;margin-bottom: 75px;margin-left: 5px;">
 
    <div style="margin-top: 30px;margin-bottom: 38px">
-     <h4 style="font-weight: 900;"> Update Driver</h4>
+     <h4 style="font-weight: 900;font-family: Manrope;"> Update Driver</h4>
    </div>
 
-   <div style="margin-bottom: 20px;" fxLayout="row">
+   <div style="margin-bottom: 20px;font-family: Manrope;" fxLayout="row">
      <div fxFlex="15">Assigned To</div>
      <div fxFlex="80"> {{ driverLabel == 'urbanpoint' ?  getdriverType(selectedOrder) : driverLabel }} </div>
    </div>
-   <div fxLayout="row">
+   <div fxLayout="row" style="font-family: Manrope;">
      <div fxFlex="14">Executed By</div>
      <div fxFlex="80">
        <mat-radio-group
         aria-label="Select an option" [(ngModel)]="driverType" >
-         <mat-radio-button  style="margin-left: 15px;" value="urbanpoint">Urban Point {{ getdriverType(selectedOrder) }}</mat-radio-button>
-         <mat-radio-button  style="margin-left: 15px;" value="outlet">Outlet Driver</mat-radio-button>
-         <mat-radio-button  style="margin-left: 15px;" value="customer">Customer (Pick Up)</mat-radio-button>
+         <mat-radio-button  style="margin-left: 15px;font-family: Manrope;font-weight: 900;" value="urbanpoint">Urban Point {{ getdriverType(selectedOrder) }}</mat-radio-button>
+         <mat-radio-button  style="margin-left: 15px;font-family: Manrope;font-weight: 900;" value="outlet">Outlet Driver</mat-radio-button>
+         <mat-radio-button  style="margin-left: 15px;font-family: Manrope;font-weight: 900;" value="customer">Customer (Pick Up)</mat-radio-button>
        </mat-radio-group>
      </div>
    </div>
@@ -279,7 +279,7 @@
   <div id="AddNotes" style="margin-top: 20px;margin-left: 5px;">
 
      <div style="margin-top: 30px;margin-bottom: 32px">
-       <h4 style="font-weight: 900;"> Add Notes</h4>
+       <h4 style="font-weight: 900; font-family: Manrope;"> Add Notes</h4>
      </div>
 
      <!-- <h4>Select Reason: </h4> -->

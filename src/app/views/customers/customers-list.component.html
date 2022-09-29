@@ -9,6 +9,9 @@
 		<span fxFlexOffset="1" class="subTitle" style="margin-left: 6px;">
 			{{subTitle}}
 		</span>
+		<span *ngIf="countSpan" style="margin-left: 6px;">
+			<strong class="count" style="font-weight: 600;">Total Registration Count:</strong>  {{type == 'registered'? customersCount : ''}}
+		</span>
   </div>
   <div class="col-sm-2">
     <ng-container *ngIf="type == 'registered' && Roles.role == '1'">
@@ -27,7 +30,7 @@
     </ng-container>
   </div>
 	<ng-container *ngIf="type == 'registered'">
-		<div class="col-sm-8"
+		<div class="col-sm-7"
 			 style="text-align: right">
 			<div class="form-group col-sm-2"
 				 style="padding: 0 10px 0 0;">

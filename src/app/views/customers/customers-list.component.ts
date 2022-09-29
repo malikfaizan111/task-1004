@@ -45,6 +45,7 @@ export class CustomersListComponent extends ExportCSVComponent implements OnInit
 	currency = 'qar';
 	amount = '';
 	subTitle: any;
+	countSpan: boolean;
 
 	constructor(protected router: Router,
 		protected _route: ActivatedRoute,
@@ -60,6 +61,7 @@ export class CustomersListComponent extends ExportCSVComponent implements OnInit
 		this.sortby = 'network';
 		this.orderby = 'ASC';
 		this.perPage = 20;
+		this.countSpan = false
 
 		this.appSelectorSubscription = this.appSelectorService.selectedApp.subscribe((response: any) => {
 			this.gerCustomersList(1);
@@ -83,7 +85,6 @@ export class CustomersListComponent extends ExportCSVComponent implements OnInit
 				this.search = this.componentSettings.search;
 			}
 		}
-		debugger
 		this.sub = this._route.params.subscribe(params => {
 			this.type = params['type'];
 			this.currentPage = 1;
@@ -91,12 +92,15 @@ export class CustomersListComponent extends ExportCSVComponent implements OnInit
 				this.title = 'Registrations';
 				this.method = 'getUsers';
 				this.subTitle = ''
+				this.countSpan = true
 				this.gerCustomersList(this.currentPage);
+				
 			}
 			else if (this.type == 'non_registered') {
 				this.title = 'Non Registered';
 				this.method = 'getNonUsers';
 				this.subTitle = 'Users who have redeemed free subscription from Ooredoo, but have not registered yet'
+				this.countSpan = false
 				this.gerCustomersList(this.currentPage);
 			}
 		});

@@ -112,8 +112,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/outlets', image: 'outlets', label: 'Outlets' },
-						{ routerLink: '/main/deals', image: 'deals', label: 'Offers' },
+						{ routerLink: '/main/outlets', image: 'Merchant', label: 'Outlets' },
+						{ routerLink: '/main/deals', image: 'Merchant', label: 'Offers' },
 					]
 				},
 				{
@@ -122,8 +122,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
-						{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/registered', image: 'Customers', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'Customers', label: 'Subscriptions' },
 					]
 				},
 				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
@@ -144,7 +144,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/interest_tag', image: 'InterestTags', label: 'Interests' },
+						{ routerLink: '/main/interest_tag', image: 'Categories', label: 'Interests' },
 					]
 				},
 				{
@@ -153,8 +153,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
-						{ routerLink: '/main/subscriptions/All', image: 'subscribe-orange', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/registered', image: 'Customers', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'Customers', label: 'Subscriptions' },
 						// { routerLink: '/main/customers/non_registered', image: 'defaults', label: 'NON REGISTERED' },
 						// { routerLink: '/main/customer/oredoo_billing', image: 'defaults', label: 'OREDOO BILLING' },
 					]
@@ -167,8 +167,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink:'/main/promo_codesNew', image:'access_codes', label:'Promo Code'},
-						{ routerLink: '/main/access_codes', image: 'access_codes', label: 'Access Code' },
+						{ routerLink:'/main/promo_codesNew', image:'Marketing', label:'Promo Code'},
+						{ routerLink: '/main/access_codes', image: 'Marketing', label: 'Access Code' },
 					]
 				},
 				// { routerLink: '/main/promo_codes', image: 'promo codes', label: 'PROMO CODES' },
@@ -178,9 +178,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{routerLink: 'kpi_report', image: 'kip-report', label: 'Kpi Report' },
-						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'Home Screen Messages' },
-						{ routerLink: '/main/versions', image: 'defaults', label: 'Versions' },
+						{routerLink: 'kpi_report', image: 'Configurations', label: 'Kpi Report' },
+						{ routerLink: '/main/home_screen_messages', image: 'Configurations', label: 'Home Screen Messages' },
+						{ routerLink: '/main/versions', image: 'Configurations', label: 'Versions' },
 					]
 				},
 				
@@ -207,7 +207,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/merchant_account', image: 'Merchant_Portals', label: 'Parent Company Accounts' },
 					]
 				},
 				{
@@ -216,10 +216,10 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/parent_companies', image: 'organization', label: 'Parent Companies' },
-						{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-						{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
+						{ routerLink: '/main/parent_companies', image: 'Merchant', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'Merchant', label: 'BRANDS' },
+						{ routerLink: '/main/outlets', image: 'Merchant', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'Merchant', label: 'OFFERS' },
 					]
 				},
 				{
@@ -228,9 +228,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
-						{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'Subscriptions' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'Non Registered' },
+						{ routerLink: '/main/customers/registered', image: 'Customers', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'Customers', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'Customers', label: 'Non Registered' },
 						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },	
 					]
 				},
@@ -241,9 +241,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/subscription-packages/eligible', image: 'dashboard', label: 'Eligible' },
-						{ routerLink: '/main/subscription-packages/not_eligible', image: 'dashboard', label: 'Not Eligible' },
-						{ routerLink: '/main/subscription-packages/card_only', image: 'dashboard', label: 'Card Only' },
+						{ routerLink: '/main/subscription-packages/eligible', image: 'Subscription_Packages', label: 'Eligible' },
+						{ routerLink: '/main/subscription-packages/not_eligible', image: 'Subscription_Packages', label: 'Not Eligible' },
+						{ routerLink: '/main/subscription-packages/card_only', image: 'Subscription_Packages', label: 'Card Only' },
 					]
 				},
 				{
@@ -252,11 +252,11 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/notifications', image: 'notifications', label: 'Push Notifications' },
-						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
-						{ routerLink: '/main/campaign', image: 'dashboard', label: 'In-App Banner' },
-						{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'Promo Code'},
-						{ routerLink: '/main/access_codes', image: 'access codes', label: 'Access Code' },
+						{ routerLink: '/main/notifications', image: 'Marketing', label: 'Push Notifications' },
+						{ routerLink: '/main/sms/list', image: 'Marketing', label: 'SMS' },
+						{ routerLink: '/main/campaign', image: 'Marketing', label: 'In-App Banner' },
+						{ routerLink:'/main/promo_codesNew', image:'Marketing', label:'Promo Code'},
+						{ routerLink: '/main/access_codes', image: 'Marketing', label: 'Access Code' },
 					]
 				},
 				{
@@ -265,8 +265,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'Delivery Orders' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'Unattended Orders' }
+						{ routerLink: '/main/delivery_order', image: 'Delivery', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'Delivery', label: 'Unattended Orders' }
 					]
 				},
 				
@@ -304,12 +304,12 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
-						{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'Outlets Accounts' }, 
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'Reports' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Code' },
-						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'Ooredoo' }, 
-						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Non Ooredoo' },
+						{ routerLink: 'kpi_report', image: 'Configurations', label: 'KPI REPORT' },
+						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' }, 
+						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dConfigurations', label: 'Ooredoo' }, 
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'Configurations', label: 'Non Ooredoo' },
 						
 					]
 				},
@@ -322,7 +322,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/merchant_account', image: 'Merchant_Portals', label: 'Parent Company Accounts' },
 					]
 				},
 				{
@@ -331,10 +331,10 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/parent_companies', image: 'organization', label: 'Parent Companies' },
-						{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-						{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
+						{ routerLink: '/main/parent_companies', image: 'Merchant', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'Merchant', label: 'BRANDS' },
+						{ routerLink: '/main/outlets', image: 'Merchant', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'Merchant', label: 'OFFERS' },
 					]
 				},
 				
@@ -345,9 +345,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
-						{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'Subscriptions' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'Non Registered' },
+						{ routerLink: '/main/customers/registered', image: 'Customers', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'Customers', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'Customers', label: 'Non Registered' },
 						
 						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
 						
@@ -360,10 +360,10 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/notifications', image: 'notifications', label: 'Push Notifications' },
-						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
-						{ routerLink: '/main/campaign', image: 'dashboard', label: 'In-App Banner' },
-						{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'Promo Code'},
+						{ routerLink: '/main/notifications', image: 'Marketing', label: 'Push Notifications' },
+						{ routerLink: '/main/sms/list', image: 'Marketing', label: 'SMS' },
+						{ routerLink: '/main/campaign', image: 'Marketing', label: 'In-App Banner' },
+						{ routerLink:'/main/promo_codesNew', image:'Marketing', label:'Promo Code'},
 						
 					]
 				},
@@ -373,8 +373,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'Delivery Orders' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'Unattended Orders' }
+						{ routerLink: '/main/delivery_order', image: 'Delivery', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'Delivery', label: 'Unattended Orders' }
 					]
 				},
 				{
@@ -383,12 +383,12 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: 'kpi_report', image: 'kip-report', label: 'KPI REPORT' },
-						{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'Outlets Accounts' }, 
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'Reports' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Code' },
-						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'Ooredoo' }, 
-						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Non Ooredoo' },
+						{ routerLink: 'kpi_report', image: 'Configurations', label: 'KPI REPORT' },
+						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' }, 
+						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'Configurations', label: 'Ooredoo' }, 
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'Configurations', label: 'Non Ooredoo' },
 						
 					]
 				},
@@ -426,7 +426,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/merchant_account', image: 'Merchant_Portals', label: 'Parent Company Accounts' },
 					]
 				},
 				{
@@ -435,10 +435,10 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/parent_companies', image: 'organization', label: 'Parent Companies' },
-						{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-						{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
+						{ routerLink: '/main/parent_companies', image: 'Merchant', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'Merchant', label: 'BRANDS' },
+						{ routerLink: '/main/outlets', image: 'Merchant', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'Merchant', label: 'OFFERS' },
 					]
 				},
 				{
@@ -447,9 +447,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
-						{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'Subscriptions' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'Non Registered' },
+						{ routerLink: '/main/customers/registered', image: 'Customers', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'Customers', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'Customers', label: 'Non Registered' },
 						
 						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
 						
@@ -475,8 +475,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'Delivery Orders' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'Unattended Orders' }
+						{ routerLink: '/main/delivery_order', image: 'Delivery', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'Delivery', label: 'Unattended Orders' }
 					]
 				},
 				{
@@ -486,10 +486,10 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						
-						{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'Outlets Accounts' }, 
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'Reports' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Code' },
-						{ routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'Ooredoo Billing' },
+						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' }, 
+						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
+						{ routerLink: '/main/customers/oredoo_billing', image: 'Configurations', label: 'Ooredoo Billing' },
 						
 						
 					]
@@ -507,8 +507,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/merchant_account', image: 'merchant account', label: 'Parent Company Accounts' },
-						{ routerLink: '/main/outlet_account', image: 'outlet acc', label: 'Outlet Accounts' },
+						{ routerLink: '/main/merchant_account', image: 'Merchant_Portals', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/outlet_account', image: 'Merchant_Portals', label: 'Outlet Accounts' },
 					]
 				},
 				{
@@ -517,11 +517,11 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/parent_companies', image: 'organization', label: 'Parent Companies' },
-						{ routerLink: '/main/brands', image: 'parentOutlet', label: 'BRANDS' },
-						{ routerLink: '/main/outlets', image: 'outlets', label: 'OUTLETS' },
-						{ routerLink: '/main/deals', image: 'offers', label: 'OFFERS' },
-						{ routerLink: '/main/merchant_report', image: 'orders', label: 'Merchant Reports' },
+						{ routerLink: '/main/parent_companies', image: 'Merchant', label: 'Parent Companies' },
+						{ routerLink: '/main/brands', image: 'Merchant', label: 'BRANDS' },
+						{ routerLink: '/main/outlets', image: 'Merchant', label: 'OUTLETS' },
+						{ routerLink: '/main/deals', image: 'Merchant', label: 'OFFERS' },
+						{ routerLink: '/main/merchant_report', image: 'Merchant', label: 'Merchant Reports' },
 					]
 				},
 				{
@@ -530,11 +530,11 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/categories', image: 'defaults', label: 'Main Categories' },
-						{ routerLink: '/main/trending_search', image: 'defaults', label: 'Trending Search Keywords' },
-						{ routerLink: '/main/interest_tag', image: 'InterestTags', label: 'Interests' },
-						{ routerLink: '/main/popularcategories', image: 'defaults', label: 'Popular Categories' },
-						{ routerLink: '/main/collection', image: 'defaults', label: 'Subcategory' },
+						{ routerLink: '/main/categories', image: 'Categories', label: 'Main Categories' },
+						{ routerLink: '/main/trending_search', image: 'Categories', label: 'Trending Search Keywords' },
+						{ routerLink: '/main/interest_tag', image: 'Categories', label: 'Interests' },
+						{ routerLink: '/main/popularcategories', image: 'Categories', label: 'Popular Categories' },
+						{ routerLink: '/main/collection', image: 'Categories', label: 'Subcategory' },
 					]
 				},
 				{
@@ -543,9 +543,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/customers/registered', image: 'defaults', label: 'Registrations' },
-						{ routerLink: '/main/subscriptions/All', image: 'subscriptions', label: 'Subscriptions' },
-						{ routerLink: '/main/customers/non_registered', image: 'defaults', label: 'Non Registered' },
+						{ routerLink: '/main/customers/registered', image: 'Customers', label: 'Registrations' },
+						{ routerLink: '/main/subscriptions/All', image: 'Customers', label: 'Subscriptions' },
+						{ routerLink: '/main/customers/non_registered', image: 'Customers', label: 'Non Registered' },
 						
 						// { routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'OOREDOO BILLING' },
 						
@@ -558,13 +558,13 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/notifications', image: 'notifications', label: 'Push Notifications' },
-						{ routerLink: '/main/sms/list', image: 'notifications', label: 'SMS' },
-						{ routerLink: '/main/campaign', image: 'dashboard', label: 'In-App Banner' },
-						{ routerLink: '/main/web_redemption', image: 'defaults', label: 'Web Vouchers'},
-						{ routerLink:'/main/promo_codesNew', image:'promo codes', label:'Promo Code'},
-						{ routerLink: '/main/access_codes', image: 'access codes', label: 'Access Code' },
-						{ routerLink: '/main/sms-blacklist', image: 'defaults', label: 'SMS Blacklist' },
+						{ routerLink: '/main/notifications', image: 'Marketing', label: 'Push Notifications' },
+						{ routerLink: '/main/sms/list', image: 'Marketing', label: 'SMS' },
+						{ routerLink: '/main/campaign', image: 'Marketing', label: 'In-App Banner' },
+						{ routerLink: '/main/web_redemption', image: 'Marketing', label: 'Web Vouchers'},
+						{ routerLink:'/main/promo_codesNew', image:'Marketing', label:'Promo Code'},
+						{ routerLink: '/main/access_codes', image: 'Marketing', label: 'Access Code' },
+						{ routerLink: '/main/sms-blacklist', image: 'Marketing', label: 'SMS Blacklist' },
 						
 					]
 				},
@@ -574,11 +574,11 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{ routerLink: '/main/delivery_order', image: 'defaults', label: 'Delivery Orders' },
-						{ routerLink: '/main/unattended_orders', image: 'defaults', label: 'Unattended Orders' },
-						{ routerLink: '/main/restaurants', image: 'defaults', label: 'Delivery Brands' },
-						{ routerLink: '/main/Delivery_categories', image: 'defaults', label: 'Delivery Categories' },
-						{ routerLink: '/main/kill_switch', image: 'defaults', label: 'Killswitch' },
+						{ routerLink: '/main/delivery_order', image: 'Delivery', label: 'Delivery Orders' },
+						{ routerLink: '/main/unattended_orders', image: 'Delivery', label: 'Unattended Orders' },
+						{ routerLink: '/main/restaurants', image: 'Delivery', label: 'Delivery Brands' },
+						{ routerLink: '/main/Delivery_categories', image: 'Delivery', label: 'Delivery Categories' },
+						{ routerLink: '/main/kill_switch', image: 'Delivery', label: 'Killswitch' },
 						
 						// { routerLink: '/main/outlet_account', image: 'merchants', label: 'OUTLET ACCOUNT' },
 						
@@ -604,22 +604,22 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
-						{routerLink: 'kpi_report', image: 'kip-report', label: 'Kpi Report'},
-						{ routerLink: '/main/customers/reports', image: 'defaults', label: 'Reports' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Code' },
-						{ routerLink: '/main/customers/oredoo_billing', image: 'defaults', label: 'Ooredoo Billing' },
-						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'Ooredoo' },
-						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Non Ooredoo' },
-						{ routerLink: '/main/delivery_playlist', image: 'defaults', label: 'Delivery Playlisyt' }, 
-						{ routerLink: '/main/delivery_playlist_parentOutlet', image: 'defaults', label: 'Delivery Playlisyt Parent Ooutlet' },
-						{ routerLink: '/main/spendXYList', image: 'defaults', label: '25% Offers' },
-						{ routerLink: '/main/home_screen_messages', image: 'defaults', label: 'Home Screen Messages' },
-						{ routerLink: '/main/subscription_text', image: 'defaults', label: 'Subscription Text' }, 
-						{ routerLink: '/main/subscription_page', image: 'defaults', label: 'Subscription Page' },
-						{ routerLink: '/main/uber_status', image: 'defaults', label: 'Uber Status' },
-						{ routerLink: '/main/offer_detail_messages', image: 'defaults', label: 'Offer Detail Messages' },
-						{ routerLink: '/main/versions', image: 'defaults', label: 'Versions' },
-						{ routerLink: '/main/playlist', image: 'defaults', label: 'Category Playlist' },
+						{routerLink: 'kpi_report', image: 'Configurations', label: 'Kpi Report'},
+						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
+						{ routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
+						{ routerLink: '/main/customers/oredoo_billing', image: 'Configurations', label: 'Ooredoo Billing' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'Configurations', label: 'Ooredoo' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'Configurations', label: 'Non Ooredoo' },
+						{ routerLink: '/main/delivery_playlist', image: 'Configurations', label: 'Delivery Playlisyt' }, 
+						{ routerLink: '/main/delivery_playlist_parentOutlet', image: 'Configurations', label: 'Delivery Playlisyt Parent Ooutlet' },
+						{ routerLink: '/main/spendXYList', image: 'Configurations', label: '25% Offers' },
+						{ routerLink: '/main/home_screen_messages', image: 'Configurations', label: 'Home Screen Messages' },
+						{ routerLink: '/main/subscription_text', image: 'Configurations', label: 'Subscription Text' }, 
+						{ routerLink: '/main/subscription_page', image: 'Configurations', label: 'Subscription Page' },
+						{ routerLink: '/main/uber_status', image: 'Configurations', label: 'Uber Status' },
+						{ routerLink: '/main/offer_detail_messages', image: 'Configurations', label: 'Offer Detail Messages' },
+						{ routerLink: '/main/versions', image: 'Configurations', label: 'Versions' },
+						{ routerLink: '/main/playlist', image: 'Configurations', label: 'Category Playlist' },
 						
 						
 						

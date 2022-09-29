@@ -51,8 +51,8 @@
 						<mat-slide-toggle [(ngModel)]="push"
 										  [ngModelOptions]="{standalone: true}"
 										  (change)="onChange($event)"
-										  color="accent">
-							Push
+										  color="accent" >
+							<span style="font-family: Manrope;">Push</span>
 						</mat-slide-toggle>
 					</div>
 				</div>
@@ -70,10 +70,10 @@
 						 >
 						<div style="margin-top: 20px"
 							 fxFlex="100">
-							<mat-radio-group formControlName="audience">
-								<mat-radio-button value="userCreatedDate">User Created Date</mat-radio-button>
-								<mat-radio-button value="specificusers">Specific Users</mat-radio-button>
-								<mat-radio-button value="allusers">All Users</mat-radio-button>
+							<mat-radio-group formControlName="audience" class="radio_btn">
+								<mat-radio-button value="userCreatedDate" class="radio_btn"  >User Created Date</mat-radio-button>
+								<mat-radio-button value="specificusers" class="radio_btn">Specific Users</mat-radio-button>
+								<mat-radio-button value="allusers" class="radio_btn">All Users</mat-radio-button>
 							</mat-radio-group>
 						</div>
 
@@ -84,9 +84,9 @@
 								   for="">Date Range</label>
 							<mat-radio-group style="margin-top: 20px"
 											 formControlName="dates">
-								<mat-radio-button value="Greater">Greater</mat-radio-button>
-								<mat-radio-button value="Less">Less</mat-radio-button>
-								<mat-radio-button value="Both">Both</mat-radio-button>
+								<mat-radio-button value="Greater" class="radio_btn">Greater</mat-radio-button>
+								<mat-radio-button value="Less" class="radio_btn">Less</mat-radio-button>
+								<mat-radio-button value="Both" class="radio_btn">Both</mat-radio-button>
 							</mat-radio-group>
 
 							<ng-container
@@ -143,8 +143,8 @@
 							<mat-radio-group style="margin-top: 20px"
 											 [(ngModel)]="select_opt"
 											 [ngModelOptions]="{standalone: true}">
-								<mat-radio-button value="1">Email</mat-radio-button>
-								<mat-radio-button value="2"> CSV</mat-radio-button>
+								<mat-radio-button value="1" class="radio_btn">Email</mat-radio-button>
+								<mat-radio-button value="2" class="radio_btn"> CSV</mat-radio-button>
 							</mat-radio-group>
 
 							<multi-tag-input *ngIf="select_opt == 1"
@@ -187,17 +187,17 @@
 						<div style="padding-top: 10px"
 							 fxFlex="100">
 							<mat-radio-group formControlName="platform">
-								<mat-radio-button value="android">Android</mat-radio-button>
-								<mat-radio-button value="ios">IOS</mat-radio-button>
-								<mat-radio-button value="Both">Both</mat-radio-button>
+								<mat-radio-button value="android" class="radio_btn">Android</mat-radio-button>
+								<mat-radio-button value="ios" class="radio_btn">IOS</mat-radio-button>
+								<mat-radio-button value="Both" class="radio_btn">Both</mat-radio-button>
 							</mat-radio-group>
 						</div>
 						<div style="padding-top: 10px"
 							 fxFlex="100">
 							<mat-radio-group formControlName="operator">
-								<mat-radio-button value="vodafone">Vodafone</mat-radio-button>
-								<mat-radio-button value="ooredoo">Ooredoo</mat-radio-button>
-								<mat-radio-button value="both">Both</mat-radio-button>
+								<mat-radio-button value="vodafone" class="radio_btn">Vodafone</mat-radio-button>
+								<mat-radio-button value="ooredoo" class="radio_btn">Ooredoo</mat-radio-button>
+								<mat-radio-button value="both" class="radio_btn">Both</mat-radio-button>
 							</mat-radio-group>
 						</div>
 					</div>

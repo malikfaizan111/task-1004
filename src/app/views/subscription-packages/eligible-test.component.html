@@ -19,13 +19,13 @@
 <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGimageap="10px" fxLayoutGap="10px">
     <div fxFlex.xl="98" fxFlex.lg="98" fxFlex.md="98">
         <div fxFlex="35">
-            <label style="width: 100%; margin-left: 8%;text-transform: capitalize; margin-bottom: 3%;">{{scenario}} Subscribers Image
+            <label style="width: 100%; margin-left: 8%;text-transform: capitalize; margin-bottom: 3%; font-family: Manrope;">{{scenario}} Subscribers Image
             </label>
         </div>
     </div>
     <div fxFlex.xl="98" fxFlex.lg="98" fxFlex.md="98">
         <div fxFlex="35">
-            <label style="width: 100%;margin-left: 8%; font-size: 13px;">Select Image
+            <label style="width: 100%;margin-left: 8%; font-size: 13px; font-family: Manrope;">Select Image
             </label>
             <file-picker (onFileSelect)="onFileSelect($event)" controlName="image" [isIconHidden]="false"
                 [image]="imagePath" type="Custom" [size]="{width: 172, height: 172}">

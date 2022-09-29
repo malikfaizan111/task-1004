@@ -117,7 +117,7 @@
 					<mat-error *ngIf="getValue('email')?.invalid && (getValue('email')?.dirty || getValue('email')?.touched)">Email
 						is required</mat-error>
 				</mat-form-field> -->
-				<multi-tag-input (onTagAdd)="onTagAdd($event)"
+				<multi-tag-input class="multi_tag" (onTagAdd)="onTagAdd($event)"
 								 [emails]="Merchant?.email"
 								 [required]="false"
 								 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z0-9.-]{0,30}$"

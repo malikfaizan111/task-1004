@@ -389,7 +389,7 @@
 					</div>
 				</div>
 				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
-					<multi-tag-input (onTagAdd)="onTagAdd($event)" [emails]="outlet?.emails" [required]="true"
+					<multi-tag-input class="multi_tag" (onTagAdd)="onTagAdd($event)" [emails]="outlet?.emails" [required]="true"
 						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Emails"></multi-tag-input>
 				</div>
 				<!-- <div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
@@ -405,8 +405,8 @@
 			</div>
 		</div>
 		<div fxFlex="25">
-			<label style="width: 100%;">Select Image
-				<span style="font-size: 12px;"> (square image):</span>
+			<label class="image_logo" style="width: 100%;">Select Image
+				<span  style="font-size: 12px;"> (square image):</span>
 
 				<!--
 				<span style="float: right;font-size: 12px; color: #ff2c54"
@@ -440,7 +440,7 @@
 		</file-picker> -->
 			<span style="float: right;font-size: 12px; color: #ff2c54" *ngIf="errorMsgimage">{{errorMsgimage}}</span>
 
-			<label style="width: 100%;">Select Logo:
+			<label class="image_logo" style="width: 100%;">Select Logo:
 				<span style="font-size: 12px;"> (square logo):</span>
 				<!--<span style="float: right;font-size: 12px; color: #ff2c54"
 				      *ngIf="getValue('logo')?.invalid && (getValue('logo')?.dirty || getValue('logo')?.touched)">Logo is required</span>-->
@@ -473,7 +473,7 @@
 					<li *ngIf="!urltext">
 						<div fxLayout="row" fxLayoutAlign="start center">
 							<div fxFlex="55">
-								<a (click)="uploadMenuSection('link')">Upload menu as link</a>
+								<a class="image_logo" (click)="uploadMenuSection('link')">Upload menu as link</a>
 							</div>
 							<div fxFlex="45">
 							</div>
@@ -486,7 +486,7 @@
 								<a (click)="uploadMenuSection('link')">Edit menu as link</a>
 							</div>
 							<div fxFlex="45">
-								<span style="color: #757575;margin-left: 16px;font-weight: 200;font-size: 13px;">Menu uploaded</span>
+								<span class="image_logo" style="color: #757575;margin-left: 16px;font-size: 13px;">Menu uploaded</span>
 							</div>
 						</div>
 
@@ -494,7 +494,7 @@
 					<li *ngIf="!pdftext">
 						<div fxLayout="row" fxLayoutAlign="start center">
 							<div fxFlex="55">
-								<a (click)="uploadMenuSection('pdf')">Upload menu as PDF</a>
+								<a class="image_logo" (click)="uploadMenuSection('pdf')">Upload menu as PDF</a>
 							</div>
 							<div fxFlex="45">
 							</div>
@@ -503,7 +503,7 @@
 					<li *ngIf="pdftext">
 						<div fxLayout="row" fxLayoutAlign="start center">
 							<div fxFlex="55">
-								<a (click)="uploadMenuSection('pdf')">Edit menu as PDF</a>
+								<a class="image_logo" (click)="uploadMenuSection('pdf')">Edit menu as PDF</a>
 							</div>
 							<div fxFlex="45">
 								<span style="color: #757575;margin-left: 16px;font-weight: 200;font-size: 13px;">Menu uploaded</span>
@@ -513,7 +513,7 @@
 					<li *ngIf="!imagetext">
 						<div fxLayout="row" fxLayoutAlign="start center">
 							<div fxFlex="55">
-								<a (click)="uploadMenuSection('image')">Upload menu as image</a>
+								<a class="image_logo" (click)="uploadMenuSection('image')">Upload menu as image</a>
 							</div>
 							<div fxFlex="45">
 							</div>
@@ -522,10 +522,10 @@
 					<li *ngIf="imagetext">
 						<div fxLayout="row" fxLayoutAlign="start center">
 							<div fxFlex="55">
-								<a (click)="uploadMenuSection('image')">Edit menu as image</a>
+								<a class="image_logo" (click)="uploadMenuSection('image')">Edit menu as image</a>
 							</div>
 							<div fxFlex="45">
-								<span style="color: #757575; margin-left: 17px;font-weight: 200;font-size: 13px;">Menu uploaded</span>
+								<span class="image_logo" style="color: #757575; margin-left: 17px;font-size: 13px;">Menu uploaded</span>
 							</div>
 						</div>
 					</li>

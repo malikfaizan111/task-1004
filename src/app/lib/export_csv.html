@@ -1,6 +1,6 @@
 <div style="min-width: 200px;max-width: 500px;">
     <div class="content-head clearfix">
-        <div style="font-size: 25px;"
+        <div style="font-size: 28px;"
              class="title">Export CSV</div>
     </div>
     <form [formGroup]="Form"
@@ -42,11 +42,11 @@
 
         <div class="row">
             <div class="col-sm-12" *ngIf="filter_values.length > 0" >
-                <strong>Filters:</strong>
+                <strong style="font-family: Manrope;">Filters:</strong>
             </div>
             <div class="col-sm-12"
                  *ngFor="let fv of filter_values">
-                <span *ngIf="fv.value != ''" >{{fv.title}}:&nbsp; {{fv.value}}</span>
+                <span *ngIf="fv.value != ''" style="font-family: Manrope;" >{{fv.title}}:&nbsp; {{fv.value}}</span>
             </div>
             <div  style="margin-top: 5px;" class="col-sm-12">
                 Select date range to export csv.

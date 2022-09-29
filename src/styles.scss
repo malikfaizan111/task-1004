@@ -1259,6 +1259,7 @@ legend.scheduler-border {
     width: inherit;
     padding: 0 10px;
     border-bottom: none;
+    font-family: $font_family_4;
 }
 
 /* file */
@@ -1336,12 +1337,13 @@ input[type=number] {
 }
 
 body {
-    font-family: $font_family_1;
+    font-family: $font_family_4;
     background-color: #eef0f2;
 }
 
 .input-group.input-error {
     background-color: $background_color_1;
+    
 }
 
 button[disabled] {
@@ -1572,6 +1574,7 @@ a {
 }
 
 .btn {
+    font-family: $font_family_4;
     &:hover {
         color: $color_7;
     }
@@ -1724,6 +1727,7 @@ a {
 textarea.form-control {
     height: 150px;
     resize: none;
+    
 }
 
 .form-control.directionRtl {
@@ -1916,6 +1920,7 @@ input {
         margin-bottom: 15px;
     }
     .content-head {
+        font-family: $font_family_4;
         .btn {
             margin-top: 20px;
             margin-left: 20px;
@@ -2216,7 +2221,7 @@ input {
     padding: 5px;
     border: 1px solid #999;
     text-align: center;
-    font-family: $font_family_3;
+    font-family: $font_family_4;
     line-height: 30px;
     padding-left: 10px;
     position: absolute;
@@ -2735,7 +2740,9 @@ table.fixed {
             tr {
                 th {
                     font-size: 14px;
-                    font-weight: bold;
+                    font-family: $font_family_4;
+                    font-variation-settings: 'wght' 800;
+                    // font-weight: bold;
                     padding: 4px .6em 4px .6em;
                     cursor: pointer;
                     transition: color .3s ease-in;
@@ -2753,12 +2760,14 @@ table.fixed {
                 height: 58px;
                 td {
                     font-size: 14px;
-                    font-weight: normal;
+                    font-family: $font_family_4;
+                    font-variation-settings: 'wght' 400;
+                    // font-weight: normal;
                     padding: 4px .6em 4px .6em;
                     -webkit-box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     box-sizing: border-box;
-                    max-width: 150px; // word-break: break-word;
+                    max-width: 170px; // word-break: break-word;
                     // vertical-align: text-bottom;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -2953,7 +2962,11 @@ input[autocomplete="false"] {
     font-family: $font_family_4;
     font-variation-settings: 'wght' 800;
 }
-
+.dailog_Title{
+    font-size: 22px;
+    font-family: $font_family_4;
+    font-variation-settings: 'wght' 400;
+}
 .subTitle{
     font-size: 14px;
     // line-height: 32px;
@@ -2961,6 +2974,70 @@ input[autocomplete="false"] {
     font-variation-settings: 'wght' 600;
 }
 
-// .col-sm-2 {
-//   width: fit-content !important;
+.count{
+    font-size: 14px;
+    // line-height: 32px;
+    font-family: $font_family_4;
+    font-variation-settings: 'wght' 800;
+}
+
+// .test{
+//     font-size: 36px;
+//     // line-height: 32px;
+//     font-family: $font_family_4;
+//     font-variation-settings: 'wght' 500;
 // }
+
+.multi_tag{
+    font-family: $font_family_4;
+}
+
+
+.mat-raised-button{
+        font-family: $font_family_4;
+        // font-variation-settings: 'wght' 500; 
+}
+
+
+
+input.mat-input-element {
+    font-family: $font_family_4;
+    // font-size: 15px;
+}
+
+textarea.mat-input-element {
+    font-family: $font_family_4;
+    // font-size: 15px;
+}
+
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label:not(.mat-empty):not(.mat-form-field-empty) {
+   font-family: $font_family_4;
+   
+  }
+
+.mat-select{
+    font-family: $font_family_4;
+ }
+
+ .input-group .form-control{
+    font-family: $font_family_4;
+ }
+
+ .image_logo{
+    font-family: $font_family_4;
+    font-variation-settings: 'wght' 800;
+ }
+
+ .form-group select{
+    font-family: $font_family_4;
+ }
+
+ .radio_btn{
+    font-family: $font_family_4 !important;
+    font-variation-settings: 'wght' 800 !important;
+ }
+
+ .dropdown-menu>li>a{
+    font-family: $font_family_4;
+ }
+ 

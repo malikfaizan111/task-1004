@@ -25,7 +25,7 @@
        fxLayoutAlign="space-between start"
        >
   <div style="margin-top: 38px">
-    <h4 style="font-weight: 900;">  {{ switch.type == 'kill_switch' ? 'UP' : switch.type == 'bee_delivery_kill_switch' ? 'Bee' : 'Majoor'   }} Delivery Kill Switch</h4>
+    <h4 style="font-weight: 900; font-family: Manrope;">  {{ switch.type == 'kill_switch' ? 'UP' : switch.type == 'bee_delivery_kill_switch' ? 'Bee' : 'Majoor'   }} Delivery Kill Switch</h4>
   </div>
     <div fxFlex="100">
     <div fxLayout="row wrap"
@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <span>Kill Delivery: </span>
+    <span style="font-family: Manrope;">Kill Delivery: </span>
     <mat-slide-toggle (change)="onChangeSwitch(killSwitch)"
     [(ngModel)]="switch.special_status"
     color="accent"></mat-slide-toggle>

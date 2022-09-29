@@ -66,7 +66,7 @@
 			<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
 				<div fxFlex.xl="48" fxFlex.lg="48" fxFlex.md="48">
 					<div fxFlex="70">
-						<label style="width: 100%;">Select Image
+						<label class="image_logo" style="width: 100%;">Select Image
 						</label>
 						<file-picker (onFileSelect)="onFileSelect($event)" controlName="image" [isIconHidden]="false"
 							[image]="getImage1('image')" type="Custom" [size]="{width: 172, height: 172}">
@@ -82,7 +82,7 @@
 								style="background: transparent;	border-color: #148F96;	height: 35px;padding: 4px 14px; width: 100%; color: #148F96; font-weight: 700;"
 								(click)="onExportCSV()">Download Outlets List CSV
 							</button>
-							<span class="text-under-csv">Download the list of outlets currently listed under this
+							<span class="text-under-csv multi_tag">Download the list of outlets currently listed under this
 								popular category.</span>
 						</div>
 						<div fxFlex="100">
@@ -94,7 +94,7 @@
 								style="background: #148F96;	border-color: #148F96;	height: 35px;padding: 4px 14px; width: 100%; font-weight: 700;"
 								accept=".csv" type="file" (click)="onUploadCSV()">Update Outlets
 							</button>
-							<span class="text-under-csv">Note that updating outlets will overwrite and replace the
+							<span class="text-under-csv multi_tag">Note that updating outlets will overwrite and replace the
 								current list of outlets in this
 								category.</span>
 						</div>

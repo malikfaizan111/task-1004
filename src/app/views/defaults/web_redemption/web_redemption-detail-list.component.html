@@ -25,18 +25,18 @@
 	</div>
 </div>
 <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="padding-left: 40px;">
-	<div flex>
-		<span><strong>Offer: </strong>{{headerdata?.offer_name}}</span><br>
-		<span><strong>Brand: </strong>{{headerdata?.outlets_parents.name}}</span><br>
-		<span><strong>Expiry: </strong>{{headerdata?.expiry_date}}</span>
+	<div flex >
+		<span><strong class="count">Offer: </strong><span style="font-family: Manrope;">{{headerdata?.offer_name}}</span></span><br>
+		<span><strong class="count">Brand: </strong><span style="font-family: Manrope;">{{headerdata?.outlets_parents.name}}</span></span><br>
+		<span><strong class="count">Expiry: </strong><span style="font-family: Manrope;">{{headerdata?.expiry_date}}</span></span>
 	</div>
-	<div fxFlex="30">
-		<span *ngIf="headerdata?.voucher_type == 'paid'"><strong>Offer Links Generated :
-			</strong>{{vouchercount}}</span>
-		<span *ngIf="headerdata?.voucher_type == 'free'"><strong>Voucher ID: </strong>{{headerdata?.id}}</span><br>
-		<span *ngIf="headerdata?.voucher_type == 'free'"><strong>Offer Link: </strong>{{headerdata?.offer_link?
-			headerdata?.offer_link : 'N/A'}}</span><br>
-		<span *ngIf="headerdata?.voucher_type == 'free'"><strong>Codes Generated: </strong>{{linkscount}}</span>
+	<div fxFlex="30" >
+		<span *ngIf="headerdata?.voucher_type == 'paid'"><strong class="count">Offer Links Generated :
+			</strong><span style="font-family: Manrope;">{{vouchercount}}</span></span>
+		<span *ngIf="headerdata?.voucher_type == 'free'"><strong class="count">Voucher ID: </strong><span style="font-family: Manrope;">{{headerdata?.id}}</span></span><br>
+		<span *ngIf="headerdata?.voucher_type == 'free'"><strong class="count">Offer Link: </strong><span style="font-family: Manrope;">{{headerdata?.offer_link?
+			headerdata?.offer_link : 'N/A'}}</span></span><br>
+		<span *ngIf="headerdata?.voucher_type == 'free'"><strong class="count">Codes Generated: </strong><span style="font-family: Manrope;">{{linkscount}}</span></span>
 	</div>
 	<div fxFlex="50px">
 		<button *ngIf="headerdata?.voucher_type == 'paid'"

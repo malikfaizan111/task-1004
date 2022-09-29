@@ -286,7 +286,7 @@ fxFlex.md="48">
 </div>
 </div>
 		<div fxFlex="25">
-			<label style="width: 100%;">Select Image
+			<label class="image_logo" style="width: 100%;">Select Image
 			</label>
 			<file-picker (onFileSelect)="onFileSelect($event)"
 						 controlName="image"
@@ -298,7 +298,7 @@ fxFlex.md="48">
 			<span style="float: right;font-size: 12px; color: #ff2c54"
 				  *ngIf="errorMsgimage">{{errorMsgimage}}</span>
 
-			<label style="width: 100%;">Select Logo:
+			<label class="image_logo" style="width: 100%;">Select Logo:
 
 			</label>
 			<file-picker (onFileSelect)="onFileSelect($event)"
