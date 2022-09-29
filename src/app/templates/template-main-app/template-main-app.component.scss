@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
 
 $primary_font_family: 'Manrope';
 $color_1: #148F96;
@@ -49,7 +49,7 @@ $color_1: #148F96;
     
 }
 .font_style{
-    font-family: $primary_font_family;
+    // font-family: $primary_font_family;
     font-variation-settings: 'wght' 800;
     font-size: 15px;
 }
@@ -73,7 +73,7 @@ $font_family_1: 'Glyphicons Halflings';
             padding: 15px 10px 15px 20px;
             color: #1f1f1f;
             cursor: pointer;
-            font-family: $primary_font_family;
+            // font-family: $primary_font_family;
             font-variation-settings: 'wght' 800;
             &:focus {
                 outline: none;

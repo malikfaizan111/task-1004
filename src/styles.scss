@@ -6,6 +6,7 @@
 
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 @import "assets/styles/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
@@ -74,7 +75,7 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
 
 // input[type=number]::-webkit-inner-spin-button,
 // input[type=number]::-webkit-outer-spin-button {
@@ -2352,7 +2353,7 @@ input {
     z-index: 999;
     -moz-box-shadow: 0px 1px 22px #cfcfcf;
     -webkit-box-shadow: 0px 1px 22px #cfcfcf;
-    box-shadow: 0px 1px 8px #cfcfcf;
+    box-shadow: 0px 1px 6px #cfcfcf;
 }
 
 .welcome {
@@ -2767,7 +2768,7 @@ table.fixed {
                     -webkit-box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     box-sizing: border-box;
-                    max-width: 170px; // word-break: break-word;
+                    max-width: 200px; // word-break: break-word;
                     // vertical-align: text-bottom;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -2955,7 +2956,7 @@ input[autocomplete="false"] {
 .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label {
     width: unset;
 }
-// cms Component title
+// cms font style
 .mainTitle{
     font-size: 22px;
     line-height: 32px;
@@ -2981,12 +2982,7 @@ input[autocomplete="false"] {
     font-variation-settings: 'wght' 800;
 }
 
-// .test{
-//     font-size: 36px;
-//     // line-height: 32px;
-//     font-family: $font_family_4;
-//     font-variation-settings: 'wght' 500;
-// }
+
 
 .multi_tag{
     font-family: $font_family_4;

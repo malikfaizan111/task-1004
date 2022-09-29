@@ -94,7 +94,7 @@
 						                  [(ngModel)]="code.slide"
 						                  color="accent"></mat-slide-toggle>
 					</td>
-					<td style="text-align: center; width: 200px;">
+					<td style="text-align: center;">
 						<!-- <i *ngIf="code.multiple == 1"
 						   title="View Codes"
 						   class="action-btn">
@@ -114,7 +114,7 @@
 						        (click)="onEditPromoCodes(code)"
 						        color="accent">Edit
 						</button>
-						<button style="min-width: 50px;"
+						<button style="min-width: 50px; margin-left: 3px;"
 						        mat-raised-button
 						        (click)="onViewAllPromoCodes(code)"
 						        [disabled]="code.multiple == 0"

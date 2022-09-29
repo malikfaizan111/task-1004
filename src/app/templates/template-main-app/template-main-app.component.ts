@@ -208,6 +208,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{ routerLink: '/main/merchant_account', image: 'Merchant_Portals', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' },
 					]
 				},
 				{
@@ -305,7 +306,6 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{ routerLink: 'kpi_report', image: 'Configurations', label: 'KPI REPORT' },
-						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' }, 
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
 						{ routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dConfigurations', label: 'Ooredoo' }, 
@@ -323,6 +323,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{ routerLink: '/main/merchant_account', image: 'Merchant_Portals', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' },
 					]
 				},
 				{
@@ -384,7 +385,6 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{ routerLink: 'kpi_report', image: 'Configurations', label: 'KPI REPORT' },
-						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' }, 
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
 						{ routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'Configurations', label: 'Ooredoo' }, 
@@ -427,6 +427,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{ routerLink: '/main/merchant_account', image: 'Merchant_Portals', label: 'Parent Company Accounts' },
+						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' }, 
 					]
 				},
 				{
@@ -486,7 +487,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						
-						{ routerLink: '/main/outlet_account', image: 'Configurations', label: 'Outlets Accounts' }, 
+						
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
 						{ routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						{ routerLink: '/main/customers/oredoo_billing', image: 'Configurations', label: 'Ooredoo Billing' },

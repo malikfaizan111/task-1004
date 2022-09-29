@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-6">
-		<span style="font-size: 19px;line-height: 36px;font-weight: 600;">
+		<span class="mainTitle">
 			<div fxLayout="row"
 				 fxLayoutAlign="start center"
 				 fxLayoutGap="10px">
@@ -10,7 +10,7 @@
 					<img src="assets/images/actions/back.png"
 						 alt="">
 				</button>
-				<span>ASSIGN PROMOTION</span>
+				<span>Assign Promotion</span>
 			</div>
 		</span>
 	</div>
@@ -51,9 +51,9 @@
 		</div>
   </div>
 
-  <div style="margin-top: 15px;">
+  <div style="margin-top: 15px;" class="count">
     <span > <strong> Selected Outlet: </strong>
-       <span *ngIf="!selectedOutlet" style="color: darkgray;margin-left: 13px;">No Outlet Selected</span>
+       <span *ngIf="!selectedOutlet" style="color: darkgray;margin-left: 13px; ">No Outlet Selected</span>
        <span>{{ selectedOutlet?.name }}</span>
     </span>
   </div>
