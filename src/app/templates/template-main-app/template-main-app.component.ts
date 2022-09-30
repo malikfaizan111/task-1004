@@ -805,7 +805,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						// { routerLink: '/main/sms/list', image: 'Configurations', label: 'SMS' },	
 					]
 				},
-				{ routerLink: '/main/edit-history-list', image: 'CMS_History', label: 'CMS EDITING HISTORY' },
+				{ routerLink: '/main/edit-history-list', image: 'CMS_History', label: 'CMS Editing History' }, 
 				// {
 				// 	image: 'customers',
 				// 	label: 'CUSTOMERS',
