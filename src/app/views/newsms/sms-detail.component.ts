@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MainService, BaseLoaderService, PaginationService } from '../../services';
+import { MainService, BaseLoaderService, PaginationService, ExcelService } from '../../services';
 import { AppLoaderService } from '../../lib/app-loader/app-loader.service';
-import { ExportCSVComponent } from '../../lib/export_csv.component';
 import { AlertDialog } from '../../lib/alert.dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { UserAppSelectorService } from '../../lib/app-selector/app-selector.service';
@@ -16,7 +15,7 @@ import { Subscription } from 'rxjs';
     '.form-control {border-radius: 10px !important;}'
   ]
 })
-export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
+export class SmsDetailComponent implements OnInit {
 
   smsId: any
   search: string;
@@ -37,7 +36,8 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
 		search: null
 	};
   channel: any
-  message: any
+  message: any;
+  compaignCSV: any;
   appSelectorSubscription: Subscription;
 
   constructor(protected route: ActivatedRoute,
@@ -46,14 +46,15 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
        protected dialog: MatDialog,
        protected paginationService: PaginationService,
        protected loaderService: BaseLoaderService,
-       protected appSelectorService: UserAppSelectorService) {
-    super(mainApiService, appLoaderService, dialog);
+       protected appSelectorService: UserAppSelectorService,
+       protected excelservice: ExcelService) {
     this.search = '';
     this.filterstatus = ''
     this.Sms = [];
     this.smsInfo = []
+    this.compaignCSV = []
 		this.perPage = 20;
-    this.isNeededDate = false;
+
     
 
     this.appSelectorSubscription = this.appSelectorService.selectedApp.subscribe((response: any) =>
@@ -94,10 +95,6 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
 
   gerSmsDetailList(index: any, isLoaderHidden?: boolean): void
   {
-    // this.url_values = [
-		// 	{key: 'sentstatus', value: this.sent_Status, title: 'Sent Status'},
-		// ];
-    
     this.loaderService.setLoading(true);
 
     let url = 'getCampaignDetails?campaign_id='+ this.smsId + 'page='  + index + '&index2=' + this.perPage;
@@ -159,6 +156,37 @@ export class SmsDetailComponent extends ExportCSVComponent implements OnInit {
 		this.index = this.currentPage;
 		this.gerSmsDetailList(pageDate.page);
 	}
+
+  onExportSmsDetail()
+  {
+    this.compaignCSV = []
+    let url = 'getCampaignExport?campaign_id=' + this.smsId;
+
+    this.mainApiService.getSms(url)
+    .then((response) => {
+      if(response.statusCode === 200 && response.data)
+      {
+        response.data.forEach(element => {
+          let obj = {
+            'Id': element.id,
+            'Phone Number': element.phone,
+            'Type': element.sms_type,
+            'Message': element.sms,
+            'Status': element.sent_status,
+            'Sent On': element.created_at,
+          }
+          this.compaignCSV.push(obj)
+          console.log('eer', this.compaignCSV)
+        });
+        this.excelservice.downloadFile(this.compaignCSV, "Compaign Detail")
+      } else
+      {
+        this.compaignCSV = []
+      }
+    })
+  }
+
+
 
   ngOnDestroy(): void 
 	{

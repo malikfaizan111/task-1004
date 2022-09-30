@@ -1,0 +1,1 @@
+export {KpiReportComponent} from './kpi-report.component'

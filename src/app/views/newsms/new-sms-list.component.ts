@@ -160,7 +160,7 @@ export class NewSmsListComponent implements OnInit
 		// dialogRef.componentInstance.Deal = sms;
 		// localStorage.setItem('Sms', JSON.stringify(sms));
     // localStorage.removeItem('componentSettings')
-		this.router.navigateByUrl('main/sms/detail/' + sms.id)
+		this.router.navigateByUrl('main/sms/detail/' + sms.campaign_id)
 	}
 
 	setPage(pageDate: any) 

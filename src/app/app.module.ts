@@ -20,7 +20,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 import { NgxEmojiPickerModule } from "ngx-emoji-picker";
 
 // Services
-import { AuthService, MainService, PaginationService, BaseLoaderService } from './services';
+import { AuthService, MainService, PaginationService, BaseLoaderService, ExcelService } from './services';
 
 // Lib
 import { FilterDatePipe, AlertDialog, BaseLoaderComponent, PaginationComponent, MapLocationDialog, GetLocationDialog, FilePickerComponent, ExportCSVDialog, MultiTagInputComponent } from './lib';
@@ -145,6 +145,8 @@ import {ViewSingleCodeComponent} from './views/access_codes/view-single-code.com
 import { NewSmsListComponent } from './views/newsms/new-sms-list.component';
 import { NewSmsFormComponent } from './views/newsms/new-sms-form.component';
 import { SmsDetailComponent } from './views/newsms/sms-detail.component';
+import { TransactionsComponent } from './views/defaults/transactions/transactions.component';
+import {KpiReportComponent} from './views/kpi-report/kpi-report.component';
 
 
 @NgModule({
@@ -179,6 +181,7 @@ import { SmsDetailComponent } from './views/newsms/sms-detail.component';
     AuthGuard,
     AuthService,
     MainService,
+    ExcelService,
     ApiLoaderService,
     MainAuthGuard,
     AppsGuard,
@@ -343,6 +346,8 @@ import { SmsDetailComponent } from './views/newsms/sms-detail.component';
     NewSmsListComponent,
     NewSmsFormComponent,
     SmsDetailComponent,
+    TransactionsComponent,
+    KpiReportComponent
 
   
   ],
