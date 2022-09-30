@@ -62,11 +62,11 @@
 			<thead>
 				<tr>
 					<th class="weight-600">ID</th>
-					<th class="weight-600">Name</th>
-					<th *ngIf="Roles?.role != '2'" class="weight-600">Email</th>
+					<!-- <th class="weight-600">Name</th>
+					<th *ngIf="Roles?.role != '2'" class="weight-600">Email</th> -->
 					<th *ngIf="Roles?.role != '2'" class="weight-600">Phone #</th>
-					<th class="weight-600">Subscription Type</th>
-					<th class="weight-600">language</th>
+					<!-- <th class="weight-600">Subscription Type</th> -->
+					<!-- <th class="weight-600">language</th> -->
 					<th class="weight-600">response code</th>
 					<th class="weight-600">type</th>
 					<th class="weight-600">price point</th>
@@ -81,11 +81,11 @@
 			<tbody>
 				<tr *ngFor="let subscription of SubscriptionLogs">
 					<td>{{subscription.id == null ? 'N/A' : subscription.id}}</td>
-					<td>{{subscription.name == null ? 'N/A' : subscription.name}}</td>
-					<td *ngIf="Roles?.role != '2'" [title]="subscription.email">{{subscription.email == null ? 'N/A' : subscription.email}}</td>
+					<!-- <td>{{subscription.name == null ? 'N/A' : subscription.name}}</td>
+					<td *ngIf="Roles?.role != '2'" [title]="subscription.email">{{subscription.email == null ? 'N/A' : subscription.email}}</td> -->
 					<td *ngIf="Roles?.role != '2'">{{subscription.phone == null ? 'N/A' : subscription.phone}}</td>
-					<td>{{subscription.network == null ? 'N/A' : subscription.network}}</td>
-					<td>{{subscription.language == null ? 'N/A' : subscription.language}}</td>
+					<!-- <td>{{subscription.network == null ? 'N/A' : subscription.network}}</td> -->
+					<!-- <td>{{subscription.language == null ? 'N/A' : subscription.language}}</td> -->
 					<td>{{subscription.response_code == null ? 'N/A' : subscription.response_code}}</td>
 					<td>{{subscription.type == null ? 'N/A' : subscription.type}}</td>
 					<td>{{subscription.price_point == null ? 'N/A' : subscription.price_point}}</td>
