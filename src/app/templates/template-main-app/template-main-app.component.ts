@@ -741,7 +741,8 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				// { routerLink: '/main/Ooredo-Billing', image: 'deals', label: 'Ooredoo Billing' },
 				{
 					image: 'Subscription_Packages',
-					label: 'Subscription Packages',
+					label: `Subscription
+					Packages`,
 					is_parent: true,
 					opened: false,
 					children: [

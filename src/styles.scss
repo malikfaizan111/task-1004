@@ -3040,4 +3040,10 @@ textarea.mat-input-element {
  .dropdown-menu>li>a{
     font-family: $font_family_4;
  }
+
+ .mat-card:not([class*=mat-elevation-z]){
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+ }
  
