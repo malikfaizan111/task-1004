@@ -217,6 +217,22 @@ export class ImportCSVComponent implements OnInit {
                     this.afterSuccess();
                 })
             }
+            else if(response.status == 404)
+            {
+                console.log('checking 400 : ' , response)
+                let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
+                let cm = dialogRef.componentInstance;
+                cm.heading = 'Message';
+                cm.message = response.error.message;
+                cm.cancelButtonText = 'Ok';
+                cm.type = 'error';
+                dialogRef.afterClosed().subscribe(result => {
+                    // this.router.navigateByUrl('/main/merchants');
+                    // this.isLoading = false;
+
+                    this.afterSuccess();
+                })
+            }
 
 
             else {
