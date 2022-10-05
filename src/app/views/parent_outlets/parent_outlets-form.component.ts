@@ -7,6 +7,7 @@ import { AlertDialog } from '../../lib';
 import { MatDialog } from '@angular/material/dialog';
 import { appConfig } from '../../../config';
 import * as moment from 'moment';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
 	selector: 'app-parent_outlets-form',
 	templateUrl: './parent_outlets-form.component.html',
@@ -34,13 +35,29 @@ export class ParentOutletsFormComponent implements OnInit
     urlType: string = '';
 	enableBrandNewDate: boolean = false;
 	currentDate: Date = new Date();
+	logoName: any;
+	logoUrl: any;
+	imageUrl: any;
+	mat_toggle = {'color': '#757575',}
+	feature_toggle = {'color': '#148F96'};
+	// static data for image
+	coverImage = new Array();
+	movies: any
 	constructor(protected router: Router,
 		protected _route: ActivatedRoute,
 		protected mainApiService: MainService,
 		protected formbuilder: FormBuilder, protected dialog: MatDialog, protected baseloader : BaseLoaderService)
 	{
-		this.Form = this.formbuilder.group({
-			name: [null, [Validators.required, Validators.maxLength(50)]],
+		this.coverImage = [
+			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
+			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
+			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
+			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
+			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
+			
+		]
+			this.Form = this.formbuilder.group({
+			name: [null, [Validators.required, Validators.maxLength(50), Validators.minLength(6)]],
 			delivery_status: [null, [Validators.required]],
 			featured : [null],
 			isnewbrand_expiry : [null],
@@ -48,10 +65,13 @@ export class ParentOutletsFormComponent implements OnInit
 		});
 		this.isLoading = false;
 		this.isEditing = false;
+		// debugger;
 		this.baseloader.menudata.subscribe(d => {
             console.log('checking the data ', d)
             this.menudata = d;
+			console.log('my check', this.menudata)
             if (this.menudata.menu_card) {
+				
                 if (this.menudata.type = 'link') {
                     this.urltext = true;
                     this.pdftext = false;
@@ -180,14 +200,17 @@ export class ParentOutletsFormComponent implements OnInit
         return this.Form.get(name);
 	}
 	checkNewBrand($event){
-		if($event.target.checked)
+		console.log('toggle', $event)
+		if($event.checked == true)
 		{
+			this.mat_toggle = {'color': '#148F96'}
 			this.enableBrandNewDate = true;
 			this.Form.get('isnew_brand').setValue(1);
 			this.Form.addControl('isnewbrand_expiry', new FormControl(null, [Validators.required]));
 		}
 		else
 		{
+			this.mat_toggle = {'color': '#757575'}
 			this.enableBrandNewDate = false;
 			this.Form.get('isnew_brand').setValue(0);
 			this.Form.removeControl('isnewbrand_expiry');
@@ -196,9 +219,11 @@ export class ParentOutletsFormComponent implements OnInit
 	toggleView() {
 		console.log(this.status);
 		if(this.status == true){
+			this.feature_toggle = {'color': '#148F96'}
 			this.Form.get('featured').setValue(1);
 		}
 		else{
+			this.feature_toggle = {'color': '#757575'}
 			this.Form.get('featured').setValue(0);
 		}
 		// console.log(item.status);
@@ -239,7 +264,7 @@ export class ParentOutletsFormComponent implements OnInit
             .then(result => {
                 if (result.status == 200 && result.data) {
                     this.Outlets = result.data.parents[0];
-					console.log(this.Outlets);
+					console.log('my second check', this.Outlets);
                     result.data.parents.forEach(element => {
                         this.menudatatype = element.parentOutletMenu[0]?.type;
                     });
@@ -267,6 +292,7 @@ export class ParentOutletsFormComponent implements OnInit
     }
 	doSubmit(): void
 	{
+		
 		this.isLoading = true;
 		let method = '';
 		if (this.id == 'add')
@@ -309,4 +335,22 @@ export class ParentOutletsFormComponent implements OnInit
 		localStorage.setItem('brandForm', JSON.stringify(this.Form.value));
 		this.router.navigateByUrl('main/brands/'+ this.id + '/' + type);
 	}
+
+	// new screen loigcs
+
+	onFileImageChange(event:any)
+	{
+		let abc = event.target.files[0]
+		this.logoName = abc.name
+		if (event.target.files && event.target.files[0]) {
+            var reader = new FileReader();
+            reader.onload = (event: any) => {
+                this.logoUrl = event.target.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+		
+	}
+
+
 }

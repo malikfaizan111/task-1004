@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
 	<div class="col-sm-6">
 		<span class="mainTitle">
 			<div fxLayout="row"
@@ -61,46 +61,24 @@
 				</mat-slide-toggle>
 				<span style="color: #706666; padding-left: 7px;font-family: Manrope;" >Featured</span>
 		</div>
-	</div>
-	<div style="margin-top: 20px"
+	</div> -->
+<!-- <div style="margin-top: 20px"
 	fxLayout="row wrap"
 	fxLayoutAlign="space-between start"
-	>
-   <div fxFlex.xl="32"
+	> -->
+<!-- <div fxFlex.xl="32"
 		fxFlex.lg="48"
 		fxFlex.md="48">
-	   <!-- <div class="form-group mb-0">
-		   <mat-form-field style="width: 100%">
-			   <input matInput
-					  formControlName="name"
-					  type="text"
-					  required
-					  placeholder="Name">
-			   <mat-error
-						  *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">
-				   Name is required</mat-error>
-		   </mat-form-field>
-	   </div> -->
-   </div>
-   <div fxFlex.xl="32"
+	   
+   </div> -->
+<!-- <div fxFlex.xl="32"
 		fxFlex.lg="48"
 		fxFlex.md="48">
 	   <div class="form-group mb-0">
-		   <!-- <mat-form-field style="width: 100%">
-			   <mat-select formControlName="delivery_status"
-						   placeholder="Delivery Status">
-				   <mat-option value="0"> No</mat-option>
-				   <mat-option value="1"> Yes</mat-option>
-				   <mat-option value="2"> Both</mat-option>
-			   </mat-select>
-			   <mat-error
-						  *ngIf="getValue('delivery_status')?.invalid && (getValue('delivery_status')?.dirty || getValue('delivery_status')?.touched)">
-						  Delivery Status
-				   is required</mat-error>
-		   </mat-form-field> -->
+		   
 	   </div>
-   </div>
-   <div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48" style="margin-top: 7px; padding-left: 50px;">
+   </div> -->
+<!-- <div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48" style="margin-top: 7px; padding-left: 50px;">
 	<div fxlayout="row nowrap" fxLayoutAign="space-between center">
 		<div fxFlex="40" style="margin-top: 10px;">
 			<label class="container text-nowrap"> 
@@ -133,10 +111,10 @@
 			</mat-form-field>
 		</div>
    </div>
-	</div>
-	
-</div>
-  <div style="margin-top: 20px"
+	</div> -->
+
+<!-- </div> -->
+<!-- <div style="margin-top: 20px"
   fxLayout="row wrap"
   fxLayoutAlign="space-between start"
   >
@@ -212,8 +190,8 @@ fxFlex.md="48">
 </div>
 <div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48" style="margin-top: 7px; padding-left: 50px;">
 </div>
-</div>
-	<div class="row">
+</div> -->
+<!-- <div class="row">
 		<div style="margin-top: 20px"
 			 class="col-sm-12">
 			<button type="submit"
@@ -234,5 +212,216 @@ fxFlex.md="48">
 				 class="loader-btn-image"
 				 src="assets/images/view-loader.gif">
 		</div>
+	</div> -->
+<!-- </form> -->
+
+<div fxLayout="row" fxLayoutAlign="start center">
+	<button mat-icon-button (click)="onLocationBack()" color="accent">
+		<img src="assets/images/actions/back.png" alt="">
+	</button>
+	<span class="mainTitle" fxFlexOffset="1">{{isEditing? 'Edit': 'Add'}} Brands</span>
+
+</div>
+
+<form [formGroup]="Form" fxLayout="row wrap"  class="font_family">
+	<div fxLayout="column" fxFlexOffset="1" fxFlex="44">
+		<div fxFlexOffset="8" fxLayoutAlign="space-between none">
+			<label class="input_label" style="margin-top: 13px;">Brand</label>
+			<mat-form-field style="width: 80%;">
+				<!-- <mat-label >Enter brand name</mat-label> -->
+				<input matInput class="mat_input" formControlName="name" placeholder="Enter brand name">
+			</mat-form-field>
+		</div>
+		<div fxLayoutAlign="space-between none" style="width: 57.3%;">
+			<label class="input_label" style="margin-top: 12px;">Delivery</label>
+			<mat-form-field style="width: 65%">
+				<mat-label>Access Level</mat-label>
+				<mat-select formControlName="delivery_status"
+				placeholder="Delivery Status">
+					<mat-option value="0"> No</mat-option>
+						<mat-option value="1"> Yes</mat-option>
+						<mat-option value="2"> Both</mat-option>
+				</mat-select>
+
+			</mat-form-field>
+
+		</div>
+		<div>
+			<label class="input_label">New brand</label>
+			<mat-slide-toggle [ngStyle]="mat_toggle" class="font_family" fxFlexOffset="7" [checked]="enableBrandNewDate" (change)="checkNewBrand($event)">Enabled</mat-slide-toggle>
+		</div>
+		<!-- <div  fxLayoutAlign="space-between none" style="width: 57.3%;">
+			<label class="time_label" fxFlexOffset="4" style="margin-top: 18px;" >Start</label>
+			<mat-form-field  style="width: 65%; margin-top: 10px;">
+				<input matInput
+					   [owlDateTime]="startDate"
+					   [owlDateTimeTrigger]="startDate"
+					   readonly
+					   [min]="currentDate"
+					   [max]="EndDate"
+					   [(ngModel)]="StartDate"
+					   [ngModelOptions]="{standalone: true}"
+					   (dateTimeChange)="onStartDate()"
+					   type="text"
+					   placeholder="Set start date & time"
+					   required>
+				
+				<owl-date-time pickerType="both"
+							   #startDate></owl-date-time>
+				<mat-error *ngIf="getValue('start_datetime')?.invalid && (getValue('start_datetime')?.dirty || getValue('start_datetime')?.touched)">Start
+					Date is required</mat-error>
+			</mat-form-field>
+
+		</div> -->
+		<div fxLayoutAlign="space-between none" style="width: 57.3%;"
+		 *ngIf="Form.get('isnew_brand')?.value == 1 && Form.get('isnew_brand')?.value != ''">
+			<label class="time_label" fxFlexOffset="4" style="margin-top: 20px; font-weight: 200;">End</label>
+			<mat-form-field style="width: 65%; margin-top: 10px;">
+				<input matInput [owlDateTime]="startDate" [owlDateTimeTrigger]="startDate" readonly [min]="currentDate"
+					[max]="EndDate" [(ngModel)]="StartDate" [ngModelOptions]="{standalone: true}"
+					(dateTimeChange)="onStartDate()" type="text" placeholder="Set end date & time" required>
+
+				<owl-date-time pickerType="both" #startDate></owl-date-time>
+				<mat-error
+					*ngIf="getValue('start_datetime')?.invalid && (getValue('start_datetime')?.dirty || getValue('start_datetime')?.touched)">
+					Start
+					Date is required</mat-error>
+			</mat-form-field>
+
+		</div>
+		<div>
+			<label class="input_label">Featured</label>
+			<mat-slide-toggle [ngStyle]="feature_toggle" class="font_family" [(ngModel)]="status" [ngModelOptions]="{standalone: true}" (change)="toggleView()" fxFlexOffset="9.2" >Disabled</mat-slide-toggle>
+		</div>
+		
 	</div>
+	<div fxFlexOffset="4" fxLayout="column" fxFlex="50">
+		<div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="2">
+			<div fxLayoutAlign="center center" fxFlex="16"
+				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 90px;">
+				<span style="font-weight: 300;" *ngIf="!logoUrl">
+					Preview
+				</span>
+				<span *ngIf="logoUrl">
+
+					<img [src]="url">
+				</span>
+
+			</div>
+			<span style="font-size: 13px; font-weight: 200;" *ngIf="logoName != undefined"
+				fxFlexOffset="1">{{logoName}}</span>
+		</div>
+
+		<div fxFlexOffset="0.5" fxLayout="row">
+			<button type="button" style="display:block;padding: 0; border: none;  background: white;color: #148F96; font-size: 15px;
+                font-weight: 700;" onclick="document.getElementById('image').click()">Upload brand logo</button> <br>
+			<input id="image" style="visibility:hidden;" type="file" (change)="onFileImageChange($event)"
+				accept="image/jpg, image/png">
+		</div>
+		<span  style="font-size: 12px;">Upload brand logo image in jpg or png format.</span>
+
+		<div  fxFlexOffset="1"  fxLayout="row wrap" fxFlex="120px">
+			<div  fxLayoutAlign="center center" fxFlex="19"
+				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 110px;"
+				*ngIf="coverImage.length == 0">
+				
+				Preview
+			</div>
+			
+			<div fxFlexOffset="0.5"   fxLayout="column"  fxFlex="19" *ngFor="let item of coverImage">
+				<span fxLayoutAlign="start center"  style="overflow: hidden; font-size: 13px; font-weight: 200;" >
+					{{item.filename}}
+				</span>
+				<div fxFlexOffset="3"  fxLayoutAlign="center center" fxFlex
+				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 90px;">
+				
+				{{item.image}}
+			</div>
+
+			</div>
+		</div>
+
+		<button fxFlexOffset="0.5" fxLayoutAlign="start center"  type="button" style="display:block;padding: 0; border: none;width: 30%;  background: white;color: #148F96; font-size: 15px;
+                font-weight: 700;">Upload cover images</button>
+				<span  style="font-size: 12px;">Upload one or multiple cover images in jpg or png format.</span>
+
+				<div fxFlex.xl="32"
+				fxFlex.lg="48"
+				fxFlex.md="48" fxLayout="row">
+				<div fxFlex="60" style="margin-top: 18px;border: 2px dotted #E8E8E8;border-radius: 10px; padding-top: 10px">
+						  
+				  <ul style="list-style: none; padding-left: 24px;">
+					  <li *ngIf="!urltext">
+						  <div fxLayout="row" fxLayoutAlign="start center">
+							  <div fxFlex="55">
+								  <a style="font-family: Manrope; font-weight: bolder;" (click)="uploadMenuSection('link')">Upload menu as link</a>
+							  </div>
+							  <div fxFlex="45">
+							  </div>
+						  </div>
+					  </li>
+					  <li *ngIf="urltext">
+						  <div fxLayout="row" fxLayoutAlign="start center">
+							  <div fxFlex="55">
+								  <a style="font-family: Manrope; font-weight: bolder;" (click)="uploadMenuSection('link')">Edit menu as link</a>
+							  </div>
+							  <div fxFlex="45">
+								  <span style="color: #757575;margin-left: 16px;font-weight: 200;font-size: 13px;">Menu uploaded</span>
+							  </div>
+						  </div>
+					  </li>
+					  <li *ngIf="!pdftext">
+						  <div fxLayout="row" fxLayoutAlign="start center">
+							  <div fxFlex="55">
+								  <a style="font-family: Manrope; font-weight: bolder;" (click)="uploadMenuSection('pdf')">Upload menu as PDF</a>
+							  </div>
+							  <div fxFlex="45">
+							  </div>
+						  </div>
+					  </li>
+					  <li *ngIf="pdftext">
+						  <div fxLayout="row" fxLayoutAlign="start center">
+							  <div fxFlex="55">
+								  <a (click)="uploadMenuSection('pdf')">Edit menu as PDF</a>
+							  </div>
+							  <div fxFlex="45">
+								  <span style="color: #757575;margin-left: 16px;font-weight: 200;font-size: 13px; font-family: Manrope; font-weight: bolder; ">Menu uploaded</span>
+							  </div>
+						  </div>
+					  </li>
+					  <li *ngIf="!imagetext">
+						  <div fxLayout="row" fxLayoutAlign="start center">
+							  <div fxFlex="55">
+								  <a style="font-family: Manrope; font-weight: bolder;" (click)="uploadMenuSection('image')">Upload menu as image</a>
+							  </div>
+							  <div fxFlex="45">
+							  </div>
+						  </div>
+					  </li>
+					  <li *ngIf="imagetext">
+						  <div fxLayout="row" fxLayoutAlign="start center">
+							  <div fxFlex="55">
+								  <a style="font-family: Manrope; font-weight: bolder;" (click)="uploadMenuSection('image')">Edit menu as image</a>
+							  </div>
+							  <div fxFlex="45">
+								  <span style="color: #757575; margin-left: 17px;font-weight: 200;font-size: 13px;">Menu uploaded</span>
+							  </div>
+						  </div>
+					  </li>
+				  </ul>
+			  </div>
+			  </div>
+				
+
+	</div>
+	<div>
+		<button type="submit"
+					
+					class="btn btn-primary round-elem"
+					style="background: red; border-color: red">
+					Save brand
+			</button>
+		
+	</div> 
+
 </form>
