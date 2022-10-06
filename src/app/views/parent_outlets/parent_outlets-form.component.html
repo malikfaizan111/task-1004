@@ -230,6 +230,7 @@ fxFlex.md="48">
 			<mat-form-field style="width: 80%;">
 				<!-- <mat-label >Enter brand name</mat-label> -->
 				<input matInput class="mat_input" formControlName="name" placeholder="Enter brand name">
+				<mat-error *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">Name is Required</mat-error>
 			</mat-form-field>
 		</div>
 		<div fxLayoutAlign="space-between none" style="width: 57.3%;">
@@ -242,6 +243,10 @@ fxFlex.md="48">
 						<mat-option value="1"> Yes</mat-option>
 						<mat-option value="2"> Both</mat-option>
 				</mat-select>
+				<mat-error
+							   *ngIf="getValue('delivery_status')?.invalid && (getValue('delivery_status')?.dirty || getValue('delivery_status')?.touched)">
+							   Delivery Status
+						is required</mat-error>
 
 			</mat-form-field>
 
@@ -282,10 +287,10 @@ fxFlex.md="48">
 					(dateTimeChange)="onStartDate()" type="text" placeholder="Set end date & time" required>
 
 				<owl-date-time pickerType="both" #startDate></owl-date-time>
-				<mat-error
-					*ngIf="getValue('start_datetime')?.invalid && (getValue('start_datetime')?.dirty || getValue('start_datetime')?.touched)">
+				<!-- <mat-error
+					*ngIf="getValue('isnewbrand_expiry ')?.invalid && (getValue('isnewbrand_expiry ')?.dirty || getValue('isnewbrand_expiry ')?.touched)">
 					Start
-					Date is required</mat-error>
+					Date is required</mat-error> -->
 			</mat-form-field>
 
 		</div>
@@ -314,7 +319,7 @@ fxFlex.md="48">
 
 		<div fxFlexOffset="0.5" fxLayout="row">
 			<button type="button" style="display:block;padding: 0; border: none;  background: white;color: #148F96; font-size: 15px;
-                font-weight: 700;" onclick="document.getElementById('image').click()">Upload brand logo</button> <br>
+                font-weight: 700;" onclick="document.getElementById('image').click()">{{logoText == false ? 'Upload cover images' : 'Update cover images'}}</button> <br>
 			<input id="image" style="visibility:hidden;" type="file" (change)="onFileImageChange($event)"
 				accept="image/jpg, image/png">
 		</div>
@@ -330,12 +335,12 @@ fxFlex.md="48">
 			
 			<div fxFlexOffset="0.5"   fxLayout="column"  fxFlex="19" *ngFor="let item of coverImage">
 				<span fxLayoutAlign="start center"  style="overflow: hidden; font-size: 13px; font-weight: 200;" >
-					{{item.filename}}
+					{{item.file}}
 				</span>
-				<div fxFlexOffset="3"  fxLayoutAlign="center center" fxFlex
+				<div fxFlexOffset="3" fxLayout="row"  fxLayoutAlign="center center" fxFlex="100"
 				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 90px;">
 				
-				{{item.image}}
+				<img  style="width:100%; height:auto;" [src]="item.file">
 			</div>
 
 			</div>

@@ -43,25 +43,22 @@ export class ParentOutletsFormComponent implements OnInit
 	// static data for image
 	coverImage = new Array();
 	movies: any
-	coverImageText: boolean = false
+	coverImageText: boolean = false;
+	logoText: boolean = false;
 	fileUrl:any;
 	formData: any;
 	imageFile: any[] = [];
+	logo:any
+	brandInfo: any;
+	featureInfo:any
 	constructor(protected router: Router,
 		protected _route: ActivatedRoute,
 		protected mainApiService: MainService,
 		protected formbuilder: FormBuilder, protected dialog: MatDialog, protected baseloader : BaseLoaderService)
 	{
-		this.coverImage = [
-			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
-			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
-			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
-			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
-			// {filename: '5453453543543.png', image: 'gffgdfgdgfgfdgd'},
-			
-		]
+		this.coverImage = []
 			this.Form = this.formbuilder.group({
-			name: [null, [Validators.required, Validators.maxLength(50), Validators.minLength(6)]],
+			name: [null, [Validators.required, Validators.maxLength(50)]],
 			delivery_status: [null, [Validators.required]],
 			featured : [null],
 			isnewbrand_expiry : [null],
@@ -111,16 +108,19 @@ export class ParentOutletsFormComponent implements OnInit
             }
         });
 		// for cover image title
-		let abc = localStorage.getItem('ParentOutlet') as string;
-					console.log(abc);
-					let parentOutletCoverImage = JSON.parse(abc);
-					if(parentOutletCoverImage == null){
-						this.coverImageText = false
-					}else if (parentOutletCoverImage.parentImages.length != 0){
-						this.coverImageText = true
-					}else{
-						this.coverImageText = false
-					}
+		// let abc = localStorage.getItem('ParentOutlet') as string;
+		// 			console.log(abc);
+		// 			let parentOutletCoverImage = JSON.parse(abc);
+		// 			if(parentOutletCoverImage == null){
+		// 				this.coverImageText = false
+		// 			}else if (parentOutletCoverImage.parentImages.length != 0){
+		// 				this.coverImageText = true
+		// 			}else{
+		// 				this.coverImageText = false
+		// 			}
+		console.log('logo....', this.logoText)
+					
+					
 	}
 	ngOnInit()
 	{
@@ -128,6 +128,7 @@ export class ParentOutletsFormComponent implements OnInit
 			this.id = params['id'];
 			// console.log('id', this.id)
 			this.gerOutletsList(this.id);
+			console.log('covercheck....', this.coverImage)
 				if (this.id != 'add')
 				{
 					this.Form.addControl('id', new FormControl(this.id));
@@ -224,7 +225,7 @@ export class ParentOutletsFormComponent implements OnInit
         return this.Form.get(name);
 	}
 	checkNewBrand($event){
-		console.log('toggle', $event)
+		// console.log('toggle', $event)
 		if($event.checked == true)
 		{
 			this.mat_toggle = {'color': '#148F96'}
@@ -241,7 +242,7 @@ export class ParentOutletsFormComponent implements OnInit
 		}
 	}
 	toggleView() {
-		console.log(this.status);
+		// console.log(this.status);
 		if(this.status == true){
 			this.feature_toggle = {'color': '#148F96'}
 			this.Form.get('featured').setValue(1);
@@ -288,10 +289,26 @@ export class ParentOutletsFormComponent implements OnInit
             .then(result => {
                 if (result.status == 200 && result.data) {
                     this.Outlets = result.data.parents[0];
-					console.log('my second check', this.Outlets);
+					// console.log('my second check', this.Outlets);
                     result.data.parents.forEach(element => {
                         this.menudatatype = element.parentOutletMenu[0]?.type;
+						this.coverImage = element.parentImages
+						this.logo = element.logo
+						this.brandInfo = element.isnew_brand
+						this.featureInfo = element.featured
                     });
+					if (this.logo !== null){
+						this.logoText = true;
+					}
+					if (this.brandInfo == 1){
+						this.mat_toggle = {'color': '#148F96'}
+					}
+					if (this.coverImage.length != 0){
+						this.coverImageText = true;
+					}
+					if (this.featureInfo == 0){
+						this.feature_toggle = {'color': '#757575'}
+					}
                      if (this.menudatatype == 'pdf') {
                         this.pdftext = true;
                         this.urltext = false;

@@ -31,6 +31,7 @@ export class parentMenuOutlet{
     errorMsgImages: boolean = false;
     brandCover: any;
     brandCoverData:any;
+    errormesCover: boolean = false;
 
     images: Array<{ name: string, path: string, source: any }> = [];
     constructor(private _route: ActivatedRoute, protected formbuilder: FormBuilder,
@@ -134,10 +135,10 @@ export class parentMenuOutlet{
     }
 
     onFileImageChange(event) {
-        debugger
         if (event.target.files && event.target.files[0]) {
             var filesAmount = event.target.files.length;
         }
+        if(this.type === 'image' ){
         if (filesAmount > 0 && filesAmount < 11) {
             this.images = [];
             this.errorMsgImages = false;
@@ -146,6 +147,16 @@ export class parentMenuOutlet{
         else{
             this.errorMsgImages = true;
         }
+    }else{
+        if (filesAmount > 0 && filesAmount < 6) {
+            this.images = [];
+            this.errormesCover = false;
+            this.imagesarray = event.target.files;
+        }
+        else{
+            this.errormesCover = true;
+        }
+    }
 
         if (filesAmount != 0) {
             this.Form.get('image').clearValidators();
@@ -155,7 +166,6 @@ export class parentMenuOutlet{
         }
     }
     doSubmit() {
-        debugger;
         let imagesdata = [];
         if (this.id != 'add') {
             this.isLoading = true;
