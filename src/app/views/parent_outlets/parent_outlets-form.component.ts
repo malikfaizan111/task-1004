@@ -44,6 +44,9 @@ export class ParentOutletsFormComponent implements OnInit
 	coverImage = new Array();
 	movies: any
 	coverImageText: boolean = false
+	fileUrl:any;
+	formData: any;
+	imageFile: any[] = [];
 	constructor(protected router: Router,
 		protected _route: ActivatedRoute,
 		protected mainApiService: MainService,
@@ -66,6 +69,8 @@ export class ParentOutletsFormComponent implements OnInit
 		});
 		this.isLoading = false;
 		this.isEditing = false;
+		this.fileUrl = appConfig.file_urlV2;
+		this.formData = new FormData();
 		// debugger;
 		this.baseloader.menudata.subscribe(d => {
             console.log('checking the data ', d)
@@ -130,6 +135,12 @@ export class ParentOutletsFormComponent implements OnInit
 					let abc = localStorage.getItem('ParentOutlet') as string;
 					console.log(abc);
 					this.parentOutlet = JSON.parse(abc);
+					console.log(this.parentOutlet);
+					if(this.parentOutlet?.logo !== null || this.parentOutlet?.logo !== '')
+					{
+						this.url = this.parentOutlet?.logo;
+						this.url = this.fileUrl + this.url;
+					}	
 					this.Form.patchValue(this.parentOutlet);
 					if(this.parentOutlet.featured == '1' || this.parentOutlet.featured == 1){
 						this.status = true
@@ -316,6 +327,11 @@ export class ParentOutletsFormComponent implements OnInit
 		{
 			method = 'updateParent';
 		}
+		this.formData.append('logo', this.imageFile[0]);
+		this.formData.append('delivery_status', this.Form.get('delivery_status').value);
+		this.formData.append('featured', this.Form.get('featured').value);
+		this.formData.append('isnewbrand_expiry', this.Form.get('isnewbrand_expiry').value);
+		this.formData.append('isnew_brand', this.Form.get('isnew_brand').value);
 		this.mainApiService.postData(appConfig.base_url_slug +method, this.Form.value).then(response => {
 			if (response.status == 200 || response.status == 201)
 			{
@@ -353,7 +369,11 @@ export class ParentOutletsFormComponent implements OnInit
 
 	onFileImageChange(event:any)
 	{
-		let abc = event.target.files[0]
+		this.imageFile = [];
+		this.imageFile.push(event.target.files[0]);
+		console.log(this.formData);
+		console.log(this.imageFile);
+		let abc = event.target.files[0];
 		this.logoName = abc.name
 		if (event.target.files && event.target.files[0]) {
             var reader = new FileReader();
@@ -362,6 +382,9 @@ export class ParentOutletsFormComponent implements OnInit
             }
             reader.readAsDataURL(event.target.files[0]);
         }
+		else{
+
+		}
 		
 	}
 

@@ -30,6 +30,7 @@ export class parentMenuOutlet{
     menudata: any;
     errorMsgImages: boolean = false;
     brandCover: any;
+    brandCoverData:any;
 
     images: Array<{ name: string, path: string, source: any }> = [];
     constructor(private _route: ActivatedRoute, protected formbuilder: FormBuilder,
@@ -64,6 +65,10 @@ export class parentMenuOutlet{
             this.Form.addControl('image', new FormControl(null, [Validators.required]));
             this.Form.addControl('fileImage', new FormControl(null));
         }
+        else if (this.type == 'coverimages') {
+            this.Form.addControl('image', new FormControl(null, [Validators.required]));
+            this.Form.addControl('fileImage', new FormControl(null));
+        }
         else {
 
          }
@@ -79,7 +84,8 @@ export class parentMenuOutlet{
                     console.log('idbase', this.Outlets)
                     result.data.parents.forEach(element => {
                         this.menudata = element.parentOutletMenu;
-                        this.brandCover = element.parentImages[0]?.type
+                        this.brandCoverData = element.parentImages;
+                        this.brandCover = element.parentImages[0]?.type;
                         this.menudatatype = element.parentOutletMenu[0]?.type;
                         console.log('wowowowo...', this.menudatatype)
                     });
@@ -90,9 +96,14 @@ export class parentMenuOutlet{
                     else if (this.menudatatype == 'url' && this.type == 'link') {
                         this.Form.get('menu_card').setValue(this.menudata[0].file);
                     }
-                    else if (this.menudatatype == 'image') {
+                    else if (this.menudatatype == 'image' && this.type == 'image') {
                         this.imagesarray = this.menudata;
                     }
+                    else if(this.brandCover == 'image' && this.type == 'coverimages')
+                    {
+                        this.imagesarray = this.brandCoverData;
+                    }
+                    
                     else { }
                 }
                 else {
@@ -149,7 +160,12 @@ export class parentMenuOutlet{
         if (this.id != 'add') {
             this.isLoading = true;
             let method = '';
-            method = 'updateOutletParentMenu';
+            if(this.type !== 'coverimages'){
+                method = 'updateOutletParentMenu';
+            }
+            else{
+                method = 'updateOutletParentImages';
+            }
 
             if (this.type == 'link') {
                 this.Form.get('file_type').setValue('url');
@@ -182,15 +198,24 @@ export class parentMenuOutlet{
                         cm.type = 'error';
                     })
             }
-            else if (this.type == 'pdf' || this.type == 'image') {
+            else if (this.type == 'pdf' || this.type == 'image' || this.type == 'coverimages') {
                 let formData = new FormData();
                 formData.append('id', this.id);
-                formData.append('file_type', this.type);
+                if(this.type !== 'coverimages'){
+                    formData.append('file_type', this.type);
+                }
 
                 if (this.type == 'pdf' && this.Form.get('fileSource').value != null) {
                     formData.append('pdf_file', this.Form.get('fileSource').value);
                 }
                 else if (this.type == 'image') {
+                    formData.append('previous_images_remove', 'true');
+                    formData.append('images_count', JSON.stringify(this.imagesarray.length));
+                    for (let i = 0; i < this.imagesarray.length; i++) {
+                        formData.append('image_' + [i + 1], this.imagesarray[i]);
+                    }
+                }
+                else if (this.type == 'coverimages') {
                     formData.append('previous_images_remove', 'true');
                     formData.append('images_count', JSON.stringify(this.imagesarray.length));
                     for (let i = 0; i < this.imagesarray.length; i++) {
@@ -250,6 +275,20 @@ export class parentMenuOutlet{
                 this.router.navigateByUrl('/main/brands/' + this.id);
 
             }
+            else if (this.type == 'coverimages' && this.images.length > 0) {
+                for (let i = 0; i < this.images.length; i++) {
+                    imagesdata[i] = this.imagesarray[i];
+                }
+                let data = {
+                    type: 'image',
+                    previous_images_remove: 'true',
+                    images_count: JSON.stringify(this.images.length),
+                    imagesarray: imagesdata,
+                }
+                this.baseloader.sendMenuToOutlet(data);
+                this.router.navigateByUrl('/main/brands/' + this.id);
+
+            }
             else if (this.type == 'link' && this.Form.get('menu_card').value != null) {
                 let data = {
                     type: this.type,
@@ -266,7 +305,7 @@ export class parentMenuOutlet{
     onEditArrangment() {
         if (this.imagesarray.length > 0) {
 
-            let dialogRef = this.dialog.open(changeParentOutletImageComponent, { autoFocus: false, data: { pageValue: this.imagesarray } });
+            let dialogRef = this.dialog.open(changeParentOutletImageComponent, { autoFocus: false, data: { pageValue: this.imagesarray, type: this.type } });
             dialogRef.afterClosed().subscribe(result => {
                 if (result) {
                     window.location.reload();

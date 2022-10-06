@@ -223,7 +223,7 @@ fxFlex.md="48">
 
 </div>
 
-<form [formGroup]="Form" fxLayout="row wrap"  class="font_family">
+<form [formGroup]="Form" (ngSubmit)="doSubmit()" fxLayout="row wrap"  class="font_family">
 	<div fxLayout="column" fxFlexOffset="1" fxFlex="44">
 		<div fxFlexOffset="8" fxLayoutAlign="space-between none">
 			<label class="input_label" style="margin-top: 13px;">Brand</label>
@@ -299,12 +299,12 @@ fxFlex.md="48">
 		<div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="2">
 			<div fxLayoutAlign="center center" fxFlex="16"
 				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 90px;">
-				<span style="font-weight: 300;" *ngIf="!url">
+				<span style="font-weight: 300;" *ngIf="url == null || url == ''">
 					Preview
 				</span>
-				<span *ngIf="url">
+				<span *ngIf="url !== null || url !== ''">
 
-					<img [src]="url">
+					<img style="width:100%; height:auto;" [src]="url">
 				</span>
 
 			</div>
