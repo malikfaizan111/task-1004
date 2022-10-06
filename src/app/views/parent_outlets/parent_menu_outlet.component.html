@@ -5,7 +5,7 @@
             <button mat-icon-button (click)="onLocationBack()" color="accent">
                 <img src="assets/images/actions/back.png" alt="">
             </button>
-            <span class="mainTitle" >Upload Menu</span>
+            <span class="mainTitle" >{{type == 'coverimages' ? 'Upload Cover Images' : 'Upload Menu'}}</span>
         </div>
     </div>
 </div>
@@ -57,6 +57,20 @@
                     *ngIf="imagesarray[0]?.id" (click)="onEditArrangment()">EDIT ARRANGEMENT</a></span>
         </div>
     </div>
+    <!-- <div *ngIf="type == 'coverimages'">
+        <div style="margin-top: 30px; margin-bottom: 50px; margin-left: 5px;">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button type="button" style="display:block; border: none; background: white;color: #148F96; font-size: 15px;
+                font-weight: 700;" onclick="document.getElementById('images').click()">Upload image</button> <br>
+                <input id="images" style="visibility:hidden;" type="file" 
+                    (change)="onFileImageChange($event)" multiple accept="image/jpg, image/png">
+            </div>
+            <span style="margin-left: 6px;" *ngIf="imagesarray.length === 0 ">Upload one or multiple cover images in jpg or png format.</span>
+            <span style="margin-left: 6px;" *ngIf="imagesarray.length !== 0 ">{{imagesarray.length}} images uploaded</span>
+            <span><a style=" cursor: pointer;;margin-left: 22px; font-size: 14px; font-weight: 700; color: #757575;"
+                    *ngIf="imagesarray[0]?.id" (click)="onEditArrangment()">EDIT ARRANGEMENT</a></span>
+        </div>
+    </div> -->
     <div *ngIf="errorMsgImages">
         <span style="color: red; margin-left: 15px;">
             You can only select upto 10 images.

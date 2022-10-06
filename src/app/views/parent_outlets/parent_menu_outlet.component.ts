@@ -29,6 +29,7 @@ export class parentMenuOutlet{
     menudatatype: any;
     menudata: any;
     errorMsgImages: boolean = false;
+    brandCover: any;
 
     images: Array<{ name: string, path: string, source: any }> = [];
     constructor(private _route: ActivatedRoute, protected formbuilder: FormBuilder,
@@ -49,6 +50,7 @@ export class parentMenuOutlet{
         this.sub = this._route.params.subscribe(params => {
             this.id = params['id'];
             this.type = params['type'];
+            console.log('cover....', this.type)
             this.gerOutletsList(this.id);
         });
         if (this.type == 'link') {
@@ -74,9 +76,12 @@ export class parentMenuOutlet{
             .then(result => {
                 if (result.status == 200 && result.data) {
                     this.Outlets = result.data.parents[0];
+                    console.log('idbase', this.Outlets)
                     result.data.parents.forEach(element => {
                         this.menudata = element.parentOutletMenu;
+                        this.brandCover = element.parentImages[0]?.type
                         this.menudatatype = element.parentOutletMenu[0]?.type;
+                        console.log('wowowowo...', this.menudatatype)
                     });
                     if (this.menudatatype == 'pdf' && this.type == 'pdf') {
                         this.checkPdf = true;
@@ -118,6 +123,7 @@ export class parentMenuOutlet{
     }
 
     onFileImageChange(event) {
+        debugger
         if (event.target.files && event.target.files[0]) {
             var filesAmount = event.target.files.length;
         }
@@ -138,6 +144,7 @@ export class parentMenuOutlet{
         }
     }
     doSubmit() {
+        debugger;
         let imagesdata = [];
         if (this.id != 'add') {
             this.isLoading = true;

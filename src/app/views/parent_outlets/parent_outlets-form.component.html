@@ -299,10 +299,10 @@ fxFlex.md="48">
 		<div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="2">
 			<div fxLayoutAlign="center center" fxFlex="16"
 				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 90px;">
-				<span style="font-weight: 300;" *ngIf="!logoUrl">
+				<span style="font-weight: 300;" *ngIf="!url">
 					Preview
 				</span>
-				<span *ngIf="logoUrl">
+				<span *ngIf="url">
 
 					<img [src]="url">
 				</span>
@@ -342,7 +342,7 @@ fxFlex.md="48">
 		</div>
 
 		<button fxFlexOffset="0.5" fxLayoutAlign="start center"  type="button" style="display:block;padding: 0; border: none;width: 30%;  background: white;color: #148F96; font-size: 15px;
-                font-weight: 700;">Upload cover images</button>
+                font-weight: 700;" (click)="uploadMenuSection('coverimages')">{{coverImageText == false ? 'Upload cover images' : 'Update cover images'}}</button>
 				<span  style="font-size: 12px;">Upload one or multiple cover images in jpg or png format.</span>
 
 				<div fxFlex.xl="32"

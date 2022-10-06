@@ -36,13 +36,14 @@ export class ParentOutletsFormComponent implements OnInit
 	enableBrandNewDate: boolean = false;
 	currentDate: Date = new Date();
 	logoName: any;
-	logoUrl: any;
+	url: any;
 	imageUrl: any;
 	mat_toggle = {'color': '#757575',}
 	feature_toggle = {'color': '#148F96'};
 	// static data for image
 	coverImage = new Array();
 	movies: any
+	coverImageText: boolean = false
 	constructor(protected router: Router,
 		protected _route: ActivatedRoute,
 		protected mainApiService: MainService,
@@ -104,11 +105,23 @@ export class ParentOutletsFormComponent implements OnInit
                 this.pdftext = false;
             }
         });
+		// for cover image title
+		let abc = localStorage.getItem('ParentOutlet') as string;
+					console.log(abc);
+					let parentOutletCoverImage = JSON.parse(abc);
+					if(parentOutletCoverImage == null){
+						this.coverImageText = false
+					}else if (parentOutletCoverImage.parentImages.length != 0){
+						this.coverImageText = true
+					}else{
+						this.coverImageText = false
+					}
 	}
 	ngOnInit()
 	{
 		this.sub = this._route.params.subscribe(params => {
 			this.id = params['id'];
+			// console.log('id', this.id)
 			this.gerOutletsList(this.id);
 				if (this.id != 'add')
 				{
@@ -345,7 +358,7 @@ export class ParentOutletsFormComponent implements OnInit
 		if (event.target.files && event.target.files[0]) {
             var reader = new FileReader();
             reader.onload = (event: any) => {
-                this.logoUrl = event.target.result;
+                this.url = event.target.result;
             }
             reader.readAsDataURL(event.target.files[0]);
         }
