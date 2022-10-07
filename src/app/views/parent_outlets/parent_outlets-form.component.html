@@ -227,7 +227,7 @@ fxFlex.md="48">
 	<div fxLayout="column" fxFlexOffset="1" fxFlex="44">
 		<div fxFlexOffset="8" fxLayoutAlign="space-between none">
 			<label class="input_label" style="margin-top: 13px;">Brand</label>
-			<mat-form-field style="width: 80%;">
+			<mat-form-field class="brand" style="width: 80%;">
 				<!-- <mat-label >Enter brand name</mat-label> -->
 				<input matInput class="mat_input" formControlName="name" placeholder="Enter brand name">
 				<mat-error *ngIf="getValue('name')?.invalid && (getValue('name')?.dirty || getValue('name')?.touched)">Name is Required</mat-error>
@@ -235,7 +235,7 @@ fxFlex.md="48">
 		</div>
 		<div fxLayoutAlign="space-between none" style="width: 57.3%;">
 			<label class="input_label" style="margin-top: 12px;">Delivery</label>
-			<mat-form-field style="width: 65%">
+			<mat-form-field class="brand" style="width: 65%">
 				<mat-label>Access Level</mat-label>
 				<mat-select formControlName="delivery_status"
 				placeholder="Delivery Status">
@@ -281,7 +281,7 @@ fxFlex.md="48">
 		<div fxLayoutAlign="space-between none" style="width: 57.3%;"
 		 *ngIf="Form.get('isnew_brand')?.value == 1 && Form.get('isnew_brand')?.value != ''">
 			<label class="time_label" fxFlexOffset="4" style="margin-top: 20px; font-weight: 200;">End</label>
-			<mat-form-field style="width: 65%; margin-top: 10px;">
+			<mat-form-field class="brand" style="width: 65%; margin-top: 10px;">
 				<input matInput [owlDateTime]="startDate" [owlDateTimeTrigger]="startDate" readonly [min]="currentDate"
 					[max]="EndDate" [(ngModel)]="StartDate" [ngModelOptions]="{standalone: true}"
 					(dateTimeChange)="onStartDate()" type="text" placeholder="Set end date & time" required>
@@ -319,7 +319,7 @@ fxFlex.md="48">
 
 		<div fxFlexOffset="0.5" fxLayout="row">
 			<button type="button" style="display:block;padding: 0; border: none;  background: white;color: #148F96; font-size: 15px;
-                font-weight: 700;" onclick="document.getElementById('image').click()">{{logoText == false ? 'Upload cover images' : 'Update cover images'}}</button> <br>
+                font-weight: 700;" onclick="document.getElementById('image').click()">{{logoText == true ? 'Update brand logo' : 'Upload brand logo'}}</button> <br>
 			<input id="image" style="visibility:hidden;" type="file" (change)="onFileImageChange($event)"
 				accept="image/jpg, image/png">
 		</div>
@@ -327,13 +327,13 @@ fxFlex.md="48">
 
 		<div  fxFlexOffset="1"  fxLayout="row wrap" fxFlex="120px">
 			<div  fxLayoutAlign="center center" fxFlex="19"
-				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 110px;"
-				*ngIf="coverImage.length == 0">
+				style="border: 3px dotted #E8E8E8; border-radius: 10px; margin-top: 10px; padding: 0px; border-width: revert; height: 110px;"
+				*ngIf="brandCoverImage.length == 0">
 				
 				Preview
 			</div>
 			
-			<div fxFlexOffset="0.5"   fxLayout="column"  fxFlex="19" *ngFor="let item of coverImage">
+			<div fxFlexOffset="0.5"   fxLayout="column"  fxFlex="19" *ngFor="let item of brandCoverImage" >
 				<span fxLayoutAlign="start center"  style="overflow: hidden; font-size: 13px; font-weight: 200;" >
 					{{item.file}}
 				</span>
@@ -421,7 +421,7 @@ fxFlex.md="48">
 	</div>
 	<div>
 		<button type="submit"
-					
+					[disabled]="Form.invalid || isLoading"
 					class="btn btn-primary round-elem"
 					style="background: red; border-color: red">
 					Save brand

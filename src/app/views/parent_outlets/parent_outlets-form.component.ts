@@ -41,10 +41,11 @@ export class ParentOutletsFormComponent implements OnInit
 	mat_toggle = {'color': '#757575',}
 	feature_toggle = {'color': '#148F96'};
 	// static data for image
-	coverImage = new Array();
+	brandCoverImage  = new Array()
 	movies: any
-	coverImageText: boolean = false;
 	logoText: boolean = false;
+	coverImageText: boolean = false;
+	
 	fileUrl:any;
 	formData: any;
 	imageFile: any[] = [];
@@ -56,7 +57,7 @@ export class ParentOutletsFormComponent implements OnInit
 		protected mainApiService: MainService,
 		protected formbuilder: FormBuilder, protected dialog: MatDialog, protected baseloader : BaseLoaderService)
 	{
-		this.coverImage = []
+		this.brandCoverImage = []
 			this.Form = this.formbuilder.group({
 			name: [null, [Validators.required, Validators.maxLength(50)]],
 			delivery_status: [null, [Validators.required]],
@@ -118,7 +119,8 @@ export class ParentOutletsFormComponent implements OnInit
 		// 			}else{
 		// 				this.coverImageText = false
 		// 			}
-		console.log('logo....', this.logoText)
+		console.log('logo....', this.brandCoverImage.length)
+		console.log('array...', this.brandCoverImage.some(e => e.Name === 'file'))
 					
 					
 	}
@@ -126,9 +128,10 @@ export class ParentOutletsFormComponent implements OnInit
 	{
 		this.sub = this._route.params.subscribe(params => {
 			this.id = params['id'];
-			// console.log('id', this.id)
+			console.log('id', this.id)
 			this.gerOutletsList(this.id);
-			console.log('covercheck....', this.coverImage)
+			// console.log('covercheck....', this.coverImage)
+			
 				if (this.id != 'add')
 				{
 					this.Form.addControl('id', new FormControl(this.id));
@@ -183,6 +186,7 @@ export class ParentOutletsFormComponent implements OnInit
 				{
 					this.isEditing = false;
                     this.Form.reset();
+					// this.brandCoverImage = []
                 //   let formTest =   JSON.parse(localStorage.getItem('brandForm') as string);
                 //   console.log(formTest);
                 //     if(formTest !== null){
@@ -284,26 +288,42 @@ export class ParentOutletsFormComponent implements OnInit
 		window.history.back();
 	}
 	gerOutletsList(id): void {
+		
         let url = 'getParents?id=' + id;
         this.mainApiService.getList(appConfig.base_url_slug + url)
             .then(result => {
                 if (result.status == 200 && result.data) {
                     this.Outlets = result.data.parents[0];
+					// console.log('check', result.data.parents)
+					// this.brandCoverImage =result.data.parents.parentImages
+					// console.log('check for images cover', this.brandCoverImage)
 					// console.log('my second check', this.Outlets);
+					
                     result.data.parents.forEach(element => {
-                        this.menudatatype = element.parentOutletMenu[0]?.type;
-						this.coverImage = element.parentImages
+						// debugger
+						if(this.id == 'add'){
+							// this.menudatatype = element.parentOutletMenu[0]?.type;
+						this.brandCoverImage = []
+						this.logo = null
+						this.brandInfo = 0
+						this.featureInfo = 1
+						}else{
+							this.menudatatype = element.parentOutletMenu[0]?.type;
+						this.brandCoverImage = element?.parentImages
 						this.logo = element.logo
 						this.brandInfo = element.isnew_brand
 						this.featureInfo = element.featured
+						}
+                        
                     });
+					// debugger
 					if (this.logo !== null){
 						this.logoText = true;
 					}
 					if (this.brandInfo == 1){
 						this.mat_toggle = {'color': '#148F96'}
 					}
-					if (this.coverImage.length != 0){
+					if (this.brandCoverImage.length != 0){
 						this.coverImageText = true;
 					}
 					if (this.featureInfo == 0){
@@ -330,6 +350,7 @@ export class ParentOutletsFormComponent implements OnInit
                     this.Outlets = [];
                 }
             });
+			console.log('after', this.brandCoverImage)
     }
 	doSubmit(): void
 	{

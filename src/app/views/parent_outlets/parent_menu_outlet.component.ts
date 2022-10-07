@@ -46,13 +46,15 @@ export class parentMenuOutlet{
             // fileImage: new FormControl(null)
         })
         this.isLoading = false;
+
+        console.log('imgarray', this.imagesarray)
     }
 
     ngOnInit(): void {
         this.sub = this._route.params.subscribe(params => {
             this.id = params['id'];
             this.type = params['type'];
-            console.log('cover....', this.type)
+            console.log('cover....', this.id)
             this.gerOutletsList(this.id);
         });
         if (this.type == 'link') {
@@ -84,12 +86,21 @@ export class parentMenuOutlet{
                     this.Outlets = result.data.parents[0];
                     console.log('idbase', this.Outlets)
                     result.data.parents.forEach(element => {
-                        this.menudata = element.parentOutletMenu;
-                        this.brandCoverData = element.parentImages;
+                        if(this.id == 'add'){
+                            this.menudata = []
+                        this.brandCoverData = []
                         this.brandCover = element.parentImages[0]?.type;
                         this.menudatatype = element.parentOutletMenu[0]?.type;
-                        console.log('wowowowo...', this.menudatatype)
+                        }else{
+                            this.menudata = element.parentOutletMenu;
+                            this.brandCoverData = element.parentImages;
+                            this.brandCover = element.parentImages[0]?.type;
+                            this.menudatatype = element.parentOutletMenu[0]?.type;
+                            console.log('wowowowo...', this.menudatatype)
+                        }
+                        
                     });
+                    // debugger
                     if (this.menudatatype == 'pdf' && this.type == 'pdf') {
                         this.checkPdf = true;
                         this.filename = this.menudata[0].file;
