@@ -63,7 +63,8 @@ export class ParentOutletsFormComponent implements OnInit
 			delivery_status: [null, [Validators.required]],
 			featured : [null],
 			isnewbrand_expiry : [null],
-			isnew_brand: [null]
+			isnew_brand: [null],
+			logo:[null]
 		});
 		this.isLoading = false;
 		this.isEditing = false;
@@ -140,7 +141,8 @@ export class ParentOutletsFormComponent implements OnInit
 					console.log(abc);
 					this.parentOutlet = JSON.parse(abc);
 					console.log(this.parentOutlet);
-					if(this.parentOutlet?.logo !== null || this.parentOutlet?.logo !== '')
+
+					if(this.parentOutlet?.logo !== null  || this.parentOutlet?.logo !== '' || this.parentOutlet?.logo !== undefined)
 					{
 						this.url = this.parentOutlet?.logo;
 						this.url = this.fileUrl + this.url;
@@ -216,6 +218,9 @@ export class ParentOutletsFormComponent implements OnInit
                     this.Form.reset();
                 }
 					localStorage.removeItem('ParentOutlet');
+
+					this.Form.get('featured').setValue(1);
+					this.Form.get('isnew_brand').setValue(0);
 				}
 		});
 	}
@@ -363,21 +368,34 @@ export class ParentOutletsFormComponent implements OnInit
 		}
 		else
 		{
+			this.formData.append('id', this.Form.get('id').value);
 			method = 'updateParent';
 		}
-		this.formData.append('logo', this.imageFile[0]);
+
+		if(this.Form.get('logo')?.value){
+			this.formData.append('logo', this.Form.get('logo')?.value);
+			this.Form.removeControl('logo');
+		}
+
+
+		this.formData.append('name', this.Form.get('name').value);
 		this.formData.append('delivery_status', this.Form.get('delivery_status').value);
-		this.formData.append('featured', this.Form.get('featured').value);
-		this.formData.append('isnewbrand_expiry', this.Form.get('isnewbrand_expiry').value);
-		this.formData.append('isnew_brand', this.Form.get('isnew_brand').value);
-		this.mainApiService.postData(appConfig.base_url_slug +method, this.Form.value).then(response => {
+		this.formData.append('featured',this.Form.get('featured').value);
+		this.formData.append('isnew_brand',this.Form.get('isnew_brand').value);
+		if(this.Form.get('isnew_brand').value == 1)
+		{
+			this.formData.append('isnewbrand_expiry', this.Form.get('isnewbrand_expiry')?.value);
+		}
+		this.mainApiService.postData(appConfig.base_url_slug +method, this.formData).then(response => {
 			if (response.status == 200 || response.status == 201)
 			{
+				this.formData = new FormData();
 				this.router.navigateByUrl('/main/brands' );
 				this.isLoading = false;
 			}
 			else
 			{
+				this.formData = new FormData();
 				this.isLoading = false;
 				let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
 				let cm = dialogRef.componentInstance;
@@ -390,6 +408,7 @@ export class ParentOutletsFormComponent implements OnInit
 		Error => {
 			// log here(Error)
 			this.isLoading = false;
+			this.formData = new FormData();
 			let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
 			let cm = dialogRef.componentInstance;
 			cm.heading = 'Error';
@@ -407,10 +426,13 @@ export class ParentOutletsFormComponent implements OnInit
 
 	onFileImageChange(event:any)
 	{
-		this.imageFile = [];
-		this.imageFile.push(event.target.files[0]);
-		console.log(this.formData);
-		console.log(this.imageFile);
+		// this.imageFile = [];
+		// this.imageFile.push(event.target.files[0]);
+		// console.log(this.formData);
+		// console.log(this.imageFile);
+		this.Form.patchValue({
+			logo: event.target.files[0]
+		})
 		let abc = event.target.files[0];
 		this.logoName = abc.name
 		if (event.target.files && event.target.files[0]) {

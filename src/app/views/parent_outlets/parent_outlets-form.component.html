@@ -253,7 +253,7 @@ fxFlex.md="48">
 		</div>
 		<div>
 			<label class="input_label">New brand</label>
-			<mat-slide-toggle [ngStyle]="mat_toggle" class="font_family" fxFlexOffset="7" [checked]="enableBrandNewDate" (change)="checkNewBrand($event)">Enabled</mat-slide-toggle>
+			<mat-slide-toggle [ngStyle]="mat_toggle" class="font_family" fxFlexOffset="7" [checked]="enableBrandNewDate" (change)="checkNewBrand($event)">{{enableBrandNewDate ? 'Enabled' : 'Disabled' }}</mat-slide-toggle>
 		</div>
 		<!-- <div  fxLayoutAlign="space-between none" style="width: 57.3%;">
 			<label class="time_label" fxFlexOffset="4" style="margin-top: 18px;" >Start</label>
@@ -296,7 +296,7 @@ fxFlex.md="48">
 		</div>
 		<div>
 			<label class="input_label">Featured</label>
-			<mat-slide-toggle [ngStyle]="feature_toggle" class="font_family" [(ngModel)]="status" [ngModelOptions]="{standalone: true}" (change)="toggleView()" fxFlexOffset="9.2" >Disabled</mat-slide-toggle>
+			<mat-slide-toggle [ngStyle]="feature_toggle" class="font_family" [(ngModel)]="status" [ngModelOptions]="{standalone: true}" (change)="toggleView()" fxFlexOffset="9.2" >{{status ? 'Enabled' : 'Disabled' }}</mat-slide-toggle>
 		</div>
 		
 	</div>
@@ -304,12 +304,12 @@ fxFlex.md="48">
 		<div fxLayout="row" fxLayoutAlign="start center" fxFlexOffset="2">
 			<div fxLayoutAlign="center center" fxFlex="16"
 				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 90px;">
-				<span style="font-weight: 300;" *ngIf="url == null || url == ''">
+				<span style="font-weight: 300;" *ngIf="url == null || url == '' || url == undefined">
 					Preview
 				</span>
 				<span *ngIf="url !== null || url !== ''">
 
-					<img style="width:100%; height:auto;" [src]="url">
+					<img style="width:100%; height:auto;padding: 5px;" [src]="url">
 				</span>
 
 			</div>
@@ -340,7 +340,7 @@ fxFlex.md="48">
 				<div fxFlexOffset="3" fxLayout="row"  fxLayoutAlign="center center" fxFlex="100"
 				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 90px;">
 				
-				<img  style="width:100%; height:auto;" [src]="item.file">
+				<img  style="width:100%; height:auto;padding: 5px;" [src]="item.file">
 			</div>
 
 			</div>
