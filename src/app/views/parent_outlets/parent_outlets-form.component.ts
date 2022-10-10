@@ -63,7 +63,9 @@ export class ParentOutletsFormComponent implements OnInit
 			delivery_status: [null, [Validators.required]],
 			featured : [null],
 			isnewbrand_expiry : [null],
-			isnew_brand: [null]
+			isnew_brand: [null],
+			logo:[null],
+			logoSource: [null]
 		});
 		this.isLoading = false;
 		this.isEditing = false;
@@ -364,20 +366,34 @@ export class ParentOutletsFormComponent implements OnInit
 		else
 		{
 			method = 'updateParent';
+			this.formData.append('id', this.Form.get('id')?.value);
 		}
-		this.formData.append('logo', this.imageFile[0]);
-		this.formData.append('delivery_status', this.Form.get('delivery_status').value);
-		this.formData.append('featured', this.Form.get('featured').value);
-		this.formData.append('isnewbrand_expiry', this.Form.get('isnewbrand_expiry').value);
-		this.formData.append('isnew_brand', this.Form.get('isnew_brand').value);
-		this.mainApiService.postData(appConfig.base_url_slug +method, this.Form.value).then(response => {
+		console.log(this.imageFile[0]?.file);
+		if(this.Form.get('logoSource')?.value){
+			this.formData.append('logo', this.Form.get('logoSource')?.value);
+		}
+		else if(this.Form.get('isnewbrand_expiry')?.value){
+			this.formData.append('isnewbrand_expiry', this.Form.get('isnewbrand_expiry')?.value);
+		}
+		else{
+
+		}
+		
+		// this.formData.append('delivery_status', this.Form.get('delivery_status')?.value);
+		this.formData.append('name', this.Form.get('name')?.value);
+		this.formData.append('featured', this.Form.get('featured')?.value);
+		// this.formData.append('isnewbrand_expiry', this.Form.get('isnewbrand_expiry')?.value);
+		this.formData.append('isnew_brand', this.Form.get('isnew_brand')?.value);
+		this.mainApiService.postData(appConfig.base_url_slug +method, this.formData).then(response => {
 			if (response.status == 200 || response.status == 201)
 			{
+				this.formData = new FormData();
 				this.router.navigateByUrl('/main/brands' );
 				this.isLoading = false;
 			}
 			else
 			{
+				this.formData = new FormData();
 				this.isLoading = false;
 				let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
 				let cm = dialogRef.componentInstance;
@@ -389,6 +405,7 @@ export class ParentOutletsFormComponent implements OnInit
 		},
 		Error => {
 			// log here(Error)
+			this.formData = new FormData();
 			this.isLoading = false;
 			let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
 			let cm = dialogRef.componentInstance;
@@ -409,8 +426,11 @@ export class ParentOutletsFormComponent implements OnInit
 	{
 		this.imageFile = [];
 		this.imageFile.push(event.target.files[0]);
-		console.log(this.formData);
 		console.log(this.imageFile);
+		this.Form.patchValue({
+			logoSource: event.target.files[0]
+		})
+		console.log(this.Form.get('logoSource'));
 		let abc = event.target.files[0];
 		this.logoName = abc.name
 		if (event.target.files && event.target.files[0]) {
