@@ -83,10 +83,13 @@
             You can only select upto 5 images.
         </span>
     </div>
-    <div style="margin-top: 15px">
-        <button type="submit" [disabled]="Form.invalid || errorMsgImages || errormesCover" class="btn btn-primary round-elem"
+    <div style="margin-top: 15px" fxLayout="row" fxLayoutAlign="none center">
+        <button type="submit" [disabled]="Form.invalid || errorMsgImages || errormesCover || isLoading" class="btn btn-primary round-elem"
             style="background: red; border-color: red; width: 7.5em; margin-left: 10px;">
             Upload
         </button>
+        <img fxFlexOffset="1" *ngIf="isLoading"
+			     class="loader-btn-image"
+			     src="assets/images/view-loader.gif">
     </div>
 </form>

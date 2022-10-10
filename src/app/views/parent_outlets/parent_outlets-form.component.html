@@ -309,11 +309,11 @@ fxFlex.md="48">
 				</span>
 				<span *ngIf="url !== null || url !== ''">
 
-					<img style="width:100%; height:auto;padding: 5px;" [src]="url">
+					<img style="width:100%; height:auto;" [src]="url">
 				</span>
 
 			</div>
-			<span style="font-size: 13px; font-weight: 200;" *ngIf="logoName != undefined"
+			<span style="font-size: 13px; font-weight: 200;" *ngIf="logoName != null"
 				fxFlexOffset="1">{{logoName}}</span>
 		</div>
 
@@ -419,13 +419,16 @@ fxFlex.md="48">
 				
 
 	</div>
-	<div>
+	<div fxLayout="row" fxLayoutAlign="none center">
 		<button type="submit"
 					[disabled]="Form.invalid || isLoading"
 					class="btn btn-primary round-elem"
 					style="background: red; border-color: red">
 					Save brand
 			</button>
+			<img fxFlexOffset="1" *ngIf="isLoading"
+			     class="loader-btn-image"
+			     src="assets/images/view-loader.gif">
 		
 	</div> 
 

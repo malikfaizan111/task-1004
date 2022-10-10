@@ -142,11 +142,13 @@ export class ParentOutletsFormComponent implements OnInit
 					this.parentOutlet = JSON.parse(abc);
 					console.log(this.parentOutlet);
 
-					if(this.parentOutlet?.logo !== null  || this.parentOutlet?.logo !== '' || this.parentOutlet?.logo !== undefined)
+					if(this.parentOutlet?.logo == null  || this.parentOutlet?.logo == '' || this.parentOutlet?.logo == undefined)
 					{
+						this.url = ''
+					}else{
 						this.url = this.parentOutlet?.logo;
 						this.url = this.fileUrl + this.url;
-					}	
+					}
 					this.Form.patchValue(this.parentOutlet);
 					if(this.parentOutlet.featured == '1' || this.parentOutlet.featured == 1){
 						this.status = true
@@ -290,7 +292,8 @@ export class ParentOutletsFormComponent implements OnInit
 	}
 	onLocationBack(): void
 	{
-		window.history.back();
+		// window.history.back();
+		this.router.navigateByUrl('main/brands');
 	}
 	gerOutletsList(id): void {
 		
@@ -324,6 +327,7 @@ export class ParentOutletsFormComponent implements OnInit
 					// debugger
 					if (this.logo !== null){
 						this.logoText = true;
+						this.logoName = this.logo;
 					}
 					if (this.brandInfo == 1){
 						this.mat_toggle = {'color': '#148F96'}
