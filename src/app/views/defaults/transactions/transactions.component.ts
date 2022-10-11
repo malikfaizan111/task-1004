@@ -44,7 +44,7 @@ export class TransactionsComponent extends ExportCSVComponent implements OnInit,
     this.baseSlug = appConfig.base_url_slug;
     this.search = '';
     this.perPage = 20;
-    this.orderBy = 'ASC'
+    // this.orderBy = 'ASC'
 
     this.componentSettings = {
       name: null,
@@ -106,7 +106,7 @@ export class TransactionsComponent extends ExportCSVComponent implements OnInit,
     }
 
     console.log(index);
-   let  url = this.baseSlug +  'userWalletLogs?page=' + index + '&per_page=' + this.perPage + '&orderby=' + this.orderBy;
+   let  url = this.baseSlug +  'userWalletLogs?page=' + index + '&per_page=' + this.perPage;
 
    if(this.search != '')
    {
