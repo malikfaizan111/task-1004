@@ -181,7 +181,6 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{routerLink: 'kpi_report', image: 'Configurations', label: 'Kpi Report' },
-						{routerLink: 'Transactions', image: 'Configurations', label: 'Balance Transaction'},
 						{ routerLink: '/main/home_screen_messages', image: 'Configurations', label: 'Home Screen Messages' },
 						{ routerLink: '/main/versions', image: 'Configurations', label: 'Versions' },
 					]
@@ -321,7 +320,6 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{ routerLink: 'kpi_report', image: 'Configurations', label: 'KPI REPORT' },
-						{routerLink: 'Transactions', image: 'Configurations', label: 'Balance Transaction'},
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
 						// { routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						// { routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dConfigurations', label: 'Ooredoo' }, 
@@ -413,7 +411,6 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{ routerLink: 'kpi_report', image: 'Configurations', label: 'KPI REPORT' },
-						{routerLink: 'Transactions', image: 'Configurations', label: 'Balance Transaction'},
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
 						// { routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						// { routerLink: '/main/credit-card-packages/ooredooUsers', image: 'Configurations', label: 'Ooredoo' }, 
@@ -529,7 +526,6 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						
 						
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
-						{routerLink: 'Transactions', image: 'Configurations', label: 'Balance Transaction'},
 						// { routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						{ routerLink: '/main/customers/oredoo_billing', image: 'Configurations', label: 'Ooredoo Billing' },
 						
@@ -659,7 +655,6 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{routerLink: 'kpi_report', image: 'Configurations', label: 'Kpi Report'},
-						{routerLink: 'Transactions', image: 'Configurations', label: 'Balance Transaction'},
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
 						// { routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						{ routerLink: '/main/customers/oredoo_billing', image: 'Configurations', label: 'Ooredoo Billing' },
@@ -853,7 +848,6 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					opened: false,
 					children: [
 						{routerLink: 'kpi_report', image: 'Configurations', label: 'Kpi Report'},
-						{routerLink: 'Transactions', image: 'Configurations', label: 'Balance Transaction'},
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
 						// { routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						{ routerLink: '/main/customers/oredoo_billing', image: 'Configurations', label: 'Ooredoo Billing' },

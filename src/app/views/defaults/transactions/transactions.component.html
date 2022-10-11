@@ -1,23 +1,21 @@
-<app-loader [totalRecords]="ArrayCSVCount" [completedRecords]="ArrayCSV.length" [loaderMessage]="loaderMessage">
-</app-loader>
+
 <div fxLayout.lg="row" fxLayout.xs="column" fxLayoutAlign.lg="space-between center">
     <div fxLayout.xs="column" fxLayoutAlign.lg="space-between center" fxFlex.lg="27">
       <span style="font-size: 19px;line-height: 36px;font-weight: 600;">Balance Transactions</span>
-      <button mat-raised-button color="accent" ngStyle.xs="width: 40%" fxFlex="33"  style="border-radius: 20px; height: 34px;" (click)="onExportCSV()">Export CSV</button>
+      <button mat-raised-button color="accent" ngStyle.xs="width: 40%" fxFlex="33"  style="border-radius: 20px; height: 34px;">Export CSV</button>
     </div>
     <div fxFlexOffset.xs="4" fxLayout="row" fxFlex="30" fxLayoutAlign.lg="space-between center">
-      <span style="cursor: pointer; height: 34px;" (click)="getTransactionList(1)" class="input-group-addon" fxFlex.lg="10"
+      <span style="cursor: pointer; height: 34px;" class="input-group-addon" fxFlex.lg="10"
         fxLayoutAlign="center center">
         <i class="glyphicon glyphicon-search"></i>
       </span>
       <input autocomplete="false" type="text" 
                maxlength="50"
 				       class="form-control"
-				       placeholder="Search"
-					   [(ngModel)]="search" (keyup)="onSearch()">
+				       placeholder="Search">
     </div>
   </div>
-  <base-loader>
+<!-- <base-loader> -->
 	<div class="data-table">
 		<table class="table table-responsive table-striped" style="width: 100%; margin-top: 18px">
 			<thead>
@@ -31,20 +29,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let tran of tranactionList">
-					<td class="w-auto">{{tran.id ? tran.id: 'N/A'}}</td>
-					<td>{{tran.phone ? tran.phone: 'N/A'}}</td>
-					<td>{{tran.transaction ? tran.transaction: 'N/A'}}</td>
-					<td>{{tran.type ? tran.type: 'N/A'}}</td>
-					<td>{{tran.amount ? tran.amount: 'N/A'}}</td>
-					<td>{{tran.created_at ? tran.created_at: 'N/A'}}</td>
+				<tr >
+					<td class="w-auto">Welcome</td>
+					<td>Welcome</td>
+					<td>Welcome</td>
+					<td>Welcome</td>
+					<td>Welcome</td>
+					<td>Welcome</td>
 				</tr>
-				<tr *ngIf="tranactionList.length == 0">
+				<!-- <tr *ngIf="Merchants.length === 0">
 					<td colspan="100" style="text-align: center">No record found.</td>
-				</tr>
+				</tr> -->
 			</tbody>
 		</table>
 	</div>
-</base-loader>
-	<app-pagination *ngIf="tranactionList.length > 0" (setPage)="setPage($event)" [perPage]="perPage"
-		[totalPages]="totalPages" [currentPage]="currentPage"></app-pagination> 
+	<!-- <app-pagination *ngIf="Merchants.length > 0" (setPage)="setPage($event)" [perPage]="perPage"
+		[totalPages]="totalPages" [currentPage]="currentPage"></app-pagination> -->
+<!-- </base-loader> -->

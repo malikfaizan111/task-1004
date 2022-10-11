@@ -551,18 +551,7 @@
 
 
 	<div style="margin-top: 10px;font-size: 22px;color: red;    font-weight: 600;">
-		{{OrderDetails?.status == 'outlet_rejected' ? 'Rejected' :
-     OrderDetails?.status == 'outlet_preparing'? 'In Progress'
-     :OrderDetails?.status == 'outlet_dispatched'? 'Dispatched'
-     :OrderDetails?.status == 'outlet_delivered'? 'Completed'
-     :OrderDetails?.status == 'admin_rejected'? 'Rejected'
-     :OrderDetails?.status == 'completed'? 'Completed'
-     :OrderDetails?.status == 'created'? 'Created'
-     :OrderDetails?.status == 'outlet_own_accepted'? 'In Progress'
-     : OrderDetails?.status == 'outlet_urbanpoint_accepted' ? 'In Progress' 
-     :OrderDetails?.status == 'outlet_assigned' ? 'In Progress'
-      :OrderDetails?.status == 'pending' ? 'Pending'
-       : OrderDetails?.status == 'cancel_due_to_timeout' ? 'Auto Cancelled' : OrderDetails?.status }}
+		{{OrderDetails?.status == 'outlet_rejected' ? 'Rejected' : OrderDetails?.status == 'outlet_preparing'? 'In Progress':OrderDetails?.status == 'outlet_dispatched'? 'Dispatched':OrderDetails?.status == 'outlet_delivered'? 'Completed':OrderDetails?.status == 'admin_rejected'? 'Rejected':OrderDetails?.status == 'completed'? 'Completed':OrderDetails?.status == 'created'? 'Created':OrderDetails?.status == 'outlet_own_accepted'? 'In Progress': OrderDetails?.status == 'outlet_urbanpoint_accepted' ? 'In Progress' :OrderDetails?.status == 'outlet_assigned' ? 'In Progress' :OrderDetails?.status == 'pending' ? 'Pending' : OrderDetails?.status }}
 
 	</div>
 
@@ -958,26 +947,18 @@
 							<p>Discount/Offers</p>
 							<p>Payment Method</p>
 							<p><b>Total Amount</b></p>
-              <p *ngIf="OrderDetails?.payment_method !== 'cash_on_delivery'">Balance Used</p>
-              <p *ngIf="OrderDetails?.payment_method !== 'cash_on_delivery'">Paid with card</p>
 
 						</div>
 						<div fxFlex="70px">
-							<!-- <p>{{ currency }} {{OrderDetails?.sub_total}}</p>
+							<p>{{ currency }} {{OrderDetails?.sub_total}}</p>
 							<p *ngIf="OrderDetails.order_type == 'delivery'">{{ currency }} {{OrderDetails?.outlets_parents?.delivery_charges}}</p>
 							<p style="width: 200%;">{{ currency }} {{OrderDetails?.saving_amount}} <span *ngIf="!hideDiscount">( {{ discountPercentage }}% )</span> </p>
 							<p>{{OrderDetails?.payment_method == 'cash_on_delivery' ? 'Cash' : 'Card'}}</p>
-							<p><b>{{OrderDetails?.amount}}</b></p> -->
-              <p>{{ currency }} {{OrderDetails?.sub_total}}</p>
-							<p *ngIf="OrderDetails.order_type == 'delivery'">{{ currency }} {{OrderDetails?.outlets_parents?.delivery_charges}}</p>
-							<p style="width: 200%;">{{ currency }} {{OrderDetails?.saving_amount}} <span *ngIf="!hideDiscount">( {{ discountPercentage }}% )</span> </p>
-							<p style="white-space: nowrap;">{{OrderDetails?.payment_method== 'partial' ? 'Balance + Card' : OrderDetails?.payment_method == 'cash_on_delivery' ? 'Cash on Delivery' : OrderDetails?.payment_method | titlecase}}</p>
-							<p><b>{{currency}} {{total_amount}}</b></p>
-              <p *ngIf="OrderDetails?.payment_method !== 'cash_on_delivery'">{{currency}} {{balance_used}}</p>
-              <p *ngIf="OrderDetails?.payment_method !== 'cash_on_delivery'">{{currency}} {{paid_with_card}}</p>
+							<p><b>{{OrderDetails?.amount}}</b></p>
 
 						</div>
 					</div>
+
 				</div>
 			</div>
 
