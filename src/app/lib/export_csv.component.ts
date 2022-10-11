@@ -129,6 +129,11 @@ export class ExportCSVComponent implements OnInit {
 			perPage = 1000;
 			url = appConfig.base_url_slug + this.method + '?index=' + 1 + '&index2=' + 5 + '&export=csv' + '&voucher_id=' + this.voucher_id;
 		}
+		else if(this.method == 'userWalletLogs')
+		{
+			perPage = 1000;
+			url = appConfig.base_url_slug + this.method + '?page=' + 1 + '&per_page=' + perPage ;
+		}
 		else {
 			url = appConfig.base_url_slug + this.method + '?index=' + 1 + '&index2=' + 5 + '&export=csv';
 		}
@@ -208,6 +213,10 @@ export class ExportCSVComponent implements OnInit {
 				else if (this.method == 'exportLinks') {
 					this.ArrayCSVCount = result.pagination.count;
 				}
+				else if(this.method == 'userWalletLogs')
+				{
+					this.ArrayCSVCount = result.pagination.count;
+				}
 
 				this.ArrayCSV = [];
 				let index = 1, loopIndex = 0;
@@ -262,6 +271,11 @@ export class ExportCSVComponent implements OnInit {
 		else if (this.method == 'exportLinks') {
 			perPage = 1000;
 			url = appConfig.base_url_slug + this.method + '?export=csv' + '&page=' + index + '&per_page=' + perPage + '&voucher_id=' + this.voucher_id;
+		}
+		else if(this.method == 'userWalletLogs')
+		{
+			perPage = 1000;
+			url = appConfig.base_url_slug + this.method + '?page=' + 1 + '&per_page=' + perPage ;
 		}
 		else {
 			url = appConfig.base_url_slug + this.method + '?index=' + index + '&index2=' + perPage + '&export=csv';
@@ -823,6 +837,26 @@ export class ExportCSVComponent implements OnInit {
 								Brand: elem.web_vouchers?.outlets_parents?.name,
 								Offer: elem.web_vouchers?.offer_name,
 								Expiry: elem.web_vouchers?.expiry_date,
+							}
+							usersData.push(obj);
+						});
+					}
+					else if(this.method == 'userWalletLogs')
+					{
+						csvName = 'Balance_Tranaction.csv';
+						let obj = {};
+						result.data.forEach(elem => {
+							obj = elem;
+							obj = {
+								Transaction_ID: elem.id,
+								User_ID: elem.user_id,
+								Outlet_name: elem.outlet_name,
+								Order_ID: elem.order_id,
+								Phone: elem.phone,
+								Transaction: elem.transaction,
+								Type: elem.type,
+								Amount_in_QAR: elem.total_order_amount,
+								Transaction_Date: elem.created_at,
 							}
 							usersData.push(obj);
 						});

@@ -9,11 +9,11 @@ export const appConfig =
   //  file_urlV2: 'https://d35lr39dcxnup6.cloudfront.net/uploads_staging/uploads/',
 
   // azure internal
-     base_url: 'http://internal-v1.adminurban.com/api/v1/',
-   file_url: 'http://internal.adminurban.com/uploads/',
+  //    base_url: 'http://internal-v1.adminurban.com/api/v1/',
+  //  file_url: 'http://internal.adminurban.com/uploads/',
 
-   base_urlV2: 'http://internal-v2.adminurban.com/api/v2/',
-   file_urlV2: 'https://urbanpoint-storage.azureedge.net/uploads/',
+  //  base_urlV2: 'http://internal-v2.adminurban.com/api/v2/',
+  //  file_urlV2: 'https://urbanpoint-storage.azureedge.net/uploads/',
 
   //-----------------------------STAGING URLs---------------------------//
 
@@ -27,11 +27,11 @@ export const appConfig =
 
 
     //azure Staging
-      // base_url : 'https://staging-v1.adminurban.com/api/v1/',
-      // base_urlV2: 'https://staging-v2.adminurban.com/api/v2/',
+      base_url : 'http://staging-v1.adminurban.com/api/v1/',
+      base_urlV2: 'http://staging-v2.adminurban.com/api/v2/',
 
-      //  file_url: 'https://urbanpoint-storage.azureedge.net/test/uploads/',
-      //  file_urlV2: 'https://urbanpoint-storage.azureedge.net/test/uploads_staging/uploads/',
+       file_url: 'https://urbanpoint-storage.azureedge.net/test/uploads/',
+       file_urlV2: 'https://urbanpoint-storage.azureedge.net/test/uploads_staging/uploads/',
 
 
     //-----------------------------PRE-PRODUCTION URLs---------------------------//

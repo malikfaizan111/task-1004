@@ -303,6 +303,7 @@ export class SubMenuFormComponent extends ImportCSVComponent implements OnInit {
 	}
 
 	onUploadCSV(): void {
+		this.afterSelectionCsv(this.result, this.headersObj, this.objTemp);
 		this.JsonToServer = { "data": this.afterJSON };
 		this.urlVersion = 2;
 		super.onUploadCSV();

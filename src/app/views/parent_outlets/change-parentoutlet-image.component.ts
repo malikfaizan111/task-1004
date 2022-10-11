@@ -43,14 +43,11 @@ export class changeParentOutletImageComponent{
       options: any;
       fileurl: any;
       copyarrayOfImages : any;
-      type:any;
     
       constructor(protected router: Router, protected formbuilder: FormBuilder, protected dialog: MatDialog,
         protected loaderService: BaseLoaderService, private mainService: MainService, protected mainApiService: MainService,
         protected paginationService: PaginationService, protected dialogRef: MatDialogRef<changeParentOutletImageComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
         this.Outlets = data.pageValue;
-        this.type = data.type;
-
         this.fileurl = appConfig.file_urlV2;
       }
     
@@ -108,14 +105,7 @@ export class changeParentOutletImageComponent{
         let dataobject = {
           data: dataSend,
         };
-        var method;
-        if(this.type == 'coverimages')
-        {
-          method = 'parentImagesArrangment';
-        }
-        else{
-          method = 'parentMenuImagesArrangment';
-        }
+        var method = 'parentMenuImagesArrangment'
         this.mainApiService.postData(appConfig.base_url_slug + method, dataobject, 2).then(response => {
           if (response.status == 200 || response.status == 201) {
             // this.closedialog();

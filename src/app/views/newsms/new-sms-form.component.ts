@@ -109,6 +109,7 @@ export class NewSmsFormComponent implements OnInit {
 			cm.message = "Your Request has been sent.";
 			cm.cancelButtonText = 'Ok';
 			cm.type = 'success';
+			localStorage.removeItem('componentSettings');
 			dialogRef.afterClosed().subscribe(result => {
 				this.router.navigateByUrl('/main/newsms/list');
 			})

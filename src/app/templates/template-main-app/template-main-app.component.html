@@ -17,8 +17,10 @@
         </div>
         <div fxLayout="row"  (clickOutside)="adminClick = false" style="min-width: 200px;color: #148F96;
             font-weight: 600;" class="welcome" >
+            <!-- <h5 class="font_style" style="margin-top: 17px;color: #148F96;
+            font-weight: 600;">Welcome,{{userName.name}}</h5> -->
             <h5 class="font_style" style="margin-top: 17px;color: #148F96;
-            font-weight: 600;">Welcome,{{userName.name}}</h5>
+            font-weight: 600;">Welcome</h5>
 
             <button fxLayoutAlign="center center" class="matmenu"  fxFlex="5px" mat-button [matMenuTriggerFor]="menu"><img src="assets/images/user.png" height="26px" width="26px"></button>
             <mat-menu #menu="matMenu">

@@ -50,6 +50,10 @@ export class DialogProgressOrderHistoryListComponent implements OnInit {
 	discountPercentage = 0;
 	currency = '';
 	hideDiscount = false;
+	total_amount: any;
+	balance_used:any;
+	paid_with_card:any;
+
 	constructor(protected mainApiService: MainService, protected dialogRef: MatDialogRef<DialogProgressOrderHistoryListComponent>) {
 		this.search = '';
 		this.perPage = 20;
@@ -69,12 +73,47 @@ export class DialogProgressOrderHistoryListComponent implements OnInit {
 	}
 
 	getAllParentOutlets(index: any, isLoaderHidden?: boolean): void {
+		
+		this.total_amount = 0;
+		this.balance_used = 0;
+		this.paid_with_card = 0;
+
 		let url = 'getDeliveryOrderDetail/' + this.orderId + '?';
 
 		this.mainApiService.getList(appConfig.base_url_slug + url, false, 2).then(result => {
 			console.log(result);
 			if (result.status == 200 && result.data) {
 				this.OrderDetails = result.data;
+				if(this.OrderDetails?.payment_method== 'card')
+				{
+					this.total_amount = this.OrderDetails.amount;
+					this.balance_used = this.OrderDetails.wallet_amount;
+					this.paid_with_card = this.OrderDetails.amount;
+
+				}
+				else if(this.OrderDetails?.payment_method== 'wallet')
+				{
+					this.total_amount = this.OrderDetails.wallet_amount;
+					this.balance_used = this.OrderDetails.wallet_amount;
+					this.paid_with_card = this.OrderDetails.amount;
+				}
+				else if(this.OrderDetails?.payment_method== 'partial')
+				{
+					this.total_amount = this.OrderDetails.amount + this.OrderDetails.wallet_amount;
+					
+					this.balance_used = this.OrderDetails.wallet_amount;
+					this.paid_with_card = this.OrderDetails.amount;
+				}
+				else if(this.OrderDetails?.payment_method== 'cash_on_delivery')
+				{
+					this.total_amount = this.OrderDetails.amount;
+					// this.balance_used = this.OrderDetails.wallet_amount;
+					// this.paid_with_card = this.OrderDetails.amount;
+				}
+				else{
+
+				}
+				
 
 				this.Promotions = this.OrderDetails.order_items.promotions;
 				this.ItemsFromMenu = this.OrderDetails.order_items.menu_items;
