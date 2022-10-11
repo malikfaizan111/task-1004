@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span class="mainTitle">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <button mat-icon-button (click)="onLocationBack()" color="accent">
+                    <img src="assets/images/actions/back.png" alt="">
+                </button>
+                <span>Upload New Brands</span>
+            </div>
+        </span>
+    </div>
+</div>
+<form action="">
+<div class="row" style="margin-top: 20px;">
+    <div fxLayout="row" class="col-sm-8"  fxLayoutAlign="space-around center">
+        <input #uploadFile accept=".csv" type="file" style="display: none;"  (change)="convertFile($event)">
+        <button mat-raised-button color="accent" style="border-radius: 20px;" fxFlex="70" (click)="uploadFile.click()">Upload new brands CSV</button>
+        <a download target="_blank" href="assets/Mass_Upload_Brands.csv" class="no-background-btn" style="font-size: 14px;" >
+            Download sample CSV
+        </a>
+    </div>
+</div>
+<div class="row" style="margin-top: 8px;">
+    <div fxLayoutAlign="center center" fxLayoutAlign.xs="start center" class="col-sm-6">
+        <span class="multi_tag" style="font-size: 13px; font-weight: 600;" *ngIf="CSVName != ''">Uploded: {{CSVName}}</span>
+
+    </div>
+
+</div>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-sm-4" fxFlexOffset="2">
+        <button fxFlex="30" fxFlex.xs class="btn btn-primary round-elem"
+		        style="background: red; border-color: red;"
+		        >Upload
+		</button>
+
+    </div>
+
+</div>
+</form>

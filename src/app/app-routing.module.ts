@@ -40,7 +40,7 @@ import { AppsGuard } from './guards/apps.guard';
 import { PromoCodesListComponent, PromoCodesFormComponent, PromoCodesFormNewComponent, PromoCodesListNewComponent } from './views/promo_code';
 import { OfferDetailMessagesComponent } from "./views/defaults/offer_detail_message/offer_detail_messages.component";
 import { SmsFormComponent, SmsListComponent, SmsCodeFormComponent } from './views/sms';
-import { parentMenuOutlet, ParentOutletsFormComponent, ParentOutletsListComponent } from './views/parent_outlets';
+import { parentMenuOutlet, ParentOutletsFormComponent, ParentOutletsListComponent, UploadMultipleBrandsComponent } from './views/parent_outlets';
 import { ReportsComponent } from './views/customers/reports/reports.component';
 import { CreditCardPackagesListComponent, CreditCardPackagesFormComponent } from "./views/credit_card_packages";
 import { MerchantAccountFormComponent, MerchantAccountListComponent } from './views/merchant_account';
@@ -148,6 +148,7 @@ const mainApp: Routes = [
 	{ path: 'merchant_account/:id', component: MerchantAccountFormComponent, canActivate: [AppsGuard], data: { roles: ['1'] } },
 
 	{ path: 'brands', component: ParentOutletsListComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
+	{ path: 'brands/upload_multiple_brands', component: UploadMultipleBrandsComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'brands/:id', component: ParentOutletsFormComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'brands/:id/:type', component: parentMenuOutlet, canActivate: [AppsGuard], data: {roles: ['1','2']}},
 

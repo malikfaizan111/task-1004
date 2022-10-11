@@ -7,13 +7,14 @@
 			Company name in HubSpot
 		</span>
 	</div>
-  <div *ngIf="UpAdmin.role == 1" class="col-sm-2">
+  <div *ngIf="UpAdmin.role == 1" class="col-sm-4" fxLayoutAlign="none center">
 		<button class="btn btn-primary round-elem"
 		        style="background: red; border-color: red"
 		        (click)="addNew()">ADD NEW
 		</button>
+		<button fxFlexOffset="6"  class="no-background-btn" (click)="addBrands()">Upload CSV</button>
   </div>
-	<div class="col-sm-6"
+	<div class="col-sm-4"
 	     style="text-align: right;float: right;">
 		<div class="form-group col-sm-3"
 		     style="padding: 0 10px 0 0;">
