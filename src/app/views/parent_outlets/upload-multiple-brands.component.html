@@ -30,9 +30,9 @@
 
 <div class="row" style="margin-top: 20px;">
     <div class="col-sm-4" fxFlexOffset="2">
-        <button fxFlex="30" fxFlex.xs class="btn btn-primary round-elem"
+        <button [disabled]="arrCsv.length == 0" fxFlex="30" fxFlex.xs class="btn btn-primary round-elem"
 		        style="background: red; border-color: red;"
-		        >Upload
+		        (click)="onUploadCSV()">Upload
 		</button>
 
     </div>

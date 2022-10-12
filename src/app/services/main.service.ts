@@ -211,7 +211,7 @@ export class MainService
 
 	postData( apiSlug: string, formData: any, urlVersion?: number): Promise<any>
 	{
-
+		debugger
 		this.user_app = this.appSelectorService.getApp();
     formData['user_app_id'] = this.user_app.user_app_id;
     console.log(this.headers);

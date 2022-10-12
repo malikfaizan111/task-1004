@@ -77,44 +77,44 @@ export class NewSmsFormComponent implements OnInit {
 		console.log('my sms', sms)
 
 
-		// this.isLoading = true;
+		this.isLoading = true;
 
-		// let url = 'sendBulkSms'
+		let url = 'sendBulkSms'
 
-		// this.mainApiService.postSms(url, sms).then(response => {
-		// 	if (response.statusCode == 200 || response.statusCode == 201) {
-		// 		// this.router.navigateByUrl('/main/sms/list');
-		// 		this.isLoading = false;
-		// 	}
-		// 	else {
-		// 		this.isLoading = false;
-		// 		let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
-		// 		let cm = dialogRef.componentInstance;
-		// 		cm.heading = 'Error';
-		// 		cm.message = 'Error while saving data.';
-		// 		cm.cancelButtonText = 'Ok';
-		// 		cm.type = 'error';
-		// 	}
-		// },
-		// 	Error => {
-		// 		this.isLoading = false;
-		// 		let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
-		// 		let cm = dialogRef.componentInstance;
-		// 		cm.heading = 'Error';
-		// 		cm.message = "Internal Server Error.";
-		// 		cm.cancelButtonText = 'Ok';
-		// 		cm.type = 'error';
-		// 	})
+		this.mainApiService.postSms(url, sms).then(response => {
+			if (response.statusCode == 200 || response.statusCode == 201) {
+				// this.router.navigateByUrl('/main/sms/list');
+				this.isLoading = false;
+			}
+			else {
+				this.isLoading = false;
+				let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
+				let cm = dialogRef.componentInstance;
+				cm.heading = 'Error';
+				cm.message = 'Error while saving data.';
+				cm.cancelButtonText = 'Ok';
+				cm.type = 'error';
+			}
+		},
+			Error => {
+				this.isLoading = false;
+				let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
+				let cm = dialogRef.componentInstance;
+				cm.heading = 'Error';
+				cm.message = "Internal Server Error.";
+				cm.cancelButtonText = 'Ok';
+				cm.type = 'error';
+			})
 
-		// 	let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
-		// 	let cm = dialogRef.componentInstance;
-		// 	cm.heading = 'Success';
-		// 	cm.message = "Your Request has been sent.";
-		// 	cm.cancelButtonText = 'Ok';
-		// 	cm.type = 'success';
-		// 	dialogRef.afterClosed().subscribe(result => {
-		// 		this.router.navigateByUrl('/main/newsms/list');
-		// 	})
+			let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
+			let cm = dialogRef.componentInstance;
+			cm.heading = 'Success';
+			cm.message = "Your Request has been sent.";
+			cm.cancelButtonText = 'Ok';
+			cm.type = 'success';
+			dialogRef.afterClosed().subscribe(result => {
+				this.router.navigateByUrl('/main/newsms/list');
+			})
 	}
 
 	public csv_JSON(csv: any) {
