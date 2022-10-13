@@ -10,11 +10,11 @@
         </span>
     </div>
 </div>
-<form action="">
-<div class="row" style="margin-top: 20px;">
-    <div fxLayout="row" class="col-sm-8"  fxLayoutAlign="space-around center">
+<!-- <form action=""> -->
+<div class="row" style=" margin-top: 20px; height: 43px;">
+    <div fxLayout="row" class="col-sm-8" style="height: 100%;"  fxLayoutAlign="space-around center">
         <input #uploadFile accept=".csv" type="file" style="display: none;"  (change)="convertFile($event)">
-        <button mat-raised-button color="accent" style="border-radius: 20px;" fxFlex="70" (click)="uploadFile.click()">Upload new brands CSV</button>
+        <button mat-raised-button color="accent" style="border-radius: 20px; height: 100%;" fxFlex="70" (click)="uploadFile.click()">Upload new brands CSV</button>
         <a download target="_blank" href="assets/Mass_Upload_Brands.csv" class="no-background-btn" style="font-size: 14px;" >
             Download sample CSV
         </a>
@@ -22,7 +22,7 @@
 </div>
 <div class="row" style="margin-top: 8px;">
     <div fxLayoutAlign="center center" fxLayoutAlign.xs="start center" class="col-sm-6">
-        <span class="multi_tag" style="font-size: 13px; font-weight: 600;" *ngIf="CSVName != ''">Uploded: {{CSVName}}</span>
+        <span class="multi_tag" style="font-size: 13px; font-weight: 200;" *ngIf="CSVName != ''">Uploaded: {{CSVName}}</span>
 
     </div>
 
@@ -30,7 +30,7 @@
 
 <div class="row" style="margin-top: 20px;">
     <div class="col-sm-4" fxFlexOffset="2">
-        <button [disabled]="arrCsv.length == 0" fxFlex="30" fxFlex.xs class="btn btn-primary round-elem"
+        <button [disabled]="arrCsv.length == 0" fxFlex="35" fxFlex.xs class="btn btn-primary round-elem"
 		        style="background: red; border-color: red;"
 		        (click)="onUploadCSV()">Upload
 		</button>
@@ -38,4 +38,4 @@
     </div>
 
 </div>
-</form>
+<!-- </form> -->

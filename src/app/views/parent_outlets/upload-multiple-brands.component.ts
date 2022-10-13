@@ -17,6 +17,7 @@ export class UploadMultipleBrandsComponent implements OnInit {
   csvJSON: any;
   arrCsv: Array<any> = []
   CSVName: any;
+  payload: any
   @ViewChild('uploadFile') clearInput!: ElementRef;
   constructor(protected dialog: MatDialog, protected mainApiService: MainService, protected router: Router,) {
     this.CSVName = ''
@@ -59,8 +60,8 @@ console.log('moment',res);
         else if (row[2] == 0 && row[3] != '' && row[4] != '') {
           let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
           let cm = dialogRef.componentInstance;
-          cm.heading = 'Error';
-          cm.message = 'Error while saving data.';
+          cm.heading = 'Upload unsuccessful';
+          cm.message = 'Invalid Data';
           cm.cancelButtonText = 'Ok';
           cm.type = 'error';
           this.arrCsv = []
@@ -98,17 +99,26 @@ console.log('moment',res);
         }
         else {
           this.arrCsv.push({
-            name: row[0],
-            delivery_status: row[1],
-            isnew_brand: row[2],
-            isnewbrand_created_at: row[2] == 0 ? '' : row[3],
-            isnewbrand_expiry: row[2] == 0 ? '' : row[4]
+            "brand_name": row[0],
+            "delivery_status": row[1],
+            "new_brand_status": row[2],
+            "new_brand_start": row[2] == 0 ? '' : row[3],
+            "new_brand_end": row[2] == 0 ? '' : row[4]
           })
         }
         // this.arrCsv.push({ phone: row[0], type: row[1] })
       }
     }
-    console.log('ohhh', this.arrCsv)
+    
+
+    this.payload = {
+      data : this.arrCsv,
+    };
+
+    // this.payload = JSON.stringify(abc)
+
+    console.log('ohhh', this.payload)
+
     // this.Form.get('phones').setValue(this.arrSms)
   }
 
@@ -135,10 +145,8 @@ console.log('moment',res);
 
   onUploadCSV()
   {
-    // debugger;
     let url = 'addBrandInBulk'
-
-    this.mainApiService.postData(appConfig.base_url_slug + url, this.arrCsv).then((response) => {
+    this.mainApiService.postData(appConfig.base_url_slug + url, this.payload, 2).then((response) => {
       if (response.status == 200 || response.status == 201)
 			{
 				this.router.navigateByUrl('/main/brands' );
@@ -162,10 +170,10 @@ console.log('moment',res);
 }
 
 export interface brands {
-  name: string,
+  brand_name: string,
   delivery_status: number,
-  isnew_brand: number,
-  isnewbrand_created_at: string,
-  isnewbrand_expiry: string
+  new_brand_status: number,
+  new_brand_start: string,
+  new_brand_end: string
 }
 
