@@ -21,8 +21,7 @@ export class UploadMultipleBrandsComponent implements OnInit {
   @ViewChild('uploadFile') clearInput!: ElementRef;
   constructor(protected dialog: MatDialog, protected mainApiService: MainService, protected router: Router,) {
     this.CSVName = ''
-    var res = moment("2011-05-22").format('DD/MM/YYYY');
-console.log('moment',res);
+    
   }
 
   ngOnInit(): void {
@@ -35,7 +34,7 @@ console.log('moment',res);
   public csv_JSON(csv: any) {
 
     var lines = csv.split("\n");
-    console.log('lines', lines)
+
 
     for (let index = 1; index < lines.length; index++) {
       if (lines[index] != '') {
@@ -43,7 +42,7 @@ console.log('moment',res);
         for (var i = 0; i < row.length; ++i) {
           row[i] = row[i].replace(/(\r\n|\n|\r)/gm, "")
         }
-        console.log('row....', row);
+
         if(row[0] == '' && row[2] == '')
         {
           let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
@@ -106,7 +105,6 @@ console.log('moment',res);
             "new_brand_end": row[2] == 0 ? '' : row[4]
           })
         }
-        // this.arrCsv.push({ phone: row[0], type: row[1] })
       }
     }
     
@@ -114,12 +112,6 @@ console.log('moment',res);
     this.payload = {
       data : this.arrCsv,
     };
-
-    // this.payload = JSON.stringify(abc)
-
-    console.log('ohhh', this.payload)
-
-    // this.Form.get('phones').setValue(this.arrSms)
   }
 
   convertFile(event: any) {
@@ -128,14 +120,12 @@ console.log('moment',res);
     let file: File = this.csvJSON[0];
     if (file != undefined) {
       this.CSVName = file.name
-      console.log('file', file)
       var reader: FileReader = new FileReader();
       reader.readAsText(file);
       reader.onload = (event: any) => {
         let text: any = reader.result;
         text.substring(0);
         this.csv_JSON(text);
-        console.log('text', text[2])
       };
     }
     else {
@@ -162,7 +152,17 @@ console.log('moment',res);
 				cm.cancelButtonText = 'Ok';
 				cm.type = 'error';
 			}
-    })
+    },
+		Error => {
+			// log here(Error)
+			// this.isLoading = false;
+			let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
+			let cm = dialogRef.componentInstance;
+			cm.heading = 'Error';
+			cm.message = "Internal Server Error.";
+			cm.cancelButtonText = 'Ok';
+			cm.type = 'error';
+		})
   }
 
 
