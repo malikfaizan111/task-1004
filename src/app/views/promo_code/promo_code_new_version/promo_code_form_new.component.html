@@ -124,7 +124,7 @@
 				</div> -->
 				<div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48" style="padding-top: 10px;">
 					<div class="form-group mb-0" style="margin-left: 7px;margin-top: 5px;">
-						<mat-checkbox [(ngModel)]="isMultiple" (change)="onChangeMultiple($event)"
+						<mat-checkbox [(ngModel)]="isMultiple" color="warn" (change)="onChangeMultiple($event)" class="custom-frame" 
 							[ngModelOptions]="{standalone: true}" value="false" color="primary" style="font-family: Manrope;font-weight: 900;">Multiple Access Codes
 						</mat-checkbox>
 					</div>
@@ -158,7 +158,7 @@
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%">
 							<mat-label>Select CreditCard Packages</mat-label>
-							<mat-select [(ngModel)]="creditcarditem" formControlName="creditcard_packages_id">
+							<mat-select  formControlName="creditcard_packages_id" multiple>
 								<mat-option *ngFor="let item of CreditCardPackagesItem" [value]="item.id">
 										<!-- {{item.name}} -->
 										&nbsp;&nbsp; {{item.scenario == 'card_only' ? '(CO)' : item.scenario == 'eligible' ? '(E)' : item.scenario == 'not_eligible' ? '(NE)' : '' }}

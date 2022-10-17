@@ -10,7 +10,8 @@ import { appConfig } from '../../../../config';
 
 @Component({
 	selector: 'app_promo_codes_form_new',
-	templateUrl: './promo_code_form_new.component.html'
+	templateUrl: './promo_code_form_new.component.html',
+	styleUrls: ['./promo_code_form_new.component.scss']
 })
 export class PromoCodesFormNewComponent implements OnInit {
 	id: any;
@@ -69,6 +70,14 @@ export class PromoCodesFormNewComponent implements OnInit {
 				this.codeGet = JSON.parse(abc);
 				this.Form.patchValue(this.codeGet);
 				this.expiryDatetime = new Date(this.codeGet.expiry_datetime);
+				let collect_ids: any = [];
+				if (this.codeGet.creditcard_packages_id) {
+					console.log(this.codeGet.creditcard_packages_id);
+					collect_ids = this.codeGet.creditcard_packages_id.split(',');
+					collect_ids = collect_ids.map(Number);
+				}
+				console.log(collect_ids);
+				this.Form.get('creditcard_packages_id')?.setValue(collect_ids);
 			}
 			else {
 				this.isEditing = false;
@@ -160,6 +169,20 @@ export class PromoCodesFormNewComponent implements OnInit {
 	}
 
 	doSubmit(): void {
+
+		let Allpackages = this.Form.get('creditcard_packages_id')?.value.join();
+		// this.Form.get('creditcard_packages_id').setValue(Allpackages);
+		// console.log(this.Form.get('creditcard_packages_id').value);
+		let formData = new FormData();
+		formData.append('title', this.Form.get('title')?.value);
+		formData.append('code',this.Form.get('code')?.value);
+		formData.append('discount_type',this.Form.get('discount_type')?.value);
+		formData.append('discount_value',this.Form.get('discount_value')?.value);
+		formData.append('expiry_datetime',this.Form.get('expiry_datetime')?.value);
+		formData.append('redemptions',this.Form.get('redemptions')?.value);
+		formData.append('creditcard_packages_id', Allpackages);
+
+
 		this.isLoading = true;
 		let method = '';
 
@@ -167,11 +190,12 @@ export class PromoCodesFormNewComponent implements OnInit {
 			method = 'addDiscountCode';
 		}
 		else {
+			formData.append('id',this.Form.get('id')?.value);
 			method = 'updateDiscountCode';
 			// this.router.navigateByUrl('/main/admins/' + this.type );
 		}
 
-		this.mainApiService.postData(appConfig.base_url_slug + method, this.Form.value).then(response => {
+		this.mainApiService.postData(appConfig.base_url_slug + method, formData).then(response => {
 			if (response.status == 200 || response.status == 201) {
 				this.router.navigateByUrl('/main/promo_codesNew');
 				this.isLoading = false;

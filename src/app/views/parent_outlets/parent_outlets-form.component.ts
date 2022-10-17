@@ -7,6 +7,7 @@ import { AlertDialog } from '../../lib';
 import { MatDialog } from '@angular/material/dialog';
 import { appConfig } from '../../../config';
 import * as moment from 'moment';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
 	selector: 'app-parent_outlets-form',
 	templateUrl: './parent_outlets-form.component.html',
@@ -34,24 +35,48 @@ export class ParentOutletsFormComponent implements OnInit
     urlType: string = '';
 	enableBrandNewDate: boolean = false;
 	currentDate: Date = new Date();
+	logoName: any;
+	url: any;
+	imageUrl: any;
+	mat_toggle = {'color': '#757575',}
+	feature_toggle = {'color': '#148F96'};
+	// static data for image
+	brandCoverImage  = new Array()
+	movies: any
+	logoText: boolean = false;
+	coverImageText: boolean = false;
+	
+	fileUrl:any;
+	formData: any;
+	imageFile: any[] = [];
+	logo:any
+	brandInfo: any;
+	featureInfo:any
 	constructor(protected router: Router,
 		protected _route: ActivatedRoute,
 		protected mainApiService: MainService,
 		protected formbuilder: FormBuilder, protected dialog: MatDialog, protected baseloader : BaseLoaderService)
 	{
-		this.Form = this.formbuilder.group({
+		this.brandCoverImage = []
+			this.Form = this.formbuilder.group({
 			name: [null, [Validators.required, Validators.maxLength(50)]],
 			delivery_status: [null, [Validators.required]],
 			featured : [null],
 			isnewbrand_expiry : [null],
-			isnew_brand: [null]
+			isnew_brand: [null],
+			logo:[null]
 		});
 		this.isLoading = false;
 		this.isEditing = false;
+		this.fileUrl = appConfig.file_urlV2;
+		this.formData = new FormData();
+		// debugger;
 		this.baseloader.menudata.subscribe(d => {
             console.log('checking the data ', d)
             this.menudata = d;
+			console.log('my check', this.menudata)
             if (this.menudata.menu_card) {
+				
                 if (this.menudata.type = 'link') {
                     this.urltext = true;
                     this.pdftext = false;
@@ -84,12 +109,30 @@ export class ParentOutletsFormComponent implements OnInit
                 this.pdftext = false;
             }
         });
+		// for cover image title
+		// let abc = localStorage.getItem('ParentOutlet') as string;
+		// 			console.log(abc);
+		// 			let parentOutletCoverImage = JSON.parse(abc);
+		// 			if(parentOutletCoverImage == null){
+		// 				this.coverImageText = false
+		// 			}else if (parentOutletCoverImage.parentImages.length != 0){
+		// 				this.coverImageText = true
+		// 			}else{
+		// 				this.coverImageText = false
+		// 			}
+		console.log('logo....', this.brandCoverImage.length)
+		console.log('array...', this.brandCoverImage.some(e => e.Name === 'file'))
+					
+					
 	}
 	ngOnInit()
 	{
 		this.sub = this._route.params.subscribe(params => {
 			this.id = params['id'];
+			console.log('id', this.id)
 			this.gerOutletsList(this.id);
+			// console.log('covercheck....', this.coverImage)
+			
 				if (this.id != 'add')
 				{
 					this.Form.addControl('id', new FormControl(this.id));
@@ -97,6 +140,15 @@ export class ParentOutletsFormComponent implements OnInit
 					let abc = localStorage.getItem('ParentOutlet') as string;
 					console.log(abc);
 					this.parentOutlet = JSON.parse(abc);
+					console.log(this.parentOutlet);
+
+					if(this.parentOutlet?.logo == null  || this.parentOutlet?.logo == '' || this.parentOutlet?.logo == undefined)
+					{
+						this.url = ''
+					}else{
+						this.url = this.parentOutlet?.logo;
+						this.url = this.fileUrl + this.url;
+					}
 					this.Form.patchValue(this.parentOutlet);
 					if(this.parentOutlet.featured == '1' || this.parentOutlet.featured == 1){
 						this.status = true
@@ -138,6 +190,7 @@ export class ParentOutletsFormComponent implements OnInit
 				{
 					this.isEditing = false;
                     this.Form.reset();
+					// this.brandCoverImage = []
                 //   let formTest =   JSON.parse(localStorage.getItem('brandForm') as string);
                 //   console.log(formTest);
                 //     if(formTest !== null){
@@ -167,6 +220,9 @@ export class ParentOutletsFormComponent implements OnInit
                     this.Form.reset();
                 }
 					localStorage.removeItem('ParentOutlet');
+
+					this.Form.get('featured').setValue(1);
+					this.Form.get('isnew_brand').setValue(0);
 				}
 		});
 	}
@@ -180,25 +236,30 @@ export class ParentOutletsFormComponent implements OnInit
         return this.Form.get(name);
 	}
 	checkNewBrand($event){
-		if($event.target.checked)
+		// console.log('toggle', $event)
+		if($event.checked == true)
 		{
+			this.mat_toggle = {'color': '#148F96'}
 			this.enableBrandNewDate = true;
 			this.Form.get('isnew_brand').setValue(1);
 			this.Form.addControl('isnewbrand_expiry', new FormControl(null, [Validators.required]));
 		}
 		else
 		{
+			this.mat_toggle = {'color': '#757575'}
 			this.enableBrandNewDate = false;
 			this.Form.get('isnew_brand').setValue(0);
 			this.Form.removeControl('isnewbrand_expiry');
 		}
 	}
 	toggleView() {
-		console.log(this.status);
+		// console.log(this.status);
 		if(this.status == true){
+			this.feature_toggle = {'color': '#148F96'}
 			this.Form.get('featured').setValue(1);
 		}
 		else{
+			this.feature_toggle = {'color': '#757575'}
 			this.Form.get('featured').setValue(0);
 		}
 		// console.log(item.status);
@@ -231,18 +292,52 @@ export class ParentOutletsFormComponent implements OnInit
 	}
 	onLocationBack(): void
 	{
-		window.history.back();
+		// window.history.back();
+		this.router.navigateByUrl('main/brands');
 	}
 	gerOutletsList(id): void {
+		
         let url = 'getParents?id=' + id;
         this.mainApiService.getList(appConfig.base_url_slug + url)
             .then(result => {
                 if (result.status == 200 && result.data) {
                     this.Outlets = result.data.parents[0];
-					console.log(this.Outlets);
+					// console.log('check', result.data.parents)
+					// this.brandCoverImage =result.data.parents.parentImages
+					// console.log('check for images cover', this.brandCoverImage)
+					// console.log('my second check', this.Outlets);
+					
                     result.data.parents.forEach(element => {
-                        this.menudatatype = element.parentOutletMenu[0]?.type;
+						// debugger
+						if(this.id == 'add'){
+							// this.menudatatype = element.parentOutletMenu[0]?.type;
+						this.brandCoverImage = []
+						this.logo = null
+						this.brandInfo = 0
+						this.featureInfo = 1
+						}else{
+							this.menudatatype = element.parentOutletMenu[0]?.type;
+						this.brandCoverImage = element?.parentImages
+						this.logo = element.logo
+						this.brandInfo = element.isnew_brand
+						this.featureInfo = element.featured
+						}
+                        
                     });
+					// debugger
+					if (this.logo !== null){
+						this.logoText = true;
+						this.logoName = this.logo;
+					}
+					if (this.brandInfo == 1){
+						this.mat_toggle = {'color': '#148F96'}
+					}
+					if (this.brandCoverImage.length != 0){
+						this.coverImageText = true;
+					}
+					if (this.featureInfo == 0){
+						this.feature_toggle = {'color': '#757575'}
+					}
                      if (this.menudatatype == 'pdf') {
                         this.pdftext = true;
                         this.urltext = false;
@@ -264,9 +359,11 @@ export class ParentOutletsFormComponent implements OnInit
                     this.Outlets = [];
                 }
             });
+			console.log('after', this.brandCoverImage)
     }
 	doSubmit(): void
 	{
+		
 		this.isLoading = true;
 		let method = '';
 		if (this.id == 'add')
@@ -275,16 +372,34 @@ export class ParentOutletsFormComponent implements OnInit
 		}
 		else
 		{
+			this.formData.append('id', this.Form.get('id').value);
 			method = 'updateParent';
 		}
-		this.mainApiService.postData(appConfig.base_url_slug +method, this.Form.value).then(response => {
+
+		if(this.Form.get('logo')?.value){
+			this.formData.append('logo', this.Form.get('logo')?.value);
+			this.Form.removeControl('logo');
+		}
+
+
+		this.formData.append('name', this.Form.get('name').value);
+		this.formData.append('delivery_status', this.Form.get('delivery_status').value);
+		this.formData.append('featured',this.Form.get('featured').value);
+		this.formData.append('isnew_brand',this.Form.get('isnew_brand').value);
+		if(this.Form.get('isnew_brand').value == 1)
+		{
+			this.formData.append('isnewbrand_expiry', this.Form.get('isnewbrand_expiry')?.value);
+		}
+		this.mainApiService.postData(appConfig.base_url_slug +method, this.formData).then(response => {
 			if (response.status == 200 || response.status == 201)
 			{
+				this.formData = new FormData();
 				this.router.navigateByUrl('/main/brands' );
 				this.isLoading = false;
 			}
 			else
 			{
+				this.formData = new FormData();
 				this.isLoading = false;
 				let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
 				let cm = dialogRef.componentInstance;
@@ -297,6 +412,7 @@ export class ParentOutletsFormComponent implements OnInit
 		Error => {
 			// log here(Error)
 			this.isLoading = false;
+			this.formData = new FormData();
 			let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
 			let cm = dialogRef.componentInstance;
 			cm.heading = 'Error';
@@ -309,4 +425,32 @@ export class ParentOutletsFormComponent implements OnInit
 		localStorage.setItem('brandForm', JSON.stringify(this.Form.value));
 		this.router.navigateByUrl('main/brands/'+ this.id + '/' + type);
 	}
+
+	// new screen loigcs
+
+	onFileImageChange(event:any)
+	{
+		// this.imageFile = [];
+		// this.imageFile.push(event.target.files[0]);
+		// console.log(this.formData);
+		// console.log(this.imageFile);
+		this.Form.patchValue({
+			logo: event.target.files[0]
+		})
+		let abc = event.target.files[0];
+		this.logoName = abc.name
+		if (event.target.files && event.target.files[0]) {
+            var reader = new FileReader();
+            reader.onload = (event: any) => {
+                this.url = event.target.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+		else{
+
+		}
+		
+	}
+
+
 }

@@ -17,8 +17,10 @@
         </div>
         <div fxLayout="row"  (clickOutside)="adminClick = false" style="min-width: 200px;color: #148F96;
             font-weight: 600;" class="welcome" >
+            <!-- <h5 class="font_style" style="margin-top: 17px;color: #148F96;
+            font-weight: 600;">Welcome,{{userName.name}}</h5> -->
             <h5 class="font_style" style="margin-top: 17px;color: #148F96;
-            font-weight: 600;">Welcome,{{userName.name}}</h5>
+            font-weight: 600;">Welcome</h5>
 
             <button fxLayoutAlign="center center" class="matmenu"  fxFlex="5px" mat-button [matMenuTriggerFor]="menu"><img src="assets/images/user.png" height="26px" width="26px"></button>
             <mat-menu #menu="matMenu">
@@ -114,7 +116,7 @@
                                                 </div>
                                                 <span class="child_label" fxFlex>{{child.label}}</span>
                                                 <span style="background: #FF2C54;"
-                                                    *ngIf="child.label == 'UNATTENDED ORDERS'"
+                                                    *ngIf="child.label == 'Unattended Orders'"
                                                     class="badge badge-pill badge-danger"> {{ noOfOrders }} </span>
                                                 <!-- <span *ngIf="child.label == 'UNATTENDED ORDERS'" matBadge="1" matBadgeOverlap="false">s</span> -->
                                             </div>
