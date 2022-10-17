@@ -99,7 +99,7 @@
                                 <a *ngIf="menu.is_parent" class="nav-dropdown-trigger">
                                     <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
                                         <div fxFlex="15" class="text-center">
-                                            <img width="22" height="22" style="top: -2px;position: relative;"
+                                            <img width="22" height="22" style="top: -2px;position: relative; font-weight: 800;"
                                                 src="assets/images/new_side_menu/{{menu.image}}.png">
                                         </div>
                                         <span style="padding-right: 10px;" fxFlex>{{menu.label}}</span>
@@ -126,14 +126,15 @@
                                         (click)="onChildMenuClick(child, $event)">
 
                                         <a *ngIf="child.is_parent" class="nav-dropdown-trigger">
-                                            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
+                                            <div fxLayout="row"   fxLayoutAlign="start center">
                                                 <div fxFlex="21" class="text-center">
-                                                    <!-- <img width="22"
+                                                    <img width="22"
+                                                                fxFlexOffset="16"
                                                                  height="22"
-                                                                 style="top: -2px;position: relative;"
-                                                                 src="assets/images/side-menu/{{child.image}}.png"> -->
+                                                                 style="top: -2px;position: relative; margin: 0; padding: 0;"
+                                                                 src="assets/images/side-menu/{{child.image}}.png">
                                                 </div>
-                                                <span fxFlex>{{child.label}}</span>
+                                                <span fxFlexOffset="-2"  fxFlex>{{child.label}}</span>
                                             </div>
 
                                         </a>
@@ -167,7 +168,7 @@
                         <a [routerLink]="menu.routerLink">
                             <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
                                 <div fxFlex="15" class="text-center">
-                                    <img width="22" height="22" style="top: -2px;position: relative;"
+                                    <img width="22" height="22" style="top: -2px;position: relative; opacity: 1;"
                                         src="assets/images/new_side_menu/{{menu.image}}.png">
                                 </div>
                                 <span fxFlex>{{menu.label}}</span>

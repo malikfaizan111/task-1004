@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MainService } from '../../services/main.service';
 import { appConfig } from '../../../config';
 import { UserAppSelectorService } from '../../lib/app-selector/app-selector.service';
+import { image } from 'html2canvas/dist/types/css/types/image';
 declare var $: any;
 export class SideMenuItems {
 	routerLink?: string;
@@ -167,9 +168,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					is_parent: true,
 					opened: false,
 					children: [
+						{ routerLink: '/main/newsms/list', image: 'Marketing', label: 'SMS' },
 						{ routerLink:'/main/promo_codesNew', image:'Marketing', label:'Promo Code'},
 						{ routerLink: '/main/access_codes', image: 'Marketing', label: 'Access Code' },
-						{ routerLink: '/main/newsms/list', image: 'Marketing', label: 'SMS' },
 						{ routerLink: '/main/sms/list', image: 'Marketing', label: 'Old SMS' },
 					]
 				},
@@ -583,7 +584,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/trending_search', image: 'Categories', label: 'Trending Search Keywords' },
 						{ routerLink: '/main/interest_tag', image: 'Categories', label: 'Interests' },
 						{ routerLink: '/main/popularcategories', image: 'Categories', label: 'Popular Categories' },
-						{ routerLink: '/main/collection', image: 'Categories', label: 'Subcategory' },
+						{ routerLink: '/main/collection', image: 'Categories', label: 'Subcategories' },
 					]
 				},
 				{
@@ -779,7 +780,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/trending_search', image: 'Categories', label: 'Trending Search Keywords' },
 						{ routerLink: '/main/interest_tag', image: 'Categories', label: 'Interests' },
 						{ routerLink: '/main/popularcategories', image: 'Categories', label: 'Popular Categories' },
-						{ routerLink: '/main/collection', image: 'Categories', label: 'Subcategory' },
+						{ routerLink: '/main/collection', image: 'Categories', label: 'Subcategories' },
 					]
 				},
 
@@ -863,20 +864,25 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/offer_detail_messages', image: 'Configurations', label: 'Offer Detail Messages' },
 						{ routerLink: '/main/versions', image: 'Configurations', label: 'Versions' },
 						{ routerLink: '/main/playlist', image: 'Configurations', label: 'Category Playlist' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: ' Old Ooredoo Package' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Old Non Ooredoo Package' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Old Promo Codes Package' },
+							
+						
 						// { routerLink: '/main/sms/list', image: 'Configurations', label: 'SMS' },	
 					]
 				},
-				{
-					image: 'credit_card',
-					label: 'Packages',
-					is_parent: true,
-					opened: false,
-					children: [
-						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'Ooredoo' },
-						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Non Ooredoo' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Codes' },
-					]
-				},
+				// {
+				// 	image: 'credit_card',
+				// 	label: 'Packages',
+				// 	is_parent: true,
+				// 	opened: false,
+				// 	children: [
+				// 		{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: 'Ooredoo' },
+				// 		{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Non Ooredoo' },
+				// 		{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Promo Codes' },
+				// 	]
+				// },
 				{ routerLink: '/main/edit-history-list', image: 'CMS_History', label: 'CMS Editing History' }, 
 				// {
 				// 	image: 'customers',
