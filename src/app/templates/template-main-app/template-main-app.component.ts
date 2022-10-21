@@ -184,6 +184,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{routerLink: 'kpi_report', image: 'Configurations', label: 'Kpi Report' },
 						{ routerLink: '/main/home_screen_messages', image: 'Configurations', label: 'Home Screen Messages' },
 						{ routerLink: '/main/versions', image: 'Configurations', label: 'Versions' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: ' Old Ooredoo Package' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Old Non Ooredoo Package' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Old Promo Codes' },
 					]
 				},
 				{
@@ -252,7 +255,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				{ routerLink: '/main/orders/All', image: 'Redemptions', label: 'Redemptions' },
 				{
 					image: 'Subscription_Packages',
-					label: 'Subscription Packages',
+					label: "Subscription"+ '\n' + "Packages",
 					is_parent: true,
 					opened: false,
 					children: [
@@ -322,6 +325,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					children: [
 						{ routerLink: 'kpi_report', image: 'Configurations', label: 'KPI REPORT' },
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: ' Old Ooredoo Package' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Old Non Ooredoo Package' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Old Promo Codes' },
 						// { routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						// { routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dConfigurations', label: 'Ooredoo' }, 
 						// { routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'Configurations', label: 'Non Ooredoo' },
@@ -413,6 +419,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 					children: [
 						{ routerLink: 'kpi_report', image: 'Configurations', label: 'KPI REPORT' },
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: ' Old Ooredoo Package' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Old Non Ooredoo Package' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Old Promo Codes' },
 						// { routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						// { routerLink: '/main/credit-card-packages/ooredooUsers', image: 'Configurations', label: 'Ooredoo' }, 
 						// { routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'Configurations', label: 'Non Ooredoo' },
@@ -529,6 +538,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/customers/reports', image: 'Configurations', label: 'Reports' },
 						// { routerLink: '/main/promo_codes', image: 'Configurations', label: 'Promo Code' },
 						{ routerLink: '/main/customers/oredoo_billing', image: 'Configurations', label: 'Ooredoo Billing' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: ' Old Ooredoo Package' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Old Non Ooredoo Package' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Old Promo Codes' },
 						
 						
 					]
@@ -671,6 +683,9 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/offer_detail_messages', image: 'Configurations', label: 'Offer Detail Messages' },
 						{ routerLink: '/main/versions', image: 'Configurations', label: 'Versions' },
 						{ routerLink: '/main/playlist', image: 'Configurations', label: 'Category Playlist' },
+						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: ' Old Ooredoo Package' },
+						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Old Non Ooredoo Package' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Old Promo Codes' },
 						
 						
 						
@@ -802,8 +817,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 				// { routerLink: '/main/Ooredo-Billing', image: 'deals', label: 'Ooredoo Billing' },
 				{
 					image: 'Subscription_Packages',
-					label: `Subscription
-					Packages`,
+					label: "Subscription"+ '\n' + "Packages",
 					is_parent: true,
 					opened: false,
 					children: [
@@ -866,7 +880,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/playlist', image: 'Configurations', label: 'Category Playlist' },
 						{ routerLink: '/main/credit-card-packages/ooredooUsers', image: 'dashboard', label: ' Old Ooredoo Package' },
 						{ routerLink: '/main/credit-card-packages/nonOoredooUsers', image: 'dashboard', label: 'Old Non Ooredoo Package' },
-						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Old Promo Codes Package' },
+						{ routerLink: '/main/promo_codes', image: 'access_codes', label: 'Old Promo Codes' },
 							
 						
 						// { routerLink: '/main/sms/list', image: 'Configurations', label: 'SMS' },	

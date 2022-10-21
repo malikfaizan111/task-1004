@@ -1213,6 +1213,7 @@ $color_15: #dddddd;
 $color_16: rgba(255, 255, 255, 0.7);
 $color_17: #2b2b2b;
 $color_18: #059cd5;
+$color_19: #148F96;
 $font_family_1: "Open Sans";
 $font_family_2: 'icomoon';
 $font_family_3: 'Roboto',
@@ -3047,3 +3048,19 @@ textarea.mat-input-element {
     box-shadow: none;
  }
  
+
+ .no-background-btn{
+    font-family: $font_family_4 !important;
+    font-variation-settings: 'wght' 700 !important;
+    font-size: 15px;
+    color: $color_19;
+    background: transparent;
+    border: none;
+    &:hover{
+        color: $color_19;
+    }
+    &:focus{
+        color: $color_19;
+        text-decoration: none;
+    }
+ }

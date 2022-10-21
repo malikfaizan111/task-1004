@@ -13,7 +13,7 @@ export const appConfig =
    file_url: 'http://internal.adminurban.com/uploads/',
 
    base_urlV2: 'http://internal-v2.adminurban.com/api/v2/',
-   file_urlV2: 'https://urbanpoint-storage.azureedge.net/uploads/',
+   file_urlV2: 'http://internal.adminurban.com/uploads/',
 
   //-----------------------------STAGING URLs---------------------------//
 

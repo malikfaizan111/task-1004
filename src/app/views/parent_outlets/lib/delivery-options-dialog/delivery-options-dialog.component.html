@@ -1,0 +1,39 @@
+<div style="min-width: 550px;" class="wrapper">
+  <div class="content-head clearfix">
+      <div style="font-size: 25px;"
+           class="dailog_Title">Update Delivery Option</div>
+  </div>
+
+  <div style="margin-top: 25px;">
+    <mat-radio-group [(ngModel)]="selectValue"
+    [ngModelOptions]="{standalone: true}"
+     class="mt-4">
+       <mat-radio-button value="outlet">Outlet</mat-radio-button>
+       <mat-radio-button style="margin-left: 10px;" value="urbanpoint">Urban Point</mat-radio-button>
+       <mat-radio-button style="margin-left: 10px;" value="both">Both</mat-radio-button>
+    </mat-radio-group>
+
+    <div *ngIf="selectValue == 'urbanpoint' || selectValue == 'both'" class="form-group mb-0" style="margin-top: 4px;">
+      <mat-form-field style="width: 100%;">
+          <mat-select placeholder="Delivery Type" [(ngModel)]="deliveryType">
+              <mat-option value="bee_delivery">Bee Delivery</mat-option>
+              <mat-option value="majoor">Majoor Delivery</mat-option>
+          </mat-select>
+          <!-- <mat-error
+                     *ngIf="getValue('year')?.invalid && (getValue('year')?.dirty || getValue('year')?.touched)">
+              year
+              is required</mat-error> -->
+      </mat-form-field>
+  </div>
+  </div>
+  <button style="min-width: 50px; margin-top: 15px;"
+          mat-raised-button
+          (click)="updateDeliveryOptions()"
+          color="primary"
+          [disabled]="!selectValue || (selectValue == 'urbanpoint' && !deliveryType) || (selectValue == 'both' && !deliveryType)"
+          >Update Delivery
+</button>
+<img *ngIf="isLoading"
+      class="loader-btn-image"
+      src="assets/images/view-loader.gif">
+</div>

@@ -79,6 +79,11 @@ export class ParentOutletsListComponent implements OnInit
 		this.router.navigateByUrl('main/brands/add');
 	}
 
+	addBrands()
+	{
+		this.router.navigateByUrl('main/brands/upload_multiple_brands');
+	}
+
 	onSearchParentOutlet(): void
 	{
 		clearTimeout(this.searchTimer);

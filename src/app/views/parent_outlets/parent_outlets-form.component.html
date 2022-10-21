@@ -307,9 +307,10 @@ fxFlex.md="48">
 				<span style="font-weight: 300;" *ngIf="url == null || url == '' || url == undefined">
 					Preview
 				</span>
-				<span *ngIf="url !== null || url !== ''">
+				<span style="height: 90px;" *ngIf="url !== null || url !== ''">
 
-					<img style="width:100%; height:auto;padding: 5px;" [src]="url">
+					<img style="height: 100%; 
+					width: 90px;padding: 5px;object-fit: contain;" [src]="url">
 				</span>
 
 			</div>
@@ -337,10 +338,10 @@ fxFlex.md="48">
 				<span fxLayoutAlign="start center"  style="overflow: hidden; font-size: 13px; font-weight: 200;" >
 					{{item.file}}
 				</span>
-				<div fxFlexOffset="3" fxLayout="row"  fxLayoutAlign="center center" fxFlex="100"
-				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert; height: 90px;">
+				<div fxFlexOffset="3" fxLayout="row"  fxLayoutAlign="center center" fxFlex="100px"
+				style="border: 3px dotted #E8E8E8; border-radius: 10px; padding: 0px; border-width: revert;">
 				
-				<img  style="width:100%; height:auto;padding: 5px;" [src]="item.file">
+				<img  style="width:100%; height:100%; object-fit:contain;padding: 5px;" src="{{fileUrl}}{{item.file}}">
 			</div>
 
 			</div>

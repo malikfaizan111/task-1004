@@ -1,0 +1,161 @@
+<div style="min-width: 200px;max-width: 500px;">
+    <div class="content-head clearfix">
+        <div style="font-size: 25px;"
+             class="title">Export CSV</div>
+    </div>
+    <form [formGroup]="Form"
+          style=" min-height: 100px; margin-top: 20px;"
+          (ngSubmit)="onSubmitClick()"
+          novalidate>
+        <div class="row">
+            <div class="col-sm-12"
+                 *ngIf="filter_values.length > 0">
+                <strong>Filters:</strong>
+            </div>
+            <div class="col-sm-12"
+                 *ngFor="let fv of filter_values">
+                <span *ngIf="fv.value != ''">{{fv.title}}:&nbsp; {{fv.value}}</span>
+            </div>
+            <div style="margin-top: 5px;"
+                 class="col-sm-12">
+                Select Month/Date to export csv.
+            </div>
+            <ng-container *ngIf="isOnlyMonth ">
+                <div style="text-align: center"
+                     class="col-sm-12">
+                    <!-- <div class="form-group mb-0">
+               <mat-form-field style="width: 100%">
+                   <input matInput
+                          readonly
+                          [owlDateTime]="dateRange"
+                          [owlDateTimeTrigger]="dateRange"
+                          [(ngModel)]="selectedDateRange"
+                          [ngModelOptions]="{standalone: true}"
+                          (dateTimeChange)="onSelectDateRange()"
+                          selectMode="single"
+                          type="text"
+                          placeholder="Select Month/Date">
+                   <i matSuffix
+                      class="glyphicon glyphicon-time"></i>
+                   <owl-date-time pickerType="calendar"
+                                  startView="multi-years"
+                                  #dateRange></owl-date-time>
+                   <mat-error *ngIf="getValue('dateRange')?.invalid && (getValue('dateRange')?.dirty || getValue('dateRange')?.touched)">Range
+                       is required</mat-error>
+               </mat-form-field>
+           </div> -->
+                    <div class="form-group mb-0">
+                        <mat-form-field style="width: 100%">
+                            <input matInput
+                                   readonly
+                                   [owlDateTime]="start_date"
+                                   [owlDateTimeTrigger]="start_date"
+                                   [max]="EndDate"
+                                   [(ngModel)]="StartDate"
+                                   [ngModelOptions]="{standalone: true}"
+                                   (dateTimeChange)="onStartDate()"
+                                   type="text"
+                                   placeholder="Start Time">
+                            <i matSuffix
+                               class="glyphicon glyphicon-time"></i>
+                            <owl-date-time pickerType="calendar"
+                                           #start_date></owl-date-time>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div style="text-align: center"
+                     class="col-sm-12">
+                    <div class="form-group mb-0">
+                        <mat-form-field style="width: 100%">
+                            <input matInput
+                                   readonly
+                                   [owlDateTime]="end_date"
+                                   [owlDateTimeTrigger]="end_date"
+                                   [min]="StartDate"
+                                   [max]="nextMonth"
+                                   [(ngModel)]="EndDate"
+                                   [ngModelOptions]="{standalone: true}"
+                                   (dateTimeChange)="onEndDate()"
+                                   type="text"
+                                   placeholder="End Time">
+
+                            <i matSuffix
+                               class="glyphicon glyphicon-time"></i>
+
+                            <owl-date-time pickerType="calendar"
+                                           #end_date></owl-date-time>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="DropDown">
+                <div>
+                    <div class="form-group mb-0">
+                        <mat-form-field style="width: 100%; margin-bottom: 10px">
+                            <mat-select formControlName="year"
+                                        >
+
+                                <mat-option value="2020">2020</mat-option>
+                                <mat-option value="2021">2021</mat-option>
+                                <mat-option value="2022">2022</mat-option>
+                                <mat-option value="2023">2023</mat-option>
+                                <mat-option value="2024">2024</mat-option>
+                                <mat-option value="2025">2025</mat-option>
+                            </mat-select>
+                            <mat-error
+                                       *ngIf="getValue('year')?.invalid && (getValue('year')?.dirty || getValue('year')?.touched)">
+                                year
+                                is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group mb-0">
+                        <mat-form-field style="width: 100%; margin-bottom: 10px">
+
+                            <mat-select formControlName="month"
+                                        placeholder="month">
+                                <mat-option value="01">Jan</mat-option>
+                                <mat-option value="02">Feb</mat-option>
+                                <mat-option value="03">March</mat-option>
+                                <mat-option value="04">April</mat-option>
+                                <mat-option value="05">May</mat-option>
+                                <mat-option value="06">June</mat-option>
+                                <mat-option value="07">July</mat-option>
+                                <mat-option value="08">August</mat-option>
+                                <mat-option value="09">Sep</mat-option>
+                                <mat-option value="10">Oct</mat-option>
+                                <mat-option value="11">Nov</mat-option>
+                                <mat-option value="12">Dec</mat-option>
+                            </mat-select>
+
+                            <mat-error
+                                       *ngIf="getValue('month')?.invalid && (getValue('month')?.dirty || getValue('month')?.touched)">
+                                       month is
+                                required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="col-sm-12"
+                 style="text-align: right;">
+
+                <button mat-raised-button
+                style="margin-right: 4px;"
+                        color="primary"
+                        class="btn btn-clear"
+                        [disabled]="isLoading"
+                        type="button"
+                        (click)="onCancelClick()">Cancel</button>
+
+                <button mat-raised-button
+                        color="primary"
+                        class="btn btn-submit btn-primary"
+                        [disabled]="isLoading"
+                        type="button"
+                        (click)="onSubmitClick()">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

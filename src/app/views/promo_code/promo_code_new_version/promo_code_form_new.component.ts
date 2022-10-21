@@ -69,6 +69,18 @@ export class PromoCodesFormNewComponent implements OnInit {
 				let abc = localStorage.getItem('PromoCode') as string;
 				this.codeGet = JSON.parse(abc);
 				this.Form.patchValue(this.codeGet);
+				if(this.codeGet.multiple == "1")
+				{
+					this.isMultiple = true;
+					this.Form.removeControl('code');
+					this.Form.addControl('number', new FormControl('', [Validators.required]));
+				}
+				else
+				{
+					this.isMultiple = false;
+					this.Form.removeControl('number');
+					this.Form.addControl('code', new FormControl('', [Validators.maxLength(6), Validators.minLength(6)]));
+				}
 				this.expiryDatetime = new Date(this.codeGet.expiry_datetime);
 				let collect_ids: any = [];
 				if (this.codeGet.creditcard_packages_id) {
@@ -133,11 +145,11 @@ export class PromoCodesFormNewComponent implements OnInit {
 		// log here(event);
 		if (this.isMultiple) {
 			this.Form.removeControl('code');
-			this.Form.addControl('number', new FormControl(null, [Validators.required]));
+			this.Form.addControl('number', new FormControl('', [Validators.required]));
 		}
 		else {
 			this.Form.removeControl('number');
-			this.Form.addControl('code', new FormControl(null, [Validators.maxLength(6), Validators.minLength(6)]));
+			this.Form.addControl('code', new FormControl('', [Validators.maxLength(6), Validators.minLength(6)]));
 		}
 	}
 
@@ -175,7 +187,13 @@ export class PromoCodesFormNewComponent implements OnInit {
 		// console.log(this.Form.get('creditcard_packages_id').value);
 		let formData = new FormData();
 		formData.append('title', this.Form.get('title')?.value);
-		formData.append('code',this.Form.get('code')?.value);
+		if (this.isMultiple) {
+			formData.append('number', this.Form.get('number')?.value ? this.Form.get('number')?.value : null)
+		}
+		else {
+			formData.append('code', this.Form.get('code')?.value ? this.Form.get('code')?.value : null)
+		}
+		// formData.append('code',this.Form.get('code')?.value);
 		formData.append('discount_type',this.Form.get('discount_type')?.value);
 		formData.append('discount_value',this.Form.get('discount_value')?.value);
 		formData.append('expiry_datetime',this.Form.get('expiry_datetime')?.value);

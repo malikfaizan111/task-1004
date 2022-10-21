@@ -146,7 +146,8 @@ import { NewSmsListComponent } from './views/newsms/new-sms-list.component';
 import { NewSmsFormComponent } from './views/newsms/new-sms-form.component';
 import { SmsDetailComponent } from './views/newsms/sms-detail.component';
 import { TransactionsComponent } from './views/defaults/transactions/transactions.component';
-import { KpiReportComponent } from './views/kpi-report/kpi-report.component'
+import { KpiReportComponent } from './views/kpi-report/kpi-report.component';
+import { UploadMultipleBrandsComponent } from './views/parent_outlets/upload-multiple-brands.component';
 
 @NgModule({
   imports: [
@@ -346,7 +347,8 @@ import { KpiReportComponent } from './views/kpi-report/kpi-report.component'
     NewSmsFormComponent,
     SmsDetailComponent,
     TransactionsComponent,
-    KpiReportComponent
+    KpiReportComponent,
+    UploadMultipleBrandsComponent
 
   
   ],

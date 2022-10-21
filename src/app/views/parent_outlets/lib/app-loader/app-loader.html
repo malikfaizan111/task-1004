@@ -1,0 +1,30 @@
+<ng-container *ngIf="isLoading" >
+    <div style="position: fixed;
+         width: 100%;
+         height: 100%;
+         background: #46464652;
+         z-index: 99999;
+         top: 0;
+        left: 0;">
+        <div class="row">
+            <div style="height: 100vh;"
+                 class="col-sm-12">
+                <div style="width: 200px;
+                background: white;
+                text-align: center;
+                height: 170px;
+                border-radius: 1px;
+                position: absolute;
+                top: calc(50% - 85px);
+                left: calc(50% - 100px);">
+                    <img style="margin-top: 10px;"
+                         width="50"
+                         height="50"
+                         src="assets/images/view-loader.gif">
+                    <h4 style="font-size: 14px; margin-top: 20px">{{loaderMessage}}</h4>
+                    <h4 style="font-size: 14px; margin-top: 30px; font-weight: bold;">{{completedRecords}} / {{totalRecords}} Records.</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

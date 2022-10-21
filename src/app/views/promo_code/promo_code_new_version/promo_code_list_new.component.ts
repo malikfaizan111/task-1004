@@ -48,8 +48,9 @@ export class PromoCodesListNewComponent implements OnInit{
 
 		this.appSelectorSubscription = this.appSelectorService.selectedApp.subscribe((response: any) =>
         {
-			this.gerPromoCodesList(1);
+			// this.gerPromoCodesList(1);
 		});
+		this.gerPromoCodesList(1);
 	}
 
 	ngOnInit() 

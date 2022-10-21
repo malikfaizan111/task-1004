@@ -271,6 +271,16 @@ export class parentMenuOutlet{
                     })
             }
         }
+        else if(this.type == 'coverimages' && this.id == 'add')
+        {
+            this.isLoading = false;
+            let dialogRef = this.dialog.open(AlertDialog, { autoFocus: false });
+            let cm = dialogRef.componentInstance;
+            cm.heading = 'Alert';
+            cm.message = "Please Add Brand First.";
+            cm.cancelButtonText = 'Ok';
+            cm.type = 'info';
+        }
         else {
             if (this.type == 'pdf' && this.Form.get('fileSource').value != null) {
                 let data = {

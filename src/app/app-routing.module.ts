@@ -81,7 +81,7 @@ import {NewSmsFormComponent} from './views/newsms/new-sms-form.component';
 import {SmsDetailComponent} from './views/newsms/sms-detail.component';
 import {TransactionsComponent} from './views/defaults/transactions/transactions.component'
 import {KpiReportComponent} from './views/kpi-report/kpi-report.component';
-
+import { UploadMultipleBrandsComponent } from './views/parent_outlets/upload-multiple-brands.component'
 
 
 
@@ -148,6 +148,7 @@ const mainApp: Routes = [
 	{ path: 'merchant_account/:id', component: MerchantAccountFormComponent, canActivate: [AppsGuard], data: { roles: ['1'] } },
 
 	{ path: 'brands', component: ParentOutletsListComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
+	{ path: 'brands/upload_multiple_brands', component: UploadMultipleBrandsComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'brands/:id', component: ParentOutletsFormComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },
 	{ path: 'brands/:id/:type', component: parentMenuOutlet, canActivate: [AppsGuard], data: {roles: ['1','2']}},
 

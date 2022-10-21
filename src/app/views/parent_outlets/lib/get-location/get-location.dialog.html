@@ -1,0 +1,47 @@
+﻿<mat-card>
+    <mat-card-header mat-color="primary">
+        <mat-card-title>Search Location</mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="width: 70vw">
+        <div fxLayout="column"
+             class="mapContent">
+            <div fxLayout="row">
+                <!-- <div fxFlex> -->
+                <input fxFlex
+                       style="margin-bottom: 10px;"
+                       id="autocompleteInput"
+                       placeholder="Search address">
+                <!-- </div> -->
+            </div>
+            <agm-map [latitude]="currentLocation.lat"
+                     [longitude]="currentLocation.lng"
+                     [zoom]="initialZoom"
+                     [disableDefaultUI]="false"
+                     
+                     fxFlex>
+
+                <agm-marker [latitude]="marker.lat"
+                            [longitude]="marker.lng"
+                            [label]="marker.label"
+                            [markerDraggable]="marker.draggable"
+                            (dragEnd)="markerDragEnd(marker, $event)">
+
+                </agm-marker>
+
+            </agm-map>
+        </div>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button type="button"
+                mat-raised-button
+                color="accent"
+                (click)="cancelLocation()">Cancel</button>&nbsp;
+        <button type="button"
+                mat-raised-button
+                [disabled]="currentLocation.lat == 0 || currentLocation.lng == 0"
+                color="primary"
+                (click)="setLocation()">Select</button>
+
+    </mat-card-actions>
+</mat-card>

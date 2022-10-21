@@ -1,0 +1,20 @@
+<div *ngIf="isLoading"
+     style="min-width: 300px;">
+    <div class="row">
+        <div style="text-align: center"
+             class="col-sm-12">
+            <img width="50"
+                 height="50"
+                 src="assets/images/view-loader.gif"
+                 alt="">
+        </div>
+    </div>
+</div>
+<!-- 
+<ng-container *ngIf="!isLoading">
+    <ng-content></ng-content>
+</ng-container> -->
+
+<div [ngStyle]="{ 'display' : (isLoading == true) ? 'none' : 'block' }">
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,35 @@
+﻿<div style="min-width: 70vw;flex-direction: row;box-sizing: border-box;">
+    <div style="height: 40px;padding: 10px;color: white; background: #1A2838"
+         fxLayout="row wrap"
+         
+         fxLayoutAlign="space-between center">
+         <i class="glyphicon glyphicon-map-marker"></i>
+        <span style="font-weight: bold">Location</span>
+        <!-- <button type="button"
+                style="margin-left: -40px;"
+                (click)="onLocation()">
+            X
+        </button> -->
+        <button mat-icon-button (click)="onLocation()">
+                <i class="glyphicon glyphicon-remove"></i>
+            <!-- <mat-icon class="mat-18">ligature</mat-icon> -->
+        </button>
+
+    </div>
+    <agm-map [latitude]="currentLocation.lat"
+             [longitude]="currentLocation.lng"
+             [zoom]="initialZoom"
+             [disableDefaultUI]="false"
+             
+             fxFlex>
+
+        <agm-marker [latitude]="marker.lat"
+                    [longitude]="marker.lng"
+                    [label]="marker.label"
+                    [markerDraggable]="false">
+
+        </agm-marker>
+    </agm-map>
+
+
+</div>

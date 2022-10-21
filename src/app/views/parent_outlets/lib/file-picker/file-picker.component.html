@@ -1,0 +1,30 @@
+<!-- <label>Item Icon:</label> -->
+
+<div class="my-drop-zone">
+    <label class="fileContainer"
+           [style.width.px]="size.width"
+           [style.height.px]="size.height">
+
+        <ng-container *ngIf="!image">
+
+            <i style="padding: 45%; margin: unset"
+               *ngIf="!isIconHidden"
+               class="cloud-icon glyphicon glyphicon-plus"></i>
+
+            <div style="margin-top: 13%;"
+                 *ngIf="isIconHidden">{{description}}</div>
+
+        </ng-container>
+        <input type="file"
+               id="avatar"
+               accept="image/png, image/jpeg, image/jpg"
+               (change)="onFileChange($event)"
+               #fileInput/>
+
+        <img *ngIf="image"
+             style="height: 100%; width: 100%;"
+             [src]="image"
+             alt="">
+
+    </label>
+</div>
