@@ -148,6 +148,9 @@ import { SmsDetailComponent } from './views/newsms/sms-detail.component';
 import { TransactionsComponent } from './views/defaults/transactions/transactions.component';
 import { KpiReportComponent } from './views/kpi-report/kpi-report.component';
 import { UploadMultipleBrandsComponent } from './views/parent_outlets/upload-multiple-brands.component';
+import { OutletTagsListComponent } from './views/outlets_tags/outlet-tags-list.component';
+import { SelectBrandsOrOutletsListComponent } from './views/outlets_tags/select-brands-or-outlets-list.component';
+import { AddTagsComponent } from './views/outlets_tags/add-tags.component';
 
 @NgModule({
   imports: [
@@ -348,7 +351,10 @@ import { UploadMultipleBrandsComponent } from './views/parent_outlets/upload-mul
     SmsDetailComponent,
     TransactionsComponent,
     KpiReportComponent,
-    UploadMultipleBrandsComponent
+    UploadMultipleBrandsComponent,
+    OutletTagsListComponent,
+    SelectBrandsOrOutletsListComponent,
+    AddTagsComponent
 
   
   ],

@@ -2792,7 +2792,7 @@ table.fixed {
 }
 
 .table>tbody>tr:hover {
-    background-color: #757575 !important;
+    background-color: #757575;
     color: white;
 }
 
@@ -3062,5 +3062,39 @@ textarea.mat-input-element {
     &:focus{
         color: $color_19;
         text-decoration: none;
+    }
+ }
+
+ .tags_table{
+    table{
+        border: 1px solid #ddd;
+        thead{
+            tr{
+                height: 55px;
+                th{
+                    vertical-align: middle;
+                    // padding: 0 !important;
+                    border: 2px solid #E8E8E8;
+                }
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    font-variation-settings: 'wght' 600 !important;
+                    border: 2px solid #E8E8E8;
+                }
+            }
+        }
+    }
+    .table>tbody>tr:hover{
+        &:nth-child(odd){
+            background-color: #F9F9F9;
+            color: #148F96 !important;
+        }
+        &:nth-child(even){
+            background-color: transparent;
+            color: #148F96 !important;
+        }
     }
  }

@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-sm-12">
+        <span class="mainTitle">
+            Outlets Tags
+        </span>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 13px;">
+    <div class="col-sm-6">
+            <button fxFlex="180px" style="border-radius: 23px;" mat-raised-button color="accent" (click)="onSelectBrandorOutlets()">
+                Tag Outlets
+            </button>
+            <button fxFlex="150px" class="no-background-btn" (click)="addTags()" >Add new tags</button>
+    </div>
+</div>
+
+<div class="data-table tags_table">
+    <table class="table table-responsive table-striped table-bordered "
+           style="width:100%; margin-top: 20px">
+        <thead>
+            <tr>
+                <th class="col-xs-2">Food & Drink</th>
+                <th class="col-xs-2">Beauty & Health</th>
+                <th class="col-xs-2">Fun & leisure</th>
+                <th class="col-xs-2">retail & services</th>
+                <th class="col-xs-2">cuisine</th>
+                <th class="col-xs-2">attributes</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr style="color: #148F96;">
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+            </tr>
+            <tr style="color: #148F96;">
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+                <td class="col-xs-2">Mazhar</td>
+            </tr>
+            <!-- <tr *ngIf="Admins.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No record found.</td>
+
+            </tr> -->
+
+        </tbody>
+    </table>
+</div>
+

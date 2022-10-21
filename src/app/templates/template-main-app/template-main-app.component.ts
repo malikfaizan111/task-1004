@@ -783,6 +783,7 @@ export class TemplateMainApp implements OnInit, OnDestroy {
 						{ routerLink: '/main/outlets', image: 'Merchant', label: 'Outlets' },
 						{ routerLink: '/main/deals', image: 'Merchant', label: 'Offers' },
 						{ routerLink: '/main/merchant_report', image: 'Merchant', label: 'Merchant Reports' },
+						{routerLink: '/main/outlets_tags', image: 'Mercent', label: 'Outlets Tags'}
 					]
 				},
 				{
