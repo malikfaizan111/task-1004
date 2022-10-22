@@ -1,1 +1,59 @@
-<p>add-tags works!</p>
+<div class="row">
+    <div class="col-sm-12" fxLayoutAlign="none center">
+        <button mat-icon-button (click)="onLocationBack()" color="accent">
+            <img src="assets/images/actions/back.png" alt="">
+        </button>
+        <span fxFlexOffset="8px" class="mainTitle">
+            Add New Tag
+        </span>
+    </div>
+</div>
+<div class="row" style="margin-top: 24px;">
+    <div class="col-sm-12">
+        <label fxFlexOffset="22px">
+            Name the tag
+        </label>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-sm-7">
+        <form [formGroup]="form" (ngSubmit)="doSubmit()">
+            <div class="col-sm-6">
+                <mat-form-field style="width: 100%">
+                    <input matInput formControlName="tag_name" type="text" placeholder="Enter Name">
+                    <mat-error
+                        *ngIf="getValue('tag_name')?.invalid && (getValue('tag_name')?.dirty || getValue('tag_name')?.touched)">
+                        Name is
+                        required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+                <mat-form-field fxFlex appearance="legacy" class="mat-arrow">
+                    <mat-label class="mat-select">Tag Category</mat-label>
+                    <mat-select formControlName="tag_category">
+                        <mat-option value="option1">Food & Drink</mat-option>
+                        <mat-option value="option2">Beauty & Health</mat-option>
+                        <mat-option value="option3">Fun & Leisure</mat-option>
+                        <mat-option value="option4">Retail & Services</mat-option>
+                        <mat-option value="option5">Cuisines</mat-option>
+                        <mat-option value="option6">Attributes</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix fxLayoutAlign="center center">keyboard_arrow_down</mat-icon>
+                    <mat-error
+                        *ngIf="getValue('tag_category')?.invalid && (getValue('tag_category')?.dirty || getValue('tag_category')?.touched)">
+                        Category required</mat-error>
+
+                </mat-form-field>
+
+            </div>
+            <div class="col-sm-6" style="margin-top: 10px;">
+                <button class="tag_btn" fxFlex="150px" style="border-radius: 23px;" mat-raised-button color="accent" [disabled]="form.invalid">
+                    Create
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>

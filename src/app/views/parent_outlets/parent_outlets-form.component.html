@@ -307,7 +307,7 @@ fxFlex.md="48">
 				<span style="font-weight: 300;" *ngIf="url == null || url == '' || url == undefined">
 					Preview
 				</span>
-				<span style="height: 90px;" *ngIf="url !== null || url !== ''">
+				<span style="height: 90px;" *ngIf="url !== null || url !== '' || url == undefined">
 
 					<img style="height: 100%; 
 					width: 90px;padding: 5px;object-fit: contain;" [src]="url">

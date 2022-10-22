@@ -3090,11 +3090,35 @@ textarea.mat-input-element {
     .table>tbody>tr:hover{
         &:nth-child(odd){
             background-color: #F9F9F9;
-            color: #148F96 !important;
+            color: $color_19 !important;
         }
         &:nth-child(even){
             background-color: transparent;
-            color: #148F96 !important;
+            color: $color_19 !important;
         }
     }
  }
+
+ .mat-arrow{
+    .mat-select-arrow{
+        opacity: 0;
+    }
+    .mat-icon {
+        width: 14px !important;
+        height: 14px !important;
+        line-height: 14px !important;
+        transform: translateY(50%) translateX(-30%) ;
+        
+     }
+     .material-icons {
+        font-size: 24px !important;
+        color: $color_19;
+     }
+     .mat-select{
+        font-variation-settings: 'wght' 700 !important;
+        color: $color_19;
+    }  
+ }
+
+ 
+
