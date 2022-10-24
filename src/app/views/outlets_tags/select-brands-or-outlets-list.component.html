@@ -1,1 +1,84 @@
-<p>select-brands-or-outlets-list works!</p>
+<div class="row">
+    <div class="col-sm-12" fxLayoutAlign="none center">
+        <button mat-icon-button (click)="onLocationBack()" color="accent">
+            <img src="assets/images/actions/back.png" alt="">
+        </button>
+        <span fxFlexOffset="8px" class="mainTitle">
+            Select Brands or Outlets
+        </span>
+    </div>
+</div>
+<div class="row" style="margin-top: 24px;">
+    <div class="col-sm-12">
+        <label class="multi_tag" fxFlexOffset="16px">
+            Select brands or outlets to tag
+        </label>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 10px;">
+    <div class="col-sm-12">
+        <div class="col-sm-2" fxLayoutAlign="none center">
+            <mat-form-field fxFlex="100" appearance="legacy" class="mat-arrow">
+                <mat-label class="mat-select">Select Type</mat-label>
+                <mat-select>
+                    <mat-option value="option1">Outlets</mat-option>
+                    <mat-option value="option2">Brands</mat-option>
+                </mat-select>
+                <mat-icon matSuffix fxLayoutAlign="center center">keyboard_arrow_down</mat-icon>
+                <!-- <mat-error
+                    *ngIf="getValue('tag_category')?.invalid && (getValue('tag_category')?.dirty || getValue('tag_category')?.touched)">
+                    Category required</mat-error> -->
+            </mat-form-field>
+        </div>
+        <div class="col-sm-3 custom_search">
+            <mat-form-field fxFlex="100" class="example-full-width" >
+                <mat-label>Search</mat-label>
+                <input matInput>
+              </mat-form-field>
+        </div>
+        <div class="col-sm-1 multi_tag" fxLayoutAlign="center center" style="height: 43px;">
+            or
+        </div>
+        <div class="col-sm-3"  fxLayout="column">
+            <button fxLayoutAlign="start none" style="font-size: 13px;"  class="no-background-btn">Upload CSV</button>
+            <button fxLayoutAlign="start none" class="no-background-btn" style="font-size: 13px; color: #757575;"  >Download Sample CSV</button>
+        </div>
+
+        <div class="col-sm-3" fxLayoutAlign="none center"  style="height: 43px;">
+            <button fxFlex="130px" style="border-radius: 23px; height: 75%;" mat-raised-button color="accent" fxLayoutAlign="center center">
+                Tag Outlets
+            </button>
+            <span class="multi_tag" fxFlexOffset="6">
+                count
+            </span>
+        </div>
+
+    </div>
+</div>
+
+<div class="data-table tags_table">
+    <table class="table table-responsive table-striped table-bordered "
+           style="width:100%; margin-top: 20px">
+        <thead>
+            <tr>
+                <th class="col-xs-2">Results</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr style="color: #148F96;">
+                <td class="col-xs-2">Mazhar</td>
+            </tr>
+            <tr style="color: #148F96;">
+                <td class="col-xs-2">Mazhar</td>
+            </tr>
+            <!-- <tr *ngIf="Admins.length == 0">
+                <td colspan="100"
+                    style="text-align: center">No record found.</td>
+
+            </tr> -->
+
+        </tbody>
+    </table>
+</div>

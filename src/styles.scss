@@ -3120,5 +3120,11 @@ textarea.mat-input-element {
     }  
  }
 
+ .custom_search{
+    .mat-form-field-should-float .mat-form-field-label-wrapper {
+        display: none!important;
+    }
+ }
+
  
 
