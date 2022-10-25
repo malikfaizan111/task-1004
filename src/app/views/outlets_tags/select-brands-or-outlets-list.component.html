@@ -50,14 +50,15 @@
                 Tag Outlets
             </button>
             <span class="multi_tag" fxFlexOffset="6">
-                count
+                <!-- count -->
+                {{objectKeys(selectedOptions).length != 0 ? objectKeys(selectedOptions).length : 'count'}}
             </span>
         </div>
 
     </div>
 </div>
 
-<div class="data-table tags_table">
+<!-- <div class="data-table tags_table">
     <table class="table table-responsive table-striped table-bordered "
            style="width:100%; margin-top: 20px">
         <thead>
@@ -73,12 +74,52 @@
             <tr style="color: #148F96;">
                 <td class="col-xs-2">Mazhar</td>
             </tr>
-            <!-- <tr *ngIf="Admins.length == 0">
-                <td colspan="100"
-                    style="text-align: center">No record found.</td>
-
-            </tr> -->
 
         </tbody>
     </table>
-</div>
+</div> -->
+
+<!-- <div>
+    <mat-selection-list [compareWith]="compareServiceTypes" [(ngModel)]="data" multiple>
+        <div style="border: 2px solid #E8E8E8;">
+           <h4 style="margin-left: 15px;"><b>Results</b></h4> 
+        </div>
+        <mat-list-option style="border: 1px solid #E8E8E8;" checkboxPosition="before" [value]="s" *ngFor="let s of serviceTypes;">
+            {{ s.label }}
+        </mat-list-option>
+    </mat-selection-list>
+</div> -->
+
+<form [formGroup]="form">
+    <mat-selection-list
+      #selectionList
+      [compareWith]="compareFunction"
+      [formControlName]="'selected'"
+      (selectionChange)="onSelectionChanged($event)"
+    >
+    <div style="border: 2px solid #E8E8E8;">
+        <h4 style="margin-left: 15px;"><b>Results</b></h4> 
+     </div>
+      <mat-list-option style="border: 1px solid #E8E8E8;"
+        *ngFor="let item of typesOfShoes"
+        checkboxPosition="before"
+        [value]="item"
+      >
+        {{item.name}}
+      </mat-list-option>
+    </mat-selection-list>
+    <div>
+        <app-pagination
+            [hide]="false"
+            [perPage]="20"></app-pagination>
+    </div>
+    <button (click)="switchPage(1)">Page 1</button>
+    <button (click)="switchPage(2)">Page 2</button>
+  
+    <pre>
+    form.value: {{form.value | json}}
+      Seelected: {{selectedOptions | json}}
+      Count: {{objectKeys(selectedOptions).length}}
+    <!-- selectedValues: {{selectedOptions | json}} -->
+  </pre>
+  </form>

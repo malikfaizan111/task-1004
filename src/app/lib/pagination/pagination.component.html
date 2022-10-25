@@ -12,12 +12,12 @@
 				<option value="500">500 per page</option>
 			</select>
 		</li>
-		<li>
+		<li *ngIf="hide">
 			<a class="paginate_button first"
 			   (click)="$event.target.classList.contains('disabled') || makePagination(1)"
 			   [ngClass]="{disabled:currentPage == 1}">FIRST</a>
 		</li>
-		<li>
+		<li *ngIf="hide">
 			<a class="paginate_button prev"
 			   (click)="$event.target.classList.contains('disabled') || makePagination(currentPage - 1)"
 			   [ngClass]="{disabled:currentPage == 1}"> <img width="10" height="15" src="assets/images/leftArrow.png" /> </a>
@@ -38,7 +38,7 @@
 			<a class="paginate_button"
 			   (click)="makePagination(currentPage-1)">{{currentPage - 1}}</a>
 		</li>
-		<li class="active">
+		<li class="active" *ngIf="hide">
 			<a class="paginate_button"
 			   (click)="makePagination(currentPage)">{{currentPage}}</a>
 		</li>
@@ -58,15 +58,15 @@
 			<span class="pull-left"
 			      style="display: block; margin: 0 5px">...</span>
 		</li>
-		<li>
+		<li *ngIf="hide">
 			<a class="paginate_button next"
 			   (click)="$event.target.classList.contains('disabled') || makePagination(currentPage + 1)"
 			   [ngClass]="{disabled:currentPage == totalPages}"><img width="10" height="15" src="assets/images/rightArrow.png" /></a>
 		</li>
-		<li>
+		<li *ngIf="hide">
 			<a class="paginate_button last"
 			   (click)="$event.target.classList.contains('disabled') || makePagination(totalPages)"
 			   [ngClass]="{disabled:currentPage == totalPages}">LAST</a>
-		</li>
+		</li> 
 	</ul>
 </div>
