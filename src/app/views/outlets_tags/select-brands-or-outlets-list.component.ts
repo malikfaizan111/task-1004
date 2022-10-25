@@ -1,13 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
+import { ActivatedRoute, Router } from '@angular/router';
+import { extend } from 'jquery';
+import { ImportCSVComponent } from 'src/app/lib/import_csv.component';
+import { BaseLoaderService, MainService } from 'src/app/services';
 
 @Component({
   selector: 'app-select-brands-or-outlets-list',
   templateUrl: './select-brands-or-outlets-list.component.html',
   styleUrls: ['./select-brands-or-outlets-list.component.scss']
 })
-export class SelectBrandsOrOutletsListComponent implements OnInit {
+export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent implements OnInit {
 
   // selectedOptions = { '1': { name: 'Boots', id: 1 } };
   objectKeys = Object.keys;
@@ -27,9 +32,12 @@ export class SelectBrandsOrOutletsListComponent implements OnInit {
 
   @ViewChild('selectionList') selectionList: MatSelectionList;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(protected router: Router,protected _route: ActivatedRoute,protected baseloader: BaseLoaderService,protected mainApiService: MainService,
+    protected formBuilder: FormBuilder, protected dialog: MatDialog) {
+      super(mainApiService, dialog);
     this.index= 1;
     this.perPage = 20;
+    this.result = 0;
    }
 
   
@@ -83,5 +91,38 @@ setPage(pageDate: any)
 {
   this.perPage = pageDate.perPage;
 }
+
+
+afterSelectionCsv(result: any, headersObj: any, objTemp: any): void {
+  // console.log(result);
+  for (let key in headersObj) {
+      if (!headersObj.hasOwnProperty('outlet_id') && !objTemp.hasOwnProperty('outlet_id')) {
+          objTemp['outlet_id'] = null;
+          this.errorMessageForCSV = this.errorMessageForCSV + '<b>outlet_id</b> is missing,<br> ';
+          this.errorCounter++;
+      }
+  }
+
+  if (this.errorCounter == 0) {
+      result.forEach((element: any, index: any) => {
+          if (element['outlet_id'] == null || element['outlet_id'] == '') {
+              this.errorMessageForCSV = this.errorMessageForCSV + '<b>outlet_id</b> is empty on line number ' + (index + 1) + ',<br> ';
+              this.errorCounter++;
+          }
+      });
+  }
+  this.afterJSON = result;
+}
+
+
+onUploadCSV(): void {
+  this.afterSelectionCsv(this.result, this.headersObj, this.objTemp);
+  this.JsonToServer = { outlets: JSON.stringify(this.result) };
+  // this.JsonToServer = { outlets: "[]" };
+  // console.log(this.JsonToServer);
+  super.onUploadCSV();
+}
+
+
 
 }

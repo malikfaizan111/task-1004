@@ -41,17 +41,28 @@
             or
         </div>
         <div class="col-sm-3"  fxLayout="column">
-            <button fxLayoutAlign="start none" style="font-size: 13px;"  class="no-background-btn">Upload CSV</button>
-            <button fxLayoutAlign="start none" class="no-background-btn" style="font-size: 13px; color: #757575;"  >Download Sample CSV</button>
+
+            <input #uploadFile accept=".csv" type="file" style="display: none;" (change)="convertFile($event)">
+
+            <button fxLayoutAlign="start none" style="font-size: 13px;"  class="no-background-btn" (click)="uploadFile.click()">Upload CSV</button>
+            <button fxLayoutAlign="start none" class="no-background-btn" style="font-size: 13px; color: #757575;">
+                <a download target="_blank" href="assets/sample_csv_tags.csv" style="font-size: 13px; color: #757575;" >
+                Download sample CSV
+            </a>
+            </button>
         </div>
 
         <div class="col-sm-3" fxLayoutAlign="none center"  style="height: 43px;">
             <button fxFlex="130px" style="border-radius: 23px; height: 75%;" mat-raised-button color="accent" fxLayoutAlign="center center">
                 Tag Outlets
             </button>
-            <span class="multi_tag" fxFlexOffset="6">
+            <span class="multi_tag" fxFlexOffset="6" *ngIf="objectKeys(result).length == 0">
                 <!-- count -->
                 {{objectKeys(selectedOptions).length != 0 ? objectKeys(selectedOptions).length : 'count'}}
+            </span>
+            <span class="multi_tag" fxFlexOffset="6" *ngIf="objectKeys(result).length != 0">
+                <!-- count -->
+                {{objectKeys(result).length != 0 ? objectKeys(result).length : 'count'}}
             </span>
         </div>
 
@@ -90,7 +101,7 @@
     </mat-selection-list>
 </div> -->
 
-<form [formGroup]="form">
+<form [formGroup]="form" *ngIf="objectKeys(result).length == 0">
     <mat-selection-list
       #selectionList
       [compareWith]="compareFunction"
@@ -98,7 +109,7 @@
       (selectionChange)="onSelectionChanged($event)"
     >
     <div style="border: 2px solid #E8E8E8;">
-        <h4 style="margin-left: 15px;"><b>Results</b></h4> 
+        <h5 style="margin-left: 15px;"><b>Results</b></h5> 
      </div>
       <mat-list-option style="border: 1px solid #E8E8E8;"
         *ngFor="let item of typesOfShoes"
@@ -120,6 +131,11 @@
     form.value: {{form.value | json}}
       Seelected: {{selectedOptions | json}}
       Count: {{objectKeys(selectedOptions).length}}
+      CSV to JSON : {{result | json}}
     <!-- selectedValues: {{selectedOptions | json}} -->
   </pre>
   </form>
+
+  <div *ngIf="objectKeys(result).length != 0">
+    <h1>{{fileName}}</h1>
+  </div>
