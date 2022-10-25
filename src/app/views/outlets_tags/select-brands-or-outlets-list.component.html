@@ -32,21 +32,23 @@
             </mat-form-field>
         </div>
         <div class="col-sm-3 custom_search">
-            <mat-form-field fxFlex="100" class="example-full-width" >
+            <mat-form-field fxFlex="100" class="example-full-width">
                 <mat-label>Search</mat-label>
                 <input matInput>
-              </mat-form-field>
+            </mat-form-field>
         </div>
         <div class="col-sm-1 multi_tag" fxLayoutAlign="center center" style="height: 43px;">
             or
         </div>
-        <div class="col-sm-3"  fxLayout="column">
-            <button fxLayoutAlign="start none" style="font-size: 13px;"  class="no-background-btn">Upload CSV</button>
-            <button fxLayoutAlign="start none" class="no-background-btn" style="font-size: 13px; color: #757575;"  >Download Sample CSV</button>
+        <div class="col-sm-3" fxLayout="column">
+            <button fxLayoutAlign="start none" style="font-size: 13px;" class="no-background-btn">Upload CSV</button>
+            <button fxLayoutAlign="start none" class="no-background-btn"
+                style="font-size: 13px; color: #757575;">Download Sample CSV</button>
         </div>
 
-        <div class="col-sm-3" fxLayoutAlign="none center"  style="height: 43px;">
-            <button fxFlex="130px" style="border-radius: 23px; height: 75%;" mat-raised-button color="accent" fxLayoutAlign="center center">
+        <div class="col-sm-3" fxLayoutAlign="none center" style="height: 43px;">
+            <button fxFlex="130px" style="border-radius: 23px; height: 75%;" mat-raised-button color="accent"
+                fxLayoutAlign="center center" (click)="onSelectTag()">
                 Tag Outlets
             </button>
             <span class="multi_tag" fxFlexOffset="6">
@@ -58,8 +60,7 @@
 </div>
 
 <div class="data-table tags_table">
-    <table class="table table-responsive table-striped table-bordered "
-           style="width:100%; margin-top: 20px">
+    <table class="table table-responsive table-striped table-bordered " style="width:100%; margin-top: 20px">
         <thead>
             <tr>
                 <th class="col-xs-2">Results</th>

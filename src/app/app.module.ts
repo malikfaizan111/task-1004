@@ -151,6 +151,7 @@ import { UploadMultipleBrandsComponent } from './views/parent_outlets/upload-mul
 import { OutletTagsListComponent } from './views/outlets_tags/outlet-tags-list.component';
 import { SelectBrandsOrOutletsListComponent } from './views/outlets_tags/select-brands-or-outlets-list.component';
 import { AddTagsComponent } from './views/outlets_tags/add-tags.component';
+import { SelectTagsComponent } from './views/outlets_tags/select-tags.component';
 
 @NgModule({
   imports: [
@@ -354,7 +355,8 @@ import { AddTagsComponent } from './views/outlets_tags/add-tags.component';
     UploadMultipleBrandsComponent,
     OutletTagsListComponent,
     SelectBrandsOrOutletsListComponent,
-    AddTagsComponent
+    AddTagsComponent,
+    SelectTagsComponent
 
   
   ],

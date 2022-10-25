@@ -82,7 +82,7 @@ import {SmsDetailComponent} from './views/newsms/sms-detail.component';
 import {TransactionsComponent} from './views/defaults/transactions/transactions.component'
 import {KpiReportComponent} from './views/kpi-report/kpi-report.component';
 import { UploadMultipleBrandsComponent } from './views/parent_outlets/upload-multiple-brands.component';
-import {OutletTagsListComponent, SelectBrandsOrOutletsListComponent, AddTagsComponent} from './views/outlets_tags/index';
+import {OutletTagsListComponent, SelectBrandsOrOutletsListComponent, AddTagsComponent, SelectTagsComponent} from './views/outlets_tags/index';
 
 
 
@@ -165,6 +165,8 @@ const mainApp: Routes = [
 	{ path: 'outlets_tags', component: OutletTagsListComponent, canActivate: [AppsGuard], data: { roles: ['1', '2', '3'] } },
 	{ path: 'outlets_tags/select', component: SelectBrandsOrOutletsListComponent, canActivate: [AppsGuard], data: { roles: ['1', '2', '3'] } },
 	{ path: 'outlets_tags/add', component: AddTagsComponent, canActivate: [AppsGuard], data: { roles: ['1', '2', '3'] } },
+	{ path: 'outlets_tags/select/:id', component: SelectTagsComponent, canActivate: [AppsGuard], data: { roles: ['1', '2', '3'] } },
+	
 
 
 	{ path: 'notifications', component: NotificationsListComponent, canActivate: [AppsGuard], data: { roles: ['1', '2'] } },

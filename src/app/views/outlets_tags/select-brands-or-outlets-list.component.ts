@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-brands-or-outlets-list',
@@ -9,14 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectBrandsOrOutletsListComponent implements OnInit {
 
-  constructor() { }
+  constructor(protected router: Router,) { }
 
   ngOnInit(): void {
   }
 
 
-  onLocationBack(): void {
+onLocationBack(): void 
+{
     window.history.back();
+}
+
+onSelectTag()
+{
+  this.router.navigateByUrl('main/outlets_tags/select/select_tags');
 }
 
 }
