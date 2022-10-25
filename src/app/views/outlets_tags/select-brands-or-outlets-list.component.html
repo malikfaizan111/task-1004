@@ -58,11 +58,11 @@
             </button>
             <span class="multi_tag" fxFlexOffset="6" *ngIf="objectKeys(result).length == 0">
                 <!-- count -->
-                {{objectKeys(selectedOptions).length != 0 ? objectKeys(selectedOptions).length : 'count'}}
+                {{objectKeys(selectedOptions).length != 0 ? objectKeys(selectedOptions).length + ' outlets' : 'count'}}
             </span>
             <span class="multi_tag" fxFlexOffset="6" *ngIf="objectKeys(result).length != 0">
                 <!-- count -->
-                {{objectKeys(result).length != 0 ? objectKeys(result).length : 'count'}}
+                {{objectKeys(result).length != 0 ? objectKeys(result).length + ' outlets' : 'count'}}
             </span>
         </div>
 
@@ -101,41 +101,81 @@
     </mat-selection-list>
 </div> -->
 
-<form [formGroup]="form" *ngIf="objectKeys(result).length == 0">
-    <mat-selection-list
-      #selectionList
-      [compareWith]="compareFunction"
-      [formControlName]="'selected'"
-      (selectionChange)="onSelectionChanged($event)"
-    >
-    <div style="border: 2px solid #E8E8E8;">
-        <h5 style="margin-left: 15px;"><b>Results</b></h5> 
-     </div>
-      <mat-list-option style="border: 1px solid #E8E8E8;"
-        *ngFor="let item of typesOfShoes"
-        checkboxPosition="before"
-        [value]="item"
-      >
-        {{item.name}}
-      </mat-list-option>
-    </mat-selection-list>
-    <div>
-        <app-pagination
-            [hide]="false"
-            [perPage]="20"></app-pagination>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="95" fxFlexOffset="1">
+        <form [formGroup]="form" *ngIf="objectKeys(result).length == 0">
+            <mat-selection-list
+              #selectionList
+              [compareWith]="compareFunction"
+              [formControlName]="'selected'"
+              (selectionChange)="onSelectionChanged($event)"
+            >
+            <div style="border: 2px solid #E8E8E8;">
+                <h5 style="margin-left: 15px;"><b>Results</b></h5> 
+             </div>
+              <mat-list-option style="border: 1px solid #E8E8E8;"
+                *ngFor="let item of typesOfShoes"
+                checkboxPosition="before"
+                [value]="item"
+              >
+                {{item.name}}
+              </mat-list-option>
+            </mat-selection-list>
+            <div>
+                <app-pagination
+                    [hide]="false"
+                    [perPage]="20"></app-pagination>
+            </div>
+            <button (click)="switchPage(1)">Page 1</button>
+            <button (click)="switchPage(2)">Page 2</button>
+          
+            <pre>
+            form.value: {{form.value | json}}
+              Seelected: {{selectedOptions | json}}
+              Count: {{objectKeys(selectedOptions).length}}
+              CSV to JSON : {{result | json}}
+            <!-- selectedValues: {{selectedOptions | json}} -->
+          </pre>
+          </form>
     </div>
-    <button (click)="switchPage(1)">Page 1</button>
-    <button (click)="switchPage(2)">Page 2</button>
-  
-    <pre>
-    form.value: {{form.value | json}}
-      Seelected: {{selectedOptions | json}}
-      Count: {{objectKeys(selectedOptions).length}}
-      CSV to JSON : {{result | json}}
-    <!-- selectedValues: {{selectedOptions | json}} -->
-  </pre>
-  </form>
 
-  <div *ngIf="objectKeys(result).length != 0">
+</div>
+
+
+  <!-- <div *ngIf="objectKeys(result).length != 0">
     <h1>{{fileName}}</h1>
+  </div> -->
+
+  <div *ngIf="objectKeys(result).length != 0" class="mt-5">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div fxFlex="1"></div>
+        <div fxFlex="40" style="border: 1px solid #E8E8E8" >
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                <div fxFlex="3"></div>
+                <div fxFlex="52">
+                    <h5><b>File</b></h5>
+                </div>
+                <div fxFlex="45" fxLayoutAlign="center center">
+                    <h5><b>Number of outlets</b></h5>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="59"></div>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div fxFlex="1"></div>
+        <div fxFlex="40" style="border: 1px solid #E8E8E8">
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                <div fxFlex="3"></div>
+                <div fxFlex="52">
+                    <h5>{{fileName}}</h5>
+                </div>
+                <div fxFlex="45" fxLayoutAlign="center center">
+                    <h5>{{objectKeys(result).length != 0 ? objectKeys(result).length + ' outlets' : 'count'}}</h5>
+                </div>
+            </div>
+          </div>
+          <div fxFlex="59"></div>
+      </div>
   </div>
+  
