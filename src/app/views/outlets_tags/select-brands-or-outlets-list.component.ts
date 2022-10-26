@@ -85,6 +85,7 @@ onSelectionChanged(event) {
     selected: Object.values(this.selectedOptions),
   });
   console.log(this.form.get('selected').value.length);
+  console.log(Object.keys(this.selectedOptions));
 }
 
 setPage(pageDate: any)
