@@ -23,7 +23,7 @@ import { NgxEmojiPickerModule } from "ngx-emoji-picker";
 import { AuthService, MainService, PaginationService, BaseLoaderService, ExcelService } from './services';
 
 // Lib
-import { FilterDatePipe, AlertDialog, BaseLoaderComponent, PaginationComponent, MapLocationDialog, GetLocationDialog, FilePickerComponent, ExportCSVDialog, MultiTagInputComponent } from './lib';
+import { FilterDatePipe, AlertDialog, BaseLoaderComponent, PaginationComponent, MapLocationDialog, GetLocationDialog, FilePickerComponent, ExportCSVDialog, MultiTagInputComponent, assignDialog } from './lib';
 
 // Config
 import { appConfig } from '../config';
@@ -209,6 +209,7 @@ import { AddTagsComponent } from './views/outlets_tags/add-tags.component';
     LoginComponent,
     TemplateMainApp,
     AlertDialog,
+    assignDialog,
     ClickOutsideDirective,
     BaseLoaderComponent,
     PaginationComponent,
@@ -360,6 +361,7 @@ import { AddTagsComponent } from './views/outlets_tags/add-tags.component';
   ],
   entryComponents: [
     AlertDialog,
+    assignDialog,
     MapLocationDialog,
     GetLocationDialog,
     ChangeOutletOrderDialogComponent,

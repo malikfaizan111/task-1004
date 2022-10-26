@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
 import { ActivatedRoute, Router } from '@angular/router';
 import { extend } from 'jquery';
+import { assignDialog } from 'src/app/lib';
 import { ImportCSVComponent } from 'src/app/lib/import_csv.component';
 import { BaseLoaderService, MainService } from 'src/app/services';
 
@@ -21,11 +22,11 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
   index:any;
   selectedOptions:any = {}
   typesOfShoes: { name: string; id: number }[] = [
-    { name: 'Boots', id: 1 }, 
-    { name: 'Clogs', id: 2 },
-    { name: 'Loafers', id: 3 },
-    { name: 'Moccasins', id: 4 },
-    { name: 'Sneakers', id: 5 },
+    { name: 'Boots', id: 1011 }, 
+    { name: 'Clogs', id: 2011 },
+    { name: 'Loafers', id: 3011 },
+    { name: 'Moccasins', id: 4011 },
+    { name: 'Sneakers', id: 5011 },
   ];
 
   form: FormGroup;
@@ -50,16 +51,16 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
   switchPage(page: number) {
     if (page === 1) {
       this.typesOfShoes = [
-        { name: 'Boots', id: 1 },
-        { name: 'Clogs', id: 2 },
-        { name: 'Loafers', id: 3 },
-        { name: 'Moccasins', id: 4 },
-        { name: 'Sneakers', id: 5 },
+        { name: 'Boots', id: 1011 },
+        { name: 'Clogs', id: 2011 },
+        { name: 'Loafers', id: 3011 },
+        { name: 'Moccasins', id: 4011 },
+        { name: 'Sneakers', id: 5011 },
       ];
     } else {
       this.typesOfShoes = [
-        { name: 'Flyers', id: 6 },
-        { name: 'Dr.Martens', id: 7 },
+        { name: 'Flyers', id: 6011 },
+        { name: 'Dr.Martens', id: 7011 },
       ];
     }
     this.form.setValue({
@@ -71,6 +72,31 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
     window.history.back();
 }
 
+onTagSelect()
+{
+  
+  let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
+
+  dialogRef.afterClosed().subscribe((result)=>{
+    
+  })
+  // outlet import section
+  var outlets:any;
+  if(this.result.length > 0)
+  {
+    console.log('import outlets:',this.result);
+    outlets = this.result.map((item)=> {
+      return item['outlet_id'];
+    });
+    console.log(outlets);
+  }
+  else{
+    outlets = Object.keys(this.selectedOptions);
+    console.log(this.selectedOptions);
+    console.log(outlets);
+  }
+
+}
 onSelectionChanged(event) {
   const isSelected = event.option.selected;
   const value = event.option.value;
@@ -85,7 +111,8 @@ onSelectionChanged(event) {
     selected: Object.values(this.selectedOptions),
   });
   console.log(this.form.get('selected').value.length);
-  console.log(Object.keys(this.selectedOptions));
+  console.log('Selected outlets:', Object.keys(this.selectedOptions));
+  console.log('import outlets:',Object.keys(this.result))
 }
 
 setPage(pageDate: any)
