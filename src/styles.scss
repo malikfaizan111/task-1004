@@ -3159,6 +3159,27 @@ textarea.mat-input-element {
             margin: 4px;
     }
 
+    .select_tags{
+        table{
+            border: 1px solid #ddd;
+            thead{
+                tr{
+                    th{
+                        border: 1px solid #E8E8E8;
+                    }
+                }
+            }
+            tbody{
+                tr{
+                    td{
+
+                        border: 1px solid #E8E8E8;
+                    }
+                }
+            }
+        }
+    }
+
  
 
 
