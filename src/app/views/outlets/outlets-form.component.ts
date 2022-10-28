@@ -296,6 +296,47 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
                     //     }
                     
                     // this.Form.get('image').patchValue( 'data:image/jpg;base64,' + localStorage.getItem('OutletImage'));
+                    let fooddrinks;
+                    if(this.outlet.food_and_drinks_tags)
+                    {
+                        fooddrinks = this.outlet.food_and_drinks_tags.split(',');
+                    }
+                    this.Form.get('food_and_drinks_tags')?.setValue(fooddrinks);
+
+                    let cuisine;
+                    if(this.outlet.cuisine_tags)
+                    {
+                        fooddrinks = this.outlet.cuisine_tags.split(',');
+                    }
+                    this.Form.get('cuisine_tags')?.setValue(cuisine);
+
+                    let beauty;
+                    if(this.outlet.beauty_and_health_tags)
+                    {
+                        fooddrinks = this.outlet.beauty_and_health_tags.split(',');
+                    }
+                    this.Form.get('beauty_and_health_tags')?.setValue(beauty);
+
+                    let attribute;
+                    if(this.outlet.attribute_tags)
+                    {
+                        fooddrinks = this.outlet.attribute_tags.split(',');
+                    }
+                    this.Form.get('attribute_tags')?.setValue(attribute);
+
+                    let funLeisure;
+                    if(this.outlet.fun_and_leisure_tags)
+                    {
+                        fooddrinks = this.outlet.fun_and_leisure_tags.split(',');
+                    }
+                    this.Form.get('fun_and_leisure_tags')?.setValue(funLeisure);
+
+                    let retailServices
+                    if(this.outlet.retail_and_services_tags)
+                    {
+                        fooddrinks = this.outlet.retail_and_services_tags.split(',');
+                    }
+                    this.Form.get('retail_and_services_tags')?.setValue(retailServices);
 
                     let cart: any;
                     if (this.outlet.category_ids) {
@@ -463,6 +504,7 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
     doSubmit(): void {
         this.isLoading = true;
         let method = '';
+        console.log(this.Form.value);
         let formData = new FormData();
         if (this.id == 'add') {
             method = 'addOutlet';
@@ -542,6 +584,13 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
         else {
             formData.append('collection_ids', "");
         }
+
+        formData.append('food_and_drinks_tags', this.Form.value['food_and_drinks_tags'].join(','));
+        formData.append('cuisine_tags', this.Form.value['cuisine_tags'].join(','));
+        formData.append('beauty_and_health_tags', this.Form.value['beauty_and_health_tags'].join(','));
+        formData.append('attribute_tags', this.Form.value['attribute_tags'].join(','));
+        formData.append('fun_and_leisure_tags', this.Form.value['fun_and_leisure_tags'].join(','));
+        formData.append('retail_and_services_tags', this.Form.value['retail_and_services_tags'].join(','))
 
         this.mainApiService.postFormData(appConfig.base_url_slug + method, formData).then(response => {
             if (response.status == 200 || response.status == 201) {
