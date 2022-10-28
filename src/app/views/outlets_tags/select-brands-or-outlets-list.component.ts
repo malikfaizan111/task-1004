@@ -20,7 +20,8 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
   compareFunction = (o1: any, o2: any) => o1.id === o2.id;
   perPage:any;
   index:any;
-  selectedOptions:any = {}
+  selectedOptions:any = {};
+  outlets: any;
   typesOfShoes: { name: string; id: number }[] = [
     { name: 'Boots', id: 1011 }, 
     { name: 'Clogs', id: 2011 },
@@ -75,11 +76,6 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
 onTagSelect()
 {
   
-  let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
-
-  dialogRef.afterClosed().subscribe((result)=>{
-    
-  })
   // outlet import section
   var outlets:any;
   if(this.result.length > 0)
@@ -89,11 +85,35 @@ onTagSelect()
       return item['outlet_id'];
     });
     console.log(outlets);
+    let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
+    let cm = dialogRef.componentInstance;
+    cm.methodName = 'addoutlettags';
+    cm.datetoSubmit = outlets;
+    cm.tagsCount = this.result.length ;
+    cm.outletsCount = this.result.length ;
+  
+    dialogRef.afterClosed().subscribe((result)=>{
+      // this.router.navigateByUrl('/main/outlets_tags');
+    })
   }
-  else{
+  else if (Object.keys(this.selectedOptions).length > 0){
     outlets = Object.keys(this.selectedOptions);
     console.log(this.selectedOptions);
     console.log(outlets);
+
+    let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
+    let cm = dialogRef.componentInstance;
+    cm.methodName = 'addoutlettags';
+    cm.datetoSubmit = outlets;
+    cm.tagsCount = outlets.length ;
+    cm.outletsCount = outlets.length ;
+  
+    dialogRef.afterClosed().subscribe((result)=>{
+      this.router.navigateByUrl('/main/outlets_tags');
+    })
+  }
+  else{
+
   }
 
 }
