@@ -34,7 +34,7 @@
         <div class="col-sm-3 custom_search">
             <mat-form-field fxFlex="100" class="example-full-width" >
                 <mat-label>Search</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]="search" (keyup)="onSearchBrandOrOutlet()" >
               </mat-form-field>
         </div>
         <div class="col-sm-1 multi_tag" fxLayoutAlign="center center" style="height: 43px;">
@@ -114,7 +114,7 @@
                 <h5 style="margin-left: 15px;"><b>Results</b></h5> 
              </div>
               <mat-list-option style="border: 1px solid #E8E8E8;"
-                *ngFor="let item of typesOfShoes"
+                *ngFor="let item of searchList"
                 checkboxPosition="before"
                 [value]="item"
               >
@@ -123,8 +123,8 @@
             </mat-selection-list>
             <div>
                 <app-pagination
-                    [hide]="false"
-                    [perPage]="20"></app-pagination>
+                    [hide]="false" (setPage)="setPage($event)"
+                    [perPage]="perPage"></app-pagination>
             </div>
             <button (click)="switchPage(1)">Page 1</button>
             <button (click)="switchPage(2)">Page 2</button>

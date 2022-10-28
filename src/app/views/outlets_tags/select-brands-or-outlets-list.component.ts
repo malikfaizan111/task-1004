@@ -7,6 +7,7 @@ import { extend } from 'jquery';
 import { assignDialog } from 'src/app/lib';
 import { ImportCSVComponent } from 'src/app/lib/import_csv.component';
 import { BaseLoaderService, MainService } from 'src/app/services';
+import { appConfig } from 'src/config';
 
 @Component({
   selector: 'app-select-brands-or-outlets-list',
@@ -19,10 +20,13 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
   objectKeys = Object.keys;
   compareFunction = (o1: any, o2: any) => o1.id === o2.id;
   perPage:any;
-  index:any;
+  currentPage:any;
   selectedOptions:any = {};
   outlets: any;
-  typesOfShoes: { name: string; id: number }[] = [
+  search:any;
+  methodName: any;
+  searchTimer:any;
+  searchList: { name: string; id: number }[] = [
     { name: 'Boots', id: 1011 }, 
     { name: 'Clogs', id: 2011 },
     { name: 'Loafers', id: 3011 },
@@ -37,7 +41,7 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
   constructor(protected router: Router,protected _route: ActivatedRoute,protected baseloader: BaseLoaderService,protected mainApiService: MainService,
     protected formBuilder: FormBuilder, protected dialog: MatDialog) {
       super(mainApiService, dialog);
-    this.index= 1;
+    this.currentPage= 1;
     this.perPage = 20;
     this.result = 0;
    }
@@ -47,15 +51,67 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
     this.form = this.formBuilder.group({
       selected: [Object.values(this.selectedOptions)],
     });
+    // this.getBrandOrOutlets(this.currentPage);
   }
 
   onType(event:any){
     console.log(event);
+    if(event == 1)
+    {
+      this.methodName = 'searchBrands';
+      this.getBrandOrOutlets(this.currentPage);
+    }
+    else if(event == 2)
+    {
+      this.methodName = 'searchOutlets';
+      this.getBrandOrOutlets(this.currentPage);
+    }
+    else{
+
+    }
   }
+
+  onSearchBrandOrOutlet()
+  {
+
+      clearTimeout(this.searchTimer);
+      this.searchTimer = setTimeout(() => {
+        this.getBrandOrOutlets(1);
+      }, 800);
+  }
+  getBrandOrOutlets(index:any,isLoaderHidden?: boolean)
+  {
+      let url = '';
+
+      url = this.methodName + '?page=' + index + '&per_page=' + this.perPage;
+
+      if (this.search != '') {
+        url = url + '&search=' + this.search;
+      }
+
+      this.mainApiService.getList(appConfig.base_url_slug + url,false, 2)
+      .then(result =>{
+        if(result.status == 200 && result.data)
+        {
+          this.searchList = result.data;
+        }
+        else {
+          this.search = [];
+          this.currentPage = 1;
+
+        }
+      })
+
+  }
+
+  setPage(pageDate: any) {
+		this.perPage = pageDate.perPage;
+		this.getBrandOrOutlets(this.currentPage);
+	}
 
   switchPage(page: number) {
     if (page === 1) {
-      this.typesOfShoes = [
+      this.searchList = [
         { name: 'Boots', id: 1011 },
         { name: 'Clogs', id: 2011 },
         { name: 'Loafers', id: 3011 },
@@ -63,7 +119,7 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
         { name: 'Sneakers', id: 5011 },
       ];
     } else {
-      this.typesOfShoes = [
+      this.searchList = [
         { name: 'Flyers', id: 6011 },
         { name: 'Dr.Martens', id: 7011 },
       ];
@@ -113,7 +169,7 @@ onTagSelect()
     cm.outletsCount = outlets.length ;
   
     dialogRef.afterClosed().subscribe((result)=>{
-      this.router.navigateByUrl('/main/outlets_tags');
+      // this.router.navigateByUrl('/main/outlets_tags');
     })
   }
   else{
@@ -139,10 +195,6 @@ onSelectionChanged(event) {
   console.log('import outlets:',Object.keys(this.result))
 }
 
-setPage(pageDate: any)
-{
-  this.perPage = pageDate.perPage;
-}
 
 
 afterSelectionCsv(result: any, headersObj: any, objTemp: any): void {
