@@ -13,6 +13,7 @@ export class PaginationComponent implements OnInit
 	@Input() totalPages: number;
 	@Input() currentPage: number;
   @Input() show = true;
+  @Input() hide = true;
 
 	constructor(protected paginationService: PaginationService)
 	{

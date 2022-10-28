@@ -392,6 +392,84 @@
 					<multi-tag-input class="multi_tag" (onTagAdd)="onTagAdd($event)" [emails]="outlet?.emails" [required]="true"
 						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Emails"></multi-tag-input>
 				</div>
+				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%;">
+								<mat-select formControlName="food_and_drinks_tags" placeholder="Food & Drinks Tags" multiple>
+									<mat-option value="0">No</mat-option>
+									<mat-option value="1">Yes</mat-option>
+									<mat-option value="2">Both</mat-option>
+								</mat-select>
+								<mat-error *ngIf="getValue('food_and_drinks_tags')?.invalid && (getValue('food_and_drinks_tags')?.dirty || getValue('food_and_drinks_tags')?.touched)">
+								Food & Drinks Tags</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%;">
+								<mat-select formControlName="cuisine_tags" placeholder="Cuisine Tags" multiple>
+									<mat-option value="0">No</mat-option>
+									<mat-option value="1">Yes</mat-option>
+									<mat-option value="2">Both</mat-option>
+								</mat-select>
+								<mat-error *ngIf="getValue('cuisine_tags')?.invalid && (getValue('cuisine_tags')?.dirty || getValue('cuisine_tags')?.touched)">
+								Cuisine Tags</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%;">
+								<mat-select formControlName="beauty_and_health_tags" placeholder="Beauty & Health Tag" multiple>
+									<mat-option value="0">No</mat-option>
+									<mat-option value="1">Yes</mat-option>
+									<mat-option value="2">Both</mat-option>
+								</mat-select>
+								<mat-error *ngIf="getValue('beauty_and_health_tags')?.invalid && (getValue('beauty_and_health_tags')?.dirty || getValue('beauty_and_health_tags')?.touched)">
+								Beauty & Health Tag</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%;">
+								<mat-select formControlName="attribute_tags" placeholder="Attribute Tags" multiple>
+									<mat-option value="0">No</mat-option>
+									<mat-option value="1">Yes</mat-option>
+									<mat-option value="2">Both</mat-option>
+								</mat-select>
+								<mat-error *ngIf="getValue('attribute_tags')?.invalid && (getValue('attribute_tags')?.dirty || getValue('attribute_tags')?.touched)">
+								Attribute Tags</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%;">
+								<mat-select formControlName="fun_and_leisure_tags" placeholder="Fun & Leisure Tags" multiple>
+									<mat-option value="0">No</mat-option>
+									<mat-option value="1">Yes</mat-option>
+									<mat-option value="2">Both</mat-option>
+								</mat-select>
+								<mat-error *ngIf="getValue('fun_and_leisure_tags')?.invalid && (getValue('fun_and_leisure_tags')?.dirty || getValue('fun_and_leisure_tags')?.touched)">
+								Fun & Leisure Tags</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
+					<div class="form-group mb-0">
+						<mat-form-field style="width: 100%;">
+								<mat-select formControlName="retail_and_services_tags" placeholder="Retail & Services Tags" multiple>
+									<mat-option value="0">No</mat-option>
+									<mat-option value="1">Yes</mat-option>
+									<mat-option value="2">Both</mat-option>
+								</mat-select>
+								<mat-error *ngIf="getValue('retail_and_services_tags')?.invalid && (getValue('retail_and_services_tags')?.dirty || getValue('retail_and_services_tags')?.touched)">
+								Retail & Services Tags</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
 				<!-- <div fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">

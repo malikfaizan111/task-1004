@@ -23,6 +23,7 @@ export class ImportCSVComponent implements OnInit {
     result: any;
     headersObj: any;
     objTemp: any;
+    fileName:any;
 
     constructor(protected mainApiService: MainService, protected dialog: MatDialog) {
         this.afterJSON = '';
@@ -37,6 +38,7 @@ export class ImportCSVComponent implements OnInit {
         this.errorCounter = 0;
         this.csvFile = event.target.files;
         let file: File = this.csvFile[0];
+        this.fileName = file.name;
         if (file != undefined) {
             var reader: FileReader = new FileReader();
             reader.readAsText(file);

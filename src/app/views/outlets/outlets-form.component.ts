@@ -17,7 +17,7 @@ declare var $: any;
 @Component({
     selector: 'app-outlets-form',
     templateUrl: './outlets-form.component.html',
-    styles: ['li{margin: 7px 0px;} a{color:#148F96; font-weight:600; font-size:13px; cursor:pointer;} ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {color: #af1f70 !important;} :host ::ng-deep .mat-form-field .mat-form-field-flex {border-radius: 9px !important;}']
+    styles: ['li{margin: 7px 0px;} a{color:#148F96; font-weight:600; font-size:13px; cursor:pointer;} ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {color: #af1f70 !important;} :host ::ng-deep .mat-form-field .mat-form-field-flex {border-radius: 9px !important;} ::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background {background-color: #148f96 !important;}::ng-deep .mat-primary .mat-pseudo-checkbox-checked {background: #328F96;}']
 })
 export class OutletsFormComponent extends ImportCSVComponent implements OnInit, OnChanges {
     id: any = 'add';
@@ -114,7 +114,15 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
             pending_emails_body: ['',],
             menu_card: ['',],
             pdf_file: [''],
-            file_type: ['']
+            file_type: [''],
+            food_and_drinks_tags: [''],
+            cuisine_tags: [''],
+            beauty_and_health_tags: [''],
+            attribute_tags: [''],
+            fun_and_leisure_tags: [''],
+            retail_and_services_tags: [''],
+            
+
         });
 
         this.isLoading = false;

@@ -21,9 +21,9 @@
         <div class="col-sm-2" fxLayoutAlign="none center">
             <mat-form-field fxFlex="100" appearance="legacy" class="mat-arrow">
                 <mat-label class="mat-select">Select Type</mat-label>
-                <mat-select>
-                    <mat-option value="option1">Outlets</mat-option>
-                    <mat-option value="option2">Brands</mat-option>
+                <mat-select (selectionChange)="onType($event.value)" >
+                    <mat-option  value="2">Outlets</mat-option>
+                    <mat-option  value="1">Brands</mat-option>
                 </mat-select>
                 <mat-icon matSuffix fxLayoutAlign="center center">keyboard_arrow_down</mat-icon>
                 <!-- <mat-error
@@ -40,27 +40,39 @@
         <div class="col-sm-1 multi_tag" fxLayoutAlign="center center" style="height: 43px;">
             or
         </div>
-        <div class="col-sm-3" fxLayout="column">
-            <button fxLayoutAlign="start none" style="font-size: 13px;" class="no-background-btn">Upload CSV</button>
-            <button fxLayoutAlign="start none" class="no-background-btn"
-                style="font-size: 13px; color: #757575;">Download Sample CSV</button>
+
+        <div class="col-sm-3"  fxLayout="column">
+
+            <input #uploadFile accept=".csv" type="file" style="display: none;" (change)="convertFile($event)">
+
+            <button fxLayoutAlign="start none" style="font-size: 13px;"  class="no-background-btn" (click)="uploadFile.click()">Upload CSV</button>
+            <button fxLayoutAlign="start none" class="no-background-btn" style="font-size: 13px; color: #757575;">
+                <a download target="_blank" href="assets/sample_csv_tags.csv" style="font-size: 13px; color: #757575;" >
+                Download sample CSV
+            </a>
+            </button>
         </div>
 
-        <div class="col-sm-3" fxLayoutAlign="none center" style="height: 43px;">
-            <button fxFlex="130px" style="border-radius: 23px; height: 75%;" mat-raised-button color="accent"
-                fxLayoutAlign="center center" (click)="onSelectTag()">
+        <div class="col-sm-3" fxLayoutAlign="none center"  style="height: 43px;">
+            <button fxFlex="130px" style="border-radius: 23px; height: 75%;" [disabled]="this.selectedOptions.length == 0 || result.length ==  0"  (click)="onTagSelect()" mat-raised-button color="accent" fxLayoutAlign="center center">
                 Tag Outlets
             </button>
-            <span class="multi_tag" fxFlexOffset="6">
-                count
+            <span class="multi_tag" fxFlexOffset="6" *ngIf="objectKeys(result).length == 0">
+                <!-- count -->
+                {{objectKeys(selectedOptions).length != 0 ? objectKeys(selectedOptions).length + ' outlets' : 'count'}}
+            </span>
+            <span class="multi_tag" fxFlexOffset="6" *ngIf="objectKeys(result).length != 0">
+                <!-- count -->
+                {{objectKeys(result).length != 0 ? objectKeys(result).length + ' outlets' : 'count'}}
             </span>
         </div>
 
     </div>
 </div>
 
-<div class="data-table tags_table">
-    <table class="table table-responsive table-striped table-bordered " style="width:100%; margin-top: 20px">
+<!-- <div class="data-table tags_table">
+    <table class="table table-responsive table-striped table-bordered "
+           style="width:100%; margin-top: 20px">
         <thead>
             <tr>
                 <th class="col-xs-2">Results</th>
@@ -74,12 +86,97 @@
             <tr style="color: #148F96;">
                 <td class="col-xs-2">Mazhar</td>
             </tr>
-            <!-- <tr *ngIf="Admins.length == 0">
-                <td colspan="100"
-                    style="text-align: center">No record found.</td>
-
-            </tr> -->
 
         </tbody>
     </table>
+</div> -->
+
+<!-- <div>
+    <mat-selection-list [compareWith]="compareServiceTypes" [(ngModel)]="data" multiple>
+        <div style="border: 2px solid #E8E8E8;">
+           <h4 style="margin-left: 15px;"><b>Results</b></h4> 
+        </div>
+        <mat-list-option style="border: 1px solid #E8E8E8;" checkboxPosition="before" [value]="s" *ngFor="let s of serviceTypes;">
+            {{ s.label }}
+        </mat-list-option>
+    </mat-selection-list>
+</div> -->
+
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="95" fxFlexOffset="1">
+        <form [formGroup]="form" *ngIf="objectKeys(result).length == 0">
+            <mat-selection-list
+              #selectionList
+              [compareWith]="compareFunction"
+              [formControlName]="'selected'"
+              (selectionChange)="onSelectionChanged($event)"
+            >
+            <div style="border: 2px solid #E8E8E8;">
+                <h5 style="margin-left: 15px;"><b>Results</b></h5> 
+             </div>
+              <mat-list-option style="border: 1px solid #E8E8E8;"
+                *ngFor="let item of typesOfShoes"
+                checkboxPosition="before"
+                [value]="item"
+              >
+                {{item.name}}
+              </mat-list-option>
+            </mat-selection-list>
+            <div>
+                <app-pagination
+                    [hide]="false"
+                    [perPage]="20"></app-pagination>
+            </div>
+            <button (click)="switchPage(1)">Page 1</button>
+            <button (click)="switchPage(2)">Page 2</button>
+          
+            <pre>
+            form.value: {{form.value | json}}
+              Seelected: {{selectedOptions | json}}
+              Count: {{objectKeys(selectedOptions).length}}
+              CSV to JSON : {{result | json}}
+            <!-- selectedValues: {{selectedOptions | json}} -->
+          </pre>
+          </form>
+    </div>
+
 </div>
+
+
+  <!-- <div *ngIf="objectKeys(result).length != 0">
+    <h1>{{fileName}}</h1>
+  </div> -->
+
+  <div *ngIf="objectKeys(result).length != 0" class="mt-5">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div fxFlex="1"></div>
+        <div fxFlex="40" style="border: 1px solid #E8E8E8" >
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                <div fxFlex="3"></div>
+                <div fxFlex="52">
+                    <h5><b>File</b></h5>
+                </div>
+                <div fxFlex="45" fxLayoutAlign="center center">
+                    <h5><b>Number of outlets</b></h5>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="59"></div>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div fxFlex="1"></div>
+        <div fxFlex="40" style="border: 1px solid #E8E8E8">
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                <div fxFlex="3"></div>
+                <div fxFlex="52">
+                    <h5>{{fileName}}</h5>
+                </div>
+                <div fxFlex="45" fxLayoutAlign="center center">
+                    <h5>{{objectKeys(result).length != 0 ? objectKeys(result).length + ' outlets' : 'count'}}</h5>
+                </div>
+            </div>
+          </div>
+          <div fxFlex="59"></div>
+      </div>
+  </div>
+  

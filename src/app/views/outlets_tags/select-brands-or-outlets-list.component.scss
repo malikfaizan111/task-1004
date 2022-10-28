@@ -1,0 +1,17 @@
+.mat-form-field-should-float .mat-form-field-label-wrapper 
+{
+    display: none;
+}
+
+::ng-deep .mat-pseudo-checkbox-checked,
+ .mat-pseudo-checkbox-indeterminate,
+  .mat-accent .mat-pseudo-checkbox-checked,
+   .mat-accent .mat-pseudo-checkbox-indeterminate 
+   {
+    background: #148F96 !important;
+}
+
+::ng-deep .assignDialog {
+    border-radius: 15px !important;
+    width: 300px !important;
+}
