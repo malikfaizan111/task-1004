@@ -49,6 +49,10 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
     });
   }
 
+  onType(event:any){
+    console.log(event);
+  }
+
   switchPage(page: number) {
     if (page === 1) {
       this.typesOfShoes = [

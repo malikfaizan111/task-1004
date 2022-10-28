@@ -62,12 +62,12 @@ getTagCategory(){
     {
       // this.categoryTags = [];
 
-      // let dialogRef = this.dialog.open(AlertDialog, {autoFocus: false});
-      // let cm = dialogRef.componentInstance;
-      // cm.heading = 'ERROR';
-      // cm.message = result.error.message;
-      // cm.cancelButtonText = 'Ok';
-      // cm.type = 'error';
+      let dialogRef = this.dialog.open(AlertDialog, {autoFocus: false});
+      let cm = dialogRef.componentInstance;
+      cm.heading = 'ERROR';
+      cm.message = result.error.message;
+      cm.cancelButtonText = 'Ok';
+      cm.type = 'error';
 
     }
   })

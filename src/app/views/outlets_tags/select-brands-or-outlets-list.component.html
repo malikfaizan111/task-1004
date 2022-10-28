@@ -21,9 +21,9 @@
         <div class="col-sm-2" fxLayoutAlign="none center">
             <mat-form-field fxFlex="100" appearance="legacy" class="mat-arrow">
                 <mat-label class="mat-select">Select Type</mat-label>
-                <mat-select>
-                    <mat-option value="option1">Outlets</mat-option>
-                    <mat-option value="option2">Brands</mat-option>
+                <mat-select (selectionChange)="onType($event.value)" >
+                    <mat-option  value="2">Outlets</mat-option>
+                    <mat-option  value="1">Brands</mat-option>
                 </mat-select>
                 <mat-icon matSuffix fxLayoutAlign="center center">keyboard_arrow_down</mat-icon>
                 <!-- <mat-error
