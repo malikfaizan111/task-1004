@@ -12,39 +12,42 @@
     <div class="row" fxLayoutAlign="center none">
         <div class="col-xs-11" fxLayoutAlign="end center">
             <div class="col-sm-3" fxLayoutAlign="space-between none">
-            <button [ngStyle]="btn" fxFlex="160px" style="border-radius: 23px;" mat-raised-button color="accent"
-                fxLayoutAlign="center center" [disabled]="countarray.length == 0">
-                Tag {{countOutlets}} Outlets
-            </button>
-            <span  class="multi_tag" fxLayoutAlign="center center"  *ngIf="countarray.length > 0">
-                with {{countarray.length}} tags
-            </span>
-        </div>
+                <button [ngStyle]="btn" fxFlex="160px" style="border-radius: 23px;" mat-raised-button color="accent"
+                    fxLayoutAlign="center center" [disabled]="countarray.length == 0">
+                    Tag {{countOutlets}} Outlets
+                </button>
+                <span class="multi_tag" fxLayoutAlign="center center" *ngIf="countarray.length > 0">
+                    with {{countarray.length}} tags
+                </span>
+            </div>
         </div>
     </div>
 
     <div class="data-table tags_table select_tags">
-        <div class="col-sm-12">
-            <div class="col-sm-2" style="padding-left: 0; padding-right: 0"
-                *ngFor="let category of data; let index = index">
-                <table class="table table-responsive table-striped table-bordered  "
-                    style="width:100%; margin-top: 20px">
-                    <thead>
-                        <tr>
-                            <th class="col-xs-2">{{category.name}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr formArrayName="{{category.id}}"
-                            *ngFor="let order of formArray[index].controls; let i = index">
-                            <td class="col-xs-2">
-                                <mat-checkbox formControlName="{{i}}" (change)="getCount($event)" class="example-margin custom_checkbos_frame">
-                                    {{category.category_tags[i].tag}}
-                                </mat-checkbox>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="container testimonial-group">
+            <div class="row">
+                <div class="col-sm-2" style="padding-left: 0; padding-right: 0"
+                    *ngFor="let category of data; let index = index">
+                    <table class="table table-responsive table-striped table-bordered  "
+                        style="width:100%; margin-top: 20px">
+                        <thead>
+                            <tr>
+                                <th>{{category.name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr formArrayName="{{category.id}}"
+                                *ngFor="let order of formArray[index].controls; let i = index">
+                                <td>
+                                    <mat-checkbox formControlName="{{i}}" (change)="getCount($event)"
+                                        class="example-margin custom_checkbos_frame">
+                                        {{category.category_tags[i].tag}}
+                                    </mat-checkbox>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

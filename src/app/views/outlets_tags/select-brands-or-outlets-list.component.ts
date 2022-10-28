@@ -82,42 +82,43 @@ onLocationBack(): void
 
 onTagSelect()
 {
-  
+  this.router.navigateByUrl('/main/outlets_tags/select/select_tags');
   // outlet import section
   var outlets:any;
   if(this.result.length > 0)
   {
-    console.log('import outlets:',this.result);
-    outlets = this.result.map((item)=> {
-      return item['outlet_id'];
-    });
-    console.log(outlets);
-    let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
-    let cm = dialogRef.componentInstance;
-    cm.methodName = 'addoutlettags';
-    cm.datetoSubmit = outlets;
-    cm.tagsCount = this.result.length ;
-    cm.outletsCount = this.result.length ;
+    // console.log('import outlets:',this.result);
+    // outlets = this.result.map((item)=> {
+    //   return item['outlet_id'];
+    // });
+    // console.log(outlets);
+    // let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
+    // let cm = dialogRef.componentInstance;
+    // cm.methodName = 'addoutlettags';
+    // cm.datetoSubmit = outlets;
+    // cm.tagsCount = this.result.length ;
+    // cm.outletsCount = this.result.length ;
   
-    dialogRef.afterClosed().subscribe((result)=>{
-      // this.router.navigateByUrl('/main/outlets_tags');
-    })
+    // dialogRef.afterClosed().subscribe((result)=>{
+      
+    // })
   }
-  else if (Object.keys(this.selectedOptions).length > 0){
-    outlets = Object.keys(this.selectedOptions);
-    console.log(this.selectedOptions);
-    console.log(outlets);
+  else if (Object.keys(this.selectedOptions).length > 0)
+  {
+    // outlets = Object.keys(this.selectedOptions);
+    // console.log(this.selectedOptions);
+    // console.log(outlets);
 
-    let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
-    let cm = dialogRef.componentInstance;
-    cm.methodName = 'addoutlettags';
-    cm.datetoSubmit = outlets;
-    cm.tagsCount = outlets.length ;
-    cm.outletsCount = outlets.length ;
+    // let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
+    // let cm = dialogRef.componentInstance;
+    // cm.methodName = 'addoutlettags';
+    // cm.datetoSubmit = outlets;
+    // cm.tagsCount = outlets.length ;
+    // cm.outletsCount = outlets.length ;
   
-    dialogRef.afterClosed().subscribe((result)=>{
-      this.router.navigateByUrl('/main/outlets_tags');
-    })
+    // dialogRef.afterClosed().subscribe((result)=>{
+    //   this.router.navigateByUrl('/main/outlets_tags');
+    // })
   }
   else{
 

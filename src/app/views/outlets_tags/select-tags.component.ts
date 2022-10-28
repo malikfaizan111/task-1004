@@ -116,7 +116,108 @@ export class SelectTagsComponent implements OnInit {
                   "description": "" 
       
               }, 
+      { 
     
+                    "id": 191, 
+        
+                    "name": "Fun & leasure", 
+        
+                    "category_tags": [ 
+        
+                        { 
+        
+                            "id": 20, 
+        
+                            "tag": "cool" 
+        
+                        }, 
+        
+                        { 
+        
+                            "id": 21, 
+        
+                            "tag": "Outdoor cool" 
+        
+                        },
+        
+        
+                    ], 
+        
+                    "logo": "", 
+        
+                    "image": "", 
+        
+                    "description": "" 
+        
+                }, 
+        { 
+    
+                      "id": 192, 
+          
+                      "name": "Fun & leasure", 
+          
+                      "category_tags": [ 
+          
+                          { 
+          
+                              "id": 22, 
+          
+                              "tag": "cool" 
+          
+                          }, 
+          
+                          { 
+          
+                              "id": 23, 
+          
+                              "tag": "Outdoor cool" 
+          
+                          },
+          
+          
+                      ], 
+          
+                      "logo": "", 
+          
+                      "image": "", 
+          
+                      "description": "" 
+          
+                  }, 
+          { 
+    
+                        "id": 193, 
+            
+                        "name": "Fun & leasure", 
+            
+                        "category_tags": [ 
+            
+                            { 
+            
+                                "id": 24, 
+            
+                                "tag": "cool" 
+            
+                            }, 
+            
+                            { 
+            
+                                "id": 25, 
+            
+                                "tag": "Outdoor cool" 
+            
+                            },
+            
+            
+                        ], 
+            
+                        "logo": "", 
+            
+                        "image": "", 
+            
+                        "description": "" 
+            
+                    }, 
         ];
 
     countarray =[];
@@ -210,10 +311,10 @@ export class SelectTagsComponent implements OnInit {
     }
     let mergeIds = [].concat.apply([], idArray);
 
-    let arrstring = mergeIds.map((x) => String(x))
+    // let arrstring = mergeIds.map((x) => String(x))
 
     let payLoad = {
-      'tags': arrstring
+      'tags': mergeIds
     }
 
     console.log('mazhar', payLoad)

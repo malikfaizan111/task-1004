@@ -3165,6 +3165,7 @@ textarea.mat-input-element {
             thead{
                 tr{
                     th{
+                        
                         border: 1px solid #E8E8E8;
                     }
                 }
@@ -3172,12 +3173,23 @@ textarea.mat-input-element {
             tbody{
                 tr{
                     td{
-
                         border: 1px solid #E8E8E8;
                     }
                 }
             }
         }
+
+        .testimonial-group > .row {
+            overflow-x: auto;
+            white-space: nowrap;
+          }
+          .testimonial-group > .row > .col-sm-2 {
+            display: inline-block;
+            float: none;
+          }
+
+
+        
     }
 
  

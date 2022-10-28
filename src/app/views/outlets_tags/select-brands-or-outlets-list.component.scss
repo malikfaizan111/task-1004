@@ -9,9 +9,38 @@
    .mat-accent .mat-pseudo-checkbox-indeterminate 
    {
     background: #148F96 !important;
+    
 }
 
 ::ng-deep .assignDialog {
     border-radius: 15px !important;
     width: 300px !important;
 }
+
+::ng-deep .mat-pseudo-checkbox-checked::after {
+    opacity: 0 !important;
+    background-size: 30px !important;
+  }
+
+::ng-deep .mat-pseudo-checkbox{
+    width: 17px!important;
+    height: 17px!important;
+    border-radius: 25% !important;
+    border-color: #E8E8E8 !important;
+
+}
+
+::ng-deep .mat-list-base .mat-list-option.mat-list-option .mat-list-item-content .mat-list-text{
+    font-family: Manrope!important;
+}
+
+
+::ng-deep .mat-accent .mat-pseudo-checkbox.mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox.mat-pseudo-checkbox-indeterminate  {
+  border-color: white !important;
+  outline-width: 3px !important;
+    outline-color: #E8E8E8  !important;
+    outline-style: solid !important;
+  // margin: 4px;
+}
+
