@@ -26,14 +26,14 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
   search:any;
   methodName: any;
   searchTimer:any;
-  searchList: { name: string; id: number }[] = [
-    { name: 'Boots', id: 1011 }, 
-    { name: 'Clogs', id: 2011 },
-    { name: 'Loafers', id: 3011 },
-    { name: 'Moccasins', id: 4011 },
-    { name: 'Sneakers', id: 5011 },
-  ];
-
+  // searchList: { name: string; id: number }[] = [
+  //   { name: 'Boots', id: 1011 }, 
+  //   { name: 'Clogs', id: 2011 },
+  //   { name: 'Loafers', id: 3011 },
+  //   { name: 'Moccasins', id: 4011 },
+  //   { name: 'Sneakers', id: 5011 },
+  // ];
+  searchList:any = [];
   form: FormGroup;
 
   @ViewChild('selectionList') selectionList: MatSelectionList;
@@ -44,6 +44,7 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
     this.currentPage= 1;
     this.perPage = 20;
     this.result = 0;
+    this.search = '';
    }
 
   
@@ -59,12 +60,12 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
     if(event == 1)
     {
       this.methodName = 'searchBrands';
-      this.getBrandOrOutlets(this.currentPage);
+      // this.getBrandOrOutlets(this.currentPage);
     }
     else if(event == 2)
     {
       this.methodName = 'searchOutlets';
-      this.getBrandOrOutlets(this.currentPage);
+      // this.getBrandOrOutlets(this.currentPage);
     }
     else{
 
@@ -82,14 +83,16 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
   getBrandOrOutlets(index:any,isLoaderHidden?: boolean)
   {
       let url = '';
-
-      url = this.methodName + '?page=' + index + '&per_page=' + this.perPage;
+      url = this.methodName;
 
       if (this.search != '') {
-        url = url + '&search=' + this.search;
+        url = url + '?search=' + this.search;
       }
 
-      this.mainApiService.getList(appConfig.base_url_slug + url,false, 2)
+      url = url + '&page=' + index + '&per_page=' + this.perPage;
+
+
+      this.mainApiService.getList(appConfig.base_url_slug + url,true, 2)
       .then(result =>{
         if(result.status == 200 && result.data)
         {
@@ -109,25 +112,25 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
 		this.getBrandOrOutlets(this.currentPage);
 	}
 
-  switchPage(page: number) {
-    if (page === 1) {
-      this.searchList = [
-        { name: 'Boots', id: 1011 },
-        { name: 'Clogs', id: 2011 },
-        { name: 'Loafers', id: 3011 },
-        { name: 'Moccasins', id: 4011 },
-        { name: 'Sneakers', id: 5011 },
-      ];
-    } else {
-      this.searchList = [
-        { name: 'Flyers', id: 6011 },
-        { name: 'Dr.Martens', id: 7011 },
-      ];
-    }
-    this.form.setValue({
-      selected: Object.values(this.selectedOptions),
-    });
-  }
+  // switchPage(page: number) {
+  //   if (page === 1) {
+  //     this.searchList = [
+  //       { name: 'Boots', id: 1011 },
+  //       { name: 'Clogs', id: 2011 },
+  //       { name: 'Loafers', id: 3011 },
+  //       { name: 'Moccasins', id: 4011 },
+  //       { name: 'Sneakers', id: 5011 },
+  //     ];
+  //   } else {
+  //     this.searchList = [
+  //       { name: 'Flyers', id: 6011 },
+  //       { name: 'Dr.Martens', id: 7011 },
+  //     ];
+  //   }
+  //   this.form.setValue({
+  //     selected: Object.values(this.selectedOptions),
+  //   });
+  // }
 
   onLocationBack(): void {
     window.history.back();

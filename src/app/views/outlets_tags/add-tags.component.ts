@@ -52,7 +52,7 @@ export class AddTagsComponent implements OnInit {
 getTagCategory(){
   let url = 'getcategories';
 
-  this.mainService.getList(appConfig.base_urlV2 + url, false , 2)
+  this.mainService.getList(appConfig.base_url_slug + url, true , 2)
   .then(result =>{
     if(result.status == 200 && result.data)
     {
