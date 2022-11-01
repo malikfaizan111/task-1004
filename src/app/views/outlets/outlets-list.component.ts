@@ -198,7 +198,7 @@ export class OutletsListComponent extends ExportCSVComponent implements OnInit {
 			this.loaderService.setLoading(true);
 		}
 
-		let url = 'getOutletsNew?index=' + index + '&index2=' + this.perPage + '&orderby=' + this.orderby;
+		let url = 'getOutletsNew?page=' + index + '&per_page=' + this.perPage + '&orderby=' + this.orderby;
 
 		if (this.search != '') {
 			url = url + '&search=' + this.search;
@@ -223,7 +223,7 @@ export class OutletsListComponent extends ExportCSVComponent implements OnInit {
 			}
 		));
 
-		this.mainApiService.getList(appConfig.base_url_slug + url, this.userAppId, 2)
+		this.mainApiService.getList(appConfig.base_url_slug + url,false, 2)
 			.then(result => {
 				if (result.status == 200 && result.data) {
 					this.Outlets = result.data.outlets;
