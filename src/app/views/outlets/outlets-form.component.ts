@@ -75,6 +75,13 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
     PlaylistOnly: any;
     pcat_ids: any;
     collect_ids: any;
+    fooddrinks: any;
+    cuisine: any;
+    beauty: any;
+    attribute: any;
+    funLeisure: any;
+    retailServices: any;
+    
 
     constructor(protected router: Router,
         protected _route: ActivatedRoute,
@@ -115,12 +122,12 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
             menu_card: ['',],
             pdf_file: [''],
             file_type: [''],
-            food_and_drinks_tags: [''],
+            foodanddrinks_tags: [''],
             cuisine_tags: [''],
-            beauty_and_health_tags: [''],
+            beautyandhealth_tags: [''],
             attribute_tags: [''],
-            fun_and_leisure_tags: [''],
-            retail_and_services_tags: [''],
+            funandleisure_tags: [''],
+            retailandservices_tags: [''],
             
 
         });
@@ -297,46 +304,76 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
                     
                     // this.Form.get('image').patchValue( 'data:image/jpg;base64,' + localStorage.getItem('OutletImage'));
                     let fooddrinks;
-                    if(this.outlet.food_and_drinks_tags)
+                    if(this.outlet.foodanddrinks_tags)
                     {
-                        fooddrinks = this.outlet.food_and_drinks_tags.split(',');
+                        this.fooddrinks = this.outlet.foodanddrinks_tags;
+                        this.fooddrinks.forEach(element => {
+                            fooddrinks += element.id + ','
+                        });
+                        console.log('Food List:',this.fooddrinks);
+                        console.log('food string:',fooddrinks);
                     }
-                    this.Form.get('food_and_drinks_tags')?.setValue(fooddrinks);
+                    this.Form.get('foodanddrinks_tags')?.setValue(fooddrinks);
 
                     let cuisine;
                     if(this.outlet.cuisine_tags)
                     {
-                        fooddrinks = this.outlet.cuisine_tags.split(',');
+                        this.cuisine = this.outlet.cuisine_tags;
+                        this.cuisine.forEach(element => {
+                            cuisine += element.id + ','
+                        });
+                        console.log('cuisine List:',this.cuisine);
+                        console.log('cuisine string:',cuisine);
                     }
                     this.Form.get('cuisine_tags')?.setValue(cuisine);
 
                     let beauty;
-                    if(this.outlet.beauty_and_health_tags)
+                    if(this.outlet.beautyandhealth_tags)
                     {
-                        fooddrinks = this.outlet.beauty_and_health_tags.split(',');
+                        this.beauty = this.outlet.beautyandhealth_tags;
+                        this.beauty.forEach(element => {
+                            beauty += element.id + ','
+                        });
+                        console.log('beauty List:',this.beauty);
+                        console.log('beauty string:',beauty);
                     }
-                    this.Form.get('beauty_and_health_tags')?.setValue(beauty);
+                    this.Form.get('beautyandhealth_tags')?.setValue(beauty);
 
                     let attribute;
                     if(this.outlet.attribute_tags)
                     {
-                        fooddrinks = this.outlet.attribute_tags.split(',');
+                        this.attribute = this.outlet.attribute_tags;
+                        this.attribute.forEach(element => {
+                            attribute += element.id + ','
+                        });
+                        console.log('attribute List:',this.attribute);
+                        console.log('attribute string:',attribute);
                     }
                     this.Form.get('attribute_tags')?.setValue(attribute);
 
                     let funLeisure;
-                    if(this.outlet.fun_and_leisure_tags)
+                    if(this.outlet.funandleisure_tags)
                     {
-                        fooddrinks = this.outlet.fun_and_leisure_tags.split(',');
+                        this.funLeisure = this.outlet.funandleisure_tags;
+                        this.funLeisure.forEach(element => {
+                            funLeisure += element.id + ','
+                        });
+                        console.log('funLeisure List:',this.funLeisure);
+                        console.log('funLeisure string:',funLeisure);
                     }
-                    this.Form.get('fun_and_leisure_tags')?.setValue(funLeisure);
+                    this.Form.get('funandleisure_tags')?.setValue(funLeisure);
 
                     let retailServices
-                    if(this.outlet.retail_and_services_tags)
+                    if(this.outlet.retailandservices_tags)
                     {
-                        fooddrinks = this.outlet.retail_and_services_tags.split(',');
+                        this.retailServices = this.outlet.retailandservices_tags;
+                        this.beauty.forEach(element => {
+                            beauty += element.id + ','
+                        });
+                        console.log('retailServices List:',this.retailServices);
+                        console.log('retailServices string:',retailServices);
                     }
-                    this.Form.get('retail_and_services_tags')?.setValue(retailServices);
+                    this.Form.get('retailandservices_tags')?.setValue(retailServices);
 
                     let cart: any;
                     if (this.outlet.category_ids) {
@@ -585,12 +622,12 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
             formData.append('collection_ids', "");
         }
 
-        formData.append('food_and_drinks_tags', this.Form.value['food_and_drinks_tags'].join(','));
+        formData.append('foodanddrinks_tags', this.Form.value['foodanddrinks_tags'].join(','));
         formData.append('cuisine_tags', this.Form.value['cuisine_tags'].join(','));
-        formData.append('beauty_and_health_tags', this.Form.value['beauty_and_health_tags'].join(','));
+        formData.append('beautyandhealth_tags', this.Form.value['beautyandhealth_tags'].join(','));
         formData.append('attribute_tags', this.Form.value['attribute_tags'].join(','));
-        formData.append('fun_and_leisure_tags', this.Form.value['fun_and_leisure_tags'].join(','));
-        formData.append('retail_and_services_tags', this.Form.value['retail_and_services_tags'].join(','))
+        formData.append('funandleisure_tags', this.Form.value['funandleisure_tags'].join(','));
+        formData.append('retailandservices_tags', this.Form.value['retailandservices_tags'].join(','))
 
         this.mainApiService.postFormData(appConfig.base_url_slug + method, formData).then(response => {
             if (response.status == 200 || response.status == 201) {

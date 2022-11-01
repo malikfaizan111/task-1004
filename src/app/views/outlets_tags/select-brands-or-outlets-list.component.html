@@ -20,19 +20,19 @@
     <div class="col-sm-12">
         <div class="col-sm-2" fxLayoutAlign="none center">
             <mat-form-field fxFlex="100" appearance="legacy" class="mat-arrow">
+                <mat-icon matSuffix fxLayoutAlign="center center">keyboard_arrow_down</mat-icon>
                 <mat-label class="mat-select">Select Type</mat-label>
                 <mat-select (selectionChange)="onType($event.value)" >
                     <mat-option  value="2">Outlets</mat-option>
                     <mat-option  value="1">Brands</mat-option>
                 </mat-select>
-                <mat-icon matSuffix fxLayoutAlign="center center">keyboard_arrow_down</mat-icon>
                 <!-- <mat-error
                     *ngIf="getValue('tag_category')?.invalid && (getValue('tag_category')?.dirty || getValue('tag_category')?.touched)">
                     Category required</mat-error> -->
             </mat-form-field>
         </div>
         <div class="col-sm-3 custom_search">
-            <mat-form-field fxFlex="100" class="example-full-width" >
+            <mat-form-field fxFlex="100" class="example-full-width">
                 <mat-label>Search</mat-label>
                 <input style="height: 19px;" matInput [(ngModel)]="search" (keyup)="onSearchBrandOrOutlet()" >
               </mat-form-field>
@@ -40,6 +40,7 @@
         <div class="col-sm-1 multi_tag" fxLayoutAlign="center center" style="height: 43px;">
             or
         </div>
+
         <div class="col-sm-3"  fxLayout="column">
 
             <input #uploadFile accept=".csv" type="file" style="display: none;" (change)="convertFile($event)">
@@ -111,7 +112,7 @@
               (selectionChange)="onSelectionChanged($event)"
             >
             <div style="border: 2px solid #E8E8E8;">
-                <h5 style="margin-left: 15px;"><b>Results</b></h5> 
+                <h5 style="margin-left: 15px; line-height: 30px;text-transform: uppercase; font-weight: 900;" class="multi_tag"><b>Results</b></h5> 
              </div>
               <mat-list-option style="border: 1px solid #E8E8E8;"
                 *ngFor="let item of searchList"
@@ -153,10 +154,10 @@
             <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                 <div fxFlex="3"></div>
                 <div fxFlex="52">
-                    <h5><b>File</b></h5>
+                    <h5 class="multi_tag" style="line-height: 30px;text-transform: uppercase; font-weight: 900;"><b>File</b></h5>
                 </div>
                 <div fxFlex="45" fxLayoutAlign="center center">
-                    <h5><b>Number of outlets</b></h5>
+                    <h5><b class="multi_tag" style="line-height: 30px;text-transform: uppercase; font-weight: 800;" >Number of outlets</b></h5>
                 </div>
             </div>
         </div>
@@ -168,10 +169,10 @@
             <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                 <div fxFlex="3"></div>
                 <div fxFlex="52">
-                    <h5>{{fileName}}</h5>
+                    <h5 class="multi_tag" >{{fileName}}</h5>
                 </div>
                 <div fxFlex="45" fxLayoutAlign="center center">
-                    <h5>{{objectKeys(result).length != 0 ? objectKeys(result).length + ' outlets' : 'count'}}</h5>
+                    <h5 class="multi_tag">{{objectKeys(result).length != 0 ? objectKeys(result).length + ' outlets' : 'count'}}</h5>
                 </div>
             </div>
           </div>

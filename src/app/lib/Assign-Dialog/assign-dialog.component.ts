@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MainService, SharedService } from 'src/app/services';
+import { appConfig } from 'src/config';
 import { AlertDialog } from '../alert.dialog';
 
 
@@ -19,11 +20,10 @@ export class assignDialog implements OnInit
     datetoSubmit:any;
     payload:any
 
-    constructor(protected mainService: MainService,protected dialogRef: MatDialogRef<assignDialog>, protected dialog: MatDialog,
-        protected sharedService: SharedService,)
+    constructor(protected mainService: MainService,protected dialogRef: MatDialogRef<assignDialog>, protected dialog: MatDialog,protected sharedService: SharedService)
     {
         this.payload = this.sharedService.getVariable()
-        console.log('dialog', this.methodName)
+        
     }
 
     ngOnInit(): void {
@@ -42,7 +42,8 @@ export class assignDialog implements OnInit
         // let data = {
         //     outlets: this.datetoSubmit
         // }
-        this.mainService.postData(this.methodName, this.payload, this.urlVersion)
+        console.log(this.methodName);
+        this.mainService.postData(appConfig.base_url_slug +  this.methodName, this.payload, this.urlVersion)
             .then(result =>{
                 if(result.status == 200 || result.status == 201)
                 {

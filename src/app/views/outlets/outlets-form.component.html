@@ -395,12 +395,10 @@
 				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">
-								<mat-select formControlName="food_and_drinks_tags" placeholder="Food & Drinks Tags" multiple>
-									<mat-option value="0">No</mat-option>
-									<mat-option value="1">Yes</mat-option>
-									<mat-option value="2">Both</mat-option>
+								<mat-select formControlName="foodanddrinks_tags" placeholder="Food & Drinks Tags" multiple>
+									<mat-option *ngFor="let food of fooddrinks" [value]="food.id" [disabled]="true">{{food.tag}}</mat-option>
 								</mat-select>
-								<mat-error *ngIf="getValue('food_and_drinks_tags')?.invalid && (getValue('food_and_drinks_tags')?.dirty || getValue('food_and_drinks_tags')?.touched)">
+								<mat-error *ngIf="getValue('foodanddrinks_tags')?.invalid && (getValue('foodanddrinks_tags')?.dirty || getValue('foodanddrinks_tags')?.touched)">
 								Food & Drinks Tags</mat-error>
 						</mat-form-field>
 					</div>
@@ -409,9 +407,7 @@
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">
 								<mat-select formControlName="cuisine_tags" placeholder="Cuisine Tags" multiple>
-									<mat-option value="0">No</mat-option>
-									<mat-option value="1">Yes</mat-option>
-									<mat-option value="2">Both</mat-option>
+									<mat-option *ngFor="let cus of cuisine" [value]="cus.id" [disabled]="true">{{cus.tag}}</mat-option>
 								</mat-select>
 								<mat-error *ngIf="getValue('cuisine_tags')?.invalid && (getValue('cuisine_tags')?.dirty || getValue('cuisine_tags')?.touched)">
 								Cuisine Tags</mat-error>
@@ -421,12 +417,10 @@
 				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">
-								<mat-select formControlName="beauty_and_health_tags" placeholder="Beauty & Health Tag" multiple>
-									<mat-option value="0">No</mat-option>
-									<mat-option value="1">Yes</mat-option>
-									<mat-option value="2">Both</mat-option>
+								<mat-select formControlName="beautyandhealth_tags" placeholder="Beauty & Health Tag" multiple>
+									<mat-option *ngFor="let bea of beauty" [value]="bea.id" [disabled]="true">{{bea.tag}}</mat-option>
 								</mat-select>
-								<mat-error *ngIf="getValue('beauty_and_health_tags')?.invalid && (getValue('beauty_and_health_tags')?.dirty || getValue('beauty_and_health_tags')?.touched)">
+								<mat-error *ngIf="getValue('beautyandhealth_tags')?.invalid && (getValue('beautyandhealth_tags')?.dirty || getValue('beautyandhealth_tags')?.touched)">
 								Beauty & Health Tag</mat-error>
 						</mat-form-field>
 					</div>
@@ -435,9 +429,7 @@
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">
 								<mat-select formControlName="attribute_tags" placeholder="Attribute Tags" multiple>
-									<mat-option value="0">No</mat-option>
-									<mat-option value="1">Yes</mat-option>
-									<mat-option value="2">Both</mat-option>
+									<mat-option *ngFor="let attr of attribute" [value]="attr.id" [disabled]="true">{{attr.tag}}</mat-option>
 								</mat-select>
 								<mat-error *ngIf="getValue('attribute_tags')?.invalid && (getValue('attribute_tags')?.dirty || getValue('attribute_tags')?.touched)">
 								Attribute Tags</mat-error>
@@ -447,12 +439,10 @@
 				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">
-								<mat-select formControlName="fun_and_leisure_tags" placeholder="Fun & Leisure Tags" multiple>
-									<mat-option value="0">No</mat-option>
-									<mat-option value="1">Yes</mat-option>
-									<mat-option value="2">Both</mat-option>
+								<mat-select formControlName="funandleisure_tags" placeholder="Fun & Leisure Tags" multiple>
+									<mat-option *ngFor="let fun of funLeisure" [value]="fun.id" [disabled]="true">{{fun.tag}}</mat-option>
 								</mat-select>
-								<mat-error *ngIf="getValue('fun_and_leisure_tags')?.invalid && (getValue('fun_and_leisure_tags')?.dirty || getValue('fun_and_leisure_tags')?.touched)">
+								<mat-error *ngIf="getValue('funandleisure_tags')?.invalid && (getValue('funandleisure_tags')?.dirty || getValue('funandleisure_tags')?.touched)">
 								Fun & Leisure Tags</mat-error>
 						</mat-form-field>
 					</div>
@@ -460,12 +450,10 @@
 				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">
-								<mat-select formControlName="retail_and_services_tags" placeholder="Retail & Services Tags" multiple>
-									<mat-option value="0">No</mat-option>
-									<mat-option value="1">Yes</mat-option>
-									<mat-option value="2">Both</mat-option>
+								<mat-select formControlName="retailandservices_tags" placeholder="Retail & Services Tags" multiple>
+									<mat-option *ngFor="let retail of retailServices" [value]="retail.id" [disabled]="true">{{retail.tag}}</mat-option>
 								</mat-select>
-								<mat-error *ngIf="getValue('retail_and_services_tags')?.invalid && (getValue('retail_and_services_tags')?.dirty || getValue('retail_and_services_tags')?.touched)">
+								<mat-error *ngIf="getValue('retailandservices_tags')?.invalid && (getValue('retailandservices_tags')?.dirty || getValue('retailandservices_tags')?.touched)">
 								Retail & Services Tags</mat-error>
 						</mat-form-field>
 					</div>

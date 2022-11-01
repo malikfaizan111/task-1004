@@ -4,7 +4,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MainService, SharedService} from '../../services';
 import { appConfig } from '../../../config';
 import { MatDialog } from '@angular/material/dialog';
-import { assignDialog } from 'src/app/lib';
+import { assignDialog } from '../../lib/Assign-Dialog/assign-dialog.component';
+import { Router } from '@angular/router';
 
 
 
@@ -30,8 +31,7 @@ export class SelectTagsComponent implements OnInit {
 
     
 
-  constructor(private formBuilder : FormBuilder, protected mainApiService: MainService,
-               protected sharedService: SharedService, protected dialog: MatDialog,) { 
+  constructor(private formBuilder : FormBuilder, protected mainApiService: MainService,protected sharedService: SharedService, protected dialog: MatDialog,protected router: Router) { 
     this.gerOutletsTags()
  
     this.outlets = this.sharedService.getVariable()
@@ -153,8 +153,9 @@ export class SelectTagsComponent implements OnInit {
       'outlets': this.countOutlets
     }
     
+    debugger;
     this.sharedService.setVariable(payLoad)
-    let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
+    let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'});
     let cm = dialogRef.componentInstance;
     cm.methodName = 'addOutletCategoryTags';
     // cm.datetoSubmit = mergeIds
@@ -163,7 +164,7 @@ export class SelectTagsComponent implements OnInit {
     cm.outletsCount = this.countOutlets.length ;
   
     dialogRef.afterClosed().subscribe((result)=>{
-      // this.router.navigateByUrl('/main/outlets_tags');
+      this.router.navigateByUrl('/main/outlets_tags');
     })
 
 
