@@ -14,7 +14,7 @@
             <div class="col-sm-3" fxLayoutAlign="space-between none">
                 <button [ngStyle]="btn" fxFlex="160px" style="border-radius: 23px;" mat-raised-button color="accent"
                     fxLayoutAlign="center center" [disabled]="countarray.length == 0">
-                    Tag {{countOutlets.length}} Outlets
+                    Tag <ng-container *ngIf="countOutlets">{{countOutlets.length}}</ng-container> Outlets
                 </button>
                 <span class="multi_tag" fxLayoutAlign="center center" *ngIf="countarray.length > 0">
                     with {{countarray.length}} tags

@@ -34,16 +34,9 @@ export class SelectTagsComponent implements OnInit {
   constructor(private formBuilder : FormBuilder, protected mainApiService: MainService,protected sharedService: SharedService, protected dialog: MatDialog,protected router: Router) { 
     this.gerOutletsTags()
  
-    this.outlets = this.sharedService.getVariable()
+    this.countOutlets = this.sharedService.getVariable()
     this.form = this.formBuilder.group(this.groupFormArray); 
 
-    // let outletsArray = []
-    if(this.outlets){
-    for(let i = 0; i < this.outlets.length; i++)
-    {
-      this.countOutlets.push(parseInt(this.outlets[i]))
-    }
-  }
   }
 
   ngOnInit(): void {
@@ -146,6 +139,13 @@ export class SelectTagsComponent implements OnInit {
     // debugger
     let mergeIds = [].concat.apply([], idArray);
 
+    let outletsArray = []
+    if(this.countOutlets){
+    for(let i = 0; i < this.countOutlets.length; i++)
+    {
+      outletsArray.push(parseInt(this.countOutlets[i]))
+    }
+  }
     
 
     let payLoad = {
@@ -153,7 +153,6 @@ export class SelectTagsComponent implements OnInit {
       'outlets': this.countOutlets
     }
     
-    debugger;
     this.sharedService.setVariable(payLoad)
     let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'});
     let cm = dialogRef.componentInstance;

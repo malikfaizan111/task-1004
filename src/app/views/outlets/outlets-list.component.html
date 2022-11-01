@@ -98,8 +98,8 @@
 					<!-- <td>{{outlet.id}}</td> -->
 					<td>{{outlet.id}}</td>
 					<td [title]="outlet.name">{{outlet.name}}</td>
-					<td [title]="outlet.outletParent?.name == null ? 'N/A' : outlet.outletParent?.name">
-						{{outlet.outletParent?.name}}</td>
+					<td [title]="outlet.outlets_parents?.name == null ? 'N/A' : outlet.outlets_parents?.name">
+						{{outlet.outlets_parents?.name}}</td>
 					<td [title]="outlet.merchant_name">{{outlet.merchant_name}}</td>
 					<!-- <td style="text-align: center;" [title]="outlet.collection_id == null ? 'N/A' : outlet.collection_id">{{outlet.collection_id == null ? 'N/A' : outlet.collection_id}}</td>
 					<td style="text-align: center;" [title]="outlet.playlist_id == null ? 'N/A' : outlet.playlist_id">{{outlet.playlist_id == null ? 'N/A' : outlet.playlist_id}}</td> -->
