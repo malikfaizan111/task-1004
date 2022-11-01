@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { extend } from 'jquery';
 import { assignDialog } from 'src/app/lib';
 import { ImportCSVComponent } from 'src/app/lib/import_csv.component';
-import { BaseLoaderService, MainService } from 'src/app/services';
+import { BaseLoaderService, MainService,SharedService } from 'src/app/services';
 import { appConfig } from 'src/config';
 
 @Component({
@@ -39,7 +39,7 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
   @ViewChild('selectionList') selectionList: MatSelectionList;
 
   constructor(protected router: Router,protected _route: ActivatedRoute,protected baseloader: BaseLoaderService,protected mainApiService: MainService,
-    protected formBuilder: FormBuilder, protected dialog: MatDialog) {
+    protected formBuilder: FormBuilder, protected dialog: MatDialog, protected sharedService: SharedService ) {
       super(mainApiService, dialog);
     this.currentPage= 1;
     this.perPage = 20;
@@ -138,42 +138,47 @@ export class SelectBrandsOrOutletsListComponent extends ImportCSVComponent imple
 
 onTagSelect()
 {
-  
+  this.router.navigateByUrl('/main/outlets_tags/select/select_tags');
+  console.log('out if', this.result.length)
   // outlet import section
   var outlets:any;
   if(this.result.length > 0)
   {
-    console.log('import outlets:',this.result);
-    outlets = this.result.map((item)=> {
-      return item['outlet_id'];
-    });
-    console.log(outlets);
-    let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
-    let cm = dialogRef.componentInstance;
-    cm.methodName = 'addoutlettags';
-    cm.datetoSubmit = outlets;
-    cm.tagsCount = this.result.length ;
-    cm.outletsCount = this.result.length ;
+    console.log('in if')
+    // console.log('import outlets:',this.result);
+    // outlets = this.result.map((item)=> {
+    //   return item['outlet_id'];
+    // });
+    // console.log(outlets);
+    // let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
+    // let cm = dialogRef.componentInstance;
+    // cm.methodName = 'addoutlettags';
+    // cm.datetoSubmit = outlets;
+    // cm.tagsCount = this.result.length ;
+    // cm.outletsCount = this.result.length ;
   
-    dialogRef.afterClosed().subscribe((result)=>{
-      // this.router.navigateByUrl('/main/outlets_tags');
-    })
+    // dialogRef.afterClosed().subscribe((result)=>{
+    //   // this.router.navigateByUrl('/main/outlets_tags');
+    // })
+    // this.router.navigateByUrl('/main/outlets_tags/select/select_tags');
   }
-  else if (Object.keys(this.selectedOptions).length > 0){
-    outlets = Object.keys(this.selectedOptions);
-    console.log(this.selectedOptions);
-    console.log(outlets);
+  else if (Object.keys(this.selectedOptions).length > 0)
+  {
+    // outlets = Object.keys(this.selectedOptions);
+    // console.log(this.selectedOptions);
+    // console.log(outlets);
 
-    let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
-    let cm = dialogRef.componentInstance;
-    cm.methodName = 'addoutlettags';
-    cm.datetoSubmit = outlets;
-    cm.tagsCount = outlets.length ;
-    cm.outletsCount = outlets.length ;
+    // let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'},);
+    // let cm = dialogRef.componentInstance;
+    // cm.methodName = 'addoutlettags';
+    // cm.datetoSubmit = outlets;
+    // cm.tagsCount = outlets.length ;
+    // cm.outletsCount = outlets.length ;
   
-    dialogRef.afterClosed().subscribe((result)=>{
-      // this.router.navigateByUrl('/main/outlets_tags');
-    })
+    // dialogRef.afterClosed().subscribe((result)=>{
+    //   // this.router.navigateByUrl('/main/outlets_tags');
+    //   console.log('fff')
+    // })
   }
   else{
 
@@ -181,6 +186,7 @@ onTagSelect()
 
 }
 onSelectionChanged(event) {
+  // debugger
   const isSelected = event.option.selected;
   const value = event.option.value;
 
@@ -193,8 +199,12 @@ onSelectionChanged(event) {
   this.form.setValue({
     selected: Object.values(this.selectedOptions),
   });
+  let outlets = Object.keys(this.selectedOptions)
+  
+  this.sharedService.setVariable( outlets)
+
   console.log(this.form.get('selected').value.length);
-  console.log('Selected outlets:', Object.keys(this.selectedOptions));
+  console.log('my Selected outlets:', Object.keys(this.selectedOptions));
   console.log('import outlets:',Object.keys(this.result))
 }
 

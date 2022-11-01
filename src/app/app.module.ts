@@ -20,7 +20,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 import { NgxEmojiPickerModule } from "ngx-emoji-picker";
 
 // Services
-import { AuthService, MainService, PaginationService, BaseLoaderService, ExcelService } from './services';
+import { AuthService, MainService, PaginationService, BaseLoaderService, ExcelService, SharedService } from './services';
 
 // Lib
 import { FilterDatePipe, AlertDialog, BaseLoaderComponent, PaginationComponent, MapLocationDialog, GetLocationDialog, FilePickerComponent, ExportCSVDialog, MultiTagInputComponent, assignDialog } from './lib';
@@ -151,6 +151,7 @@ import { UploadMultipleBrandsComponent } from './views/parent_outlets/upload-mul
 import { OutletTagsListComponent } from './views/outlets_tags/outlet-tags-list.component';
 import { SelectBrandsOrOutletsListComponent } from './views/outlets_tags/select-brands-or-outlets-list.component';
 import { AddTagsComponent } from './views/outlets_tags/add-tags.component';
+import { SelectTagsComponent } from './views/outlets_tags/select-tags.component';
 
 @NgModule({
   imports: [
@@ -194,6 +195,7 @@ import { AddTagsComponent } from './views/outlets_tags/add-tags.component';
     AppLoaderService,
     UserAppSelectorService,
     MessagingService,
+    SharedService,
     AsyncPipe,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
@@ -355,7 +357,8 @@ import { AddTagsComponent } from './views/outlets_tags/add-tags.component';
     UploadMultipleBrandsComponent,
     OutletTagsListComponent,
     SelectBrandsOrOutletsListComponent,
-    AddTagsComponent
+    AddTagsComponent,
+    SelectTagsComponent
 
   
   ],

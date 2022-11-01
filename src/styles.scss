@@ -3126,5 +3126,106 @@ textarea.mat-input-element {
     }
  }
 
+ .custom_checkbos_frame{
+    font-family:  $font_family_4;
+    color: rgba(0,0,0,.87);
+.mat-checkbox-frame,
+.mat-checkbox-background {
+border-radius: 25%;
+border-color: #E8E8E8;
+}
+
+.mat-checkbox-inner-container {
+height: 20px!important;
+width: 20px!important;
+}
+
+.mat-checkbox-inner-container {
+margin: 1.5px 8px auto 0 !important;
+}
+
+.mat-checkbox-background svg {
+display: none;
+}
+}
+
+.mat-checkbox-ripple .mat-ripple-element,
+      .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        background-color: $color_19 !important;
+    }
+
+    .custom_checkbos_frame.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+        .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+            margin: 4px;
+    }
+
+    .select_tags{
+        table{
+            border: 1px solid #ddd;
+            thead{
+                tr{
+                    th{
+                        
+                        border: 1px solid #E8E8E8;
+                    }
+                }
+            }
+            tbody{
+                tr{
+                    td{
+                        border: 1px solid #E8E8E8;
+                    }
+                }
+            }
+        }
+        // .testimonial-group > .row {
+        //     overflow-x: auto;
+        //     white-space: nowrap;
+
+        //   }
+        //   .testimonial-group > .row > .col-sm-2 {
+        //     display: inline-block;
+        //     float: none;
+           
+            
+
+        //     // position: fixed;
+        //   }
+
+        // .row-fluid{
+        //     white-space: nowrap;
+        // }
+        // .row-fluid .col-sm-2{
+        //     display: inline-block;
+        // }
+
+        .row > .col-sm-2 {
+            display:flex;
+            flex: 0 0 16.65%;
+            // max-width: 25%
+        }
+        
+        .flex-nowrap {
+            -webkit-flex-wrap: nowrap!important;
+            -ms-flex-wrap: nowrap!important;
+            flex-wrap: nowrap!important;
+        }
+        .flex-row {
+            display:flex;
+            -webkit-box-orient: horizontal!important;
+            -webkit-box-direction: normal!important;
+            -webkit-flex-direction: row!important;
+            -ms-flex-direction: row!important;
+            flex-direction: row!important;
+        }
+        
+        
+        // .well {
+        //     min-height: 300px;
+        //     width: 100%;
+        // }
+
+        }
+
  
 
