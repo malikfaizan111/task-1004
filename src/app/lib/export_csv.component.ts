@@ -125,6 +125,11 @@ export class ExportCSVComponent implements OnInit {
 			perPage = 1000;
 			url = appConfig.base_url_slug + this.method + '?type=' + this.voucher_type + '&index=' + 1 + '&index2=' + 5 + '&export=csv' + '&voucher_id=' + this.voucher_id;
 		}
+		else if(this.method == 'getOutletsNew')
+		{
+			perPage = 1000;
+			url = appConfig.base_url_slug + this.method + '?page=' + 1 + '&per_page=' + 5;
+		}
 		else if (this.method == 'exportLinks') {
 			perPage = 1000;
 			url = appConfig.base_url_slug + this.method + '?index=' + 1 + '&index2=' + 5 + '&export=csv' + '&voucher_id=' + this.voucher_id;
@@ -166,7 +171,7 @@ export class ExportCSVComponent implements OnInit {
 				if (this.method == 'getMerchants') {
 					this.ArrayCSVCount = result.data.merchantsCount;
 				}
-				else if (this.method == 'getOutlets') {
+				else if (this.method == 'getOutletsNew') {
 					this.ArrayCSVCount = result.data.outletsCount;
 				}
 				else if (this.method == 'getOffers') {
@@ -263,6 +268,11 @@ export class ExportCSVComponent implements OnInit {
 			perPage = 1000;
 			url = appConfig.base_url_slug + this.method + '?export=csv' + '&page=' + index + '&per_page=' + perPage + '&voucher_id=' + this.voucher_id;
 		}
+		else if(this.method == 'getOutletsNew')
+		{
+			perPage = 1000;
+			url = appConfig.base_url_slug + this.method + '?page=' + 1 + '&per_page=' + perPage;
+		}
 		else {
 			url = appConfig.base_url_slug + this.method + '?index=' + index + '&index2=' + perPage + '&export=csv';
 		}
@@ -304,7 +314,7 @@ export class ExportCSVComponent implements OnInit {
 						csvName = 'merchants.csv';
 						usersData = result.data.merchants;
 					}
-					else if (this.method == 'getOutlets') {
+					else if (this.method == 'getOutletsNew') {
 						// csvName = 'outlets.csv';
 						// // usersData = result.data.outlets;
 						// csvName = 'outlets.csv';
@@ -341,8 +351,46 @@ export class ExportCSVComponent implements OnInit {
 
 						csvName = 'Outlets_Data_For_Dashboard';
 						let obj= {};
+						let foodanddrinks_tags: any = '';
+						let beautyandhealth_tags: any = '';
+						let funandleisure_tags:any = '';
+						let retailandservices_tags: any = '';
+						let cuisine_tags: any = '';
+						let attribute_tags: any = '';
 						result.data.outlets.forEach(elm => {
 							obj = elm;
+
+							elm.foodanddrinks_tags.forEach(element => {
+								foodanddrinks_tags =  foodanddrinks_tags +  element.tag +  ' ,';
+							});
+
+							elm.beautyandhealth_tags.forEach(element => {
+								beautyandhealth_tags =  beautyandhealth_tags +  element.tag +  ' ,';
+							});
+
+							elm.funandleisure_tags.forEach(element => {
+								funandleisure_tags =  funandleisure_tags +  element.tag +  ' ,';
+							});
+
+							elm.retailandservices_tags.forEach(element => {
+								retailandservices_tags =  retailandservices_tags +  element.tag +  ' ,';
+							});
+
+							elm.cuisine_tags.forEach(element => {
+								cuisine_tags =  cuisine_tags +  element.tag +  ' ,';
+							});
+
+							elm.attribute_tags.forEach(element => {
+								attribute_tags =  attribute_tags +  element.tag +  ' ,';
+							});
+
+							console.log(foodanddrinks_tags);
+							console.log(beautyandhealth_tags);
+							console.log(funandleisure_tags);
+							console.log(retailandservices_tags);
+							console.log(cuisine_tags);
+
+
 								obj = {
 									id: elm.id,
 									merchant_id: elm.merchant_id,
@@ -355,6 +403,12 @@ export class ExportCSVComponent implements OnInit {
 									phones: elm.phones,
 									SKU: elm.SKU,
 									pin: elm.pin,
+									foodanddrinks_tags : foodanddrinks_tags,
+									beautyandhealth_tags: beautyandhealth_tags,
+									funandleisure_tags: funandleisure_tags,
+									retailandservices_tags: retailandservices_tags,
+									cuisine_tags: cuisine_tags,
+									attribute_tags: attribute_tags,
 									search_tags: elm.search_tags,
 									logo: elm.logo,
 									image: elm.image,
@@ -390,7 +444,7 @@ export class ExportCSVComponent implements OnInit {
 									collection_ids: elm.collection_ids,
 									image_name: elm.image_name,
 									logo_name: elm.logo_name,
-									outletMenu: elm?.outletMenu[0],
+									outletMenu: elm?.outletMenu ? elm?.outletMenu[0] : '',
 									total_delivery_orders: elm.total_delivery_orders,
 									no_of_offers_redeemed: elm.no_of_offers_redeemed,
 									Country: elm.Country,
@@ -916,7 +970,7 @@ export class ExportCSVComponent implements OnInit {
 						// log here(this.ArrayCSV)
 						// log here(csvContent.split('\r\n'))
 
-						if(this.method == 'getOutlets'){
+						if(this.method == 'getOutletsNew'){
 							this.downloadOutletFile(this.ArrayCSV,csvName);
 						}
 						else{

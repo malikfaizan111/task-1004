@@ -59,6 +59,7 @@ export class OutletsListComponent extends ExportCSVComponent implements OnInit {
 		this.orderby = 'ASC';
 		this.active = '';
 		this.perPage = 20;
+		this.UrlVersion = 2;
 
 		this.componentSettings = {
 			name: null,
@@ -88,7 +89,7 @@ export class OutletsListComponent extends ExportCSVComponent implements OnInit {
 			}
 		}
 
-		this.method = 'getOutlets';
+		this.method = 'getOutletsNew';
 		this.gerOutletsList(this.currentPage);
 		this.getCategoriesList();
 		this.viewPopularCategoryOnly();
