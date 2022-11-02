@@ -128,7 +128,7 @@ export class ExportCSVComponent implements OnInit {
 		else if(this.method == 'getOutletsNew')
 		{
 			perPage = 1000;
-			url = appConfig.base_url_slug + this.method + '?page=' + 1 + '&per_page=' + 5;
+			url = appConfig.base_url_slug + this.method + '?page=' + 1 + '&per_page=' + 5 + '&export=csv';
 		}
 		else if (this.method == 'exportLinks') {
 			perPage = 1000;
@@ -271,7 +271,7 @@ export class ExportCSVComponent implements OnInit {
 		else if(this.method == 'getOutletsNew')
 		{
 			perPage = 1000;
-			url = appConfig.base_url_slug + this.method + '?page=' + 1 + '&per_page=' + perPage;
+			url = appConfig.base_url_slug + this.method + '?page=' + 1 + '&per_page=' + perPage + '&export=csv';
 		}
 		else {
 			url = appConfig.base_url_slug + this.method + '?index=' + index + '&index2=' + perPage + '&export=csv';
