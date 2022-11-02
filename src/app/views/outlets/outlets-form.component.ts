@@ -81,6 +81,7 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
     attribute: any;
     funLeisure: any;
     retailServices: any;
+    userAppId:boolean = false;
     
 
     constructor(protected router: Router,
@@ -405,11 +406,11 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
                     // this.Form.get('parentObject').setValue({
                     //     id: this.outlet.outletParent.id, name: this.outlet.outletParent.name
                     // })
-                    if (this.outlet.outletParent) {
+                    if (this.outlet.outlets_parents) {
                         this.Form.get('parentObject')?.setValue({
-                            id: this.outlet.outletParent.id, name: this.outlet.outletParent.name
+                            id: this.outlet.outlets_parents.id, name: this.outlet.outlets_parents.name
                         })
-                        this.search = this.outlet.outletParent.name;
+                        this.search = this.outlet.outlets_parents.name;
                     }
 
                     this.Form.get('latlng')?.setValue(this.outlet.latitude + ',' + this.outlet.longitude);
@@ -471,9 +472,9 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
 
     gerOutletsList(id): void {
 
-        let url = 'getOutlets?outlet_id=' + id;
+        let url = 'getOutletsNew?outlet_id=' + id;
 
-        this.mainApiService.getList(appConfig.base_url_slug + url)
+        this.mainApiService.getList(appConfig.base_url_slug + url, this.userAppId, 2)
             .then(result => {
                 if (result.status == 200 && result.data) {
                     this.Outlets = result.data.outlets[0];
@@ -541,7 +542,7 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
     doSubmit(): void {
         this.isLoading = true;
         let method = '';
-        console.log(this.Form.value);
+        console.log('my form',this.Form.value);
         let formData = new FormData();
         if (this.id == 'add') {
             method = 'addOutlet';
@@ -622,13 +623,14 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
             formData.append('collection_ids', "");
         }
 
-        formData.append('foodanddrinks_tags', this.Form.value['foodanddrinks_tags'].join(','));
-        formData.append('cuisine_tags', this.Form.value['cuisine_tags'].join(','));
-        formData.append('beautyandhealth_tags', this.Form.value['beautyandhealth_tags'].join(','));
-        formData.append('attribute_tags', this.Form.value['attribute_tags'].join(','));
-        formData.append('funandleisure_tags', this.Form.value['funandleisure_tags'].join(','));
-        formData.append('retailandservices_tags', this.Form.value['retailandservices_tags'].join(','))
+        formData.append('foodanddrinks_tags', this.Form.value['foodanddrinks_tags']);
+        formData.append('cuisine_tags', this.Form.value['cuisine_tags']);
+        formData.append('beautyandhealth_tags', this.Form.value['beautyandhealth_tags']);
+        formData.append('attribute_tags', this.Form.value['attribute_tags']);
+        formData.append('funandleisure_tags', this.Form.value['funandleisure_tags']);
+        formData.append('retailandservices_tags', this.Form.value['retailandservices_tags'])
 
+        // console.log('formdata....', )
         this.mainApiService.postFormData(appConfig.base_url_slug + method, formData).then(response => {
             if (response.status == 200 || response.status == 201) {
 
