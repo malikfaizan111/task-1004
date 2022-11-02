@@ -201,7 +201,8 @@ onSelectionChanged(event) {
   });
   let outlets = Object.keys(this.selectedOptions)
   
-  this.sharedService.setVariable( outlets)
+  // this.sharedService.setProduct( outlets)
+  localStorage.setItem('outletsCount', JSON.stringify(outlets))
 
   console.log(this.form.get('selected').value.length);
   console.log('my Selected outlets:', Object.keys(this.selectedOptions));

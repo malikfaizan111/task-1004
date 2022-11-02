@@ -34,7 +34,13 @@ export class SelectTagsComponent implements OnInit {
   constructor(private formBuilder : FormBuilder, protected mainApiService: MainService,protected sharedService: SharedService, protected dialog: MatDialog,protected router: Router) { 
     this.gerOutletsTags()
  
-    this.countOutlets = this.sharedService.getVariable()
+    // this.countOutlets = this.sharedService.getVariable()
+
+    // this.sharedService.selectedProduct$.subscribe((value) => {
+    //   this.countOutlets = value
+    // })
+    let abc = localStorage.getItem('outletsCount') as string
+    this.countOutlets = JSON.parse(abc)
     this.form = this.formBuilder.group(this.groupFormArray); 
 
   }
@@ -153,7 +159,8 @@ export class SelectTagsComponent implements OnInit {
       'outlets': this.countOutlets
     }
     
-    this.sharedService.setVariable(payLoad)
+    // this.sharedService.setProduct(payLoad)
+    localStorage.setItem('payload', JSON.stringify(payLoad))
     let dialogRef = this.dialog.open(assignDialog, {autoFocus:false, panelClass: 'assignDialog'});
     let cm = dialogRef.componentInstance;
     cm.methodName = 'addOutletCategoryTags';
@@ -163,11 +170,17 @@ export class SelectTagsComponent implements OnInit {
     cm.outletsCount = this.countOutlets.length ;
   
     dialogRef.afterClosed().subscribe((result)=>{
-      this.router.navigateByUrl('/main/outlets_tags');
+      // this.router.navigateByUrl('/main/outlets_tags');
     })
 
 
 
     }
+
+
+    ngOnDestroy(): void {
+      localStorage.removeItem('outletsCount')
+    }
+  
 
 }
