@@ -395,7 +395,7 @@
 				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">
-								<mat-select formControlName="foodanddrinks_tags" placeholder="Food & Drinks Tags" multiple>
+								<mat-select formControlName="foodanddrinks_tags"  placeholder="Food & Drinks Tags" multiple>
 									<mat-option *ngFor="let food of fooddrinks" [value]="food.id" >{{food.tag}}</mat-option>
 								</mat-select>
 						</mat-form-field>
@@ -431,7 +431,7 @@
 				<div *ngIf="isEditing" fxFlex.xl="32" fxFlex.lg="48" fxFlex.md="48">
 					<div class="form-group mb-0">
 						<mat-form-field style="width: 100%;">
-								<mat-select formControlName="funandleisure_tags" placeholder="Fun & Leisure Tags" multiple>
+								<mat-select formControlName="funandleisure_tags"  placeholder="Fun & Leisure Tags" multiple>
 									<mat-option *ngFor="let fun of funLeisure" [value]="fun.id">{{fun.tag}}</mat-option>
 								</mat-select>
 						</mat-form-field>

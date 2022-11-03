@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class SharedService {
 
   private siblingVar:any
+  private product$ = new BehaviorSubject<any>({});
+  selectedProduct$ = this.product$.asObservable();
   constructor() { }
 
 
-  public getVariable(){
-    return this.siblingVar
+  setProduct(product: any) {
+    this.product$.next(product);
   }
 
-  public setVariable(data: any): void {
-    this.siblingVar = data
-    console.log('gg', this.siblingVar)
-  }
+  // public getVariable(){
+  //   return this.siblingVar
+  // }
+
+  // public setVariable(data: any): void {
+  //   this.siblingVar = data
+  //   console.log('gg', this.siblingVar)
+  // }
 }

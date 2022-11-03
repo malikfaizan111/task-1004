@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { borderTopRightRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
 import { MainService, SharedService } from 'src/app/services';
 import { appConfig } from 'src/config';
 import { AlertDialog } from '../alert.dialog';
@@ -20,9 +22,15 @@ export class assignDialog implements OnInit
     datetoSubmit:any;
     payload:any
 
-    constructor(protected mainService: MainService,protected dialogRef: MatDialogRef<assignDialog>, protected dialog: MatDialog,protected sharedService: SharedService)
+    constructor(protected mainService: MainService,protected dialogRef: MatDialogRef<assignDialog>,
+         protected dialog: MatDialog,protected sharedService: SharedService,protected router: Router)
     {
-        this.payload = this.sharedService.getVariable()
+        // this.sharedService.selectedProduct$.subscribe((value) => {
+        //     this.payload = value
+        // })
+
+        let abc = localStorage.getItem('payload') as string
+        this.payload = JSON.parse(abc)
         
     }
 
@@ -48,6 +56,7 @@ export class assignDialog implements OnInit
                 if(result.status == 200 || result.status == 201)
                 {
                     this.dialogRef.close(true);
+                    this.router.navigateByUrl('/main/outlets_tags');
                 }
                 else if(result.status == 400)
                 {
@@ -70,4 +79,8 @@ export class assignDialog implements OnInit
 
             });
     }
+
+    ngOnDestroy(): void {
+        localStorage.removeItem('payload')
+      }
 }
