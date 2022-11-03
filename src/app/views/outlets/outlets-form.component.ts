@@ -680,7 +680,9 @@ export class OutletsFormComponent extends ImportCSVComponent implements OnInit, 
             tags_id += x + ','
         })
 
-        formData.append('tags', JSON.stringify(tags_id));
+        tags_id = tags_id.replace(/,\s*$/, "");
+
+        formData.append('tags', tags_id);
         // formData.append('cuisine_tags', this.Form.get('cuisine_tags')?.value);
         // formData.append('beautyandhealth_tags', this.Form.get('beautyandhealth_tags')?.value);
         // formData.append('attribute_tags', this.Form.get('attribute_tags')?.value);
